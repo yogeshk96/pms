@@ -1,0 +1,24 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-2 col-md-2 col-xs-12 hidden-print">
+
+			<ul class="nav nav-sidebar sidebar" ng-repeat="item in menuitems" id="sidebar">
+	
+				<!-- checking for current url and making the paricular sidebar item active whichever matches -->
+			    <li ng-class="{ 'active': state['current'].url == '/{{item.slug}}'}"><a ui-sref="user.{{item.slug}}.main">Home </a></li>
+			    <li ng-repeat="itemindi in item.menus" ng-class="{ 'active': state['current'].url.indexOf('{{item.slug}}/{{itemindi.sidebar_itemname}}') != -1}" ng-show="(itemindi.slug=='addmaterialtype' || itemindi.slug == 'addmaterials' || itemindi.slug == 'editmaterial') && (thisuserinfo.userid == '9' || thisuserinfo.userid == '4' || thisuserinfo.userid == '15')  ">
+			    	<a ui-sref="user.{{item.slug}}.{{itemindi.slug}}">{{itemindi.menu}} </a>
+			    </li>
+			    <li ng-repeat="itemindi in item.menus" ng-class="{ 'active': state['current'].url.indexOf('{{item.slug}}/{{itemindi.sidebar_itemname}}') != -1}" ng-show="itemindi.slug!='addmaterialtype' && itemindi.slug != 'addmaterials' && itemindi.slug != 'editmaterial' ">
+			    	<a ui-sref="user.{{item.slug}}.{{itemindi.slug}}">{{itemindi.menu}} </a>
+			    </li>
+			</ul>
+		</div>
+		<div class="col-sm-10 col-md-10">
+			
+			<div ui-view="pagetopnav"></div>
+			
+		</div>
+	</div>
+</div>
+		

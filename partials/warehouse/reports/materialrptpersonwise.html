@@ -1,0 +1,85 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Material Reconciliation Report</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+			<form ng-submit="generate_report()" class="form-horizontal">
+				<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">From Date</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="date" class="form-control" ng-model="dates.fromdate" required>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">To Date</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="date" class="form-control" ng-model="dates.todate" required>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+			 		<div for="inputEmail3" class="col-sm-2 col-md-2 col-xs-4 control-label">Search By</div>
+			 		<div class="col-sm-3 col-md-3 col-xs-8 jumbobox" style="padding:5px">
+			 			<label class="radio-inline" >
+			 				<input type="radio" ng-model="issuematto" id="inlineRadio1" value="subcontractor"> Sub Contractor
+			 			</label>
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="issuematto" id="inlineRadio2" value="thirdparty"> Third Party
+			 			</label>
+			 		</div>
+			 	</div>
+		 		<div class="form-group smallfont" ng-show="issuematto=='subcontractor'">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Sub Contractor</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" ng-options="subcon as subcon.name for subcon in subcons" ng-model="mainsubcon">
+		 					<option value="">SELECT</option>
+		 				</select>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont" ng-show="issuematto=='thirdparty'">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Third Party</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" ng-options="tpty as tpty.name for tpty in thirdparties" ng-model="maintpty">
+		 					<option value="">SELECT</option>
+		 				</select>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="submit" class="btn btn-primary" value="Generate">
+		 			</div>
+		 		</div>
+			</form>
+			<table class="table table-striped table-responsive smallfont" ng-show="mats.length>0">
+				<thead>
+ 					<tr class="innerhead">
+ 						<th>S.No</th>
+ 						<th>Material Description</th>
+ 						<th>UOM</th>
+ 						<th>Total Receipt</th>
+ 						<th>Total Issue</th>
+ 						<th>Total Damaged</th>
+ 						<th>Total</th>
+ 					</tr>
+ 				</thead>
+ 				<tbody>
+ 					<tr ng-repeat="mat in mats | orderBy:'material.category_id' | filter:fil">
+ 						<td>{{$index+1}}</td>
+ 						<td>{{mat.material.name}}</td>
+ 						<td>{{mat.material.units}}</td>
+ 						<td>{{mat.credit}}</td>
+ 						<td>{{mat.debit}}</td>
+ 						<td>{{mat.damaged}}</td>
+ 						<td>{{totals(mat)}}</td>
+ 					</tr>
+ 				</tbody>
+			</table>
+    	</div>
+
+	</div>
+
+</div>

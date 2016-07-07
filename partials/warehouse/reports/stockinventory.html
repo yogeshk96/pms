@@ -1,0 +1,396 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Stock Inventory Report</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal">
+
+		 		<div class="form-group smallfont">
+		 		<div class="col-sm-8 col-md-8 col-xs-12 jumbobox" style="padding:5px;">
+		 				<label class="radio-inline col-sm-3 col-xs-12">
+		 					<input type="radio" ng-model="stockinventoryopt" ng-change="changestocktype()" id="inlineRadio1" value="storewise"> Store Wise
+		 				</label>
+		 				
+		 				<label class="radio-inline col-sm-3 col-xs-12">
+		 					<input type="radio" ng-model="stockinventoryopt" ng-change="changestocktype()" id="inlineRadio1" value="productwise"> Product Wise
+		 				</label>
+		 				
+		 				<label class="radio-inline col-sm-2 col-xs-12">
+		 					<input type="radio" ng-model="stockinventoryopt" ng-change="changestocktype()" id="inlineRadio1" value="scrap"> Scrap
+		 				</label>
+		 				
+		 			</div>
+		 		</div>
+
+		 		<!-- ----------------------------------- Store Wise section starts ---------------------------------------- -->
+
+		 		<div class="storewisesection" ng-show="stockinventoryopt == 'storewise'">
+
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont">
+			 					<option value="select">SELECT</option>
+			 					<option>NOs</option>
+			 					<option>KG</option>
+			 					<option>3</option>
+			 					<option>4</option>
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Store</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont">
+			 					<option value="select">SELECT</option>
+			 					<option>NOs</option>
+			 					<option>KG</option>
+			 					<option>3</option>
+			 					<option>4</option>
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont submitbtn">
+			 			<div class="col-sm-2 col-md-2 col-xs-8">
+			 				<button type="button" class="btn btn-success" ng-click="generaterpt = stockinventoryopt">Generate</button>
+			 			</div>
+			 		</div>
+
+			 		<div class="jumbobox col-sm-6" ng-show="generaterpt == 'storewise'">
+
+				 		<div class="form-group smallfont">
+			 				<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label"><strong>Store Name</strong></div>
+			 				<div class="col-sm-7 col-xs-6 labelval">
+			 					Some Name
+			 				</div>
+			 			</div>
+
+			 			<div class="form-group smallfont">
+			 				<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label"><strong>Store Description</strong></div>
+			 				<div class="col-sm-7 col-xs-6 labelval">
+			 					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, labore consectetur? Facilis optio eos aperiam quibusdam laboriosam possimus quidem aliquam modi minus iste, provident quos inventore nulla veniam tempore repellat.
+			 				</div>
+			 			</div>
+
+			 			<div class="form-group smallfont">
+			 				<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label"><strong>Store Incharge</strong></div>
+			 				<div class="col-sm-7 col-xs-6 labelval">
+			 					SR Reddy
+			 				</div>
+			 			</div>
+
+			 			<div class="form-group smallfont">
+			 				<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label"><strong>Store Manager</strong></div>
+			 				<div class="col-sm-7 col-xs-6 labelval">
+			 					Sai Shiva
+			 				</div>
+			 			</div>
+
+
+				 	</div>
+
+
+			 		<div class="col-sm-8 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="generaterpt == 'storewise'">
+
+
+			 			<table class="table table-striped">
+			 				<thead>
+			 					<tr class="innerhead">
+			 						<th>S.No</th>
+			 						<th class="coloredhead">Transformers</th>
+			 						<th>UOM</th>
+			 						<th>Existing Inventory</th>
+			 						<th>Unit Rate</th>
+			 						<th>Total Amount</th>
+			 					</tr>
+			 				</thead>
+			 				<tr>
+			 					<td scope="row">1</td>
+			 					<td>16 Kva 3 Phase Transformer</td>
+			 					<td>NOS</td>
+			 					<td>150</td>
+			 					<td>2</td>
+			 					<td>300</td>
+			 				</tr>
+			 				<tr>
+			 					<td scope="row">2</td>
+			 					<td>25 Kva 3 Phase Transformer</td>
+			 					<td>NOS</td>
+			 					<td>1,500</td>
+			 					<td>2</td>
+			 					<td>3000</td>
+			 				</tr>
+			 				<tr>
+			 					<td scope="row">3</td>
+			 					<td>16 Kva 3 Phase Transformer</td>
+			 					<td>NOS</td>
+			 					<td>150</td>
+			 					<td>2</td>
+			 					<td>300</td>
+			 				</tr>
+			 				<thead>
+			 					<tr class="innerhead">
+			 						<th>S.No</th>
+			 						<th class="coloredhead">Poles</th>
+			 						<th>UOM</th>
+			 						<th>Existing Inventory</th>
+			 						<th>Unit Rate</th>
+			 						<th>Total Amount</th>
+			 					</tr>
+			 				</thead>
+			 				<tr>
+			 					<td scope="row">1</td>
+			 					<td>8 Meter PSC poles</td>
+			 					<td>NOS</td>
+			 					<td>150</td>
+			 					<td>2</td>
+			 					<td>300</td>
+			 				</tr>
+			 				<tr>
+			 					<td scope="row">2</td>
+			 					<td>8 Meter PSC poles</td>
+			 					<td>NOS</td>
+			 					<td>1,500</td>
+			 					<td>2</td>
+			 					<td>3000</td>
+			 				</tr>
+			 			</table>
+
+			 			
+
+			 		</div><!-- col-sm-8 ends -->
+
+			 	</div>
+
+			 	<!-- ----------------------------------- Store Wise section ends ---------------------------------------- -->
+
+
+		 		<!-- ----------------------------------- Product Wise section starts ---------------------------------------- -->
+
+		 		<div class="productwisesection" ng-show="stockinventoryopt == 'productwise'">
+
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Product</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont" ng-model="materialid">
+			 					<option value="select">SELECT</option>
+			 					<option ng-repeat="mat in materials" value="{{mat.id}}">{{mat.name}}</option>
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Store</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont" ng-model="storeid">
+			 					<option value="select">SELECT</option>
+			 					<option value="all">All</option>
+			 					<option  ng-repeat="store in stores" value="{{store.id}}">{{store.name}}</option>
+			 					
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont submitbtn">
+			 			<div class="col-sm-2 col-md-2 col-xs-8">
+			 				<button type="button" class="btn btn-success" ng-click="generatestockinvreport()">Generate</button>
+			 			</div>
+			 		</div>
+
+
+			 		<div class="col-sm-8 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="inventorydata.length>0">
+
+			 			<table class="table table-striped">
+
+			 				<tbody ng-repeat="stockdata in inventorydata">
+					          <tr class="innerhead">
+					            <th>S.No</th>
+					            <th>Store</th>
+					            <th class="coloredhead">{{stockdata['name']}}</th>
+					            <th>UOM</th>
+					            <th>Existing Inventory</th>
+					            <!-- <th>Unit Rate</th>
+			 					<th>Total Amount</th> -->
+					          </tr>
+					          <tr ng-repeat="stock in stockdata['submaterials']">
+					            <td scope="row">{{$index+1}}</td>
+					            <td>{{stock['stocks'][0]['store']['name']}}</td>
+					            <td>{{stock['name']}}</td>
+					            <td>{{stock['units']}}</td>
+					            <td>{{stock['stocks'][0]['quantity']}}</td>
+					            <!-- <td></td>
+					            <td></td> -->
+					            
+					          </tr>
+					        </tbody>
+
+			 				
+			 				
+			 			</table>
+
+			 			
+
+			 		</div><!-- col-sm-8 ends -->
+
+			 	</div>
+
+			 	<!-- ----------------------------------- Product Wise section ends ---------------------------------------- -->
+
+
+				<!-- ----------------------------------- Damaged section starts ---------------------------------------- -->
+
+		 		<div class="productwisesection" ng-show="stockinventoryopt == 'damaged'">
+
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Product</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont" ng-model="materialid">
+			 					<option value="select">SELECT</option>
+			 					<option ng-repeat="mat in materials" value="{{mat.id}}">{{mat.name}}</option>
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Store</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont" ng-model="storeid">
+			 					<option value="select">SELECT</option>
+			 					<option value="all">All</option>
+			 					<option  ng-repeat="store in stores" value="{{store.id}}">{{store.name}}</option>
+			 					
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont submitbtn">
+			 			<div class="col-sm-2 col-md-2 col-xs-8">
+			 				<button type="button" class="btn btn-success" ng-click="generatestockinvreport()">Generate</button>
+			 			</div>
+			 		</div>
+
+
+			 		<div class="col-sm-8 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="inventorydata.length>0">
+
+			 			<table class="table table-striped">
+
+			 				<tbody ng-repeat="stockdata in inventorydata">
+					          <tr class="innerhead">
+					            <th>S.No</th>
+					            <th>Store</th>
+					            <th class="coloredhead">{{stockdata['name']}}</th>
+					            <th>UOM</th>
+					            <th>Existing Inventory</th>
+					            <th>Unit Rate</th>
+			 					<th>Total Amount</th>
+					          </tr>
+					          <tr ng-repeat="stock in stockdata['submaterials']">
+					            <td scope="row">{{$index+1}}</td>
+					            <td>{{stock['stocks'][0]['store']['name']}}</td>
+					            <td>{{stock['name']}}</td>
+					            <td>{{stock['units']}}</td>
+					            <td>{{stock['stocks'][0]['quantity']}}</td>
+					            <td></td>
+					            <td></td>
+					            
+					          </tr>
+					        </tbody>
+
+			 				
+			 				
+			 			</table>
+
+			 			
+
+			 		</div><!-- col-sm-8 ends -->
+
+			 	</div>
+
+			 	<!-- ----------------------------------- Damaged section ends ---------------------------------------- -->
+
+			 	<!-- ----------------------------------- Scrap section starts ---------------------------------------- -->
+
+		 		<div class="scrapsection" ng-show="stockinventoryopt == 'scrap'">
+
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Product</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont" ng-model="materialid">
+			 					<option value="select">SELECT</option>
+			 					<option ng-repeat="mat in materials" value="{{mat.id}}">{{mat.name}}</option>
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Store</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont" ng-model="storeid">
+			 					<option value="select">SELECT</option>
+			 					<option value="all">All</option>
+			 					<option  ng-repeat="store in stores" value="{{store.id}}">{{store.name}}</option>
+			 					
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont submitbtn">
+			 			<div class="col-sm-2 col-md-2 col-xs-8">
+			 				<button type="button" class="btn btn-success" ng-click="generatestockinvreport()">Generate</button>
+			 			</div>
+			 		</div>
+
+
+			 		<div class="col-sm-8 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="inventorydata.length>0">
+
+			 			<table class="table table-striped">
+
+			 				<tbody ng-repeat="stockdata in inventorydata">
+					          <tr class="innerhead">
+					            <th>S.No</th>
+					            <th>Store</th>
+					            <th class="coloredhead">{{stockdata['name']}}</th>
+					            <th>UOM</th>
+					            <th>Scrap Inventory</th>
+					            
+					          </tr>
+					          <tr ng-repeat="stock in stockdata['submaterials']">
+					            <td scope="row">{{$index+1}}</td>
+					            <td>{{stock['stocks'][0]['store']['name']}}</td>
+					            <td>{{stock['name']}}</td>
+					            <td>{{stock['units']}}</td>
+					            <td>{{stock['stocks'][0]['scrap']}}</td>
+					            					            
+					          </tr>
+					        </tbody>
+
+			 				
+			 				
+			 			</table>
+
+			 			
+
+			 		</div><!-- col-sm-8 ends -->
+
+			 	</div>
+
+			 	<!-- ----------------------------------- Scrap section ends ---------------------------------------- -->
+
+		 		
+
+		 		
+
+    		</form>
+    	</div>
+
+	</div>
+
+</div>

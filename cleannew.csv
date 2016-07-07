@@ -1,0 +1,1067 @@
+A,A,Construction of New 33kV Line on 13m Rail Pole with ACSR Wolf Conductor,,64,10.55,74.55,,
+A,1,ACSR Wolf Conductor,KM,197.76,32.5995,230.3595,135670,5426.8
+A,2,105 lb (52 Kg/ meter) Rail Pole (13 meter long),No,1152,189.9,1341.9,52203.155,2088.1262
+A,3,Pole top Bracket,No,1024,168.8,1192.8,264.48,10.5792
+A,4,V-Cross Arm made of 100x50x6 mm MS Channel (Galvanised),No,1024,168.8,1192.8,1322.4,52.896
+A,5,Back Clamp for V-Cross Arm & Top Bracket made of 50x10 mm MS Flat (Galvanised),No.,2048,337.6,2385.6,132.24,5.2896
+A,6,"DP Channel made of 100x50x6 mm MS Channel (Galvanised), 3.0 Mtr. Long each)",No.,256,42.2,298.2,5206.95,208.278
+A,7,DP Channel Support Clamp made of 50x6 mm MS Flat (Galvanised),Pair,512,84.4,596.4,297.54,11.9016
+A,8,33 kv pin Insulator with Pin,No.,3264,538.05,3802.05,412.3075,16.4923
+A,9,33 kV Disc Insulator assembly comprising of 3 Nos. disc insulators (70 KN EMS and 320mm minimum creepage distance) with all Hardware Fittings and accessories complete (suitable to WOLF conductor),Set,576,94.95,670.95,687.3,27.492
+A,10,"Stay Set (1800x20 mm) assembly alongwith guy insulator, guy grip, stay wire (7/10 SWG) etc complete.",Set,640,105.5,745.5,2200,88
+A,11,Stone Stay Plate,No.,640,105.5,745.5,181.25,7.25
+A,12,Packing Piece for Rail Pole Back Clamp (50x6 mm MS Flat),No.,1792,295.4,2087.4,99.18,3.9672
+A,13,Stone Base Plate,No.,1152,189.9,1341.9,181.25,7.25
+A,14,Side Stay Clamp (50x10 mm MS Flat),Pair,512,84.4,596.4,198.36,7.9344
+A,15,Angle Stay Clamp (150x10 mm MS Flat),Pair,128,21.1,149.1,148.77,5.9508
+A,16,Cross Bracing for DP Structure (50x50x6 mm MS Angle),Set,192,31.65,223.65,2504.295,100.1718
+A,17,Clamp for Cross Bracing for DP Structure (50x6 mm MS Flat),No.,384,63.3,447.3,198.36,7.9344
+A,18,Earthing Complete,,0,0,0,0,0
+A,a,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",Set,1024,168.8,1192.8,150.8,6.032
+A,b,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",Set,128,21.1,149.1,1485.8295,59.43318
+A,19,GI Earth Wire (7/14 SWG),MT,15.36,2.532,17.892,71815.31,2872.6124
+A,20,Cement,Bag,2304,379.8,2683.8,355.25,14.21
+A,21,Stone Chips,LS,64,10.55,74.55,4350,174
+A,22,Hot deep galvanised Nuts & Bolts alongwith plane and electroplated spring washer for erection of structures of Different sizes,LS,1152,189.9,1341.9,126.295,5.0518
+A,23,PG Clamp suitable for ACSR Wolf conductors,LS,64,10.55,74.55,181.25,7.25
+A,24,Sundaries (Tree clearance etc.),LS,64,10.55,74.55,5075,203
+A,25,Route Survey,KM,64,10.55,74.55,0,0
+A,26,Aluminium binding wire for pin binding,Kg,160,26.375,186.375,217.5,8.7
+A,27,Mid span compression joints (For ACSR Wolf),No.,192,31.65,223.65,493,19.72
+A,28,"36 kV, 630 A 25 KA, 3-Ph, 3 pin type, horizontal mounting type, gang operated, AB switch along with support insulators, operating mechanism, base channel down pipe, arcing horns connectors and required accessories etc. complete as per TS",Set,6.4,1.055,7.455,53650,2146
+B,B,Construction of New 33 KV Bay Extension for New feeders,,5,4,9,,
+B,1,"A-Structure of 33kv swing bus fabricated from structural steel conforming to IS 2062 including Nuts, Bolts, Foundation Bolts, Washers & other accessories complete as per REC/ aprroved drawing",Set,5,4,9,187957.7,7518.308
+B,2,"Gantry column for 33kv outgoing feeder fabricated from structural steel conforming to IS 2062 including Nuts, Bolts, Foundation Bolts, Washers & other accessories complete as per REC/ aprroved drawing",Set,5,4,9,183871.6,7354.864
+B,3,"Outdoor type One set (3 Nos of 1- Ph.) 36kv, 1 Ph, 600/300/150/1A CT having 3 Secondary cores alongwith Terminal connectors, Junction box etc complete as per TS",Set,5,4,9,147098.15,5883.926
+B,4,"3-Ph, Outdoor type, Vaccum Circuit breaker with spring type operating mechanism alongwith support structure, marshalling box, terminal connectors and required accessories complete as per TS with Indoor type Control & Relay Panel consisting of Volt meter, Ammeter, Trivector Energy meter, O/C, E/F & Diffirential Relays, Indication lamp,Breaker Control Switch,Annunciation Windows with Annunciation Relays, Push Button for alarm Accept/Reset/Lamp Test, Minimic Diagram etc and other component complete as per TS.",Set,5,4,9,389412,15576.48
+B,5,"36 kV, 630 A 25 KA, 3-Ph, 3 pin type, horizontal mounting type, gang operated, AB switch along with support insulators, operating mechanism, base channel down pipe, arcing horns connectors and required accessories etc. complete as per TS",Set,10,8,18,53650,2146
+B,6,"Structure for 33kv CT (1 Set= 3 nos.) fabricated from structural steel conforming to IS 2062 including Nuts, Bolts, Foundation Bolts, Washers & other accessories complete as per REC/ aprroved drawing",Set,5,4,9,147098.15,5883.926
+B,7,"Structure for 33kv Isolator (1 Set= 3 nos.) fabricated from structural steel conforming to IS 2062 including Nuts, Bolts, Foundation Bolts, Washers & other accessories complete as per REC/ aprroved drawing",Set,10,8,18,98064.95,3922.598
+B,8,ACSR wolf conductor,Km.,0.15,0.12,0.27,135670,5426.8
+B,9,Control cable etc & power cable,L/S,5,4,9,50750,2030
+B,10,Clamps &Connector etc as per requirement,L/S,5,4,9,7250,290
+B,11,"30kv, 10 kA, 1-Ph Lightning Arrestor (1 Set= 3 nos.) with Surge counter and Surge monitor",Set,5,4,9,15477.3,619.092
+B,12,33kv post insulator assembly comprising of 2 Nos. of Insulators fittings and accessories(6 nos.),Nos.,30,24,54,43336.15,1733.446
+B,13,"33kv Post insulator structure fabricated from structural steel conforming to IS 2062 including Nuts, Bolts, Foundation Bolts, Washers & other accessories complete as per REC/ aprroved drawing",Nos.,30,24,54,65250,2610
+B,14,33 KV Disc insulator (set of 3) assembly comprising of 3 Nos of anti fog Disc Insulator per phase with hardware fittings and accessories complete for 33kv (9 set),Nos.,45,36,81,2057.55,82.302
+B,15,50mm dia IPS Al pipe for 33 KV Bus Bar & Dropper alongwith suitable connectors complete as per requirement.,L/S,5,4,9,6525,261
+B,16,33 kv pin Insulator with Pin 3 nos.complete,Nos.,15,12,27,412.3075,16.4923
+B,17,Earthing complete as per TS,LS,5,4,9,65250,2610
+E,E,33 KV Fault Passage Indicator,,44,31,75,,
+E,1,Pole Mounted Fault Passage Indicator of 33 KV with AB Switch & auxiliary power supply with all accessories complete in all respect.,No.,44,31,75,101500,4060
+F,F,33 KV Metering System,,5,4,9,,
+F,1,"33 kV Metering system along with Meter, Metering unit and all associated accessories complete in all respest",No,5,4,9,19575,783
+J,J,Upgradation/ Augmentation of Power Transformers and Installation of additional Power Transformers (1X5 MVA to 2X5 MVA),,1,0,1,,
+J,1,Galvonised Structure as per requirement,MT,4,0,4,87000,3480
+J,2,33KV Pin Insulator with pins,Nos.,0,0,0,416.15,16.646
+J,3 (a),33KV Isolator (630 Amp),Nos.,2,0,2,50025,2001
+J,(b),Structure for above,Nos.,2,0,2,77430,3097.2
+J,4.i),33KV Post Insulator (1 Set=2 nos.),Sets,6,0,6,471.25,18.85
+J,ii),Structure for above,Nos.,6,0,6,21750,870
+J,5.i),33KV Lightning Arrestor (1 set=3 nos.),Sets,1,0,1,15477.3,619.092
+J,6,33/11KV Transformer,,0,0,0,,0
+J,i,5 MVA,Nos.,1,0,1,4494650.55,179786.022
+J,ii,10 MVA,Nos.,0,0,0,8172091.25,326883.65
+J,7,Plinth for transformer,Nos.,1,0,1,326250,13050
+J,8,Strengthning of TF plinth,Nos.,0,0,0,181250,7250
+J,9(i),33 KV VCB with Panel,Nos.,1,0,1,510136.1,20405.444
+J,(ii),33 KV CT 600/300/150-1-1 Amp,Sets,1,0,1,46400,1856
+J,(iii),Structure for CT,Nos.,1,0,1,21750,870
+J,10(i),11 KV isolator (630 Amps),Nos.,6,0,6,27405,1096.2
+J,(ii),Structure for above,Nos.,6,0,6,56550,2262
+J,(iii),11 KV VCB with Panel,Nos.,3,0,3,372215,14888.6
+J,(iv),11 KV CT (800/400/200/5-5 Amp),sets,3,0,3,41905,1676.2
+J,(v),11 KV LA,sets,3,0,3,652.5,26.1
+J,11 (a),11 KV Post Insulator (1 set= 1 no.),Set,18,0,18,398.75,15.95
+J,(b),Structure for above,Nos.,18,0,18,21750,870
+J,12,3 Core Power Cable(Aluminium Conductor),,0,0,0,,0
+J,a,4CX10 Sq mm,M,10,0,10,96.57,3.8628
+J,b,3.5CX95 Sq mm,M,10,0,10,315.665,12.6266
+J,c,2.5CX10 Sq mm,M,5,0,5,63.8,2.552
+J,13,30 Volt battery and battery charger with cabinet,Nos.,1,0,1,113100,4524
+J,14,Control Cable,,0,0,0,,0
+J,i),2x2.5 mm sq.,M,40,0,40,77.865,3.1146
+J,ii),5x2.5 mm sq.,M,30,0,30,144.275,5.771
+J,iii),10x2.5 mm sq.,M,15,0,15,235.1175,9.4047
+J,15,Earthing of substation ( complete),,0,0,0,,0
+J,(a),Outdoor equipment (earth mat)/Indoor equipment,Nos.,0.5,0,0.5,50750,2030
+J,16,Barbed wire fencing with gate etc (switchyard),KG,0,0,0,87,3.48
+J,17,Lightening of SS including Control room,LS.,0,0,0,217500,8700
+J,a,Flood light fittings with control gears and 150W High Pressure Sodium Vapour lamp including mounting arrangement as per TS,Set,0,0,0,5510,220.4
+J,b,2x 40 W flouroscent tube fitting with vitreous enamelled reflector complete in all respects as per applicable TS,Set,0,0,0,2320,92.8
+J,c,Ceiling Fans 1400 mm sweep with regulator,No.,0,0,0,2320,92.8
+J,d,Swaged type 9mtr Steel Tubular Pole (410 SP-31) for lighting in Sub-station as per IS-2713 (1980),No.,0,0,0,10875,435
+J,e,"18"" exhaust fan with lowvers shutter",No.,0,0,0,3625,145
+J,18,63KVA 11/0.4KV T/F,Nos.,0,0,0,210965.95,8438.638
+J,19,11 KV fuse set with fixing clamps,Nos.,0,0,0,6525,261
+J,20,Cost of accessories for mounting of 63 KVA T/F,Job,0,0,0,21025,841
+J,21,Painting of Structures,Job,1,0,1,65250,2610
+J,22,Repair of existing Control Room in all respect including painting inner and outer wall,1 Job,0.25,0,0.25,181250,7250
+J,23,"415V, AC Distribution board",Set,0,0,0,108750,4350
+J,24,"30V, DC Distribution board",Set,0,0,0,65250,2610
+J,25,SafetyEquipment,,0,0,0,,0
+J,a,(1) Dry Chemical Type (5 KG) for control room,Nos.,1,0,1,9425,377
+J,b,(2) CO2 type 4.5 KG capacity for control room,Nos.,1,0,1,8120,324.8
+J,c,(3) CO2 type 22.5 KG capacity for control room,Nos.,1,0,1,22620,904.8
+J,26,Aluminium Pipe 50 mm dia as per eqiurement,M,0,0,0,6525,261
+J,27,Aluminium Connectors,LS/PSS,0.5,0,0.5,6525,261
+J,28,11 KV Disc insulator with hardware fiiting,set,12,0,12,398.75,15.95
+J,,Civil Works,,,0,,,
+J,29,Repairng/ Construction of boundary wall,M,0,0,0,3625,145
+J,30,Repairing/ Construction of road,M,0,0,0,5075,203
+M,M,Upgradation/ Augmentation of Power Transformers and Installation of additional Power Transformers (3.15 + 5 to 2X5 MVA) (Released 5 MVA transformer is used after augmentation of 5 MVA to 10 MVA),,1,0,1,,
+M,1,Galvonised Structure as per requirement,MT,0,0,0,87000,3480
+M,2,33KV Pin Insulator with pins,Nos.,0,0,0,416.15,16.646
+M,3 (a),33KV Isolator (630 Amp),Nos.,0,0,0,50025,2001
+M,(b),Structure for above,Nos.,0,0,0,77430,3097.2
+M,4.i),33KV Post Insulator (1 Set=2 nos.),Sets,0,0,0,471.25,18.85
+M,ii),Structure for above,Nos.,0,0,0,21750,870
+M,5.i),33KV Lightning Arrestor (1 set=3 nos.),Sets,0,0,0,15477.3,619.092
+M,6,33/11KV Transformer,,0,0,0,0,0
+M,i,5 MVA,Nos.,0,0,0,4494650.55,179786.022
+M,ii,10 MVA,Nos.,0,0,0,8172091.25,326883.65
+M,7,Plinth for transformer,Nos.,0,0,0,326250,13050
+M,8,Strengthning of TF plinth,Nos.,1,0,1,181250,7250
+M,9(i),33 KV VCB with Panel,Nos.,1,0,1,510136.1,20405.444
+M,(ii),33 KV CT 600/300/150-1-1 Amp,Sets,0,0,0,46400,1856
+M,(iii),Structure for CT,Nos.,0,0,0,21750,870
+M,10(i),11 KV isolator (630 Amps),Nos.,2,0,2,27405,1096.2
+M,(ii),Structure for above,Nos.,2,0,2,56550,2262
+M,(iii),11 KV VCB with Panel,Nos.,1,0,1,372215,14888.6
+M,(iv),11 KV CT (800/400/200/5-5 Amp),sets,1,0,1,41905,1676.2
+M,(v),11 KV LA,sets,1,0,1,652.5,26.1
+M,11 (a),11 KV Post Insulator (1 set= 1 no.),Set,0,0,0,398.75,15.95
+M,(b),Structure for above,Nos.,0,0,0,21750,870
+M,12,3 Core Power Cable(Aluminium Conductor),,0,0,0,0,0
+M,a,4CX10 Sq mm,M,10,0,10,96.57,3.8628
+M,b,3.5CX95 Sq mm,M,10,0,10,315.665,12.6266
+M,c,2.5CX10 Sq mm,M,5,0,5,63.8,2.552
+M,13,30 Volt battery and battery charger with cabinet,Nos.,1,0,1,113100,4524
+M,14,Control Cable,,0,0,0,0,0
+M,i),2x2.5 mm sq.,M,40,0,40,77.865,3.1146
+M,ii),5x2.5 mm sq.,M,30,0,30,144.275,5.771
+M,iii),10x2.5 mm sq.,M,15,0,15,235.1175,9.4047
+M,15,Earthing of substation ( complete),,0,0,0,0,0
+M,(a),Outdoor equipment (earth mat)/Indoor equipment,Nos.,0,0,0,50750,2030
+M,16,Barbed wire fencing with gate etc (switchyard),KG,0,0,0,87,3.48
+M,17,Lightening of SS including Control room,LS.,0,0,0,217500,8700
+M,a,Flood light fittings with control gears and 150W High Pressure Sodium Vapour lamp including mounting arrangement as per TS,Set,0,0,0,5510,220.4
+M,b,2x 40 W flouroscent tube fitting with vitreous enamelled reflector complete in all respects as per applicable TS,Set,0,0,0,2320,92.8
+M,c,Ceiling Fans 1400 mm sweep with regulator,No.,0,0,0,2320,92.8
+M,d,Swaged type 9mtr Steel Tubular Pole (410 SP-31) for lighting in Sub-station as per IS-2713 (1980),No.,0,0,0,10875,435
+M,e,"18"" exhaust fan with lowvers shutter",No.,0,0,0,3625,145
+M,18,63KVA 11/0.4KV T/F,Nos.,0,0,0,210965.95,8438.638
+M,19,11 KV fuse set with fixing clamps,Nos.,0,0,0,6525,261
+M,20,Cost of accessories for mounting of 63 KVA T/F,Job,0,0,0,21025,841
+M,21,Painting of Structures,Job,1,0,1,65250,2610
+M,22,Repair of existing Control Room in all respect including painting inner and outer wall,1 Job,0,0,0,181250,7250
+M,23,"415V, AC Distribution board",Set,0,0,0,108750,4350
+M,24,"30V, DC Distribution board",Set,0,0,0,65250,2610
+M,25,SafetyEquipment,,0,0,0,0,0
+M,a,(1) Dry Chemical Type (5 KG) for control room,Nos.,1,0,1,9425,377
+M,b,(2) CO2 type 4.5 KG capacity for control room,Nos.,1,0,1,8120,324.8
+M,c,(3) CO2 type 22.5 KG capacity for control room,Nos.,1,0,1,22620,904.8
+M,26,Aluminium Pipe 50 mm dia as per eqiurement,M,0,0,0,6525,261
+M,27,Aluminium Connectors,LS/PSS,0,0,0,6525,261
+M,28,11 KV Disc insulator with hardware fiiting,set,0,0,0,398.75,15.95
+M,,Civil Works,,,0,,,
+M,29,Repairng/ Construction of boundary wall,M,0,0,0,3625,145
+M,30,Repairing/ Construction of road,M,0,0,0,5075,203
+N,N,Upgradation/ Augmentation of Power Transformers and Installation of additional Power Transformers (1X1.6 MVA to 1X3.15 MVA) (released 3.15 power Transformer is used for augmentation from 1.6 MVA to 3.15 MVA),,1,0,1,,
+N,1,Galvonised Structure as per requirement,MT,0,0,0,87000,3480
+N,2,33KV Pin Insulator with pins,Nos.,0,0,0,416.15,16.646
+N,3 (a),33KV Isolator (630 Amp),Nos.,0,0,0,50025,2001
+N,(b),Structure for above,Nos.,0,0,0,77430,3097.2
+N,4.i),33KV Post Insulator (1 Set=2 nos.),Sets,0,0,0,471.25,18.85
+N,ii),Structure for above,Nos.,0,0,0,21750,870
+N,5.i),33KV Lightning Arrestor (1 set=3 nos.),Sets,0,0,0,15477.3,619.092
+N,6,33/11KV Transformer,,0,0,0,0,0
+N,i,5 MVA,Nos.,0,0,0,4494650.55,179786.022
+N,ii,10 MVA,Nos.,0,0,0,8172091.25,326883.65
+N,7,Plinth for transformer,Nos.,0,0,0,326250,13050
+N,8,Strengthning of TF plinth,Nos.,1,0,1,181250,7250
+N,9(i),33 KV VCB with Panel,Nos.,1,0,1,510136.1,20405.444
+N,(ii),33 KV CT 600/300/150-1-1 Amp,Sets,0,0,0,46400,1856
+N,(iii),Structure for CT,Nos.,0,0,0,21750,870
+N,10(i),11 KV isolator (630 Amps),Nos.,2,0,2,27405,1096.2
+N,(ii),Structure for above,Nos.,2,0,2,56550,2262
+N,(iii),11 KV VCB with Panel,Nos.,1,0,1,372215,14888.6
+N,(iv),11 KV CT (800/400/200/5-5 Amp),sets,1,0,1,41905,1676.2
+N,(v),11 KV LA,sets,1,0,1,652.5,26.1
+N,11 (a),11 KV Post Insulator (1 set= 1 no.),Set,0,0,0,398.75,15.95
+N,(b),Structure for above,Nos.,0,0,0,21750,870
+N,12,3 Core Power Cable(Aluminium Conductor),,0,0,0,0,0
+N,a,4CX10 Sq mm,M,10,0,10,96.57,3.8628
+N,b,3.5CX95 Sq mm,M,10,0,10,315.665,12.6266
+N,c,2.5CX10 Sq mm,M,5,0,5,63.8,2.552
+N,13,30 Volt battery and battery charger with cabinet,Nos.,1,0,1,113100,4524
+N,14,Control Cable,,0,0,0,0,0
+N,i),2x2.5 mm sq.,M,40,0,40,77.865,3.1146
+N,ii),5x2.5 mm sq.,M,30,0,30,144.275,5.771
+N,iii),10x2.5 mm sq.,M,15,0,15,235.1175,9.4047
+N,15,Earthing of substation ( complete),,0,0,0,0,0
+N,(a),Outdoor equipment (earth mat)/Indoor equipment,Nos.,0,0,0,50750,2030
+N,16,Barbed wire fencing with gate etc (switchyard),KG,0,0,0,87,3.48
+N,17,Lightening of SS including Control room,LS.,0,0,0,217500,8700
+N,a,Flood light fittings with control gears and 150W High Pressure Sodium Vapour lamp including mounting arrangement as per TS,Set,0,0,0,5510,220.4
+N,b,2x 40 W flouroscent tube fitting with vitreous enamelled reflector complete in all respects as per applicable TS,Set,0,0,0,2320,92.8
+N,c,Ceiling Fans 1400 mm sweep with regulator,No.,0,0,0,2320,92.8
+N,d,Swaged type 9mtr Steel Tubular Pole (410 SP-31) for lighting in Sub-station as per IS-2713 (1980),No.,0,0,0,10875,435
+N,e,"18"" exhaust fan with lowvers shutter",No.,0,0,0,3625,145
+N,18,63KVA 11/0.4KV T/F,Nos.,0,0,0,210965.95,8438.638
+N,19,11 KV fuse set with fixing clamps,Nos.,0,0,0,6525,261
+N,20,Cost of accessories for mounting of 63 KVA T/F,Job,0,0,0,21025,841
+N,21,Painting of Structures,Job,1,0,1,65250,2610
+N,22,Repair of existing Control Room in all respect including painting inner and outer wall,1 Job,0,0,0,181250,7250
+N,23,"415V, AC Distribution board",Set,0,0,0,108750,4350
+N,24,"30V, DC Distribution board",Set,0,0,0,65250,2610
+N,25,SafetyEquipment,,0,0,0,0,0
+N,a,(1) Dry Chemical Type (5 KG) for control room,Nos.,1,0,1,9425,377
+N,b,(2) CO2 type 4.5 KG capacity for control room,Nos.,1,0,1,8120,324.8
+N,c,(3) CO2 type 22.5 KG capacity for control room,Nos.,1,0,1,22620,904.8
+N,26,Aluminium Pipe 50 mm dia as per eqiurement,M,0,0,0,6525,261
+N,27,Aluminium Connectors,LS/PSS,0,0,0,6525,261
+N,28,11 KV Disc insulator with hardware fiiting,set,0,0,0,398.75,15.95
+N,,Civil Works,,,0,,,
+N,29,Repairng/ Construction of boundary wall,M,0,0,0,3625,145
+N,30,Repairing/ Construction of road,M,0,0,0,5075,203
+O,O,Upgradation/ Augmentation of Power Transformers and Installation of additional Power Transformers (1X5 MVA to 1X 10 MVA),,1,0,1,,
+O,1,Galvonised Structure as per requirement,MT,3,0,3,87000,3480
+O,2,33KV Pin Insulator with pins,Nos.,0,0,0,416.15,16.646
+O,3 (a),33KV Isolator (630 Amp),Nos.,0,0,0,50025,2001
+O,(b),Structure for above,Nos.,0,0,0,77430,3097.2
+O,4.i),33KV Post Insulator (1 Set=2 nos.),Sets,0,0,0,471.25,18.85
+O,ii),Structure for above,Nos.,0,0,0,21750,870
+O,5.i),33KV Lightning Arrestor (1 set=3 nos.),Sets,0,0,0,15477.3,619.092
+O,6,33/11KV Transformer,,0,0,0,0,0
+O,i,5 MVA,Nos.,0,0,0,4494650.55,179786.022
+O,ii,10 MVA,Nos.,1,0,1,8172091.25,326883.65
+O,7,Plinth for transformer,Nos.,0,0,0,326250,13050
+O,8,Strengthning of TF plinth,Nos.,1,0,1,181250,7250
+O,9(i),33 KV VCB with Panel,Nos.,1,0,1,510136.1,20405.444
+O,(ii),33 KV CT 600/300/150-1-1 Amp,Sets,0,0,0,46400,1856
+O,(iii),Structure for CT,Nos.,0,0,0,21750,870
+O,10(i),11 KV isolator (630 Amps),Nos.,10,0,10,27405,1096.2
+O,(ii),Structure for above,Nos.,10,0,10,56550,2262
+O,(iii),11 KV VCB with Panel,Nos.,5,0,5,372215,14888.6
+O,(iv),11 KV CT (800/400/200/5-5 Amp),sets,5,0,5,41905,1676.2
+O,(v),11 KV LA,sets,5,0,5,652.5,26.1
+O,11 (a),11 KV Post Insulator (1 set= 1 no.),Set,30,0,30,398.75,15.95
+O,(b),Structure for above,Nos.,30,0,30,21750,870
+O,12,3 Core Power Cable(Aluminium Conductor),,0,0,0,0,0
+O,a,4CX10 Sq mm,M,20,0,20,96.57,3.8628
+O,b,3.5CX95 Sq mm,M,20,0,20,315.665,12.6266
+O,c,2.5CX10 Sq mm,M,10,0,10,63.8,2.552
+O,13,30 Volt battery and battery charger with cabinet,Nos.,1,0,1,113100,4524
+O,14,Control Cable,,0,0,0,0,0
+O,i),2x2.5 mm sq.,M,80,0,80,77.865,3.1146
+O,ii),5x2.5 mm sq.,M,60,0,60,144.275,5.771
+O,iii),10x2.5 mm sq.,M,30,0,30,235.1175,9.4047
+O,15,Earthing of substation ( complete),,0,0,0,0,0
+O,(a),Outdoor equipment (earth mat)/Indoor equipment,Nos.,0,0,0,50750,2030
+O,16,Barbed wire fencing with gate etc (switchyard),KG,0,0,0,87,3.48
+O,17,Lightening of SS including Control room,LS.,0,0,0,217500,8700
+O,a,Flood light fittings with control gears and 150W High Pressure Sodium Vapour lamp including mounting arrangement as per TS,Set,0,0,0,5510,220.4
+O,b,2x 40 W flouroscent tube fitting with vitreous enamelled reflector complete in all respects as per applicable TS,Set,0,0,0,2320,92.8
+O,c,Ceiling Fans 1400 mm sweep with regulator,No.,0,0,0,2320,92.8
+O,d,Swaged type 9mtr Steel Tubular Pole (410 SP-31) for lighting in Sub-station as per IS-2713 (1980),No.,0,0,0,10875,435
+O,e,"18"" exhaust fan with lowvers shutter",No.,0,0,0,3625,145
+O,18,63KVA 11/0.4KV T/F,Nos.,0,0,0,210965.95,8438.638
+O,19,11 KV fuse set with fixing clamps,Nos.,0,0,0,6525,261
+O,20,Cost of accessories for mounting of 63 KVA T/F,Job,0,0,0,21025,841
+O,21,Painting of Structures,Job,1,0,1,65250,2610
+O,22,Repair of existing Control Room in all respect including painting inner and outer wall,1 Job,0,0,0,181250,7250
+O,23,"415V, AC Distribution board",Set,0,0,0,108750,4350
+O,24,"30V, DC Distribution board",Set,0,0,0,65250,2610
+O,25,SafetyEquipment,,0,0,0,0,0
+O,a,(1) Dry Chemical Type (5 KG) for control room,Nos.,1,0,1,9425,377
+O,b,(2) CO2 type 4.5 KG capacity for control room,Nos.,1,0,1,8120,324.8
+O,c,(3) CO2 type 22.5 KG capacity for control room,Nos.,1,0,1,22620,904.8
+O,26,Aluminium Pipe 50 mm dia as per eqiurement,M,0,0,0,6525,261
+O,27,Aluminium Connectors,LS/PSS,0.5,0,0.5,6525,261
+O,28,11 KV Disc insulator with hardware fiiting,set,12,0,12,398.75,15.95
+O,,Civil Works,,,0,,,
+O,29,Repairng/ Construction of boundary wall,M,0,0,0,3625,145
+O,30,Repairing/ Construction of road,M,0,0,0,5075,203
+P,P,Upgradation/ Augmentation of Power Transformers and Installation of additional Power Transformers (1X5 MVA to (1X5 +1X10 MVA)),,1,0,1,,0
+P,1,Galvonised Structure as per requirement,MT,5,0,5,87000,3480
+P,2,33KV Pin Insulator with pins,Nos.,0,0,0,416.15,16.646
+P,3 (a),33KV Isolator (630 Amp),Nos.,2,0,2,50025,2001
+P,(b),Structure for above,Nos.,2,0,2,77430,3097.2
+P,4.i),33KV Post Insulator (1 Set=2 nos.),Sets,6,0,6,471.25,18.85
+P,ii),Structure for above,Nos.,6,0,6,21750,870
+P,5.i),33KV Lightning Arrestor (1 set=3 nos.),Sets,1,0,1,15477.3,619.092
+P,6,33/11KV Transformer,,0,0,0,0,0
+P,i,5 MVA,Nos.,0,0,0,4494650.55,179786.022
+P,ii,10 MVA,Nos.,1,0,1,8172091.25,326883.65
+P,7,Plinth for transformer,Nos.,1,0,1,326250,13050
+P,8,Strengthning of TF plinth,Nos.,0,0,0,181250,7250
+P,9(i),33 KV VCB with Panel,Nos.,1,0,1,510136.1,20405.444
+P,(ii),33 KV CT 600/300/150-1-1 Amp,Sets,1,0,1,46400,1856
+P,(iii),Structure for CT,Nos.,1,0,1,21750,870
+P,10(i),11 KV isolator (630 Amps),Nos.,10,0,10,27405,1096.2
+P,(ii),Structure for above,Nos.,10,0,10,56550,2262
+P,(iii),11 KV VCB with Panel,Nos.,5,0,5,372215,14888.6
+P,(iv),11 KV CT (800/400/200/5-5 Amp),sets,5,0,5,41905,1676.2
+P,(v),11 KV LA,sets,5,0,5,652.5,26.1
+P,11 (a),11 KV Post Insulator (1 set= 1 no.),Set,30,0,30,398.75,15.95
+P,(b),Structure for above,Nos.,30,0,30,21750,870
+P,12,3 Core Power Cable(Aluminium Conductor),,0,0,0,0,0
+P,a,4CX10 Sq mm,M,20,0,20,96.57,3.8628
+P,b,3.5CX95 Sq mm,M,20,0,20,315.665,12.6266
+P,c,2.5CX10 Sq mm,M,10,0,10,63.8,2.552
+P,13,30 Volt battery and battery charger with cabinet,Nos.,1,0,1,113100,4524
+P,14,Control Cable,,0,0,0,0,0
+P,i),2x2.5 mm sq.,M,80,0,80,77.865,3.1146
+P,ii),5x2.5 mm sq.,M,60,0,60,144.275,5.771
+P,iii),10x2.5 mm sq.,M,30,0,30,235.1175,9.4047
+P,15,Earthing of substation ( complete),,0,0,0,0,0
+P,(a),Outdoor equipment (earth mat)/Indoor equipment,Nos.,0.5,0,0.5,50750,2030
+P,16,Barbed wire fencing with gate etc (switchyard),KG,0,0,0,87,3.48
+P,17,Lightening of SS including Control room,LS.,0,0,0,217500,8700
+P,a,Flood light fittings with control gears and 150W High Pressure Sodium Vapour lamp including mounting arrangement as per TS,Set,0,0,0,5510,220.4
+P,b,2x 40 W flouroscent tube fitting with vitreous enamelled reflector complete in all respects as per applicable TS,Set,0,0,0,2320,92.8
+P,c,Ceiling Fans 1400 mm sweep with regulator,No.,0,0,0,2320,92.8
+P,d,Swaged type 9mtr Steel Tubular Pole (410 SP-31) for lighting in Sub-station as per IS-2713 (1980),No.,0,0,0,10875,435
+P,e,"18"" exhaust fan with lowvers shutter",No.,0,0,0,3625,145
+P,18,63KVA 11/0.4KV T/F,Nos.,0,0,0,210965.95,8438.638
+P,19,11 KV fuse set with fixing clamps,Nos.,0,0,0,6525,261
+P,20,Cost of accessories for mounting of 63 KVA T/F,Job,0,0,0,21025,841
+P,21,Painting of Structures,Job,1,0,1,65250,2610
+P,22,Repair of existing Control Room in all respect including painting inner and outer wall,1 Job,0.25,0,0.25,181250,7250
+P,23,"415V, AC Distribution board",Set,0,0,0,108750,4350
+P,24,"30V, DC Distribution board",Set,0,0,0,65250,2610
+P,25,SafetyEquipment,,0,0,0,0,0
+P,a,(1) Dry Chemical Type (5 KG) for control room,Nos.,0,0,0,9425,377
+P,b,(2) CO2 type 4.5 KG capacity for control room,Nos.,0,0,0,8120,324.8
+P,c,(3) CO2 type 22.5 KG capacity for control room,Nos.,0,0,0,22620,904.8
+P,26,Aluminium Pipe 50 mm dia as per eqiurement,M,0,0,0,6525,261
+P,27,Aluminium Connectors,LS/PSS,1,0,1,6525,261
+P,28,11 KV Disc insulator with hardware fiiting,set,24,0,24,398.75,15.95
+P,,Civil Works,,,0,,,
+P,29,Repairng/ Construction of boundary wall,M,0,0,0,3625,145
+P,30,Repairing/ Construction of road,M,0,0,0,5075,203
+Q,Q,Constructi:on of New 11kV Lines on Rail Pole with ACSR Dog conductor,,220,0,220,,
+Q,1,Route Survey,Km,220,0,220,1305,0
+Q,2,"Rail Pole 105 lbs, 13 meter",No,3960,0,3960,52203.155,2088.1262
+Q,3,Pin Insulator & Pin 11 KV as per TS,Set,11880,0,11880,108.75,4.35
+Q,4,Disc Insulator & Hardware,Set,1980,0,1980,414.7,16.588
+Q,5,ACSR Dog Conductor,Km,679.8,0,679.8,82711.7,3308.468
+Q,6,"Supply & Fabrication of Pole Top Bracket, V cross arm, Back clamp for V cross arm, DP Channel, DP channel clamp, DP Cross bracing, DP Bracing clamps",Kg,88000,0,88000,95.7,3.828
+Q,7,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,,0
+Q,a,Stay wire 7/12 SWG,Set,1760,0,1760,507.5,20.3
+Q,b,Stay Insulator,no.,1760,0,1760,21.75,0.87
+Q,c,Stay Rod assembly,Set,1760,0,1760,725,29
+Q,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,1760,0,1760,181.25,7.25
+Q,8,Earthing,,0,0,0,,0
+Q,a,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",No,3520,0,3520,152.25,6.09
+Q,b,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",No,440,0,440,1486.25,59.45
+Q,9,Nuts & Bolts,Kg,4840,0,4840,127.165,5.0866
+Q,10,Aluminium wire for binding,Kg,4.4,0,4.4,217.5,8.7
+Q,11,Preformed Jointing Sleeve,Set,220,0,220,253.75,10.15
+Q,12,"Sundaries (Tree Clearance, etc)",LS,220,0,220,5075,203
+Q,13,Guarding and Lacing,,0,0,0,0,0
+Q,a,GI Wire 7/16 SWG for Guarding as per REC Construction drawing standard A-1 at crossing,MT,13.2,0,13.2,71814.15,2872.566
+Q,b,GI Wire (8 SWG) for Lacing as per REC Construction drawing Standard A-1 at crossing lacing,MT,8.8,0,8.8,71814.15,2872.566
+Q,14,PG clamps suitable for following ACSR conductors (6 nos. per DP/cut point),No,1320,0,1320,181.25,7.25
+Q,15,Sectionliser switch (400 Amp rating) ( 1 set per 5 Km),Set,44,0,44,21750,870
+Q,16,Stone base plate,Nos,3960,0,3960,181.25,7.25
+R,R,"Constructi:on of New 11kV Lines on 9M, 400 Kg PSC Pole with ACSR Dog conductor",,20,0,20,,
+R,1,Route Survey,Km,20,0,20,1305,0
+R,2,PSC Pole 9 Mtr. 400 Kg,No,440,0,440,5694.15,427.06125
+R,3,Pin Insulator & Pin 11 KV as per TS,Set,1260,0,1260,108.75,4.35
+R,4,Disc Insulator & Hardware,Set,180,0,180,414.7,16.588
+R,5,ACSR Dog conductor,Km,61.8,0,61.8,82711.7,3308.468
+R,6,"Supply & Fabrication of Pole Top Bracket, V cross arm, Back clamp for V cross arm, DP Channel, DP channel clamp, DP Cross bracing, DP Bracing clamps",Kg,8000,0,8000,95.7,3.828
+R,7,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+R,a,Stay wire 7/12 SWG,Set,200,0,200,507.5,20.3
+R,b,Stay Insulator,no.,200,0,200,21.75,0.87
+R,c,Stay Rod assembly,Set,200,0,200,725,29
+R,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,200,0,200,181.25,7.25
+R,8,Earthing,,0,0,0,0,0
+R,a,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",No,320,0,320,152.25,6.09
+R,b,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",No,40,0,40,1486.25,59.45
+R,9,Nuts & Bolts,Kg,440,0,440,127.165,5.0866
+R,10,Aluminium wire for binding,Kg,0.4,0,0.4,217.5,8.7
+R,11,Preformed Jointing Sleeve,Set,20,0,20,253.75,10.15
+R,12,"Sundaries (Tree Clearance, etc)",LS,20,0,20,5075,203
+R,13,Guarding and Lacing,,0,0,0,0,0
+R,a,GI Wire 7/16 SWG for Guarding as per REC Construction drawing standard A-1 at crossing,MT,1.2,0,1.2,71814.15,2872.566
+R,b,GI Wire (8 SWG) for Lacing as per REC Construction drawing Standard A-1 at crossing lacing,MT,0.8,0,0.8,71814.15,2872.566
+R,14,PG clamps suitable for following ACSR conductors (6 nos. per DP/cut point),No,120,0,120,181.25,7.25
+R,15,Sectionliser switch (400 Amp rating) ( 1 set per 5 Km),Set,4,0,4,21750,870
+R,16,Stone base plate,Nos,360,0,360,181.25,7.25
+S,S,"Constructi:on of New 11kV Lines on8M, 200 Kg PSC Pole with ACSR Rabbit Conductor",,161,40,201,,
+S,1,Route Survey,Km,161,40,201,1305,0
+S,2,PSC Pole 8 Mtr 200 Kg,No,2898,720,3618,3500,262.5
+S,3,Pin Insulator & Pin 11 KV as per TS,Set,8694,2160,10854,108.75,4.35
+S,4,Disc Insulator & Hardware,Set,1449,360,1809,414.7,16.588
+S,5,ACSR Rabbit equivalent,Km,497.49,123.6,621.09,42727.3,1709.092
+S,6,"Supply & Fabrication of Pole Top Bracket, V cross arm, Back clamp for V cross arm, DP Channel, DP channel clamp, DP Cross bracing, DP Bracing clamps",Kg,64400,16000,80400,95.7,3.828
+S,7,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+S,a,Stay wire 7/12 SWG,Set,1288,320,1608,507.5,20.3
+S,b,Stay Insulator,no.,1288,320,1608,21.75,0.87
+S,c,Stay Rod assembly,Set,1288,320,1608,725,29
+S,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,1288,320,1608,181.25,7.25
+S,8,Earthing,,0,0,0,0,0
+S,a,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",No,2576,640,3216,152.25,6.09
+S,b,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",No,322,80,402,1486.25,59.45
+S,9,Nuts & Bolts,Kg,3542,880,4422,127.165,5.0866
+S,10,Aluminium wire for binding,Kg,3.22,0.8,4.02,217.5,8.7
+S,11,Preformed Jointing Sleeve,Set,161,40,201,253.75,10.15
+S,12,"Sundaries (Tree Clearance, etc)",LS,161,40,201,5075,203
+S,13,Guarding and Lacing,,0,0,0,0,0
+S,a,GI Wire 7/16 SWG for Guarding as per REC Construction drawing standard A-1 at crossing,MT,9.66,2.4,12.06,71814.15,2872.566
+S,b,GI Wire (8 SWG) for Lacing as per REC Construction drawing Standard A-1 at crossing lacing,MT,6.44,1.6,8.04,71814.15,2872.566
+S,14,PG clamps suitable for following ACSR conductors (6 nos. per DP/cut point),No,966,240,1206,181.25,7.25
+S,15,Sectionliser switch (400 Amp rating) ( 1 set per 5 Km),Set,32.2,8,40.2,21750,870
+S,16,Stone base plate,Nos,2898,720,3618,181.25,7.25
+T,T,Construction of 11kV New Lines on 9 Mtr. 400Kg PSC Pole with ACSR Rabbit Conductor,,160,40,200,,
+T,1,Route Survey,Km,160,40,200,1305,0
+T,2,PSC Pole 9 Mtr 400 Kg,No,2880,720,3600,5694.15,427.06125
+T,3,Pin Insulator & Pin 11 KV as per TS,Set,8640,2160,10800,108.75,4.35
+T,4,Disc Insulator & Hardware,Set,1440,360,1800,414.7,16.588
+T,5,ACSR Rabbit equivalent,Km,494.4,123.6,618,42727.3,1709.092
+T,6,"Supply & Fabrication of Pole Top Bracket, V cross arm, Back clamp for V cross arm, DP Channel, DP channel clamp, DP Cross bracing, DP Bracing clamps",Kg,64000,16000,80000,95.7,3.828
+T,7,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+T,a,Stay wire 7/12 SWG,Set,1280,320,1600,507.5,20.3
+T,b,Stay Insulator,no.,1280,320,1600,21.75,0.87
+T,c,Stay Rod assembly,Set,1280,320,1600,725,29
+T,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,1280,320,1600,181.25,7.25
+T,8,Earthing,,,0,0,0,0
+T,a,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",No,2560,640,3200,152.25,6.09
+T,b,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",No,320,80,400,1486.25,59.45
+T,9,Nuts & Bolts,Kg,3520,880,4400,127.165,5.0866
+T,10,Aluminium wire for binding,Kg,3.2,0.8,4,217.5,8.7
+T,11,Preformed Jointing Sleeve,Set,160,40,200,253.75,10.15
+T,12,"Sundaries (Tree Clearance, etc)",LS,160,40,200,5075,203
+T,13,Guarding and Lacing,,0,0,0,0,0
+T,a,GI Wire 7/16 SWG for Guarding as per REC Construction drawing standard A-1 at crossing,MT,9.6,2.4,12,71814.15,2872.566
+T,b,GI Wire (8 SWG) for Lacing as per REC Construction drawing Standard A-1 at crossing lacing,MT,6.4,1.6,8,71814.15,2872.566
+T,14,PG clamps suitable for following ACSR conductors (6 nos. per DP/cut point),No,960,240,1200,181.25,7.25
+T,15,Sectionliser switch (400 Amp rating) ( 1 set per 5 Km),Set,32,8,40,21750,870
+T,16,Stone base plate,Nos,2880,720,3600,181.25,7.25
+V,V,Construction of New 11kV Lines on 8 Mtr. 200Kg PSC Pole with ACSR Weasel Conductor,,60,10,70,,
+V,1,Route Survey,Km,60,10,70,1305,0
+V,2,PSC Pole 8 Mtr 200 Kg,No,1080,180,1260,3500,262.5
+V,3,Pin Insulator & Pin 11 KV as per TS,Set,3240,540,3780,108.75,4.35
+V,4,Disc Insulator & Hardware,Set,540,90,630,414.7,16.588
+V,5,ACSR Weasel equivalent,Km,185.4,30.9,216.3,28727.3,1149.092
+V,6,"Supply & Fabrication of Pole Top Bracket, V cross arm, Back clamp for V cross arm, DP Channel, DP channel clamp, DP Cross bracing, DP Bracing clamps",Kg,24000,4000,28000,95.7,3.828
+V,7,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+V,a,Stay wire 7/12 SWG,Set,480,80,560,507.5,20.3
+V,b,Stay Insulator,no.,480,80,560,21.75,0.87
+V,c,Stay Rod assembly,Set,480,80,560,725,29
+V,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,480,80,560,181.25,7.25
+V,8,Earthing,,0,0,0,0,0
+V,a,Spiral type earthing,No,960,160,1120,152.25,6.09
+V,b,Pipe type earthing,No,120,20,140,1486.25,59.45
+V,9,Nuts & Bolts,Kg,1320,220,1540,127.165,5.0866
+V,10,Aluminium wire for binding,Kg,1.2,0.2,1.4,217.5,8.7
+V,11,Preformed Jointing Sleeve,Set,60,10,70,253.75,10.15
+V,12,"Sundaries (Tree Clearance, etc)",LS,60,10,70,5075,203
+V,13,Guarding and Lacing,,0,0,0,0,0
+V,a,GI Wire 7/16 SWG for Guarding as per REC Construction drawing standard A-1 at crossing,MT,3.6,0.6,4.2,71814.15,2872.566
+V,b,GI Wire (8 SWG) for Lacing as per REC Construction drawing Standard A-1 at crossing lacing,MT,2.4,0.4,2.8,71814.15,2872.566
+V,14,PG clamps suitable for following ACSR conductors (6 nos. per DP/cut point),No,360,60,420,181.25,7.25
+V,15,Sectionliser switch (400 Amp rating) ( 1 set per 5 Km),Set,12,2,14,21750,870
+V,16,Stone base plate,Nos,1080,180,1260,181.25,7.25
+W,W,Construction of New 11kV Lines on 9 Mtr. 400Kg PSC Pole with ACSR Weasel Conductor,,34,16,50,,
+W,1,Route Survey,Km,34,16,50,1305,0
+W,2,PSC Pole 9 Mtr 400 Kg,No,612,288,900,5694.15,427.06125
+W,3,Pin Insulator & Pin 11 KV as per TS,Set,1836,864,2700,108.75,4.35
+W,4,Disc Insulator & Hardware,Set,306,144,450,414.7,16.588
+W,5,ACSR Weasel equivalent,Km,105.06,49.44,154.5,28727.3,1149.092
+W,6,"Supply & Fabrication of Pole Top Bracket, V cross arm, Back clamp for V cross arm, DP Channel, DP channel clamp, DP Cross bracing, DP Bracing clamps",Kg,13600,6400,20000,95.7,3.828
+W,7,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+W,a,Stay wire 7/12 SWG,Set,272,128,400,507.5,20.3
+W,b,Stay Insulator,no.,272,128,400,21.75,0.87
+W,c,Stay Rod assembly,Set,272,128,400,725,29
+W,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,272,128,400,181.25,7.25
+W,8,Earthing,,0,0,0,0,0
+W,a,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",No,544,256,800,152.25,6.09
+W,b,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",No,68,32,100,1486.25,59.45
+W,9,Nuts & Bolts,Kg,748,352,1100,127.165,5.0866
+W,10,Aluminium wire for binding,Kg,0.68,0.32,1,217.5,8.7
+W,11,Preformed Jointing Sleeve,Set,34,16,50,253.75,10.15
+W,12,"Sundaries (Tree Clearance, etc)",LS,34,16,50,5075,203
+W,13,Guarding and Lacing,,0,0,0,0,0
+W,a,GI Wire 7/16 SWG for Guarding as per REC Construction drawing standard A-1 at crossing,MT,2.04,0.96,3,71814.15,2872.566
+W,b,GI Wire (8 SWG) for Lacing as per REC Construction drawing Standard A-1 at crossing lacing,MT,1.36,0.64,2,71814.15,2872.566
+W,14,PG clamps suitable for following ACSR conductors (6 nos. per DP/cut point),No,204,96,300,181.25,7.25
+W,15,Sectionliser switch (400 Amp rating) ( 1 set per 5 Km),Set,6.8,3.2,10,21750,870
+W,16,Stone base plate,Nos,612,288,900,181.25,7.25
+Y,Y,Reconductoring of 11 KV Line by using PSC Pole & ACSR Rabbit conductor,,111,0,111,,
+Y,1,ACSR Rabbit conductor,Km,342.99,0,342.99,42727.3,1709.092
+Y,2,PSC Pole 9 Mtr 400 Kg,No,444,0,444,5694.15,427.06125
+Y,3,Pin Insulator & Pin 11 KV as per TS,Set,3330,0,3330,108.75,4.35
+Y,4,Rail Pole 13 Mtr (105 lbs),No,0,0,0,52203.155,2088.1262
+Y,5,Disc Insulator with Hardware fittings suitable to ACSR Rabbit/Weasel conductor complete in all rspect,Set,666,0,666,414.7,16.588
+Y,6,"Supply & Fabrication of Pole Top Bracket, V cross arm, Back clamp for V cross arm, DP Channel, DP channel clamp, DP Cross bracing, DP Bracing clamps",Kg,27750,0,27750,95.7,3.828
+Y,7,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,,0
+Y,8,Stay wire 7/12 SWG,Set,444,0,444,507.5,20.3
+Y,9,Stay Insulator,no.,444,0,444,21.75,0.87
+Y,10,Stay Rod assembly,Set,444,0,444,725,29
+Y,11,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,444,0,444,181.25,7.25
+Y,12,Earthing,,0,0,0,,0
+Y,13,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",No,1776,0,1776,152.25,6.09
+Y,14,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",No,222,0,222,1486.25,59.45
+Y,15,Nuts & Bolts,Kg,1332,0,1332,127.165,5.0866
+Y,16,Aluminium wire for binding,Kg,2.22,0,2.22,217.5,8.7
+Y,17,Preformed Jointing Sleeve suitable to ACSR Rabbit Conductor,Set,111,0,111,253.75,10.15
+Y,18,"Sundaries (Tree Clearance, etc)",LS,111,0,111,5075,203
+Y,19,Guarding and Lacing,,0,0,0,,0
+Y,20,GI Wire 7/16 SWG for Guarding as per REC Construction drawing standard A-1 at crossing,MT,6.66,0,6.66,71814.15,2872.566
+Y,21,GI Wire (8 SWG) for Lacing as per REC Construction drawing Standard A-1 at crossing lacing,MT,4.44,0,4.44,71814.15,2872.566
+Y,22,PG clamps suitable for ACSR Rabbit conductors (6 nos. per DP/cut point),No,666,0,666,181.25,7.25
+Y,24,Stone base plate,Nos,444,0,444,181.25,7.25
+Y,25,"(a) Dismentling of existing defective/damaged pole-support (Rail/joist/tubular from existing line and returning the dismentoled pole structure including storage, handling, insurance, loading, unloading, transportation to designated etore of NBPDCL as per the direction of Engineer-in-charge and handing over the pole to the authorised representative of NBPDCL with propoer accounting as per the TS.",LS per CKM,111,0,111,25000,1000
+Y,,"(b) Dismentling of existing Conductor (Dog/Rabbit/Weasel etc) and rewinding of thedismantled conductor in the wooden drum to be arranged by the contractor at their own cost) and returning the dismantled conductor including storage, handling, insurance, loading, unloading, transportation to designated etore of NBPDCL as per the direction of Engineer-in-charge and handing over the conductor to the authorised representative of NBPDCL with propoer accounting as per the TS.",LS per CKM,111,0,111,29000,1160
+Y,26,(a) Route Survey,KM,111,0,111,1305,0
+AC,AC,11 KV Metering System,,14,0,14,,
+AC,1,11 kV Metering units in all respest with TS,No,14,0,14,21750,870
+AD,AD,Construction of New 11 KV Bay Extension for New feeders,,14,0,14,,0
+AD,1,"12 KV, 630 A, (25KA S.C. rating), 3-Ph, Outdoor type Vacuum Circuit Breaker (with 30V DC tripping/closing coil and associated control) along with marshalling box, terminal connectors and required accessories complete as per applicable TS",Set,14,0,14,320692.15,12827.686
+AD,2,"12KV, 400 A (25KA S.C. rating), 3-ph double break centre rotating type (with Earth Switch), Gang Operated, Isolator along with Support Insulators, Operating Mechanism, Base Channel Down Pipe, Terminal connectors and all reauired accessories complete as per applicable TS",Set,28,0,28,52869.9,2114.796
+AD,3,"9 kV, 10kA, 1-ph LA, Metal oxide with terminal connector complete in all respect ( 1set= 3no.)",Set,14,0,14,2228.65,89.146
+AD,4,"12 KV, 1-PH, 25KA, 800-400-200/5-5 Amp outdoor type Current Transformer, having two secondary cores (protection & metering) alongwith terminal connectors, junction box and required accessories etc. complete as per applicable TS ( 1 set = 3 nos.)",Set,14,0,14,44575.9,1783.036
+AD,5,"12 KV Control & Relay panel for 12 KV VCB & Power Transformer (suitable for 30 V DC tripping/closing coil and associated control) alongwith, ElF & O/C relays,Static energy meter (class 0.5 with communication port) , Mimic Diagram, Voltmete, Ammeter, etc complete as per",Set,14,0,14,179539,7181.56
+AD,6,"Strcutures for 11 KV bay including AB switch, PI, LA & CT",Lot,14,0,14,154774.45,6190.978
+AD,6 b,A structure for 11 KV swing bus,nos.,14,0,14,154774.45,6190.978
+AD,7,Auxiliaries & Misc. Items,,0,0,0,,0
+AD,a,11 KV post Insulator,No.,84,0,84,398.75,15.95
+AD,b.,11 KV Disc insulator (45 KN) as per TS ( 1 set=1 no.) with Hardware fitting,Set,84,0,84,398.75,15.95
+AD,c,ACSR Wolf conductor,Km,0.21,0,0.21,135670,5426.8
+AD,d,Control and Power cable various sizes as per requirement,Lot,14,0,14,65250,2610
+AD,e,Earthing as per REC specification and construction of cable trench if required,Lot,14,0,14,55717.7,2228.708
+AD,f,Al. Pipe 50 mm dia as per TS,Mtr.,140,0,140,435,17.4
+AF,AF,"Construction of New11/0.433 KV, 63 KVA Distribution Transformers",,60,0,60,,
+AF,1,3-Ph-63 KVA Distribution Transformer,No.,60,0,60,210965.95,8438.638
+AF,2,8 mtrs long 200 kg PSC Pole,No.,120,0,120,3500,262.5
+AF,3,"Supply & fabrication of channel for supporting transformers/ AB switch, channel for supporting DO fuse & Las channel support for transformer belting, belting support, clamps for AB switch base channel 2 pairs, angle for LT distribution bus for DTs",Kg,15900,0,15900,95.7,3.828
+AF,4,AB Switch 3 Pin type double break ( horizontal) 11 kV 3 pole 200 Amp,Set,60,0,60,13000.7,520.028
+AF,5,Distribution box with MCCB for 3 ph 63 kVA DTs with CT operated energy meter,No.,60,0,60,23925,957
+AF,6,HG Fuse sets 11 kV with insulators etc for 3 ph transformers - 200 Amp,Set,60,0,60,5075,203
+AF,7,11 kv lightning Arrester,Nos,180,0,180,507.5,20.3
+AF,8,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",Nos,180,0,180,3045,121.8
+AF,9,Nuts & Bolts,Kg,720,0,720,127.165,5.0866
+AF,10,Supply for ACSR conductors,,0,0,0,0,0
+AF,a,ACSR Dog Conductor,KM,1.2,0,1.2,82711.7,3308.468
+AF,11,PG Clamps suitable for connection to ACSR Rabbit conductor,No.,360,0,360,181.25,7.25
+AF,12,Crimping type heavy duty aluminium lugs suitable for connection in rewirable kit kat fuse & connecting ACSR conductor/ PVC cables,LS,960,0,960,362.5,14.5
+AF,13,Insulators as per TS,,0,0,0,0,0
+AF,a,11 kV Disc insulator 45 KN (Single Disc) with hardware fittings suitable for ACSR Dog/ Rabbit/ Weasel conductor,Set,360,0,360,398.75,15.95
+AF,b,11 kV Pin insulator with Pin,No.,360,0,360,108.75,4.35
+AF,c,LT Pin insulator with Pin,No.,180,0,180,17.4,0.696
+AF,d,LT Shackle insulator assembly complete as per specification (Type- II),No.,480,0,480,14.5,0.58
+AF,14,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+AF,a,Stay wire 7/12 SWG,Set,120,0,120,507.5,20.3
+AF,b,Stay Insulator,no.,120,0,120,21.75,0.87
+AF,c,Stay Rod assembly,Set,120,0,120,725,29
+AF,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,120,0,120,181.25,7.25
+AF,15,Danger board (for both pole of new DSS),No.,60,0,60,116,4.64
+AF,16,Anticlimbing device (for both pole of new DSS),No.,120,0,120,153.7,6.148
+AF,17,1.1 kV grade 3&1/2 core 120 sqmm size PVC insulated PVC sheathed aluminium conductor cable,Meter,1800,0,1800,52.2,2.088
+AF,18,Stone base plate,Nos,120,0,120,181.25,7.25
+AG,AG,"Construction of New 11/0.433 KV,100 KVA Distribution Transformers on 9 Mtr. 400 Kg PSC Pole",,100,20,120,,
+AG,1,3-Ph-100 KVA Distribution Transformer,No.,100,20,120,245113.45,9804.538
+AG,2,9 mtrs long 400 kg PSC Pole,No.,200,40,240,5694.15,427.06125
+AG,3,"Supply & fabrication of channel for supporting transformers/ AB switch, channel for supporting DO fuse & Las channel support for transformer belting, belting support, clamps for AB switch base channel 2 pairs, angle for LT distribution bus for DTs",Kg,26500,5300,31800,95.7,3.828
+AG,4,AB Switch 3 Pin type double break ( horizontal) 11 kV 3 pole 200 Amp,Set,100,20,120,13000.7,520.028
+AG,5,Distribution box with MCCB for 3 ph 100 kVA DTs with CT operated energy meter,No.,100,20,120,23925,957
+AG,6,HG Fuse sets 11 kV with insulators etc for 3 ph transformers - 200 Amp,Set,100,20,120,5075,203
+AG,7,11 kv lightning Arrester,Nos,300,60,360,507.5,20.3
+AG,8,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",Nos,300,60,360,3045,121.8
+AG,9,Nuts & Bolts,Kg,1200,240,1440,127.165,5.0866
+AG,10,Supply for ACSR conductors,,0,0,0,0,0
+AG,a,ACSR Dog Conductor,KM,2,0.4,2.4,82711.7,3308.468
+AG,11,PG Clamps suitable for connection to ACSR Rabbit conductor,No.,600,120,720,181.25,7.25
+AG,12,Crimping type heavy duty aluminium lugs suitable for connection in rewirable kit kat fuse & connecting ACSR conductor/ PVC cables,LS,1600,320,1920,362.5,14.5
+AG,13,Insulators as per TS,,0,0,0,0,0
+AG,a,11 kV Disc insulator 45 KN (Single Disc) with hardware fittings suitable for ACSR Dog/ Rabbit/ Weasel conductor,Set,600,120,720,398.75,15.95
+AG,b,11 kV Pin insulator with Pin,No.,600,120,720,108.75,4.35
+AG,c,LT Pin insulator with Pin,No.,300,60,360,17.4,0.696
+AG,d,LT Shackle insulator assembly complete as per specification (Type- II),No.,800,160,960,14.5,0.58
+AG,14,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+AG,a,Stay wire 7/12 SWG,Set,200,40,240,507.5,20.3
+AG,b,Stay Insulator,no.,200,40,240,21.75,0.87
+AG,c,Stay Rod assembly,Set,200,40,240,725,29
+AG,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,200,40,240,181.25,7.25
+AG,15,Danger board (for both pole of new DSS),No.,100,20,120,116,4.64
+AG,16,Anticlimbing device (for both pole of new DSS),No.,200,40,240,153.7,6.148
+AG,17,1.1 kV grade 3&1/2 core 120 sqmm size PVC insulated PVC sheathed aluminium conductor cable,Meter,6000,1200,7200,52.2,2.088
+AG,18,Stone base plate,Nos,200,40,240,181.25,7.25
+AH,AH,"Construction of New 11/0.433 KV, 100 KVA Distribution Transformers on 13 Mtr. 105 lb Rail Pole",,34,17,51,,
+AH,1,3-Ph-100 KVA Distribution Transformer,No.,34,17,51,245113.45,9804.538
+AH,2,"Rail Pole 105 lb, 13 meter",No.,68,34,102,52203.155,2088.1262
+AH,3,"Supply & fabrication of channel for supporting transformers/ AB switch, channel for supporting DO fuse & Las channel support for transformer belting, belting support, clamps for AB switch base channel 2 pairs, angle for LT distribution bus for DTs",Kg,9010,4505,13515,95.7,3.828
+AH,4,AB Switch 3 Pin type double break ( horizontal) 11 kV 3 pole 200 Amp,Set,34,17,51,13000.7,520.028
+AH,5,Distribution box with MCCB for 3 ph 100 kVA DTs with CT operated energy meter,No.,34,17,51,23925,957
+AH,6,HG Fuse sets 11 kV with insulators etc for 3 ph transformers - 200 Amp,Set,34,17,51,5075,203
+AH,7,11 kv lightning Arrester,Nos,102,51,153,507.5,20.3
+AH,8,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",Nos,102,51,153,3045,121.8
+AH,9,Nuts & Bolts,Kg,408,204,612,127.165,5.0866
+AH,10,Supply for ACSR conductors,,0,0,0,0,0
+AH,a,ACSR Dog Conductor,KM,0.68,0.34,1.02,82711.7,3308.468
+AH,11,PG Clamps suitable for connection to ACSR Rabbit conductor,No.,204,102,306,181.25,7.25
+AH,12,Crimping type heavy duty aluminium lugs suitable for connection in rewirable kit kat fuse & connecting ACSR conductor/ PVC cables,LS,544,272,816,362.5,14.5
+AH,13,Insulators as per TS,,0,0,0,0,0
+AH,a,11 kV Disc insulator 45 KN (Single Disc) with hardware fittings suitable for ACSR Dog/ Rabbit/ Weasel conductor,Set,204,102,306,398.75,15.95
+AH,b,11 kV Pin insulator with Pin,No.,204,102,306,108.75,4.35
+AH,c,LT Pin insulator with Pin,No.,102,51,153,17.4,0.696
+AH,d,LT Shackle insulator assembly complete as per specification (Type- II),No.,272,136,408,14.5,0.58
+AH,14,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+AH,a,Stay wire 7/12 SWG,Set,68,34,102,507.5,20.3
+AH,b,Stay Insulator,no.,68,34,102,21.75,0.87
+AH,c,Stay Rod assembly,Set,68,34,102,725,29
+AH,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,68,34,102,181.25,7.25
+AH,15,Danger board (for both pole of new DSS),No.,34,17,51,116,4.64
+AH,16,Anticlimbing device (for both pole of new DSS),No.,68,34,102,153.7,6.148
+AH,17,1.1 kV grade 3&1/2 core 120 sqmm size PVC insulated PVC sheathed aluminium conductor cable,Meter,2040,1020,3060,52.2,2.088
+AH,18,Stone base plate,Nos,68,34,102,181.25,7.25
+AI,AI,"Construction of New 11/0.433 KV, 200 KVA Distribution Transformers on 9 Mtr. 400 Kg PSC Pole",,50,12,62,,
+AI,1,3-Ph-200 KVA Distribution Transformer,No.,50,12,62,346695,13867.8
+AI,2,9 mtrs long 400 kg PSC Pole,No.,100,24,124,5694.15,427.06125
+AI,3,"Supply & fabrication of channel for supporting transformers/ AB switch, channel for supporting DO fuse & Las channel support for transformer belting, belting support, clamps for AB switch base channel 2 pairs, angle for LT distribution bus for DTs",Kg,13250,3180,16430,95.7,3.828
+AI,4,AB Switch 3 Pin type double break ( horizontal) 11 kV 3 pole 400 Amp,Set,50,12,62,13000.7,520.028
+AI,5,Distribution box with MCCB for 3 ph 200 kVA DTs with CT operated energy meter,No.,50,12,62,23925,957
+AI,6,HG Fuse sets 11 kV with insulators etc for 3 ph transformers - 200 Amp,Set,50,12,62,5075,203
+AI,7,11 kv lightning Arrester,Nos,150,36,186,507.5,20.3
+AI,8,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",Nos,150,36,186,3045,121.8
+AI,9,Nuts & Bolts,Kg,600,144,744,127.165,5.0866
+AI,10,Supply for ACSR conductors,,0,0,0,0,0
+AI,a,ACSR Dog Conductor,KM,1,0.24,1.24,82711.7,3308.468
+AI,11,PG Clamps suitable for connection to ACSR Rabbit conductor,No.,300,72,372,181.25,7.25
+AI,12,Crimping type heavy duty aluminium lugs suitable for connection in rewirable kit kat fuse & connecting ACSR conductor/ PVC cables,LS,800,192,992,362.5,14.5
+AI,13,Insulators as per TS,,0,0,0,0,0
+AI,a,11 kV Disc insulator 45 KN (Single Disc) with hardware fittings suitable for ACSR Dog/ Rabbit/ Weasel conductor,Set,300,72,372,398.75,15.95
+AI,b,11 kV Pin insulator with Pin,No.,300,72,372,108.75,4.35
+AI,c,LT Pin insulator with Pin,No.,150,36,186,17.4,0.696
+AI,d,LT Shackle insulator assembly complete as per specification (Type- II),No.,400,96,496,14.5,0.58
+AI,14,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+AI,a,Stay wire 7/12 SWG,Set,100,24,124,507.5,20.3
+AI,b,Stay Insulator,no.,100,24,124,21.75,0.87
+AI,c,Stay Rod assembly,Set,100,24,124,725,29
+AI,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,100,24,124,181.25,7.25
+AI,15,Danger board (for both pole of new DSS),No.,50,12,62,116,4.64
+AI,16,Anticlimbing device (for both pole of new DSS),No.,100,24,124,153.7,6.148
+AI,17,1.1 kV grade 3&1/2 core 120 sqmm size PVC insulated PVC sheathed aluminium conductor cable,Meter,3000,720,3720,52.2,2.088
+AI,18,Stone base plate,Nos,100,24,124,181.25,7.25
+AJ,AJ,"Construction of New 11/0.433 KV, 200 KVA Distribution Transformers on 13 Mtr. 105 lb Rail Pole",,19,10,29,,
+AJ,1,3-Ph-200 KVA Distribution Transformer,No.,19,10,29,346695,13867.8
+AJ,2,"Rail Pole 105 lb, 13 meter",No.,38,20,58,52203.155,2088.1262
+AJ,3,"Supply & fabrication of channel for supporting transformers/ AB switch, channel for supporting DO fuse & Las channel support for transformer belting, belting support, clamps for AB switch base channel 2 pairs, angle for LT distribution bus for DTs",Kg,5035,2650,7685,95.7,3.828
+AJ,4,AB Switch 3 Pin type double break ( horizontal) 11 kV 3 pole 400 Amp,Set,19,10,29,13000.7,520.028
+AJ,5,Distribution box with MCCB for 3 ph 200 kVA DTs with CT operated energy meter,No.,19,10,29,23925,957
+AJ,6,HG Fuse sets 11 kV with insulators etc for 3 ph transformers - 200 Amp,Set,19,10,29,5075,203
+AJ,7,11 kv lightning Arrester,Nos,57,30,87,507.5,20.3
+AJ,8,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",Nos,57,30,87,3045,121.8
+AJ,9,Nuts & Bolts,Kg,228,120,348,127.165,5.0866
+AJ,10,Supply for ACSR conductors,,0,0,0,0,0
+AJ,a,ACSR Dog Conductor,KM,0.38,0.2,0.58,82711.7,3308.468
+AJ,11,PG Clamps suitable for connection to ACSR Rabbit conductor,No.,114,60,174,181.25,7.25
+AJ,12,Crimping type heavy duty aluminium lugs suitable for connection in rewirable kit kat fuse & connecting ACSR conductor/ PVC cables,LS,304,160,464,362.5,14.5
+AJ,13,Insulators as per TS,,0,0,0,0,0
+AJ,a,11 kV Disc insulator 45 KN (Single Disc) with hardware fittings suitable for ACSR Dog/ Rabbit/ Weasel conductor,Set,114,60,174,398.75,15.95
+AJ,b,11 kV Pin insulator with Pin,No.,114,60,174,108.75,4.35
+AJ,c,LT Pin insulator with Pin,No.,57,30,87,17.4,0.696
+AJ,d,LT Shackle insulator assembly complete as per specification (Type- II),No.,152,80,232,14.5,0.58
+AJ,14,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+AJ,a,Stay wire 7/12 SWG,Set,38,20,58,507.5,20.3
+AJ,b,Stay Insulator,no.,38,20,58,21.75,0.87
+AJ,c,Stay Rod assembly,Set,38,20,58,725,29
+AJ,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,38,20,58,181.25,7.25
+AJ,15,Danger board (for both pole of new DSS),No.,19,10,29,116,4.64
+AJ,16,Anticlimbing device (for both pole of new DSS),No.,38,20,58,153.7,6.148
+AJ,17,1.1 kV grade 3&1/2 core 120 sqmm size PVC insulated PVC sheathed aluminium conductor cable,Meter,1140,600,1740,52.2,2.088
+AJ,18,Stone base plate,Nos,38,20,58,181.25,7.25
+AL,AL,"Construction of New LT Line 8M, 200Kg PSC Pole using 3Cx95 Sqmm size ABC Cable",,74,30,104,,
+AL,1,Survey,Kms,74,30,104,0,0
+AL,2,Aerial Bunched Cable (3Cx95+1X16+1x35 sq. mm. (Bare messenger) ),Kms,77.7,31.5,109.2,269700,10788
+AL,3,"PSC Pole, 200 Kg, 8 Meters long",No,1776,720,2496,3500,262.5
+AL,4,Nuts & Bolts,Kg,740,300,1040,127.165,5.0866
+AL,5,Stay set complete with GI stay wire preformed grip and Anchor plate as per TS,Set,740,300,1040,1724.05,68.962
+AL,6,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",Nos,740,300,1040,152.25,6.09
+AL,7,"Suspension Clamps assembly suitable for bare messanger (1 no suspension clamp with bracket, 1.5Mtr stainless steel strap, 2 No buckle) including service clamp for proper support of service cable with Pole, pole bracket for service clamp with 1.5 mtr. stainless steel strap, 2 nos. buckle, insulation peircing multiport connector, insulation peircing connector for networking/insulation peircing connector for branching,/ earthing , peircing earthing connector, pre insulated bimetallic termination lug for phase & neutral, mid span joint for phases, mid span joint for neutral massenger etc. complete in all respect to complete the system.",Nos,1184,480,1664,181.25,7.25
+AL,8,Tension / Dead end clamps,Nos,814,330,1144,129.05,5.162
+AL,9,AB Cable jointing Kit,Nos,148,60,208,580,23.2
+AL,10,Stone base plate,Nos,1776,720,2496,181.25,7.25
+AN,AN,"Conversion of Single Phase LT Line to Three Phase , 4 wire Line",,59.15,42.3,101.45,,
+AN,1,Route Survey,Kms,59.15,42.3,101.45,,
+AN,2,Shackle Insulator & straps,Set,5205.2,3722.4,8927.6,65.25,2.61
+AN,3,ACSR Waesel equivalent,Kms,182.7735,130.707,313.4805,28727.3,1149.092
+AN,4,"Supply & fabrication of LT Brackett made of 75*40*6 mm MS Channel along with back clamp made of MS flat 50*6 mm ,Guard bracket made of MS angle 50*50*6 mm ,stay clamps & angle stay clamps and other fabricated materials",KG,14787.5,10575,25362.5,95.7,3.828
+AN,5,"Stay set complete with GI stay wire preformed guy and stay base plate,along with stay rod assembly etc",Set,354.9,253.8,608.7,1724.05,68.962
+AN,6,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",Set,295.75,211.5,507.25,150.8,6.032
+AN,7,Nuts & Bolts,Kg,946.4,676.8,1623.2,127.165,5.0866
+AN,8,Aluminium wire binding,Kg,1.183,0.846,2.029,210.25,8.41
+AN,9,Preformed Jointing Sleeve,Nos.,59.15,42.3,101.45,130.5,5.22
+AN,10,LT PVC Spacers,No,3549,2538,6087,65.25,2.61
+AN,11,8 SWG 4 mm GI wire for Guarding & Lacing @ 1.1 Km per guard wire (101 Kg/Km of 8 SWG GI Wire),MT,0.597415,0.42723,1.024645,71814.15,2872.566
+AN,12,PG Clamps suitable for Rabbit/Weasel/Dog Conductors,Nos.,709.8,507.6,1217.4,181.25,7.25
+AO,AO,"Construction of 3 Phase 4 Wire LT Line on 8M, 200 Kg PSC with ACSR Weasel Conductor in Vertical configuration",,125,13,138,,
+AO,1,Route Survey,Kms,125,13,138,0,0
+AO,2,"PSC Pole, 200 Kg 8 mtr. Long",No,2500,260,2760,3500,262.5
+AO,3,Shackle Insulator & straps ( Type- II),Set,11000,1144,12144,65.25,2.61
+AO,4,ACSR Weasel equivalent,Kms,515,53.56,568.56,28727.3,1149.092
+AO,5,"Supply & fabrication of U clamps LT conductor dead end,stay clamps & angle stay clamps and other fabricated materials",Kg,6250,650,6900,87,3.48
+AO,6,Stay set complete with GI stay wire preformed guy and stay base plate,Set,1000,104,1104,1724.05,68.962
+AO,7,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",Set,1250,130,1380,150.8,6.032
+AO,8,Nuts & Bolts with plain and spring washer,Kg,4000,416,4416,127.165,5.0866
+AO,9,Aluminium wire binding,Kg,2.5,0.26,2.76,210.25,8.41
+AO,10,Preformed Jointing Sleeve,Nos.,125,13,138,130.5,5.22
+AO,11,LT PVC Spacers,No,7500,780,8280,65.25,2.61
+AO,12,8 SWG 4 mm GI wire for Guarding & Lacing @ 1.1 Km per guard wire (101 Kg/Km of 8 SWG GI Wire),MT,1.2625,0.1313,1.3938,71814.15,2872.566
+AO,13,PG Clamps suitable for Rabbit/Weasel/Dog Conductors,Nos.,1500,156,1656,181.25,7.25
+AO,14,Stone base plate,Nos,2500,260,2760,181.25,7.25
+AQ,AQ,"Augmentation of 11/0.433 KV, 63 KVA to 100 KVA Distribution Transformers (released)",,84,69,153,,
+AQ,1,3-Ph 100 KVA Distribution Transformer,No.,0,0,0,245113.45,9804.538
+AQ,2,8 mtrs long 200 kg PSC Pole,No.,0,0,0,3500,262.5
+AQ,3,"Supply & fabrication of channel for supporting transformers/ AB switch, channel for supporting DO fuse & Las channel support for transformer belting, belting support, clamps for AB switch base channel 2 pairs, angle for LT distribution bus for DTs",Kg,0,0,0,87,3.48
+AQ,4,AB Switch 3 Pin type double break ( horizontal) 11 kV 3 pole 200 Amp,Set,84,69,153,13000.7,520.028
+AQ,5,Distribution box with MCCB for 3 ph 100 kVA DTs with CT operated energy meter,No.,84,69,153,23925,957
+AQ,6,HG Fuse sets 11 kV with insulators etc for 3 ph transformers - 200 Amp,Set,84,69,153,5075,203
+AQ,7,11 kv lightning Arrester,Nos,252,207,459,507.5,20.3
+AQ,8,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",Nos,252,207,459,1305,52.2
+AQ,9,Nuts & Bolts,Kg,504,414,918,127.165,5.0866
+AQ,10,Supply for ACSR conductors,,0,0,0,0,0
+AQ,a,ACSR Dog Conductor,KM,1.68,1.38,3.06,82711.7,3308.468
+AQ,11,PG Clamps suitable for connection to ACSR Rabbit conductor,No.,504,414,918,181.25,7.25
+AQ,12,Crimping type heavy duty aluminium lugs suitable for connection in rewirable kit kat fuse & connecting ACSR conductor/ PVC cables,No,1680,1380,3060,435,17.4
+AQ,13,Insulators as per TS,,0,0,0,0,0
+AQ,a,11 kV Disc insulator 45 KN (Single Disc) with hardware fittings suitable for ACSR Dog/ Rabbit/ Weasel conductor,Set,0,0,0,398.75,15.95
+AQ,b,11 kV Pin insulator with Pin,No.,0,0,0,108.75,4.35
+AQ,c,LT Pin insulator with Pin,No.,0,0,0,17.4,0.696
+AQ,d,LT Shackle insulator assembly complete as per specification (Type- II),No.,0,0,0,14.5,0.58
+AQ,14,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+AQ,a,Stay wire 7/12 SWG,Set,0,0,0,507.5,20.3
+AQ,b,Stay Insulator,no.,0,0,0,21.75,0.87
+AQ,c,Stay Rod assembly,Set,0,0,0,725,29
+AQ,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,0,0,0,181.25,7.25
+AQ,15,Danger board (for both pole of new DSS),No.,0,0,0,116,4.64
+AQ,16,Anticlimbing device (for both pole of new DSS),No.,0,0,0,153.7,6.148
+AQ,17,1.1 kV grade 3&1/2 core 120 sqmm size PVC insulated PVC sheathed aluminium conductor cable,Meter,2520,2070,4590,52.2,2.088
+AQ,18,Stone base plate,Nos,0,0,0,181.25,7.25
+AR,AR,"Augmentation of 11/0.433 KV, 100 KVA to 200 KVA Distribution Transformers",,84,69,153,,
+AR,1,3-Ph 200 KVA Distribution Transformer,No.,84,69,153,346695,13867.8
+AR,2,8 mtrs long 200 kg PSC Pole,No.,0,0,0,3500,262.5
+AR,3,"Supply & fabrication of channel for supporting transformers/ AB switch, channel for supporting DO fuse & Las channel support for transformer belting, belting support, clamps for AB switch base channel 2 pairs, angle for LT distribution bus for DTs",Kg,840,690,1530,87,3.48
+AR,4,AB Switch 3 Pin type double break ( horizontal) 11 kV 3 pole 200 Amp,Set,84,69,153,13000.7,520.028
+AR,5,Distribution box with MCCB for 3 ph 200 kVA DTs with CT operated energy meter,No.,84,69,153,23925,957
+AR,6,HG Fuse sets 11 kV with insulators etc for 3 ph transformers - 200 Amp,Set,84,69,153,5075,203
+AR,7,11 kv lightning Arrester,Nos,252,207,459,507.5,20.3
+AR,8,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",Nos,252,207,459,1305,52.2
+AR,9,Nuts & Bolts,Kg,336,276,612,127.165,5.0866
+AR,10,Supply for ACSR conductors,,0,0,0,0,0
+AR,a,ACSR Dog Conductor,KM,1.68,1.38,3.06,82711.7,3308.468
+AR,11,PG Clamps suitable for connection to ACSR Rabbit conductor,No.,504,414,918,181.25,7.25
+AR,12,Crimping type heavy duty aluminium lugs suitable for connection in rewirable kit kat fuse & connecting ACSR conductor/ PVC cables,LS,1344,1104,2448,435,17.4
+AR,13,Insulators as per TS,,0,0,0,0,0
+AR,a,11 kV Disc insulator 45 KN (Single Disc) with hardware fittings suitable for ACSR Dog/ Rabbit/ Weasel conductor,Set,0,0,0,398.75,15.95
+AR,b,11 kV Pin insulator with Pin,No.,0,0,0,108.75,4.35
+AR,c,LT Pin insulator with Pin,No.,0,0,0,17.4,0.696
+AR,d,LT Shackle insulator assembly complete as per specification (Type- II),No.,0,0,0,14.5,0.58
+AR,14,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+AR,a,Stay wire 7/12 SWG,Set,0,0,0,507.5,20.3
+AR,b,Stay Insulator,no.,0,0,0,21.75,0.87
+AR,c,Stay Rod assembly,Set,0,0,0,725,29
+AR,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,0,0,0,181.25,7.25
+AR,15,Danger board (for both pole of new DSS),No.,0,0,0,116,4.64
+AR,16,Anticlimbing device (for both pole of new DSS),No.,0,0,0,153.7,6.148
+AR,17,1.1 kV grade 3&1/2 core 120 sqmm size PVC insulated PVC sheathed aluminium conductor cable,Meter,2520,2070,4590,52.2,2.088
+AR,18,Stone base plate,Nos,0,0,0,181.25,7.25
+AS,As,R&M of existing 11/0.433 KV DSS,,365,0,365,,
+AS,1,3-Ph-200 KVA Distribution Transformer,No.,0,0,0,346695,13867.8
+AS,2,9 mtrs long 400 kg PSC Pole,No.,0,0,0,5694.15,427.06125
+AS,3,"Supply & fabrication of channel for supporting transformers/ AB switch, channel for supporting DO fuse & Las channel support for transformer belting, belting support, clamps for AB switch base channel 2 pairs, angle for LT distribution bus for DTs",Kg,21900,0,21900,95.7,3.828
+AS,4,AB Switch 3 Pin type double break ( horizontal) 11 kV 3 pole 400 Amp,Set,365,0,365,13000.7,520.028
+AS,5,Distribution box with MCCB for 3 ph 200 kVA DTs with CT operated energy meter,No.,0,0,0,23925,957
+AS,6,HG Fuse sets 11 kV with insulators etc for 3 ph transformers - 200 Amp,Set,0,0,0,5075,203
+AS,7,11 kv lightning Arrester,Nos,1095,0,1095,507.5,20.3
+AS,8,Earthing for DTs ( treated),Nos,1095,0,1095,3045,121.8
+AS,9,Nuts & Bolts,Kg,1825,0,1825,127.165,5.0866
+AS,10,Supply for ACSR conductors,,0,0,0,0,0
+AS,a,ACSR Dog Conductor,KM,7.3,0,7.3,82711.7,3308.468
+AS,11,PG Clamps suitable for connection to ACSR Rabbit conductor,No.,1460,0,1460,181.25,7.25
+AS,12,Crimping type heavy duty aluminium lugs suitable for connection in rewirable kit kat fuse & connecting ACSR conductor/ PVC cables,LS,1460,0,1460,362.5,14.5
+AS,13,Insulators as per TS,,0,0,0,0,0
+AS,a,11 kV Disc insulator 45 KN (Single Disc) with hardware fittings suitable for ACSR Dog/ Rabbit/ Weasel conductor,Set,0,0,0,398.75,15.95
+AS,b,11 kV Pin insulator with Pin,No.,1095,0,1095,108.75,4.35
+AS,c,LT Pin insulator with Pin,No.,0,0,0,17.4,0.696
+AS,d,LT Shackle insulator assembly complete as per specification (Type- II),No.,5840,0,5840,14.5,0.58
+AS,14,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+AS,a,Stay wire 7/12 SWG,Set,0,0,0,507.5,20.3
+AS,b,Stay Insulator,no.,0,0,0,21.75,0.87
+AS,c,Stay Rod assembly,Set,0,0,0,725,29
+AS,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,0,0,0,181.25,7.25
+AS,15,Danger board (for both pole of new DSS),No.,0,0,0,116,4.64
+AS,16,Anticlimbing device (for both pole of new DSS),No.,0,0,0,153.7,6.148
+AS,17,1.1 kV grade 3&1/2 core 120 sqmm size PVC insulated PVC sheathed aluminium conductor cable,Meter,7300,0,7300,52.2,2.088
+AS,18,Stone base plate,Nos,0,0,0,181.25,7.25
+AT,AT,"Construction of 3 Phase 4 Wire LT Line on 8M, 200 Kg PSC with ACSR Rabbit Conductor in Horizontal configuration",,67,19,86,,
+AT,1,Route Survey,Kms,67,19,86,,0
+AT,2,"PSC Pole, 200 KG, 8 M mtr. Long",No,1340,380,1720,3500,262.5
+AT,3,Shackle Insulator & straps ( Type- II),Set,1608,456,2064,65.25,2.61
+AT,4,ACSR Rabbit equivalent,Kms,276.04,78.28,354.32,42727.3,1709.092
+AT,5,LT Pin insulator with Pin,No.,4288,1216,5504,17.4,0.696
+AT,6,"Supply & fabrication of LT Brackett made of 75x40x6 mm MS Channel along with back clamp made of MS flat 50*6 mm ,Guard bracket made of MS angle 50*50*6 mm ,stay clamps & angle stay clamps and other fabricated materials",Kg,16750,4750,21500,95.7,3.828
+AT,7,Stay set complete with GI stay wire preformed guy and stay base plate,Set,402,114,516,1724.05,68.962
+AT,8,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",Set,670,190,860,150.8,6.032
+AT,9,Nuts & Bolts with plain and spring washer,Kg,1675,475,2150,127.165,5.0866
+AT,10,Aluminium wire binding,Kg,33.5,9.5,43,210.25,8.41
+AT,11,Preformed Jointing Sleeve,Nos.,0,0,0,130.5,88
+AT,12,LT PVC Spacers,No,4020,1140,5160,65.25,2.61
+AT,13,8 SWG 4 mm GI wire for Guarding & Lacing @ 1.1 Km per guard wire (101 Kg/Km of 8 SWG GI Wire),MT,3.015,0.855,3.87,71814.15,2872.566
+AT,14,PG Clamps suitable for Rabbit/Weasel/Dog Conductors,Nos.,804,228,1032,181.25,7.25
+AT,15,Stone base plate,Nos,1340,380,1720,181.25,7.25
+AU,AU,"Construction of 3 Phase 4 Wire LT Line on 8M, 200 Kg PSC with ACSR Weasel Conductor in Horizontal configuration",,124,13,137,,
+AU,1,Route Survey,Kms,124,13,137,0,0
+AU,2,"PSC Pole, 200 KG, 8 M mtr. Long",No,2480,260,2740,3500,262.5
+AU,3,Shackle Insulator & straps ( Type- II),Set,2976,312,3288,65.25,2.61
+AU,4,ACSR Weasel equivalent,Kms,510.88,53.56,564.44,28727.3,1149.092
+AU,5,LT Pin insulator with Pin,No.,7936,832,8768,17.4,0.696
+AU,6,"Supply & fabrication of LT Brackett made of 75*40*6 mm MS Channel along with back clamp made of MS flat 50*6 mm ,Guard bracket made of MS angle 50*50*6 mm ,stay clamps & angle stay clamps and other fabricated materials",Kg,31000,3250,34250,95.7,3.828
+AU,7,Stay set complete with GI stay wire preformed guy and stay base plate,Set,744,78,822,1724.05,68.962
+AU,8,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",Set,1240,130,1370,150.8,6.032
+AU,9,Nuts & Bolts with plain and spring washer,Kg,3100,325,3425,127.165,5.0866
+AU,10,Aluminium wire binding,Kg,62,6.5,68.5,210.25,8.41
+AU,11,Preformed Jointing Sleeve,Nos.,0,0,0,130.5,5.22
+AU,12,LT PVC Spacers,No,7440,780,8220,65.25,2.61
+AU,13,8 SWG 4 mm GI wire for Guarding & Lacing @ 1.1 Km per guard wire (101 Kg/Km of 8 SWG GI Wire),MT,5.58,0.585,6.165,71814.15,2872.566
+AU,14,PG Clamps suitable for Rabbit/Weasel/Dog Conductors,Nos.,1488,156,1644,181.25,7.25
+AU,15,Stone base plate,Nos,2480,260,2740,181.25,7.25
+AV,AV,"R&M of 3-Ph, 4 Wire LT line with ACSR Rabbit conductor",,25,13,38,,
+AV,1,Route Survey,Kms,25,13,38,0,0
+AV,2,"PSC Pole, 200 KG, 8 M mtr. Long",No,125,65,190,3500,262.5
+AV,3,Shackle Insulator & straps ( Type- II),Set,500,260,760,65.25,2.61
+AV,4,ACSR Rabbit equivalent,Kms,103,53.56,156.56,28727.3,1149.092
+AV,5,LT Pin insulator with Pin,No.,500,260,760,17.4,0.696
+AV,6,"Supply & fabrication of LT Brackett made of 75*40*6 mm MS Channel along with back clamp made of MS flat 50*6 mm ,Guard bracket made of MS angle 50*50*6 mm ,stay clamps & angle stay clamps and other fabricated materials",Kg,1500,780,2280,95.7,3.828
+AV,7,Stay set complete with GI stay wire preformed guy and stay base plate,Set,50,26,76,1724.05,68.962
+AV,8,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",Set,250,130,380,150.8,6.032
+AV,9,Nuts & Bolts with plain and spring washer,Kg,250,130,380,127.165,5.0866
+AV,10,Aluminium wire binding,Kg,12.5,6.5,19,210.25,8.41
+AV,11,Preformed Jointing Sleeve,Nos.,0,0,0,130.5,5.22
+AV,12,LT PVC Spacers,No,1500,780,2280,65.25,2.61
+AV,13,8 SWG 4 mm GI wire for Guarding & Lacing @ 1.1 Km per guard wire (101 Kg/Km of 8 SWG GI Wire),MT,1.125,0.585,1.71,71814.15,2872.566
+AV,14,PG Clamps suitable for Rabbit/Weasel/Dog Conductors,Nos.,300,156,456,181.25,7.25
+AV,15,Stone base plate,Nos,200,104,304,181.25,7.25
+AV,16,Dismentling and transportation of line materials,LS,25,13,38,18125,725
+AW,AW,"R&M of 3-Ph, 4 Wire LT line with ACSR Weasel conductor",,42.6,34.6,77.2,,
+AW,1,Route Survey,Kms,42.6,34.6,77.2,0,0
+AW,2,"PSC Pole, 200 KG, 8 M mtr. Long",No,213,173,386,3500,262.5
+AW,3,Shackle Insulator & straps ( Type- II),Set,852,692,1544,65.25,2.61
+AW,4,ACSR Weasel equivalent,Kms,175.512,142.552,318.064,28727.3,1149.092
+AW,5,LT Pin insulator with Pin,No.,852,692,1544,17.4,0.696
+AW,6,"Supply & fabrication of LT Brackett made of 75*40*6 mm MS Channel along with back clamp made of MS flat 50*6 mm ,Guard bracket made of MS angle 50*50*6 mm ,stay clamps & angle stay clamps and other fabricated materials",Kg,2556,2076,4632,95.7,3.828
+AW,7,Stay set complete with GI stay wire preformed guy and stay base plate,Set,85.2,69.2,154.4,1724.05,68.962
+AW,8,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",Set,426,346,772,150.8,6.032
+AW,9,Nuts & Bolts with plain and spring washer,Kg,426,346,772,127.165,5.0866
+AW,10,Aluminium wire binding,Kg,21.3,17.3,38.6,210.25,8.41
+AW,11,Preformed Jointing Sleeve,Nos.,0,0,0,130.5,5.22
+AW,12,LT PVC Spacers,No,2556,2076,4632,65.25,2.61
+AW,13,8 SWG 4 mm GI wire for Guarding & Lacing @ 1.1 Km per guard wire (101 Kg/Km of 8 SWG GI Wire),MT,1.917,1.557,3.474,71814.15,2872.566
+AW,14,PG Clamps suitable for Rabbit/Weasel/Dog Conductors,Nos.,511.2,415.2,926.4,181.25,7.25
+AW,15,Stone base plate,Nos,340.8,276.8,617.6,181.25,7.25
+AW,16,Dismentling and transportation of line materials,LS,42.6,34.6,77.2,18125,725
+AX,AX,"Conversion of Two Phase LT Line to Three Phase , 4 wire Line",,42.25,59.2,101.45,,
+AX,1,Route Survey,Kms,42.25,59.2,101.45,0,0
+AX,2,Shackle Insulator & straps,Set,1859,2604.8,4463.8,65.25,2.61
+AX,3,ACSR Waesel equivalent,Kms,87.035,121.952,208.987,28727.3,1149.092
+AX,4,"Supply & fabrication of LT Brackett made of 75*40*6 mm MS Channel along with back clamp made of MS flat 50*6 mm ,Guard bracket made of MS angle 50*50*6 mm ,stay clamps & angle stay clamps and other fabricated materials",KG,10562.5,14800,25362.5,95.7,3.828
+AX,5,"Stay set complete with GI stay wire preformed guy and stay base plate,along with stay rod assembly etc",Set,253.5,355.2,608.7,1724.05,68.962
+AX,6,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",Set,211.25,296,507.25,150.8,6.032
+AX,7,Nuts & Bolts,Kg,676,947.2,1623.2,127.165,5.0866
+AX,8,Aluminium wire binding,Kg,0.845,1.184,2.029,210.25,8.41
+AX,9,Preformed Jointing Sleeve,Nos.,42.25,59.2,101.45,130.5,5.22
+AX,10,LT PVC Spacers,No,2535,3552,6087,65.25,2.61
+AX,11,8 SWG 4 mm GI wire for Guarding & Lacing @ 1.1 Km per guard wire (101 Kg/Km of 8 SWG GI Wire),MT,0.426725,0.59792,1.024645,71814.15,2872.566
+AX,12,PG Clamps suitable for Rabbit/Weasel/Dog Conductors,Nos.,507,710.4,1217.4,181.25,7.25
+AY,AY,Capacitor Bank,,12,6,18,,
+AY,1,"3.6 MVAr APFC Capacitor Bank at rated volatge with RVT & Structure, Switchgear, Protection Equipment, Cable and all associated accessories complete in all respect for new PSS under Special plan Scheme (BRGF) and Existing PSS",Set,24,12,36,500250,20010
+BA,BA,"Balance Work of Special Plan (BRGF) Phase-I-Construction of New 11/0.433 KV,100 KVA Distribution Transformers on 8 Mtr. 200 Kg PSC Pole (Using released after augmentation of 100 KVA to 200 KVA)",Net Quantity,23,32,55,,
+BA,1,3-Ph-100 KVA Distribution Transformer,No.,0,0,0,245113.45,9804.538
+BA,2,8 mtrs long 200 kg PSC Pole,No.,46,64,110,3500,262.5
+BA,3,"Supply & fabrication of channel for supporting transformers/ AB switch, channel for supporting DO fuse & Las channel support for transformer belting, belting support, clamps for AB switch base channel 2 pairs, angle for LT distribution bus for DTs",Kg,6095,8480,14575,87,3.48
+BA,4,AB Switch 3 Pin type double break ( horizontal) 11 kV 3 pole 200 Amp,Set,23,32,55,13000.7,520.028
+BA,5,Distribution box with MCCB for 3 ph 100 kVA DTs with CT operated energy meter,No.,23,32,55,23925,957
+BA,6,HG Fuse sets 11 kV with insulators etc for 3 ph transformers - 200 Amp,Set,23,32,55,5075,203
+BA,7,11 kv lightning Arrester,Nos,69,96,165,507.5,20.3
+BA,8,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",Nos,69,96,165,1305,52.2
+BA,9,Nuts & Bolts,Kg,276,384,660,127.165,5.0866
+BA,10,Supply for ACSR conductors,,0,0,0,0,0
+BA,a,ACSR Dog Conductor,KM,0.46,0.64,1.1,82711.7,3308.468
+BA,11,PG Clamps suitable for connection to ACSR Rabbit conductor,No.,138,192,330,181.25,7.25
+BA,12,Crimping type heavy duty aluminium lugs suitable for connection in rewirable kit kat fuse & connecting ACSR conductor/ PVC cables,LS,368,512,880,435,17.4
+BA,13,Insulators as per TS,,0,0,0,0,0
+BA,a,11 kV Disc insulator 45 KN (Single Disc) with hardware fittings suitable for ACSR Dog/ Rabbit/ Weasel conductor,Set,138,192,330,398.75,15.95
+BA,b,11 kV Pin insulator with Pin,No.,138,192,330,108.75,4.35
+BA,c,LT Pin insulator with Pin,No.,69,96,165,17.4,0.696
+BA,d,LT Shackle insulator assembly complete as per specification (Type- II),No.,184,256,440,14.5,0.58
+BA,14,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+BA,a,Stay wire 7/12 SWG,Set,46,64,110,507.5,20.3
+BA,b,Stay Insulator,no.,46,64,110,21.75,0.87
+BA,c,Stay Rod assembly,Set,46,64,110,725,29
+BA,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,46,64,110,181.25,7.25
+BA,15,Danger board (for both pole of new DSS),No.,23,32,55,116,4.64
+BA,16,Anticlimbing device (for both pole of new DSS),No.,46,64,110,153.7,6.148
+BA,17,1.1 kV grade 3&1/2 core 120 sqmm size PVC insulated PVC sheathed aluminium conductor cable,Meter,1380,1920,3300,52.2,2.088
+BA,18,Stone base plate,Nos,46,64,110,181.25,7.25
+BB,BB,"Balance Work of Special Plan (BRGF) Phase-I- Augmentation of 11/0.433 KV, 100 KVA to 200 KVA New Distribution Transformers",,134,83,217,,0
+BB,1,3-Ph 200 KVA Distribution Transformer,No.,134,83,217,346695,13867.8
+BB,2,8 mtrs long 200 kg PSC Pole,No.,0,0,0,3500,262.5
+BB,3,"Supply & fabrication of channel for supporting transformers/ AB switch, channel for supporting DO fuse & Las channel support for transformer belting, belting support, clamps for AB switch base channel 2 pairs, angle for LT distribution bus for DTs",Kg,1340,830,2170,87,3.48
+BB,4,AB Switch 3 Pin type double break ( horizontal) 11 kV 3 pole 200 Amp,Set,134,83,217,13000.7,520.028
+BB,5,Distribution box with MCCB for 3 ph 63 kVA DTs with CT operated energy meter,No.,134,83,217,23925,957
+BB,6,HG Fuse sets 11 kV with insulators etc for 3 ph transformers - 200 Amp,Set,134,83,217,5075,203
+BB,7,11 kv lightning Arrester,Nos,402,249,651,507.5,20.3
+BB,8,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",Nos,402,249,651,1305,52.2
+BB,9,Nuts & Bolts,Kg,536,332,868,127.165,5.0866
+BB,10,Supply for ACSR conductors,,0,0,0,0,0
+BB,a,ACSR Dog Conductor,KM,2.68,1.66,4.34,82711.7,3308.468
+BB,11,PG Clamps suitable for connection to ACSR Rabbit conductor,No.,804,498,1302,181.25,7.25
+BB,12,Crimping type heavy duty aluminium lugs suitable for connection in rewirable kit kat fuse & connecting ACSR conductor/ PVC cables,LS,2144,1328,3472,435,17.4
+BB,13,Insulators as per TS,,0,0,0,0,0
+BB,a,11 kV Disc insulator 45 KN (Single Disc) with hardware fittings suitable for ACSR Dog/ Rabbit/ Weasel conductor,Set,0,0,0,398.75,15.95
+BB,b,11 kV Pin insulator with Pin,No.,0,0,0,108.75,4.35
+BB,c,LT Pin insulator with Pin,No.,0,0,0,17.4,0.696
+BB,d,LT Shackle insulator assembly complete as per specification (Type- II),No.,0,0,0,14.5,0.58
+BB,14,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+BB,a,Stay wire 7/12 SWG,Set,0,0,0,507.5,20.3
+BB,b,Stay Insulator,no.,0,0,0,21.75,0.87
+BB,c,Stay Rod assembly,Set,0,0,0,725,29
+BB,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,0,0,0,181.25,7.25
+BB,15,Danger board (for both pole of new DSS),No.,0,0,0,116,4.64
+BB,16,Anticlimbing device (for both pole of new DSS),No.,0,0,0,153.7,6.148
+BB,17,1.1 kV grade 3&1/2 core 120 sqmm size PVC insulated PVC sheathed aluminium conductor cable,Meter,4020,2490,6510,52.2,2.088
+BB,18,Stone base plate,Nos,0,0,0,181.25,7.25
+BC,BC,"Balance Work of Special Plan (BRGF) Phase-I-Augmentation of 11/0.433 KV, 63 KVA to 100 KVA (Using released Distribution Transformers from 100 to 200 KVA )",,98,33,131,,0
+BC,1,3-Ph 100 KVA Distribution Transformer,No.,0,0,0,245113.45,9804.538
+BC,2,8 mtrs long 200 kg PSC Pole,No.,0,0,0,3500,262.5
+BC,3,"Supply & fabrication of channel for supporting transformers/ AB switch, channel for supporting DO fuse & Las channel support for transformer belting, belting support, clamps for AB switch base channel 2 pairs, angle for LT distribution bus for DTs",Kg,0,0,0,87,3.48
+BC,4,AB Switch 3 Pin type double break ( horizontal) 11 kV 3 pole 200 Amp,Set,98,33,131,13000.7,520.028
+BC,5,Distribution box with MCCB for 3 ph 100 kVA DTs with CT operated energy meter,No.,98,33,131,23925,957
+BC,6,HG Fuse sets 11 kV with insulators etc for 3 ph transformers - 200 Amp,Set,98,33,131,5075,203
+BC,7,11 kv lightning Arrester,Nos,294,99,393,507.5,20.3
+BC,8,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",Nos,294,99,393,1305,52.2
+BC,9,Nuts & Bolts,Kg,588,198,786,127.165,5.0866
+BC,10,Supply for ACSR conductors,,0,0,0,0,0
+BC,a,ACSR Dog Conductor,KM,1.96,0.66,2.62,82711.7,3308.468
+BC,11,PG Clamps suitable for connection to ACSR Rabbit conductor,No.,588,198,786,181.25,7.25
+BC,12,Crimping type heavy duty aluminium lugs suitable for connection in rewirable kit kat fuse & connecting ACSR conductor/ PVC cables,LS,1568,528,2096,435,17.4
+BC,13,Insulators as per TS,,0,0,0,0,0
+BC,a,11 kV Disc insulator 45 KN (Single Disc) with hardware fittings suitable for ACSR Dog/ Rabbit/ Weasel conductor,Set,0,0,0,398.75,15.95
+BC,b,11 kV Pin insulator with Pin,No.,0,0,0,108.75,4.35
+BC,c,LT Pin insulator with Pin,No.,0,0,0,17.4,0.696
+BC,d,LT Shackle insulator assembly complete as per specification (Type- II),No.,0,0,0,14.5,0.58
+BC,14,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+BC,a,Stay wire 7/12 SWG,Set,0,0,0,507.5,20.3
+BC,b,Stay Insulator,no.,0,0,0,21.75,0.87
+BC,c,Stay Rod assembly,Set,0,0,0,725,29
+BC,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,0,0,0,181.25,7.25
+BC,15,Danger board (for both pole of new DSS),No.,0,0,0,116,4.64
+BC,16,Anticlimbing device (for both pole of new DSS),No.,0,0,0,153.7,6.148
+BC,17,1.1 kV grade 3&1/2 core 120 sqmm size PVC insulated PVC sheathed aluminium conductor cable,Meter,2940,990,3930,52.2,2.088
+BC,18,Stone base plate,Nos,0,0,0,181.25,7.25
+BD,BD,"Balance Work of Special Plan (BRGF) Phase-I- R&M of existing 11/0.433 KV DSS including renovation and upgradation of AB switches, Earthing, LT Bus-Bar and LT fuse System etc complete",,1571,1000,2571,,0
+BD,1,3-Ph-200 KVA Distribution Transformer,No.,0,0,0,346695,13867.8
+BD,2,9 mtrs long 400 kg PSC Pole,No.,0,0,0,3500,262.5
+BD,3,"Supply & fabrication of channel for supporting transformers/ AB switch, channel for supporting DO fuse & Las channel support for transformer belting, belting support, clamps for AB switch base channel 2 pairs, angle for LT distribution bus for DTs",Kg,94260,60000,154260,87,3.48
+BD,4,AB Switch 3 Pin type double break ( horizontal) 11 kV 3 pole 400 Amp,Set,1571,1000,2571,13000.7,520.028
+BD,5,Distribution box with MCCB for 3 ph 200 kVA DTs with CT operated energy meter,No.,0,0,0,23925,957
+BD,6,HG Fuse sets 11 kV with insulators etc for 3 ph transformers - 200 Amp,Set,0,0,0,5075,203
+BD,7,11 kv lightning Arrester,Nos,4713,3000,7713,507.5,20.3
+BD,8,Earthing for DTs ( treated),Nos,4713,3000,7713,1305,52.2
+BD,9,Nuts & Bolts,Kg,7855,5000,12855,127.165,5.0866
+BD,10,Supply for ACSR conductors,,0,0,0,0,0
+BD,a,ACSR Dog Conductor,KM,31.42,20,51.42,82711.7,3308.468
+BD,11,PG Clamps suitable for connection to ACSR Rabbit conductor,No.,6284,4000,10284,181.25,7.25
+BD,12,Crimping type heavy duty aluminium lugs suitable for connection in rewirable kit kat fuse & connecting ACSR conductor/ PVC cables,LS,6284,4000,10284,435,17.4
+BD,13,Insulators as per TS,,0,0,0,0,0
+BD,a,11 kV Disc insulator 45 KN (Single Disc) with hardware fittings suitable for ACSR Dog/ Rabbit/ Weasel conductor,Set,0,0,0,398.75,15.95
+BD,b,11 kV Pin insulator with Pin,No.,4713,3000,7713,108.75,4.35
+BD,c,LT Pin insulator with Pin,No.,0,0,0,17.4,0.696
+BD,d,LT Shackle insulator assembly complete as per specification (Type- II),No.,25136,16000,41136,14.5,0.58
+BD,14,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+BD,a,Stay wire 7/12 SWG,Set,0,0,0,507.5,20.3
+BD,b,Stay Insulator,no.,0,0,0,21.75,0.87
+BD,c,Stay Rod assembly,Set,0,0,0,725,29
+BD,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,0,0,0,181.25,7.25
+BD,15,Danger board (for both pole of new DSS),No.,0,0,0,116,4.64
+BD,16,Anticlimbing device (for both pole of new DSS),No.,0,0,0,153.7,6.148
+BD,17,1.1 kV grade 3&1/2 core 120 sqmm size PVC insulated PVC sheathed aluminium conductor cable,Meter,31420,20000,51420,52.2,2.088
+BD,18,Stone base plate,Nos,0,0,0,181.25,7.25
+BE,BE,"Balance Work of BRGF Phase-I-Construction of 3 Phase 4 Wire LT Line on 8M, 200 Kg PSC with ACSR Rabbit Conductor in Horizontal configuration",,71.3,47.5,118.8,,0
+BE,1,Route Survey,Kms,71.3,47.5,118.8,0,0
+BE,2,"PSC Pole, 200 KG, 8 M mtr. Long",No,1426,950,2376,3500,262.5
+BE,3,Shackle Insulator & straps ( Type- II),Set,1711.2,1140,2851.2,65.25,2.61
+BE,4,ACSR Rabbit equivalent,Kms,293.756,195.7,489.456,28727.3,1149.092
+BE,5,LT Pin insulator with Pin,No.,4563.2,3040,7603.2,17.4,0.696
+BE,6,"Supply & fabrication of LT Brackett made of 75x40x6 mm MS Channel along with back clamp made of MS flat 50*6 mm ,Guard bracket made of MS angle 50*50*6 mm ,stay clamps & angle stay clamps and other fabricated materials",Kg,17825,11875,29700,95.7,3.828
+BE,7,Stay set complete with GI stay wire preformed guy and stay base plate,Set,427.8,285,712.8,1724.05,68.962
+BE,8,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",Set,713,475,1188,150.8,6.032
+BE,9,Nuts & Bolts with plain and spring washer,Kg,1782.5,1187.5,2970,127.165,5.0866
+BE,10,Aluminium wire binding,Kg,35.65,23.75,59.4,210.25,8.41
+BE,11,Preformed Jointing Sleeve,Nos.,0,0,0,130.5,5.22
+BE,12,LT PVC Spacers,No,4278,2850,7128,65.25,2.61
+BE,13,8 SWG 4 mm GI wire for Guarding & Lacing @ 1.1 Km per guard wire (101 Kg/Km of 8 SWG GI Wire),MT,3.2085,2.1375,5.346,71814.15,2872.566
+BE,14,PG Clamps suitable for Rabbit/Weasel/Dog Conductors,Nos.,855.6,570,1425.6,181.25,7.25
+BE,15,Stone base plate,Nos,1426,950,2376,181.25,7.25
+BF,BF,"Balance Work of BRGF Phase-I-Construction of 3 Phase 4 Wire LT Line on 9M, 400 Kg PSC with ACSR DOG Conductor in Horizontal configuration",,17.83,11.8,29.63,,0
+BF,1,Route Survey,Kms,17.83,11.8,29.63,0,0
+BF,2,"PSC Pole, 400 KG, 9 M mtr. Long",No,356.6,236,592.6,3500,262.5
+BF,3,Shackle Insulator & straps ( Type- II),Set,427.92,283.2,711.12,65.25,2.61
+BF,4,ACSR Dog Conductor for Phase Lines,KM,55.0947,36.462,91.5567,82711.7,3308.468
+BF,5,ACSR Rabbit Conductor for Netural Line,Kms,18.3649,12.154,30.5189,28727.3,1149.092
+BF,6,LT Pin insulator with Pin,No.,1141.12,755.2,1896.32,17.4,0.696
+BF,7,"Supply & fabrication of LT Brackett made of 75x40x6 mm MS Channel along with back clamp made of MS flat 50*6 mm ,Guard bracket made of MS angle 50*50*6 mm ,stay clamps & angle stay clamps and other fabricated materials",Kg,4457.5,2950,7407.5,95.7,3.828
+BF,8,Stay set complete with GI stay wire preformed guy and stay base plate,Set,106.98,70.8,177.78,1724.05,68.962
+BF,9,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",Set,178.3,118,296.3,150.8,6.032
+BF,10,Nuts & Bolts with plain and spring washer,Kg,445.75,295,740.75,127.165,5.0866
+BF,11,Aluminium wire binding,Kg,8.915,5.9,14.815,210.25,8.41
+BF,12,Preformed Jointing Sleeve,Nos.,0,0,0,130.5,5.22
+BF,13,LT PVC Spacers,No,1069.8,708,1777.8,65.25,2.61
+BF,14,8 SWG 4 mm GI wire for Guarding & Lacing @ 1.1 Km per guard wire (101 Kg/Km of 8 SWG GI Wire),MT,0.80235,0.531,1.33335,71814.15,2872.566
+BF,15,PG Clamps suitable for Rabbit/Weasel/Dog Conductors,Nos.,213.96,141.6,355.56,181.25,7.25
+BF,16,Stone base plate,Nos,356.6,236,592.6,181.25,7.25
+BG,BG,"Constructi:on of New 11kV Lines on 9M, 400 Kg PSC Pole with ACSR Dog conductor",,5.75,8,13.75,,0
+BG,1,Route Survey,Km,5.75,8,13.75,0,0
+BG,2,PSC Pole 9 Mtr. 400 Kg,No,126.5,176,302.5,3500,262.5
+BG,3,Pin Insulator & Pin 11 KV as per TS,Set,362.25,504,866.25,108.75,4.35
+BG,4,Disc Insulator & Hardware,Set,51.75,72,123.75,414.7,16.588
+BG,5,ACSR Dog conductor,Km,17.7675,24.72,42.4875,82711.7,3308.468
+BG,6,"Supply & Fabrication of Pole Top Bracket, V cross arm, Back clamp for V cross arm, DP Channel, DP channel clamp, DP Cross bracing, DP Bracing clamps",Kg,2300,3200,5500,95.7,3.828
+BG,7,"Stay set complete along with guy insulator, stay clamp, guy grip, stay base plate, 7/12 SWG GI stay wire complete as per specification and drawing",,0,0,0,0,0
+BG,a,Stay wire 7/12 SWG,Set,57.5,80,137.5,507.5,20.3
+BG,b,Stay Insulator,no.,57.5,80,137.5,21.75,0.87
+BG,c,Stay Rod assembly,Set,57.5,80,137.5,725,29
+BG,d,Stone stay Plate/ Stay Base plate ( 150 x 150 x 6 mm),Set,57.5,80,137.5,181.25,7.25
+BG,8,Earthing,,0,0,0,0,0
+BG,a,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",No,92,128,220,152.25,6.09
+BG,b,"Pipe type earthing including supply of all materials like 40mm dia, 3M long GI pipe charcoal & salt as required in all kind of soil all complete as per REC construction drawing J-2 & approved drawing & TS including excavation, refilling with salt & charcoal , fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge",No,11.5,16,27.5,1486.25,59.45
+BG,9,Nuts & Bolts,Kg,126.5,176,302.5,127.165,5.0866
+BG,10,Aluminium wire for binding,Kg,0.115,0.16,0.275,217.5,8.7
+BG,11,Preformed Jointing Sleeve,Set,5.75,8,13.75,253.75,10.15
+BG,12,"Sundaries (Tree Clearance, etc)",LS,5.75,8,13.75,5075,203
+BG,13,Guarding and Lacing,,0,0,0,0,0
+BG,a,GI Wire 7/16 SWG for Guarding as per REC Construction drawing standard A-1 at crossing,MT,0.345,0.48,0.825,71814.15,2872.566
+BG,b,GI Wire (8 SWG) for Lacing as per REC Construction drawing Standard A-1 at crossing lacing,MT,0.23,0.32,0.55,71814.15,2872.566
+BG,14,PG clamps suitable for following ACSR conductors (6 nos. per DP/cut point),No,34.5,48,82.5,181.25,7.25
+BG,15,Sectionliser switch (400 Amp rating) ( 1 set per 5 Km),Set,1.15,1.6,2.75,21750,870
+BG,16,Stone base plate,Nos,103.5,144,247.5,181.25,7.25
+BH,BH,"Construction of New LT Line 8M, 200Kg PSC Pole using 3Cx95 Sqmm size ABC Cable",,89.13,59.4,148.53,,0
+BH,1,Survey,Kms,89.13,59.4,148.53,0,0
+BH,2,Aerial Bunched Cable (3Cx95+1X16+1x35 sq. mm. (Bare messenger) ),Kms,93.5865,62.37,155.9565,269700,10788
+BH,3,"PSC Pole, 200 Kg, 8 Meters long",No,2139.12,1425.6,3564.72,3500,262.5
+BH,4,Nuts & Bolts,Kg,891.3,594,1485.3,127.165,5.0866
+BH,5,Stay set complete with GI stay wire preformed grip and Anchor plate as per TS,Set,891.3,594,1485.3,1724.05,68.962
+BH,6,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",Nos,891.3,594,1485.3,152.25,6.09
+BH,7,"Suspension Clamps assembly suitable for bare messanger (1 no suspension clamp with bracket, 1.5Mtr stainless steel strap, 2 No buckle) including service clamp for proper support of service cable with Pole, pole bracket for service clamp with 1.5 mtr. stainless steel strap, 2 nos. buckle, insulation peircing multiport connector, insulation peircing connector for networking/insulation peircing connector for branching,/ earthing , peircing earthing connector, pre insulated bimetallic termination lug for phase & neutral, mid span joint for phases, mid span joint for neutral massenger etc. complete in all respect to complete the system.",Nos,1426.08,950.4,2376.48,181.25,7.25
+BH,8,Tension / Dead end clamps,Nos,980.43,653.4,1633.83,129.05,5.162
+BH,9,AB Cable jointing Kit,Nos,178.26,118.8,297.06,580,23.2
+BH,10,Stone base plate,Nos,2139.12,1425.6,3564.72,181.25,7.25
+BI,BI,Guarding of 11 KV line,,28.2,42.5,70.7,,0
+BI,1,Galvanoised Channel 75x75x6 mm,Kg,4371,6587.5,10958.5,87,3.48
+BI,2,GI earth wire (8 SWG),MT,9.87,14.875,24.745,71814.15,2872.566
+BI,3,GI Wire 7/16 SWG,MT,1.692,2.55,4.242,71814.15,2872.566
+BI,4,Bolts & Nuts including hook and back clamp,Kg,282,425,707,127.165,5.0866

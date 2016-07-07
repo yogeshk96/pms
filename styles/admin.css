@@ -1,0 +1,71 @@
+.query_console {
+float: left;
+margin-top: 20px;
+margin-bottom: 20px;
+width: 1000px;
+}
+.console_links {
+display: block;
+float: left;
+width: 112px;
+text-align: center;
+height: 30px;
+line-height: 30px;
+cursor: pointer;
+border: 1px solid #ffffff;
+border: 1px solid #bababa;
+font-family: arial;
+font-size: 12px;
+}
+.console_links:hover{
+
+	background:#CCC;
+}
+.insp_ol li 
+{
+  margin-top:10px;
+}
+.query_tbl_head {
+
+	background:#000;
+	color:#FFF;
+}
+.query_tbl {
+
+	margin-top:10px;
+}
+.query_tbl textarea {
+
+	width:150px;
+	height:50px;
+}
+.query_tbl td {
+
+	min-width:80px;
+}
+.query_tbl .querytd {
+
+	min-width:250px;
+}
+.clear {
+
+	clear:both;
+}
+.inputbox {
+
+	width:200px;
+	float:left;
+}
+.reset_pass_div {
+
+	width:1000px;
+	margin:auto;
+	float:left;
+}
+.chqinput_cnt {
+
+	width:1000px;
+	margin:auto;
+	float:left;
+	margin-bottom:20px;
+}

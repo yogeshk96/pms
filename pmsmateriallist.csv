@@ -1,0 +1,151 @@
+Poles,1,11 m long 105lb(52 kg per meter) Rail Pole ,No
+Poles,2,13 m long 105lb(52 kg per meter) Rail Pole ,No
+Poles,3,8 m/200 kgs PSC Poles ,No
+Poles,4,9 M long 400 Kg PSC Pole ,No
+Power Transformers,5,"33/11 kV, 10 MVA, PowerTransformer 3 ph, 50 Hz, ONAN,  Cu Wound, Outdoor Conventional type",No
+Power Transformers,6,"33/11 kV, 5 MVA, 3 ph, 50 Hz, ONAN,  Cu Wound, Outdoor Conventional type PowerTransformer with off load tap charger ( completely filled with oil) as per TS",No
+Distribution Transformers,7,"100 KVA, 11/0.433 kV, 3 ph, 50 Hz, ONAN,Aluminium  wound,(three star rated)",No
+Distribution Transformers,8,"Three Phase 200 KVA Design,engineering, manufacture, testing & supply of 50 Hz, 11/0.433 KV",No
+Distribution Transformers,9,"Three Phase 63 KVA Design,engineering, manufacture, testing & supply of 50 Hz, 11/0.433 KV",No
+Conductors,10,ACSR  Wolf Conductor ,KM
+Conductors,11,ACSR DOG Conductor,KM
+Conductors,12,ACSR Weasel conductor ,KM
+Conductors,13,ACSR Zebra conductor,KM
+Conductors,14,ACSR Rabbit Conductor,KM
+Insulators,15,11 KV 45 KN Disc Insulator B& S as per TS ,No.
+Insulators,16,11 KV Disc Insulator (1 Set = 2 Nos Disc Insulator 70 KN) B& S ,Set
+Insulators,17,11 KV Pin insulators  ,No
+Insulators,18,33 KV Disc Insulator  Insulator  (1 Set = 4 Nos Disc Insulator 90 KN) B&S ,Set
+Insulators,19,33 KV Pin Insulator  ,Nos.
+Insulators,20,33 KV Porcelain Disc insulator assembly compising of 3 nos. disc insulator 70 KN as per technical specification. (1Set=3 nos.) B& S ,Set
+Insulators,21,33 KV Porcelain Pin Insulators as per technical specification. ,No.
+Insulators,22,33 KV Post Insulator (1 Set = 2 Nos of 22 KV) ,Set
+Insulators,23,LT Pin insulator ,No.
+Insulators,24,LT Shackle insulator without Strap sutaible for using bus bar with Dog conductor. ,No
+Insulators,25,Shackle Insulator ( Type- II) ,No
+Insulators,26,Stay Guy Insulator ,No
+Insulator Hardware,27, GI Pin for 11 KV Pin insulators   ,No
+Insulator Hardware,28,GI PIN for 33 KV  Pin Insulators as per technical specification. ,No.
+Insulator Hardware,29,H/W fittings suitable to ACSR Wolf conductors and  accessories complete for 33 KV Disc insulators  (B&S Type) as per technical specification. ,No.
+Insulator Hardware,30,Hardware fitting for 11 KV Disc Insulator suitable for ACSR Zebra Conductor ,Set
+Insulator Hardware,31,Hardware fitting for 33 KV Disc Insulator   (B&S Type) ACSR Zebra Condcutor ,Set
+Insulator Hardware,32,Hardware fittings for 11 KV Disc insulators as per TS (B&S Type) ACSR Dog Conductor ,Set
+Insulator Hardware,33,"Hardware fittings for 11 KV, 45 KN Disc Insulator  (B&S Type) ACSR RABBIT Conductors  ",Set
+Insulator Hardware,34,"Hardware fittings for 11 KV, 45 KN Disc Insulator  (B&S Type) ACSR Dog Conductor ",Set
+Insulator Hardware,35,LT Pin ,No.
+Insulator Hardware,36,Pin for 33 KV Pin Insulator  ,Nos.
+Insulator Hardware,37,Straps for Type II shackle insulator  ,Pair
+Cables,38,1 phase ABC  [1 X16 Sq mm {Phase}+{1x25 Sq mm Messenger cum Neutral wire}] ,Km
+Cables,39,3 phase ABC  [3 X50Sq mm {Phase}+{1x35 Sq mm Messenger cum Neutral wire}] ,Km
+Cables,40,3 phase ABC  [3 X70Sq mm {Phase}+{1x50 Sq mm Messenger cum Neutral wire}] ,Km
+Cables,41,3 phase ABC  [3 X95Sq mm {Phase}+{1x70 Sq mm Messenger cum Neutral wire}] ,Km
+Cables,42,"11 kV grade XLPE, 3 core, 300 sqmm size power cable",Km
+Cables,43,"11 KV, XLPE, Power cable, aluminium  conductor, stranded 1Cx 630 sqmm (Un -armoured)",km
+Cables,44,"11 KV, XLPE, Power cable, aluminium  conductor, stranded 3Cx 185 sqmm (armoured)",Km
+Cables,45,"11 KV, XLPE, Power cable, aluminium  conductor, stranded 3Cx35 Sqmm (Un -armoured)",Km
+Cables,46,"33 kV grade XLPE, 3 core, 400 sqmm size power cable ",Km
+Cables,47,LT power cable 3.5C x 95 sq. mm. ,Km
+Cables,48,LT power cable 3.5C x 95 sq. mm. ,Km
+Cables,49,LT control cable 12C x 2.5 sq. mm.,Km
+Cables,50,LT control cable 4C x 2.5 sq. mm.,Km
+Cables,51,"PVC insulated, PVC sheathed, Aluminium Conductor, Stranded, unarmoured , 1 Cx 16 sqm aluminium conductor cable",Km
+Cables,52,"PVC insulated, PVC sheathed, Aluminium Conductor, Stranded, unarmoured , 1 Cx 35 sqm aluminium conductor cable",Km
+Cables,53,"PVC insulated, PVC sheathed, Aluminium Conductor, Stranded, unarmoured , 1 Cx 95 sqm aluminium conductor cable ",Km
+Cables,54,"PVC insulated, PVC sheathed, Aluminium Conductor, Stranded, unarmoured , 1 Cx120 sqm aluminium conductor cable ",Km
+Capacitor Banks,55,"1200 KVAR Fully automatic Capacitor bank with automatic control panel, isolator, indoor type suitable Vacuum Circuit Breaker, mounting structures: (Banks in Muiltiple of 600 KVAR as per REC Specification)",    Set
+Capacitor Banks,56,"3600 KVAR Fully automatic Capacitor bank with automatic control panel, isolator, indoor type suitable Vacuum Circuit Breaker, mounting structures : (Banks in Muiltiple of 600 KVAR as per REC Specification)",Set
+Stay Sets,57,"Stay Rod assembly complete with GS Anchor Plate of size 200x200x6 mm, Guy grip etc. stay set 16mm",Set
+Stay Sets,58,"Stay Rod assembly complete with GS Anchor Plate of size 300x300x8 mm, Guy grip etc. Saty Set 20 mm",Set
+Stay Sets,59,Stay stone Plate 450x450x50mm,No
+Wires,60,Aluminium Binding Wire,Kg
+Wires,61,Barbed wire  for DP as per TS.,Kg
+Wires,62,GI Wire 6 SWG,Kg
+Wires,63,GI Wire 8 SWG,Kg
+Wires,64,GI Wire 10 SWG,Kg
+Wires,65,Stay wire (7/8 SWG) for stay set,
+Wires,66,Stay wire (7/10 SWG) for stay set,Kg
+Wires,67,Stay wire (7/12 SWG) for stay set,Kg
+Jointing Kits,68,1Cx 630 sqmm Cable termination kit suitable for termination in transformer cable box/  breaker panel/ outdoor 11 KV terminals complete with all accessories etc.,set
+Jointing Kits,69,3Cx 185 sqmm Cable termination kit suitable for termination in transformer cable box/  breaker panel/ outdoor 11 KV terminals complete with all accessories etc.,set
+Jointing Kits,70,3Cx35 Sqmm Cable termination kit suitable for termination in transformer cable box/  breaker panel/ outdoor 11 KV terminals complete with all accessories etc.,set
+Jointing Kits,71,Outdoor type heat shrinkable end termination kit complete with all accessories including lugs suitable for 3 Core 400 Sqmm 33 kV grade Al conductor XLPE cable as per TS,Set
+Jointing Kits,72,Outdoor type heat shrinkable termination kit complete with all accessories including lugs suitable for 3 Core 300 Sqmm 11  kV grade Al conductor XLPE cable as per TS,Set
+Potential Transformer,73,"36 kV, 1-Phase, 33kV/110 volt, Single core  outdoor type Potential Transformer including accessories etc., complete as per technical specifications. (1 set=3 no)",Set
+Battery & Battery Charger,74,"30V, 100 AH  Pb(Lead) Acid battery, battery stand  made of teak  wood duly painted with anti acid resistive paint, battery insulators, inter-battery wiring using 30 sqm, 1.1 kv, copper single core  multi strand cable, terminal connectors, & all other accessories and connectors as per technical specifications.","
+
+      Set"
+Battery & Battery Charger,75,"30V, 40 Amp.  Float-cum-Boost Battery Charger with full wave rectification for  230  V,  1 phase, 50 Hz AC Input Supply as per technical specifications.",      set
+Substation & Line Switchgear,76,"36kV, 1250A,  25kA for 3 seconds, 3-ph,   Outdoor type  Vacuum Circuit breaker with marshalling box etc Complete in all respect with mounting structure.
+      ",Set
+Substation & Line Switchgear,77,"36kV, 1-Phase, 25kA/3 seconds,  800-400-200/1-1-1 Amps ( having 3 secondery, core), 1 set = 3 Nos outdoor  type Current Transformers along with junction box (1 no junction box for 3 no of 1-  phase CTs),   as required as per technical specifications complete in all respect. ",Set
+Substation & Line Switchgear,78,11 KV HG Fuse complete 200 A capacity as per technical specifications (1 Set=3 Nos),Set 
+Substation & Line Switchgear,79,"12 KV, ,200 Amp HG fuse set for  DTs  with support Insulators, Hardware, terminal connectors etc complete as per technical specification. (1 set=3 nos.)",Set 
+Substation & Line Switchgear,80,"12 kV, 200A,  3-ph, 3 Pin type, Horizontall Mounting type, Gang Operated,  AB Switch along with Support Insulators, Base Channel down Pipe, Arcing Horns etc. complete as  per technical specifications  ",Set 
+Substation & Line Switchgear,81,"12 kV, 630A, 25kA , 3-ph double break center rotating type (DBCR), Gang Operated,  isolator along  with Support Insulators, Operating  Mechanism,  Base Channel down Pipe and all required accessories complete as per technical specifications. (with Earth Switch)",Set 
+Substation & Line Switchgear,82,"12kV,400A, 25kA for 3sec, 3-ph, 3 Pin type, Horizontal Mounting type, Gang Operated,  AB Switch along with Support Insulators, Base Channel down Pipe, Arcing Horns etc. complete as  per technical specifications",Set 
+Substation & Line Switchgear,83,"12kV,630A, 25kA for 3sec, 3-ph, 3 Pin type, Horizontal Mounting type, Gang Operated,  AB Switch along with Support Insulators, Base Channel down Pipe, Arcing Horns etc. complete as  per technical specifications",Set 
+Substation & Line Switchgear,84,"36kV, 800 A, 25kA  , 3-ph double break center rotating type (DBCR), Gang Operated,  isolator along  with Support Insulators, Operating  Mechanism, Base Channel down Pipe and all required accessories complete as per technical specifications.  (with Earth Switch)",Set 
+Substation & Line Switchgear,85,"36kV, 800A, 25kA , 3-ph double break center rotating type (DBCR), Gang Operated,  isolator along  with Support Insulators, Operating  Mechanism, Base Channel down Pipe and all required accessories complete as per technical specifications. (Without Earth Switch)",Set 
+Substation & Line Switchgear,86,"36kV, 800A, 25kA, 3-ph, 3 Pin type, Horizontal Mounting type, Gang Operated,  AB Switch along with Support Insulators, Base Channel down Pipe, Arcing Horns etc. complete as  per technical specifications.",Set
+Substation & Line Switchgear,87,"30 kV, 10kA, 1-ph Station Class Lightening Arrester   (1 set= 3 Nos.)",Set
+Substation & Line Switchgear,88,"9 KV, 5 KA, 1-Ph gapless Distribution Class  Lightening Arrester complete with terminaal connectors etc. complete for DT as per technical specification (1 Set= 3 Nos)",Set
+Substation & Line Switchgear,89,"9kV, 10kA, 1-ph Station Class Lightening  Arrester complete (1 Set = 3 Nos.)",Set
+Substation & Line Switchgear,90,"12 kV, 1250 A, 25kA  for 3 seconds, 3-ph, indoor type  Vacuum Circuit Breaker  for  along with 12 kV, 1-Phase, 25kA, 1200-600-300/1-1-1 A, (having 3 secondary cores), 3 Nos indoor type Current   Transformer, Potential Transformer 11KV/110 V, indoor mounting type control panel for Bus couplar and required accessories, A-meter, volt-meter, 3-phase Tri Vector energy meter with  DLMS  (modem compactible ) , Relays & accessories complete as per specifications for transformer breaker protection  with earth fault, overcurrent .
+     ",      Set
+Substation & Line Switchgear,91,"12 kV, 630 A, 25kA  for 3 seconds, 3-ph, indoor type  Vacuum Circuit  breaker along with 12 kV, 1-Phase, 25kA, 600-300-150/5-5 A, ( having 2 secondary core),  3 Nos indoor type Current    Transformer, 3 nos indoor type Potential Transformer 11 KV / 110 V ,  indoor mounting type control panel for feeder protection and required accessories, A-meter,volt-meter, 3-phase  with  DLMS  (modem compactible ) Tri Vector energy meter, Relay & accessories complete as per  specifications for feeder breaker protection & Prtection for Earth fault and over current) with extensible arrangement for future",      Set
+Station Lighting,92,"Station Lighting System (internal) with proper illumination complete for  control room building, Incharge room, Battery room, Store room, Washroom, Guard room, portico etc.  including all associated materials such as insulated wires, cables, boards, switches and fixing arrangements etc.  and Celling, wall Fan & exhast fan (Total 8 nos.) all complte as per applicable TS and approved drawing.",Lot
+Earthing Materials,93,"40 mm dia.,  3000 mm long GI pipe(medium gauge) earth  electrode as per Technical Specification",      Set
+Earthing Materials,94,Cast Iron spun pipe of 160mm dia in Pcs of 5.6 M and above long as per TS to be laid for Under ground 11 kV Cable below Railway track at crossing,Mtr
+Earthing Materials,95,Coil type Earthing  complete  as per TS/REC Specification.(untreated),No
+Earthing Materials,96,GI Pipe 150 mm dia (Light guage) for Erection of cable over DP structure,Mtr
+Earthing Materials,97,"Spiral type earthing as per REC construction drawing J-1 including supply of all materials like 8 SWG G.I. wire closely wound having 115 turns, 50mm dia & 450mm long coil (untreated without charcoal & salt) in all type of soil including excavation, refilling with earth, fixing of bolts, nuts, washers for connection with pole support/ metalic part all complete as per TS & direction of Engineer-in charge (individual pole earthing)",Set
+Distribution Box,98,"LT Distribution box with LTCT meter (CT Ratio 400/5 A ) with  CTs- 400/5 A metering, Al-Bus bar of Adequate Size and LT control mechanism complete in all respect with one no. Of TPMCCB as per  technical specifications for Three Phase 200 KVA Distribution Transformer",Set
+Distribution Box,99,Meter Box with fixtures complete,No
+Distribution Box,100,Temper proof Spring loaded distribution service connection box for 12 nos Single phase connection Lines/consumer mains along with all associated accessories etc. complete in all respect.(SMC),Set
+Distribution Box,101,Temper proof Spring loaded distribution service connection box for 6 nos Three phase connection Lines/consumer mains along with all associated accessories etc. complete in all respect.(SMC),Set
+Distribution Box,102,"33 kV Metering system along with DLMS Static Trivector Energy Meter alongwith combined CT- PT metering unit 33KV/110 V, CT ratio-800-400/1A with bimetalic connectors and DLMS Static Trivector feeder meter  with communication port of 33 KV/110 v of CT ratio-400/1 A with 12cx2.5 Sqmm Control Cable complete alongwith earthing and all associated accessories complete in all respest",No
+Danger Boards,103,11KV Danger Board  as per TS.,No
+Danger Boards,104,33kV Danger Board  as per TS.,No
+A1. Jointing sleeves,105,Al. Jointing sleeve suitable for ACSR wolf conductors.,No
+A1. Jointing sleeves,106,Aluminum Jointing sleeves Suitable to ACSR DOG,No.
+A1. Jointing sleeves,107,Aluminum Jointing ssleeves Suitable to ACSR Rabbit ,No.
+A1. Jointing sleeves,108,Aluminum Jointing ssleeves Suitable to ACSR Weasel ,No.
+Bimetalic Clamps,109,"Bimetalic Clamps , Al. Connectors, Al. tape etc. complete in all respect as required suitable for ACSR Zebra Conductor",Lot
+Bimetalic Clamps,110,"Bimetalic clamps and Al. connectors, Al. Tape etc. as required 4CX2.5Sqmm & 12CX2.5Sqmm",LS per Bay
+Bimetalic Clamps,111,Bimetalic connector & Al lugs complete for DT for L V side (1 set= 4 Nos),Set
+Lugs,112,LT control cable different size Complete in all respect as per site requirement complete with lugs etc. 3.5CX95Sqmm,lot
+Lugs,113,LT control cable different size Complete in all respect as per site requirement complete with lugs etc. LT power cable 3.5C x 95 sq. mm. ,lot
+Lugs,114,LT Kit Kat 400 A ( 1 set = 3 nos.) of reputed make like BPC / Havells or equivalent (as per Approval) with all accessories for  100/200 KVA DT complete in all respects.,Set
+Lugs,115,LT PVC Spacers 3Ph 4 W,No
+PG Clamps,116,PG Clamps suitable for connection to ACSR Dog conductor,Nos.
+PG Clamps,117,PG Clamps suitable for connection to ACSR Rabbit conductor,No.
+PG Clamps,118,PG Clamps suitable for connection to ACSR Weasel conductor,No.
+PG Clamps,119,PG Clamps suitable for connection to ACSR Wolf conductor,No
+T Connectors,120,T connector suitable for 16 sqmm AB cable complete in all respect.  (1 Set= 3 nos for phase & 1 No for neutral),No
+T Connectors,121,T connector suitable for 50 sqmm AB cable complete in all respect.  (1 Set= 3 nos for phase & 1 No for neutral),No
+T Connectors,122,T connector suitable for 70 sqmm AB cable complete in all respect.  (1 Set= 3 nos for phase & 1 No for neutral),No
+T Connectors,123,T connector suitable for 95 sqmm AB cable complete in all respect.  (1 Set= 3 nos for phase & 1 No for neutral),No
+Misc.,124,RCC Base Plate of size 500x500x100 mm./Stone Base Plate of Size 450x450x50mm for support of base.,No
+Misc.,125,Service Clamp for proper support of Service Cable with pole complete in all respect,Set
+Misc.,126,"Supply & fabrication of U clamps LT conductor dead end,stay clamps & angle stay clamps and other fabricated materials suitable for ACSR Weasel Conductor",Kg
+Misc.,127,"Universal hook, Bolts & nuts, washer etc ",Set
+Misc.,128,"Anchoring/ Dead End clamp assembly suitable for Bare or Insulated messenger (1 no. Anchoring/Dead End clamp, 1 no. Universal Bracket,  Stainless Steel Strap with all associated accessories complete in all respect)",Set
+Misc.,129,"Bimetalic Clamps , Al. Connectors, Al. tape etc. complete in all respect as required suitable for ACSR Zebra Conductor",Lot
+Misc.,130,"Bimetalic clamps and Al. connectors, Al. Tape etc. as required 4CX2.5Sqmm & 12CX2.5Sqmm",LS per Bay
+Misc.,131,Bimetalic connector & Al lugs complete for DT for L V side (1 set= 4 Nos),Set
+Misc.,132,"Fire Fighting Equipment comprises of 
+Dry Chemical Powder Type  (6 Kg) for control  room, 
+CO 2 Type of 4.5Kg Capacity for Control Room,  
+CO2 type Trolly mounted of 22.5 KG Capacity for Switch Yard, four nos.  of fire buckets set including their stand as per technical specifications, scope of works and approved drawings",Set
+Misc.,133,"Fire Fighting Equipment comprises of 
+Dry Chemical Powder Type  (6 Kg) for control  room, 
+CO 2 Type of 4.5Kg Capacity for Control Room,  
+CO2 type Trolly mounted of 22.5 KG Capacity for Switch Yard, four nos.  of fire buckets set including their stand as per technical specifications, scope of works and approved drawings",Set
+Misc.,134,Insulation Piercing Connector for branching & Earthing with all associated accessories complete in all respect (1 Set= 3 nos for phase & 1 No for neutral),Set
+Misc.,135,Pre-Insulated Mid span joint  for phases & Neutral complete in all respect (1 Set= 3 nos for phase & 1 No for neutral),No
+Misc.,136,Service Clamp for proper support of Service Cable with pole complete in all respect,Set
+Misc.,137,"Suspension clamp assembly suitable for Bare messenger                                                                 (1 No. Suspension clamp with Bracket, 1.5 Mtr. Stainless Steel Strap, 2 Nos. Buckle)",Set
+Misc.,138,"Galvanized Steel Nuts, bolts and washers as per technical specification, approved drawings.",Kg
+Misc.,139,Nuts & Bolts with plain and spring washer,Kg
+Misc.,140,IPS Aluminium Pipe 65 mm. Dia as per IS/TS.,Mtr.
+Misc.,141,"MS Galvanized fabricated steel materials-made of Channels, angle, flats for over head structures as per technical specification, approved drawings and scope of work. ",Kg

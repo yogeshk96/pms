@@ -1,0 +1,68 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p class="cols-sm-5 col-xs-5">
+			<strong>Profile</strong>
+			<button type="button" class="btn btn-info btn-xs pull-right" style="margin-right:10px;" ng-click="editProfile=1" ng-show="editProfile==0">Edit Profile</button>
+			<button type="button" class="btn btn-danger btn-xs pull-right" style="margin-right:10px;" ng-click="editProfile=0" ng-show="editProfile==1">Cancel</button>
+			<button type="button" class="btn btn-success btn-xs pull-right" style="margin-right:10px;" ng-click="editDetails(usermain);" ng-show="editProfile==1">Save</button>
+		</p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal">
+    			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Name</div>
+		 			<div class="col-sm-2 col-xs-4 control-label">
+		 				<b style="font-size:12px;">
+			 				<span ng-show="editProfile==0">{{usermain.name}}</span>
+			 				<input type="textbox" ng-show="editProfile==1" ng-model="usermain.name"/>
+		 				</b>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">E-Mail</div>
+		 			<div class="col-sm-2 col-xs-4 control-label">
+		 				<b style="font-size:12px;">
+			 				<span ng-show="editProfile==0">{{usermain.email}}</span>
+			 				<input type="textbox" ng-show="editProfile==1" ng-model="usermain.email"/>
+		 				</b>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Designation</div>
+		 			<div class="col-sm-2 col-xs-4 control-label">
+		 				<b style="font-size:12px;">
+			 				<span ng-show="editProfile==0">{{usermain.designation}}</span>
+			 				<input type="textbox" ng-show="editProfile==1" ng-model="usermain.designation"/>
+		 				</b>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Phone No</div>
+		 			<div class="col-sm-2 col-xs-4 control-label">
+		 				<b style="font-size:12px;">
+			 				<span ng-show="editProfile==0">{{usermain.phoneno}}</span>
+			 				<input type="textbox" ng-show="editProfile==1" ng-model="usermain.phoneno"/>
+		 				</b>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Address</div>
+		 			<div class="col-sm-2 col-xs-4 control-label">
+		 				<b style="font-size:12px;">
+			 				<span ng-show="editProfile==0">{{usermain.address}}</span>
+			 				<input type="textbox" ng-show="editProfile==1" ng-model="usermain.address"/>
+		 				</b>
+		 			</div>
+		 		</div>
+    		</form>
+    	</div>
+
+	</div>
+
+</div>

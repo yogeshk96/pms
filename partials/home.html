@@ -1,0 +1,42 @@
+<div class="container">
+	
+	<div class="row">
+		
+		<div class="col-xs-12 col-md-4 col-sm-4">
+
+			<h4 class="text-center">User Login</h4>
+
+			<form class="form-horizontal" ng-submit="login()">
+			  <div class="form-group">
+			    <label for="inputEmail3" class="col-sm-4 control-label">User Name</label>
+			    <div class="col-sm-8">
+			      <input type="text" ng-model="user.username" class="form-control text-left" placeholder="Username" autocomplete="off" required >
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputPassword3" class="col-sm-4 control-label text-left">Password</label>
+			    <div class="col-sm-8">
+			      <input type="password" ng-model="user.password" class="form-control" placeholder="Password" autocomplete="off" required >
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-sm-offset-6 col-sm-6 submitbtn">
+			      <button type="submit" class="btn btn-success">Sign in</button>
+			    </div>
+			   
+			  </div>
+			</form>
+			 <p class="errormsg text-center" ng-show="loginerrormsg">{{loginerrormsg}}</p>
+			
+		</div>
+		<div class="col-xs-12 col-md-8 col-sm-8 homeimg">
+
+			<h4>Welcome to the Project Monitoring System of SSEL</h4>
+			<p>The Project Monitoring System of SSEL is one of the most advanced tools to monitor the projects that SSEL executes all over the India, the project monitoring system makes use of an android application deployed to all the supervisors and managers of SSEL, the data captured by them from the project is relayed over the web application where the data is formalized, analysed and put to right use.</p>
+
+			<img src="images/index.png" />
+			
+		</div>
+	</div>
+</div>
+<div class="loader_wrap" ng-show="showloader"><div class="loading"><i class="fa fa-spinner fa-pulse"></i></div></div>

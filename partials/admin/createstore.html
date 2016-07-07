@@ -1,0 +1,64 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Create Store</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal" ng-submit="create_store()">
+				
+				<div class="form-group smallfont">
+	 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Office</div>
+	 				<div class="col-sm-2 col-xs-6">
+	 					<select class="form-control smallfont" ng-model='store.office' required>
+	 						<option value="">SELECT</option>
+	 						<option ng-repeat="x in offices" value="{{x.id}}">{{x.name}}</option>
+	 					</select>
+	 				</div>
+	 			</div>
+    			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Name</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="text" class="form-control" ng-model='store.name' required/>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Address</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<textarea ng-model='store.address' required></textarea>
+		 			</div>
+		 		</div>
+    			<div class="form-group smallfont">
+	 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Store Manager</div>
+	 				<div class="col-sm-2 col-xs-6">
+	 					<select class="form-control smallfont" ng-model='store.manager' required>
+	 						<option value="">SELECT</option>
+	 						<option ng-repeat="x in userlist | filter:{office_id:store.office}" value="{{x.id}}">{{x.name}}</option>
+	 					</select>
+	 				</div>
+	 			</div>
+	 			<div class="form-group smallfont">
+	 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Project</div>
+	 				<div class="col-sm-2 col-xs-6">
+	 					<select class="form-control smallfont" ng-model='store.project' required>
+	 						<option value="">SELECT</option>
+	 						<option ng-repeat="x in projectlist | filter:{office_id:store.office}" value="{{x.id}}">{{x.name}}</option>
+	 					</select>
+	 				</div>
+	 			</div>
+		 		<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="submit" value="Create" class="btn btn-success">
+		 			</div>
+		 		</div>
+
+    		</form>
+    	</div>
+
+	</div>
+
+</div>

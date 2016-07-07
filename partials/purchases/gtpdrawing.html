@@ -1,0 +1,83 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Upload GTP drawing</strong></p>
+		<form class="form-horizontal">
+			<div class="col-sm-12 col-xs-12">
+
+				<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" chosen ng-model="projectid" options="projectlist" ng-options="proj.id as proj.name for proj in projectlist">		 			
+		 				</select>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Vendor<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" chosen ng-model="vendorid" options="vendorlist" ng-options="ven.id as ven.name for ven in vendorlist" ng-change="vendorchan()">	 			
+		 				</select>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" chosen ng-model="mainmaterials" options="mainmaterialslist" ng-options="matmain as matmain.name for matmain in mainmaterialslist" >
+		 					<option value="">SELECT</option>		 			
+		 				</select>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont" ng-show="mainmaterials">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Sub Material<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+<!-- 		 				<label ng-repeat="mat in mainmaterials['submaterials']"><input type="checkbox" ng-model="smat" ng-change="addSubMaterials()" ng-true-value="mat.id">{{mat.name}}</label>
+		 				<div ng-model="materialid"></div>
+ -->
+ 		 				<!-- <select class="form-control smallfont chosen-selectsubmaterial" ng-model="materialid" multiple> -->
+ 		 				<select class="form-control smallfont" chosen ng-model="materialids" options="mainmaterials.submaterials" multiple ng-options="indimain.id as indimain.name for indimain in mainmaterials.submaterials" ng-change="submatchange()">
+		 			
+		 				</select>
+
+ 		 			</div>
+		 		</div>
+
+				<div class="form-group smallfont"  ng-show="materialids">
+					<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Upload GTP Drawings document<span class="astrix">*</span></div>
+						<div class="col-sm-3 col-md-3 col-xs-8">
+							<input type="file" id="file_uploadgtp" class="form-control" file-change="uploadgtp"/>
+						</div>
+						
+						<button type="button" class="btn btn-primary smallfont" ng-click='add_doc()'>Add</button>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-xs-12 pmstable table-responsive" ng-show="materialids.length>0 && gtpdrawings.length>0">
+					<table class="table table-striped">
+						<thead>
+							<tr class="innerhead">
+								<th class="col-sm-1">S.No</th>
+								<th class="col-sm-4">File</th>
+								<th class="col-sm-1">Delete</th>
+							</tr>
+						</thead>
+						<tr ng-repeat="x in gtpdrawings">
+							<td scope="row">{{$index+1}}</td>
+							<td><a href="{{x.docpath}}" download>{{x.filename}}</a></td>
+							<td><button type="button" class="btn btn-danger smallfont" ng-click="remove_doc($index, x)"><i class="fa fa-times"></i></button></td>
+						</tr>
+					</table>
+				</div>
+
+			</div>
+
+		</form>
+
+	</div>
+</div>

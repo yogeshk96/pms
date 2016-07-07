@@ -1,0 +1,80 @@
+<!--page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<form class="form-horizontal">
+			<div class="col-sm-12 col-xs-12">
+
+			<p><strong>Indent Report</strong></p>
+
+	 			<div class="form-group smallfont hidden-print">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="polist.id as polist.name for polist in projectlist">
+	 					
+	 					</select>
+		 			</div>
+		 			<div class="col-sm-2 col-xs-4 submitbtn">
+		               <button type="button" class="btn btn-success smallfont " ng-click="getindentreportfab()">Get Report</button>
+		            </div>
+		 		</div>
+		 		<table class="table table-striped table-responsive smallfont" ng-if="matmain['sub']" ng-repeat="matmain in indentlist">
+	 				<tr>
+	 					<th class="col-sm-1">S.No</th>
+	 					<th class="col-sm-5">{{matmain.name}}</th>
+	 					<th class="col-sm-1">UOM</th>
+	 					<th class="col-sm-2">Total Indent Qty</th>
+	 					<!-- <th class="col-sm-2">Latest Indent Qty</th> -->
+	 					<th class="col-sm-2">Total PO Raised Qty</th>
+	 					<th class="col-sm-2">To be purchased Qty</th>
+	 					
+	 				</tr>
+	 				<tbody ng-repeat="mat in matmain['sub']">
+
+		 				<tr>
+		 					<td>{{mat['count']}}</td>
+		 					<td>{{mat['matname']}}</td>
+		 					<td>{{mat['uom']}}</td>
+		 					<td>{{mat['totalindent']}}</td>
+		 					<!-- <td>{{mat['latestindent']}}</td> -->
+		 					<td>{{mat['purchased']}}</td>
+		 					<td>{{mat['tobepurchased']}}</td>
+		 				</tr>
+		 				<tr>
+		 					<th>S.No</th>
+							<th>Description</th>
+							<th>ERECODE</th>
+							<th>INDENT QTY(in nos)</th>
+							<th>INDENT QTY(in kgs)</th>
+							<th colspan="2"></td>
+		 				</tr>
+		 				<tr ng-repeat="acg in mat['actgrp']">
+		 					<td>{{$index+1}}</td>
+							<td>{{acg.name}}</td>
+							<td>{{acg.erecode}}</td>
+							<td>{{acg.qty}}</td>
+							<td>{{acg.totindentqty}}</td>
+							<td colspan="2"></td>
+		 				</tr>
+		 				<tr>
+		 					<th colspan="3">Total</th>
+							<th>{{mat['indentnos']}}</th>
+							<th>{{mat['indentkgs']}}</th>
+							<th colspan="2"></td>
+		 				</tr>
+		 			</tbody>
+	 			</table>
+
+			</div>
+			<div class="form-group smallfont hidden-print" ng-show="indentlist">
+                <div class="col-sm-2 col-xs-4 col-sm-offset-3">
+                  <button type="button" class="btn btn-success" onClick="window.print()" style="width:100%;">Print</button>
+                </div>
+               
+            </div>
+		</form>
+	</div>
+</div>

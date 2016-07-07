@@ -1,0 +1,294 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+		<form class="form-horizontal smallfont">
+
+
+		<div class="col-sm-6 col-xs-12">
+
+		<p><strong>Fabrication Mapping</strong></p>
+
+    			<!-- <div class="form-group smallfont">
+			 		<div for="inputEmail3" class="col-sm-2 col-md-2 col-xs-4 control-label">Type</div>
+			 		<div class="col-sm-8 col-md-8 col-xs-8 jumbobox" style="padding:5px">
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="addmattype" value="normal" ui-sref="user.admin.addmaterials"> Noraml
+			 			</label>
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="addmattype" value="aggregator" ui-sref="user.admin.addaggregator"> Aggregator
+			 			</label>
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="addmattype" value="fabrication" ui-sref="user.admin.addfabrication"> Fabrication
+			 			</label>
+			 			
+			 		</div>
+			 	</div> -->
+
+			 	<div class="form-group smallfont">
+					<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select Fabrication Material Type<span class="astrix">*</span></div>
+					<div class="col-sm-6 col-md-6 col-xs-8">
+						<select class="form-control smallfont" ng-model="fabricationmattype" ng-options="matlist as matlist.name for matlist in agmaterials">
+							<option value="">SELECT</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group smallfont" ng-show="fabricationmattype">
+					<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select Fabrication Material<span class="astrix">*</span></div>
+					<div class="col-sm-6 col-md-6 col-xs-8">
+						<select class="form-control smallfont" ng-model="fabricationmatid" ng-options="matlist as matlist.name for matlist in fabricationmattype.submaterials" ng-change="fabmatchange()">
+							<option value="">SELECT</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-sm-12 mainbox" ng-show="fabricationmatid">
+
+			 		<!-- <div class="form-group smallfont">
+	 					<div for="inputEmail3" class="col-sm-3 col-xs-3 control-label">Dwg. No</div>
+	 					<div class="col-sm-3 col-xs-8">
+	 						<input type="text" class="form-control" ng-model="dwgno" >
+	 					</div>
+	 				</div>
+ -->
+	 				<div class="panel panel-default" >
+	                  <div class="panel-heading">Upload Dwg. document</div>
+	                  <div class="panel-body">
+
+		 					<div class="form-group smallfont">
+							<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label"></div>
+								<div class="col-sm-6 col-md-6 col-xs-8">
+									<input type="file" id="file_uploadgtp" class="form-control" file-change="uploaddwgdoc"/>
+								</div>
+								
+								<button type="button" class="btn btn-primary smallfont" ng-click='add_dwg_doc()'>Add</button>
+							</div>
+
+							<div class="col-sm-12 col-xs-12 pmstable table-responsive" ng-show="dwgdocs.length>0">
+								<table class="table table-striped">
+									<thead>
+										<tr class="innerhead">
+											<th class="col-sm-1">S.No</th>
+											<th class="col-sm-4">File</th>
+											<th class="col-sm-1">Delete</th>
+										</tr>
+									</thead>
+									<tr ng-repeat="x in dwgdocs">
+										<td scope="row">{{$index+1}}</td>
+										<td><a href="{{x.doc_url}}" download>{{x.doc_name}}</a></td>
+										<td><button type="button" class="btn btn-danger smallfont" ng-click="remove_doc($index)"><i class="fa fa-times"></i></button></td>
+									</tr>
+								</table>
+							</div>
+
+						</div>
+					</div>		
+
+	 				<!-- <div class="form-group smallfont">
+				 		<div for="inputEmail3" class="col-sm-3 col-md-3 col-xs-4 control-label"></div>
+				 		<div class="col-sm-5 col-md-5 col-xs-8 jumbobox" style="padding:5px;background:#ccc;margin-left:15px;">
+				 			<label class="radio-inline">
+				 				<input type="radio" ng-model="fabricationtype" value="gi"> GI Materials
+				 			</label>
+				 			<label class="radio-inline">
+				 				<input type="radio" ng-model="fabricationtype" value="nutsnbolts"> Nuts &amp; Bolts
+				 			</label>
+				 			
+				 			
+				 		</div>
+				 	</div>
+    		 -->
+
+			 		<div class="jumbobox col-sm-11">
+
+			 				<div class="form-group smallfont">
+								<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Select Material Type<span class="astrix">*</span></div>
+								<div class="col-sm-6 col-md-6 col-xs-8">
+									
+									<select class="form-control smallfont" ng-model="submaterialtype" ng-options="matlist as matlist.name for matlist in materials">
+										<option value="">SELECT</option>
+									</select>
+								</div>
+								
+							</div>
+
+
+							<div class="form-group smallfont" ng-show="submaterialtype">
+								<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Select Material<span class="astrix">*</span></div>
+								<div class="col-sm-6 col-md-6 col-xs-8">
+							
+									<select class="form-control smallfont" ng-model="submat" ng-options="matlist as matlist.name for matlist in submaterialtype.submaterials | filter: {type : '1'}">
+										<option value="">SELECT</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group smallfont" ng-show="submat">
+			 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">UOM</div>
+			 					<div class="col-sm-4 col-xs-8">
+
+			 						<select class="form-control smallfont" ng-model="subuomval" ng-options="smatu.id as smatu.stmatuom.uom for smatu in submat.matuom">
+										<option value="">SELECT</option>
+			 					
+			 						</select>
+			 					</div>
+			 				</div>
+
+			 				<div class="form-group smallfont" ng-show="fabricationmatid.fab_type=='2'">
+			 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Quantity<span class="astrix">*</span></div>
+			 					<div class="col-sm-3 col-xs-8">
+			 						<input type="text" class="form-control" ng-model="nutqty">
+			 					</div>
+			 				</div>
+
+			 				<div class="form-group smallfont" ng-show="fabricationmatid.fab_type=='1'">
+			 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Dwg. Code</div>
+			 					<div class="col-sm-4 col-xs-8">
+			 						<input type="text" class="form-control" ng-model="dwgcode" >
+			 					</div>
+			 				</div>
+
+			 				<div class="form-group smallfont" ng-show="fabricationmatid.fab_type=='1'">
+			 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">MS Material</div>
+			 					<div class="col-sm-4 col-xs-8">
+			 						<select class="form-control smallfont" ng-model="msmaterial" ng-options="msmat as msmat.name for msmat in msmaterials" ng-change="calculatewtpc()">
+										<option value="">SELECT</option>
+									</select>
+			 					</div>
+			 				</div>
+
+			 				<div class="form-group smallfont" ng-show="fabricationmatid.fab_type=='1'">
+			 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Length as per Dwg.</div>
+			 					<div class="col-sm-4 col-xs-8">
+			 						<input type="text" class="form-control" ng-model="dwglength" ng-blur="calculatewtpc()">
+			 					</div>
+			 				</div>
+
+			 				<!-- <div class="form-group smallfont" ng-show="fabricationmatid.fab_type=='1'">
+			 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Wt./kg (MS Mtrl) in mm</div>
+			 					<div class="col-sm-4 col-xs-8">
+			 						<input type="text" class="form-control" ng-model="wtkgmm" >
+			 					</div>
+			 				</div> -->
+
+			 				<div class="form-group smallfont">
+			 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Wt./pc</div>
+			 					<div class="col-sm-4 col-xs-8">
+			 						<input type="text" class="form-control" ng-model="wtpc" readonly ng-show="fabricationmatid.fab_type=='1'">
+			 						<input type="text" class="form-control" ng-model="wtpc" ng-show="fabricationmatid.fab_type=='2'">
+			 					</div>
+			 				</div>
+
+			 				<div class="form-group smallfont" ng-show="fabricationmatid.fab_type=='1'">
+			 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Qty per pole</div>
+			 					<div class="col-sm-4 col-xs-8">
+			 						<input type="text" class="form-control" ng-model="qtypole" ng-blur="calculatewtpole()">
+			 					</div>
+			 				</div>
+
+			 				<div class="form-group smallfont" ng-show="fabricationmatid.fab_type=='1'">
+			 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Wt. per pole</div>
+			 					<div class="col-sm-4 col-xs-8">
+			 						<input type="text" class="form-control" ng-model="wtpole" readonly >
+			 					</div>
+			 				</div>
+
+			 				<div class="form-group smallfont" ng-show="fabricationmatid.fab_type=='1'">
+			 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Qty per km</div>
+			 					<div class="col-sm-4 col-xs-8">
+			 						<input type="text" class="form-control" ng-model="qtykm" ng-blur="calculatewtkm()">
+			 					</div>
+			 				</div>
+
+			 				<div class="form-group smallfont" ng-show="fabricationmatid.fab_type=='1'">
+			 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Wt. per km</div>
+			 					<div class="col-sm-4 col-xs-8">
+			 						<input type="text" class="form-control" ng-model="wtkm" readonly >
+			 					</div>
+			 				</div>
+
+			 				<div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn">
+			 					<button type="button" class="btn btn-success" ng-click="addtotable()">ADD</button>
+			 				</div>
+		            </div>  
+		        </div>
+
+
+    	</div>
+
+    	<div class="col-sm-5 col-xs-12" style="height:500px;overflow-y:scroll;">
+
+			<p><strong>Already Existing Fabrications</strong></p>
+
+ 			<table class="table table-striped smallfont">
+ 				<tbody ng-repeat="mat in agmaterials">
+ 					<tr class="innerhead">
+ 						<th class="col-sm-1">S.No</th>
+ 						<th class="col-sm-3">Material Code</th>
+ 						<th class="coloredhead text-center col-sm-6">{{mat['name']}}</th>
+ 						<th class="col-sm-2">UOM</th>
+ 					</tr>
+	 				<tr ng-repeat="submat in mat.submaterials">
+	 					<td scope="row">{{$index+1}}</td>
+	 					<td>{{submat['material_code']}}</td>
+	 					<td>{{submat['name']}}</td>
+	 					<td>{{submat['units']}}</td>
+	 					
+	 				</tr>
+	 			</tbody>
+ 				
+ 			</table>
+
+    	</div>
+
+    	<div class="col-sm-12 col-xs-12 smallfont">
+
+ 			<table class="table table-striped table-responsive smallfont" ng-show="agmateriallist.length>0">
+ 				<thead>
+ 					<tr class="innerhead">
+ 						<th>S.No.</th>
+ 						<th>ERE CODE</th>
+ 						<th>Dwg. Code</th>
+ 						<th>Item Description</th>
+ 						<th>MS Mtrl</th>
+ 						<th>Length as per Dwg</th>
+ 						<th>Wt./Pc</th>
+ 						<th>Qty per pole</th>
+ 						<th>Wt. per pole</th>
+ 						<th>Qty per km</th>
+ 						<th>Wt. per km</th>
+ 						<th ng-show="fabricationmatid.fab_type=='2'">Nut &amp; Bolt Quantity</th>
+ 						<th>Remove</th>
+ 					</tr>
+ 				</thead>
+ 				<tr ng-repeat="agmat in agmateriallist">
+ 					<td scope="row">{{$index+1}}</td>
+ 					<td>{{agmat['ere_code']}}</td>
+ 					<td>{{agmat['dwgcode']}}</td>
+ 					<td>{{agmat['materialdesc']}}</td>
+ 					<td>{{agmat['msmaterialname']}}</td>
+ 					<td>{{agmat['dwglength']}}</td>
+ 					<td>{{agmat['wtpc']}}</td>
+ 					<td>{{agmat['qtypole']}}</td>
+ 					<td>{{agmat['wtpole']}}</td>
+ 					<td>{{agmat['qtykm']}}</td>
+ 					<td>{{agmat['wtkm']}}</td>
+ 					<td ng-show="fabricationmatid.fab_type=='2'">{{agmat['nutqty']}}</td>
+ 					<td><button type="button" class="btn btn-danger btn-xs" ng-click="removerow($index)">Remove</button></td>
+ 				</tr>
+ 				
+ 			</table>
+		</div> 		
+
+ 		<div class="form-group smallfont submitbtn" ng-show="agmateriallist.length>0">
+ 			<div class="col-sm-2 col-md-2 col-xs-8">
+ 				<div class="btn btn-success" ng-click="addfabrication()">ADD FABRICATION</div>
+ 			</div>
+ 		</div>
+	</form>
+	</div>
+
+</div>

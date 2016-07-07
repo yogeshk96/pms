@@ -1,0 +1,53 @@
+<!--page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid hidden-print">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<form class="form-horizontal">
+			<div class="col-sm-12 col-xs-12">
+
+			<p><strong>Material Tracker</strong></p>
+
+	 			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="polist.id as polist.name for polist in projectlist">
+	 					
+	 					</select>
+		 			</div>
+		 			<div class="col-sm-2 col-xs-4 submitbtn">
+		               <button type="button" class="btn btn-success smallfont " ng-click="generatemattrackerreport()">Generate</button>
+		            </div>
+		 		</div>
+		 		<table class="table table-striped table-responsive smallfont" ng-show="mattracklist">
+	 				<tr>
+	 					<th class="col-sm-1">S.No</th>
+	 					<th class="col-sm-4">Name</th>
+	 					<th class="col-sm-1">UOM</th>
+	 					<th class="col-sm-1">Indent Qty</th>
+	 					<th class="col-sm-1">Total purchased Qty</th>
+	 					<th class="col-sm-1">Total Inspection raised Qty</th>
+	 					<th class="col-sm-1">Total Inspection Approved Qty</th>
+	 					<th class="col-sm-1">Total Department DI Qty</th>
+	 					<th class="col-sm-1">Total Internal DI Qty</th>
+	 				</tr>
+	 				<tr ng-repeat="mat in mattracklist">
+	 					<td>{{$index+1}}</td>
+	 					<td>{{mat['name']}}</td>
+	 					<td>{{mat['matuom'][0]['stmatuom']['uom']}}</td>
+	 					<td>{{mat['totalindentqty']}}</td>
+	 					<td>{{mat['totalraised']}}</td>
+	 					<td>{{mat['totalinspected']}}</td>
+	 					<td>{{mat['totalapproved']}}</td>
+	 					<td>{{mat['totaldispatched']}}</td>
+	 					<td>{{mat['totalinternaldi']}}</td>
+	 				</tr>
+	 				</tr>
+	 			</table>
+
+			</div>
+		</form>
+	</div>
+</div>

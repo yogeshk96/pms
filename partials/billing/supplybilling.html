@@ -1,0 +1,388 @@
+<div class="col-sm-12">
+	<div class="row">
+		<form class="form-horizontal">
+			<div class="col-sm-12">
+				<h3 style="margin-bottom:20px;">Supply Billing</h3>
+				<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="polist.id as polist.name for polist in projectlist" ng-change="projchange()">
+		 				<option value="">SELECT</option>
+		 					
+		 				</select>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Sub-project<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" options="submultiplier" chosen ng-model="subprojectid" ng-options="smulti.id as smulti.multiplier_name for smulti in submultiplier">
+		 				<option value="">SELECT</option>
+		 					
+		 				</select>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Type<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" ng-model="billtype">
+		 				<option value="1">Ex-Works</option>
+		 				<option value="2">F&amp;I</option>
+		 					
+		 				</select>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+					<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material Type<span class="astrix">*</span></div>
+					<div class="col-sm-3 col-md-3 col-xs-8">
+						<select class="form-control smallfont" options="materials" chosen ng-model="materialtype" ng-options="mat as mat.name for mat in materials">
+							<option value="">SELECT</option>
+ 					
+ 						</select>
+					</div>
+				</div>
+
+				<div class="form-group smallfont" ng-show="materialtype">
+					<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material<span class="astrix">*</span></div>
+					<div class="col-sm-3 col-md-3 col-xs-8">
+						<select class="form-control smallfont" options="materialtype.submaterials" chosen ng-model="submat" ng-options="smat as smat.name for smat in materialtype.submaterials" ng-change="matchange()">
+							<option value="">SELECT</option>
+ 					
+ 						</select>
+					</div>
+
+					<div class="col-sm-3 col-md-3 col-xs-8">
+	 				
+		 				<div class="btn btn-success" ng-click="get_material_activities()">SEARCH</div>
+		 			</div>
+				</div>
+			</div>
+
+			<div class="col-sm-12" ng-show="filedata">
+			
+				<table class="table table-striped table-responsive smallfont">
+	 				<thead>
+	 					<tr class="innerhead">
+	 						<th class="col-sm-1">LOA Sl No</th>
+	 						<th class="col-sm-3">Description of Items</th>
+	 						<!-- <th class="col-sm-1">Units</th> -->
+	 						<th class="col-sm-1" ng-show="billtype=='1'">Ex-works Rate</th>
+	 						<th class="col-sm-1" ng-show="billtype=='2'">F&amp;I Rate</th>
+	 						<th class="col-sm-1">Unit Quantity</th>
+	 						<th class="col-sm-1">LOA Quantity</th>
+	 						<th class="col-sm-1">Already Billed Qty</th>
+	 						<th class="col-sm-1">Current Bill Qty</th>	 						
+	 					</tr>
+	 				</thead>
+	 				
+					<tbody ng-repeat="filed in filedata" ng-if="filed.count>0">
+						<tr style="background:#bababa;">
+							
+							<th>{{filed.srno}}</th>
+	 						<th>{{filed.desc}}</th>
+	 						<th></th>
+	 						<th></th>
+	 						<th></th>
+	 						<th></th>
+	 						<th></th>	 						
+						</tr>
+						<tr ng-repeat="filein in filed.sub" ng-if="filein.count>0">
+							<td>{{filein.srno}}</td>
+	 						<td>{{filein.desc}}</td>
+	 						<td ng-show="billtype=='1'">{{filein.supply_rate}}</td>
+	 						<td ng-show="billtype=='2'">{{filein.fi_rate}}</td>
+	 						<!-- <td><input type="text" ng-model="filein.uom" style="width:50px;" /></td> -->
+	 						<td>{{filein.unit_qty}}</td>
+	 						<td ng-repeat="indiq in filein.qty">
+		 						{{indiq['indiqty']}}
+	 						</td>
+	 						<td ng-repeat="indiq in filein.qty">
+		 						{{indiq['total_billed_qty']}}
+	 						</td>
+	 						<td ng-repeat="indiq in filein.qty">
+		 						<input type="text" ng-model="indiq['current_billed_qty']" style="width:60px;"/>
+	 						</td>
+	 						
+						</tr>
+					</tbody>
+				</table>
+				<div class="col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3 submitbtn">
+ 					<button type="button" class="btn btn-success" ng-click="addacttotable()">ADD</button>
+ 				</div>
+
+ 				
+			</div>
+			<div class="col-sm-12 jumbobox" ng-show="tabledata.length>0">
+				<h4>ADDED ACTIVITIES</h4>		
+				<table class="table table-striped table-responsive smallfont" ng-repeat="filet in tabledata">
+	 				<thead>
+	 					<tr class="innerhead">
+	 						<th class="col-sm-1">LOA Sl No</th>
+	 						<th class="col-sm-3">Description of Items</th>
+	 						<!-- <th class="col-sm-1">Units</th> -->
+	 						<th class="col-sm-1" ng-show="billtype=='1'">Ex-works Rate</th>
+	 						<th class="col-sm-1" ng-show="billtype=='2'">F&amp;I Rate</th>
+	 						<th class="col-sm-1">Unit Quantity</th>
+	 						<th class="col-sm-1">LOA Quantity</th>
+	 						<th class="col-sm-1">Already Billed Qty</th>
+	 						<th class="col-sm-1">Current Bill Qty</th>	 						
+	 					</tr>
+	 				</thead>
+	 				
+					<tbody ng-repeat="filed in filet">
+						<tr style="background:#bababa;">
+							
+							<th>{{filed.srno}}</th>
+	 						<th>{{filed.desc}}</th>
+	 						<th></th>
+	 						<th></th>
+	 						<th></th>
+	 						<th></th>
+	 						<th></th>	 						
+						</tr>
+						<tr ng-repeat="filein in filed.sub" ng-if="filein.count>0">
+							<td>{{filein.srno}}</td>
+	 						<td>{{filein.desc}}</td>
+	 						<td ng-show="billtype=='1'">{{filein.supply_rate}}</td>
+	 						<td ng-show="billtype=='2'">{{filein.fi_rate}}</td>
+	 						<!-- <td><input type="text" ng-model="filein.uom" style="width:50px;" /></td> -->
+	 						<td>{{filein.unit_qty}}</td>
+	 						<td ng-repeat="indiq in filein.qty">
+		 						{{indiq['indiqty']}}
+	 						</td>
+	 						<td ng-repeat="indiq in filein.qty">
+		 						{{indiq['total_billed_qty']}}
+	 						</td>
+	 						<td ng-repeat="indiq in filein.qty">
+		 						{{indiq['current_billed_qty']}}
+	 						</td>
+	 						
+						</tr>
+					</tbody>
+				</table>
+				
+			</div>
+			<div style="clear:both;height:10px;"></div>
+
+ 			<div class="jumbobox col-sm-8" ng-show="totalbillcost>0">
+				<h6><strong>Add Tax/ Discount</strong></h6>
+		 		<div class="col-sm-6 taxselectbox">
+		 			<div class="col-sm-6"><input type="radio" ng-model="taxcaltype" value="percentage">Percentage</div>
+		 			<div class="col-sm-6"><input type="radio" ng-model="taxcaltype" value="lumpsum">Lump Sum</div>
+		 		</div>
+
+		 		<div style="clear:both;"></div>
+
+				<div class="form-group smallfont">
+					<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select type<span class="astrix">*</span></div>
+					<div class="col-sm-4 col-xs-8">
+						<select class="form-control smallfont" ng-model="billtaxdetails" ng-options="tax as tax.name for tax in alltaxes | filter:taxfilter">
+						<option value="">SELECT</option>
+					</select>
+				</div>
+				</div>
+
+				<div class="form-group smallfont" ng-show="taxcaltype !='lumpsum'">
+					<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Percentage<span class="astrix">*</span></div>
+					<div class="col-sm-4 col-xs-8">
+						<input type="text" class="form-control" ng-model="billtaxdetails.percentage">
+					</div>
+				</div>
+
+				<div class="form-group smallfont" ng-show="taxcaltype == 'lumpsum'">
+					<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Amount<span class="astrix">*</span></div>
+					<div class="col-sm-4 col-xs-8">
+						<input type="text" class="form-control" ng-model="billtaxdetails.amount">
+					</div>
+				</div>
+
+				<div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn">
+					<button type="button" class="btn btn-success" ng-click="addtotax()">ADD</button>
+				</div>
+		    </div>
+		    
+		    <div class="table-responsive col-sm-12" ng-show="taxdetails.length>0 && totalbillcost>0">
+
+	        	<table class="table table-striped smallfont">
+					<thead>
+						<tr class="innerhead">
+							<th>S.No</th>
+							<th>Name</th>
+							<th>Amount</th>
+							<th>Remove</th>
+						</tr>
+					</thead>
+					<tr ng-repeat="taxdet in taxdetails">
+						<td scope="row">{{$index+1}}</td>
+						<td>{{taxdet.name}}</td>
+						<td>{{taxdet.amount}}</td>
+						<td><button type="button" class="btn btn-danger btn-xs" ng-click="removetaxrow($index, taxdet.id)">Remove</button></td>
+					</tr>
+				</table>
+			</div>
+
+			<div style="clear:both;height:10px;"></div>
+			<div class="jumbobox col-sm-6" ng-show="totalbillcost>0">
+				<h6><strong>Cost Summary</strong></h6>
+ 				<div class="form-group smallfont">
+ 					<div for="inputEmail3" class="col-sm-5 col-xs-4 control-label">Basic Value</div>
+ 					<div class="col-sm-4 col-xs-6">
+ 						{{totalbillcost}}
+ 					</div>
+ 				</div>
+ 				<div class="form-group smallfont" ng-repeat="taxdet in taxdetails">
+ 					<div for="inputEmail3" class="col-sm-5 col-xs-6 control-label">{{taxdet.name}}</div>
+ 					<div class="col-sm-4 col-xs-6">
+ 						<span ng-show="taxdet.type=='2'">-</span><span ng-show="taxdet.type=='1'">+</span> {{taxdet.amount}}
+ 					</div>
+ 				</div>
+ 				<hr>
+	 				
+ 				<div class="form-group smallfont">
+ 					<div for="inputEmail3" class="col-sm-5 col-xs-4 control-label">Grand Total</div>
+ 					<div class="col-sm-4 col-xs-8">
+ 						{{netbillcost}}
+ 					</div>
+ 				</div>
+
+            </div>
+
+			<div class="col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3 submitbtn" ng-show="tabledata.length>0">
+				<button type="button" class="btn btn-success" ng-click="savebillingdetails()">SAVE</button>
+			</div>
+
+		</form>
+
+		
+	</div>
+</div>
+
+<div ng-click="showcostsummaryclick()" ng-show="!showcostsummary && costsummary.length>0" class="showsummarybtn">
+	<div style="-webkit-transform: rotate(-90deg);width:100px;position:fixed;top:335px;right:-32px">View Cost Summary</div>
+</div>
+
+<div id="summarybox" style="max-height:400px;z-index:9;">
+	<div ng-click="hidecostsummaryclick()" class="innersummarybox">
+		<div style="-webkit-transform: rotate(-90deg);">Hide</div>
+	</div>
+	<table class="table table-striped table-responsive">
+		<thead>
+			<tr class="innerhead">
+				<th class="col-sm-3">Description of Items</th>
+				<!-- <th class="col-sm-1">Units</th> -->
+				<th class="col-sm-1">Total bill qty</th>
+				<th class="col-sm-1">Total cost</th>
+									
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr ng-repeat="indicost in  costsummary">
+				<td>{{indicost.matname}}</td>
+				<td>{{indicost.totalbillqty}}</td>
+				<td>{{indicost.totalbillcost}}</td>
+					 						
+			</tr>	
+			<tr>
+				<td	colspan="2" class="text-right"><strong>Total</strong></td>
+				<td>{{totalbillcost}}</td>	
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div style="clear:both"></div>
+
+<div class="purchaseorderbox hidden-print" style="display:inline-block;">
+	<div class="col-sm-3"><img src="images/logo.png" style="height: 50px;margin-left: -25px;margin-top: 16px;"></div>
+	<div class="col-sm-9">
+		<p><strong>{{companyinfo['company']['compdetails']['fullname']}}</strong>, {{companyinfo['company']['compdetails']['address']}}, {{companyinfo['company']['compdetails']['city']}} - {{companyinfo['company']['compdetails']['pincode']}}, Tele No.{{companyinfo['company']['compdetails']['tele_no']}}</p>
+	</div>
+	<div style="clear:both;"></div>
+	<div class="seperatorline"></div>
+	<h4 class="text-center purchasehead">Supply Invoice</h4>
+	<div class="seperatorline"></div>
+
+	<div class="col-sm-12" ng-show="billmainarr.length>0">
+		<table class="table table-striped table-responsive smallfont">
+			<thead>
+				<tr class="innerhead">
+					<th class="col-sm-1">LOA Sl No</th>
+					<th class="col-sm-3">Description of Items</th>
+					<!-- <th class="col-sm-1">Units</th> -->
+					<th class="col-sm-1" ng-show="billtype=='1'">Ex-works Rate</th>
+					<th class="col-sm-1" ng-show="billtype=='2'">F&amp;I Rate</th>
+					<th class="col-sm-1">Unit Quantity</th>
+					<th class="col-sm-1">LOA Quantity</th>
+					<th class="col-sm-1">Already Billed Qty</th>
+					<th class="col-sm-1">Current Bill Qty</th>
+					<th class="col-sm-1">Current Bill Value</th>	 						
+				</tr>
+			</thead>
+			
+			<tbody ng-repeat="filed in billmainarr">
+				<tr style="background:#bababa;">
+					
+					<th>{{filed.srno}}</th>
+					<th>{{filed.desc}}</th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>	 						
+				</tr>
+				<tr ng-repeat="filein in filed.sub" ng-if="filein.count>0">
+					<td>{{filein.srno}}</td>
+					<td>{{filein.desc}}</td>
+					<td ng-show="billtype=='1'">{{filein.supply_rate}}</td>
+					<td ng-show="billtype=='2'">{{filein.fi_rate}}</td>
+					<!-- <td><input type="text" ng-model="filein.uom" style="width:50px;" /></td> -->
+					<td>{{filein.unit_qty}}</td>
+					<td ng-repeat="indiq in filein.qty">
+						{{indiq['indiqty']}}
+					</td>
+					<td ng-repeat="indiq in filein.qty">
+						{{indiq['total_billed_qty']}}
+					</td>
+					<td ng-repeat="indiq in filein.qty">
+						{{indiq['current_billed_qty']}}
+					</td>
+					<td ng-show="billtype=='1'" ng-repeat="indiq in filein.qty">{{filein.supply_rate*indiq['current_billed_qty']}}</td>
+					<td ng-show="billtype=='2'" ng-repeat="indiq in filein.qty">{{filein.fi_rate*indiq['current_billed_qty']}}</td>
+						
+				</tr>
+			</tbody>
+				<tr>
+					<td colspan="7" class="text-right"><strong>Grand Total Gross Amount</strong></td>
+					<td colspan="2">{{totalbillcost}}</td>
+
+				</tr>
+ 				<tr ng-repeat="taxdet in taxdetails">
+ 					<td colspan="7" class="text-right">{{taxdet.name}}</td>
+ 					<td colspan="2">{{taxdet.amount}}</td>
+ 				</tr>
+ 				<tr>
+					<td colspan="7" class="text-right"><strong>Net Payable Amount</strong></td>
+					<td colspan="2">{{netbillcost}}</td>
+
+				</tr>
+		</table>
+		
+	</div>
+</div>
+<div class="schemeaddbox">
+	<h3>Schemes Adding</h3>
+	<div class="form-group smallfont">
+		<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Activity<span class="astrix">*</span></div>
+		<div class="col-sm-3 col-md-3 col-xs-8">
+			<select class="form-control smallfont" ng-model="schemes" options="billmainarr" chosen ng-options="bill as bill.srno for bill in billmainarr">
+			<option value="">SELECT</option>
+				
+			</select>
+		</div>
+	</div>
+</div>
+

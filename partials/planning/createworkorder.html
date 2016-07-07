@@ -1,0 +1,62 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Create Work Order</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal" ng-submit='create_workorder()'>
+
+    			<div class="form-group smallfont" style="padding:5px;clear:both;">
+		 			<label class="radio-inline">
+		 				<input type="radio" ng-model="project.type" id="inlineRadio1" value="tender">Tender
+		 			</label>
+		 			<label class="radio-inline">
+		 				<input type="radio" ng-model="project.type" id="inlineRadio1" value="work">Work
+		 			</label>
+		 		</div>
+				
+    			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Name</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="project.name" required/>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Description</div>
+		 			<div class="col-sm-4 col-md-4 col-xs-8">
+		 				<textarea class="form-control" ng-model="project.descr" required></textarea>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Work Order Value</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="project.cost" required/>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Client</div>
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="project.client" required/>
+		 			</div>
+		 		</div>
+    			
+		 		<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="submit" value="Create" class="btn btn-success">
+		 			</div>
+		 		</div>
+
+    		</form>
+    	</div>
+
+	</div>
+
+</div>

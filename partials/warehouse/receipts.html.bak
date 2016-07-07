@@ -1,0 +1,1515 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+  <div class="row-fluid">
+    
+    <div class="clearfix" style="height:20px;"></div>
+
+    <p class="hidden-print"><strong>Receipt</strong></p>
+    
+   
+    <div class="col-sm-12 col-xs-12 smallfont">
+
+      <form class="form-horizontal">
+        <div class="form-group hidden-print">
+          <div for="inputEmail3" class="col-sm-2 col-md-2 col-xs-4 control-label">Type</div>
+          <div class="col-sm-3 col-md-3 col-xs-8">
+            <select ng-model="rectype" class="form-control smallfont" ng-change="changemainrecpt()">
+              <option value="1">Purchased</option>
+              <option value="2">Received from another store</option>
+              <option value="3">In House Production</option>
+              <option value="4">Material Return</option>4
+              <option value="5">Received from third party</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ----------------------------------- purchased section starts ---------------------------------------- -->
+
+        <div class="purchasesection" ng-show="rectype == '1' ">
+
+            
+              <div class="form-group smallfont hidden-print">
+                <div for="inputEmail3" class="col-sm-2 col-md-2 col-xs-4 control-label">Purchased By</div>
+                <div class="col-sm-3 col-md-3 col-xs-8 jumbobox" style="padding:5px;">
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="purchasedby" id="inlineRadio1" value="self"> Local Purchase
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="purchasedby" id="inlineRadio2" value="company"> Company
+                  </label>
+                </div>
+              </div>
+
+              <!---------------purchased by self starts -------------- -->
+              <div class="jumbobox col-sm-8" ng-show="purchasedby == 'self'">
+
+              <div class="form-group smallfont" ng-show="purchasedby == 'self'">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Material Type</div>
+                <div class="col-sm-5 col-xs-6">
+                  <select class="form-control smallfont" ng-model="materialtypeid" ng-change="materialchange()">
+                    <option value="select">SELECT</option>
+                    <option ng-repeat="mat in materials" value="{{mat['id']}}">{{mat['name']}}</option>
+                   
+                  </select>
+                </div>
+                <!-- <div class="col-sm-4 col-xs-2 linktextinput">
+                  <a href="#">add new material</a>
+                </div> -->
+              </div>
+
+              <div class="form-group smallfont" ng-show="submaterials && purchasedby == 'self'">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select Material</div>
+                <div class="col-sm-4 col-md-4 col-xs-8">
+                  <select class="form-control smallfont" ng-model="submat" ng-change="getuom(submat)">
+                    <option value="select">SELECT</option>
+                    <option ng-repeat="sub in submaterials" value="{{sub.id}}" id="{{sub.id}}" materialdesc="{{sub.name}}">{{sub.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group smallfont" ng-show="purchasedby == 'self'">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">UOM</div>
+                <div class="col-sm-4 col-xs-8">
+                  <input type="text" ng-model="uomval" class="form-control" readonly />
+                </div>
+              </div>
+
+              <div class="form-group smallfont" ng-show="purchasedby == 'self'">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Supplier Name</div>
+                <div class="col-sm-4 col-xs-6">
+                  <input type="text" class="form-control" id="exampleInputEmail1" ng-model="suppliername" placeholder="Enter supplier name">
+                </div>
+              </div>
+
+              
+              <div class="form-group smallfont" ng-show="purchasedby == 'self'">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Quantity</div>
+                <div class="col-sm-4 col-xs-6">
+                  <input type="text" class="form-control" ng-model="quantity" ng-blur="getgoodscost('quantity')" id="exampleInputEmail1" placeholder="Enter quantity">
+                </div>
+              </div>
+
+              <div class="form-group smallfont" ng-show="purchasedby == 'self'">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Unit Rate(in Rs)</div>
+                <div class="col-sm-4 col-xs-6">
+                  <input type="text" class="form-control" ng-model="unitrate" ng-blur="getgoodscost('unitrate')" id="exampleInputEmail1" placeholder="Enter Unit Rate">
+                </div>
+              </div>
+
+              <div class="form-group smallfont" ng-show="purchasedby == 'self'">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Total Cost(in Rs)</div>
+                <div class="col-sm-4 col-xs-6">
+                  <input type="text" class="form-control" ng-model="valueofgoods" readonly >
+                </div>
+              </div>
+              <div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn" ng-show="purchasedby == 'self'">
+                <button type="button" class="btn btn-success" ng-click="addtotable()">ADD</button>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="purchasedby == 'self'">
+
+              <table class="table table-striped" ng-show="recptmateriallist.length>0">
+                  <thead>
+                    <tr style="background:#000;color:#FFF;">
+                      <th class="col-sm-1">S.No</th>
+                      <th class="col-sm-2">Material Description</th>
+                      <th class="col-sm-1">UOM</th>
+                      <th class="col-sm-2">Qty</th>
+                      <th class="col-sm-2">Unit Rate</th>
+                      <th class="col-sm-2">Total Cost</th>
+                      <th class="col-sm-2">Remove</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="recptmat in recptmateriallist">
+                      <td>{{$index+1}}</td>
+                      <td>{{recptmat['materialdesc']}}</td>
+                      <td>{{recptmat['uom']}}</td>
+                      <td>{{recptmat['qty']}}</td>
+                      <td>Rs. {{recptmat['unitrate']}}</td>
+                      <td>Rs. {{recptmat['valueofgoods']}}</td>
+                      <td><button type="button" class="btn btn-danger btn-xs" ng-click="removerow($index+1)">Remove</button></td>
+                    </tr>
+                    
+                  </tbody>
+                    
+                </table>
+
+            </div><!-- col-sm-12 ends -->
+
+            <div class="form-group smallfont" ng-show="purchasedby == 'self' && recptmateriallist.length>0">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Authorized By</div>
+              <div class="col-sm-3 col-xs-6">
+                <input type="text" class="form-control" ng-model="selfauthorizedby">
+              </div>
+            </div>
+
+            <div class="form-group smallfont" ng-show="purchasedby == 'self' && recptmateriallist.length>0">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Invoice No</div>
+              <div class="col-sm-2 col-xs-6">
+                <input type="text" class="form-control" ng-model="selfinvoiceno">
+              </div>
+            </div>
+
+            <div class="form-group smallfont" ng-show="purchasedby == 'self' && recptmateriallist.length>0">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Invoice Date</div>
+              <div class="col-sm-2 col-xs-6">
+                <input type="date" class="form-control" ng-model="selfinvoicedate">
+              </div>
+            </div>
+
+
+            <div class="form-group smallfont" ng-show="purchasedby == 'self' && recptmateriallist.length>0">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Total Qty</div>
+              <div class="col-sm-2 col-xs-6">
+                <input type="text" class="form-control" ng-model="selftotalqty" readonly>
+              </div>
+            </div>
+
+
+            <div class="form-group smallfont" ng-show="purchasedby == 'self' && recptmateriallist.length>0">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Total Value of Goods</div>
+              <div class="col-sm-2 col-xs-6">
+                <input type="text" class="form-control" ng-model="selftotalcostofgoods" readonly>
+              </div>
+            </div>
+
+            <div class="col-sm-3 col-sm-offset-3 col-xs-10 submitbtn" ng-show="purchasedby == 'self' && recptmateriallist.length>0">
+                <button type="button" class="btn btn-success" ng-click="addselftoinventory()">Add to Inventory</button>
+            </div>
+
+              <!---------------puchased by self ends -------------- -->
+
+              <!---------------puchased by company starts -------------- -->
+            
+              <div class="form-group smallfont hidden-print" ng-show="purchasedby == 'company'">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Purchased Order No</div>
+                <div class="col-sm-3 col-xs-4">
+                  <input type="text" class="form-control" ng-model="ponumber" placeholder="Enter purchased order no">
+                </div>
+                <div class="col-sm-2 col-xs-4 submitbtn">
+                   <button type="button" class="btn btn-success smallfont " ng-click="searchpo()">Search</button>
+                </div>
+              </div>
+              <div class="searchresult hidden-print" ng-show="purchasedby == 'company'" ng-repeat="po in ponodetails">
+                <hr>
+
+                <div class="clearfix" style="height:20px;"></div>
+
+                <div class="form-group smallfont">
+                  
+                  <div class="col-sm-4 col-xs-6">
+
+                    <div class="col-sm-6"><strong>Purchased Date</strong>: </div>
+                    <div class="col-sm-6"> {{po.created_at}}</div>
+
+                  </div>
+                  <div class="col-sm-4 col-xs-6">
+                    <div class="col-sm-6"><strong>Vendor Name</strong>: </div>
+                    <div class="col-sm-6"> {{po.vendor.name}}</div>
+
+                  </div>
+                  <div class="col-sm-4">&nbsp;
+                  </div>
+                  <div class="clearfix" style="height:10px;"></div>
+
+                  <div class="col-sm-4 col-xs-6">
+
+                    <div class="col-sm-6"><strong>Total cost of Materials</strong>: </div>
+                    <div class="col-sm-6">Rs {{po.total_cost}}</div>
+
+                  </div>
+                  <div class="col-sm-4 col-xs-6">
+                    <div class="col-sm-6"><strong>PO No</strong>: </div>
+                    <div class="col-sm-6"> {{po.id}}/SSEL/{{po.vendor.vendor_code}}/{{po.finyear}}</div>
+
+                  </div>
+
+                </div>
+
+                <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;" >
+
+                    <table class="table table-striped">
+                        <thead>
+                          <tr style="background:#000;color:#FFF;">
+                            <th class="col-sm-1">S.No</th>
+                            <th class="col-sm-2">Material Description</th>
+                            <th class="col-sm-1">UOM</th>
+                            <th class="col-sm-2">Purchased Qty</th>
+                            <th class="col-sm-2">Unit rate</th>
+                            <th class="col-sm-1">Already received</th>
+                            <th class="col-sm-1">DC received</th>
+                            <th class="col-sm-1">Shortage Qty</th>
+                            <th class="col-sm-1">Damaged Qty</th>
+                            <th class="col-sm-2">Accepted Qty</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="pomat in po.pomaterials">
+                            <td>{{$index+1}}</td>
+                            <td>{{pomat.storematerial.name}}</td>
+                            <td>{{pomat.storematerial.units}}</td>
+                            <td>{{pomat.quantity}}</td>
+                            <td>{{pomat.unit_rate}}</td>
+                            <td>{{pomat.alreadyreceived}}</td>
+                            <td><input type="text" class="form-control" ng-model="pomat.dcreceived" ng-blur="blurinput(pomat, $index+1)"/></td>
+                            <td><input type="text" class="form-control" ng-model="pomat.shortageqty" ng-blur="blurinput(pomat, $index+1)" /></td>
+                            <td><input type="text" class="form-control" ng-model="pomat.damagedqty" ng-blur="blurinput(pomat, $index+1)"/></td>
+                            <td><input type="text" readonly class="form-control" ng-model="pomat.acceptedqty"/></td>
+                          </tr>
+                          
+                        </tbody>
+                          
+                      </table>
+
+                  </div><!-- col-sm-12 ends -->
+
+                  <div class="form-group smallfont col-sm-6 col-xs-12" >
+                    <div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">DC No <span class="astrix">*</span></div>
+                    <div class="col-sm-5 col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" ng-model="companydetails.dcno" placeholder="Enter DC No">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-sm-6 col-xs-12" >
+                    <div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">DC Date <span class="astrix">*</span></div>
+                    <div class="col-sm-5 col-xs-8">
+                      <input type="date" class="form-control" id="exampleInputEmail1" ng-model="companydetails.dcdate" placeholder="Enter DC Date">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-sm-6 col-xs-12" >
+                    <div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Vehicle No <span class="astrix">*</span></div>
+                    <div class="col-sm-5 col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" ng-model="companydetails.vehicleno" placeholder="Enter vehicle no">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-sm-6 col-xs-12" >
+                    <div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Invoice No <span class="astrix">*</span></div>
+                    <div class="col-sm-5 col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" ng-model="companydetails.invoiceno" >
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-sm-6 col-xs-12" >
+                    <div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Total Accepted value</div>
+                    <div class="col-sm-5 col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" ng-model="companydetails.totalacceptedvalue" readonly >
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-sm-6 col-xs-12" >
+                    <div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Invoice Date <span class="astrix">*</span></div>
+                    <div class="col-sm-5 col-xs-8">
+                      <input type="date" class="form-control" id="exampleInputEmail1" ng-model="companydetails.invoicedate" >
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-sm-6 col-xs-12" >
+                    <div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Tax Amount <span class="astrix">*</span></div>
+                    <div class="col-sm-5 col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" ng-model="companydetails.taxamount">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-sm-6 col-xs-12" >
+                    <div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Frieght charge <span class="astrix">*</span></div>
+                    <div class="col-sm-5 col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" ng-model="companydetails.frieghtcharge">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-sm-6 col-xs-12" >
+                    <div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Total Invoice Amount</div>
+                    <div class="col-sm-5 col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" readonly ng-model="companydetails.totalinvoice">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-sm-6 col-xs-12">
+                    <div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">LR No</div>
+                    <div class="col-sm-5 col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" ng-model="companydetails.lrno">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-sm-6 col-xs-12">
+                    <div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">LR Date</div>
+                    <div class="col-sm-5 col-xs-8">
+                      <input type="date" class="form-control" id="exampleInputEmail1" ng-model="companydetails.lrdate">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-sm-6 col-xs-12">
+                    <div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Way Bill No</div>
+                    <div class="col-sm-5 col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" ng-model="companydetails.waybillno">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-sm-12 col-xs-12">
+                    <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Remarks</div>
+                    <div class="col-sm-5 col-xs-8">
+                      <textarea class="form-control" id="exampleInputEmail1" rows="3" ng-model="companydetails.remarks"></textarea>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+
+                  <div class="col-sm-7 col-xs-12" style="padding-left:0;">
+
+                    <p>I hearby accept I have received the above materials after conducting all the neccessary checks, any discrepency in the data is solely my responsibility.</p>
+
+                    <p>Mr rama rao<br>(Store Incharge)</p>
+                  </div>
+
+                  <div class="col-sm-2 col-sm-offset-4 col-xs-6 submitbtn" style="padding-left:0;">
+                    <button type="button" class="btn btn-success" ng-click="receivedcompanyrecpt()" ng-hide="transid">Received</button>
+                  </div>
+                  <div class="col-sm-3 col-xs-6" >
+                    <button type="button" class="btn btn-success" onClick="window.print()" ng-show="transid">Print</button>
+                  </div>
+
+                </div>
+
+
+            <!-- Template for print company purchase -->
+              <div class="searchresult visible-print-block" ng-show="purchasedby == 'company'" ng-repeat="po in ponodetails">
+
+                <div class="clearfix" style="height:20px;"></div>
+                <h3>Receipt ID: RPT/SSEL/{{transid}}
+                <div class="form-group smallfont">
+                  
+                  <div class="col-xs-6">
+
+                    <div class="col-xs-6"><strong>Purchased Date</strong>: </div>
+                    <div class="col-xs-6"> {{po.created_at}}</div>
+
+                  </div>
+                  <div class="col-xs-6">
+                    <div class="col-xs-6"><strong>Vendor Name</strong>: </div>
+                    <div class="col-xs-6"> {{po.vendor.name}}</div>
+
+                  </div>
+                  
+                  <div class="clearfix" style="height:10px;"></div>
+
+                  <div class="col-xs-6">
+
+                    <div class="col-xs-6"><strong>Total cost of Materials</strong>: </div>
+                    <div class="col-xs-6">Rs {{po.total_cost}}</div>
+
+                  </div>
+                  <div class="col-xs-6">
+                    <div class="col-xs-6"><strong>PO No</strong>: </div>
+                    <div class="col-xs-6"> {{po.id}}/SSEL/{{po.vendor.vendor_code}}/{{po.finyear}}</div>
+
+                  </div>
+
+                </div>
+
+                <div class="col-xs-12 pmstable" style="padding-left:0px;" >
+
+                    <table class="table table-striped">
+                        <thead>
+                          <tr style="background:#000;color:#FFF;">
+                            <th class="col-xs-1">S.No</th>
+                            <th class="col-xs-2">Material Description</th>
+                            <th class="col-xs-1">UOM</th>
+                            <th class="col-xs-2">Purchased Qty</th>
+                            <th class="col-xs-2">Unit rate</th>
+                            <th class="col-xs-1">Already received</th>
+                            <th class="col-xs-1">DC received</th>
+                            <th class="col-xs-1">Shortage Qty</th>
+                            <th class="col-xs-1">Damaged Qty</th>
+                            <th class="col-xs-2">Accepted Qty</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="pomat in po.pomaterials">
+                            <td>{{$index+1}}</td>
+                            <td>{{pomat.storematerial.name}}</td>
+                            <td>{{pomat.storematerial.units}}</td>
+                            <td>{{pomat.quantity}}</td>
+                            <td>{{pomat.unit_rate}}</td>
+                            <td>{{pomat.alreadyreceived}}</td>
+                            <td><input type="text" class="form-control" ng-model="pomat.dcreceived" ng-blur="blurinput(pomat, $index+1)"/></td>
+                            <td><input type="text" class="form-control" ng-model="pomat.shortageqty" ng-blur="blurinput(pomat, $index+1)" /></td>
+                            <td><input type="text" class="form-control" ng-model="pomat.damagedqty" ng-blur="blurinput(pomat, $index+1)"/></td>
+                            <td><input type="text" readonly class="form-control" ng-model="pomat.acceptedqty"/></td>
+                          </tr>
+                          
+                        </tbody>
+                          
+                      </table>
+
+                  </div><!-- col-sm-12 ends -->
+
+                  <div class="form-group smallfont col-xs-6" >
+                    <div for="inputEmail3" class="col-xs-4 control-label">DC No <span class="astrix">*</span></div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" ng-model="companydetails.dcno" placeholder="Enter DC No">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-xs-6" >
+                    <div for="inputEmail3" class="col-xs-4 control-label">DC Date <span class="astrix">*</span></div>
+                    <div class="col-xs-8">
+                      <input type="date" class="form-control" id="exampleInputEmail1" ng-model="companydetails.dcdate" placeholder="Enter DC Date">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-xs-6" >
+                    <div for="inputEmail3" class="col-xs-4 control-label">Vehicle No <span class="astrix">*</span></div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" ng-model="companydetails.vehicleno" placeholder="Enter vehicle no">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-xs-6" >
+                    <div for="inputEmail3" class="col-xs-4 control-label">Invoice No <span class="astrix">*</span></div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" ng-model="companydetails.invoiceno" >
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-xs-6" >
+                    <div for="inputEmail3" class="col-xs-4 control-label">Total Accepted value</div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" ng-model="companydetails.totalacceptedvalue" readonly >
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-xs-6" >
+                    <div for="inputEmail3" class="col-xs-4 control-label">Invoice Date <span class="astrix">*</span></div>
+                    <div class="col-xs-8">
+                      <input type="date" class="form-control" id="exampleInputEmail1" ng-model="companydetails.invoicedate" >
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-xs-6" >
+                    <div for="inputEmail3" class="col-xs-4 control-label">Tax Amount <span class="astrix">*</span></div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" ng-model="companydetails.taxamount">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-xs-6" >
+                    <div for="inputEmail3" class="col-xs-4 control-label">Frieght charge <span class="astrix">*</span></div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" ng-model="companydetails.frieghtcharge">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-xs-6" >
+                    <div for="inputEmail3" class="col-xs-4 control-label">Total Invoice Amount</div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" readonly ng-model="companydetails.totalinvoice">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-xs-6">
+                    <div for="inputEmail3" class="col-xs-4 control-label">LR No</div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" ng-model="companydetails.lrno">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-xs-6">
+                    <div for="inputEmail3" class="col-xs-4 control-label">LR Date</div>
+                    <div class="col-xs-8">
+                      <input type="date" class="form-control" id="exampleInputEmail1" ng-model="companydetails.lrdate">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-xs-6">
+                    <div for="inputEmail3" class="col-xs-4 control-label">Way Bill No</div>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control" id="exampleInputEmail1" ng-model="companydetails.waybillno">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont col-xs-12">
+                    <div for="inputEmail3" class="col-xs-4 control-label">Remarks</div>
+                    <div class="col-xs-8">
+                      <textarea class="form-control" id="exampleInputEmail1" rows="3" ng-model="companydetails.remarks"></textarea>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+
+                  <div class="col-sm-7 col-xs-12" style="padding-left:0;">
+
+                    <p>I hearby accept I have received the above materials after conducting all the neccessary checks, any discrepency in the data is solely my responsibility.</p>
+
+                    <p>Mr rama rao<br>(Store Incharge)</p>
+                  </div>
+
+                </div>
+              <!-- Template for print company purchase ends -->
+        </div>    
+
+        <!-------------------- puchased by company ends -------------------- -->
+
+        <!------------------------------------------------ purchased section ends  ------------------------------------------------ -->
+
+        <!-- ----------------------------------- Received from another store section starts ---------------------------------------- -->
+
+        <div class="purchasesection" ng-show="rectype == '2' ">
+
+                <div class="form-group smallfont hidden-print">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">DC No</div>
+                  <div class="col-sm-3 col-xs-4">
+                    <input type="text" class="form-control" id="exampleInputEmail1" ng-model="anotherstoredcno" placeholder="Enter DC No">
+                  </div>
+                  <div class="col-sm-2 col-xs-4 submitbtn">
+                     <button type="button" class="btn btn-success smallfont" ng-click="searchanotherstoredcno()">Search</button>
+                  </div>
+                </div>
+                 <hr class="hidden-print">
+
+                <div class="dcnodata" ng-repeat="dcdata in dcnodetails">
+
+                    <div class="clearfix" style="height:20px;"></div>
+
+                    <div class="form-group smallfont">
+                    
+                      <div class="col-sm-4 col-xs-6">
+
+                        <div class="col-sm-6"><strong>DC Date</strong>: </div>
+                        <div class="col-sm-6"> {{dcdata['dc_date']}}</div>
+
+                      </div>
+                      <div class="col-sm-4 col-xs-6">
+                        <div class="col-sm-6"><strong>Dispatched from</strong>: </div>
+                        <div class="col-sm-6"> Mr. rama rao</div>
+
+                      </div>
+
+                      <div class="col-sm-4">
+                        &nbsp;
+
+                      </div>
+
+                      <div class="clearfix" style="height:10px;"></div>
+
+                      <div class="col-sm-4 col-xs-6">
+
+                        <div class="col-sm-6"><strong>Total cost of Materials</strong>: </div>
+                        <div class="col-sm-6">Rs {{dcdata['total_cost']}}</div>
+
+                      </div>
+                      <div class="col-sm-4 col-xs-6">
+                        <div class="col-sm-6"><strong>DC No</strong>: </div>
+                        <div class="col-sm-6"> {{dcdata['id']}}/SSEL/DCNO</div>
+
+                      </div>
+
+                    </div>
+
+                    <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;">
+
+                      <table class="table table-striped">
+                          <thead>
+                            <tr style="background:#000;color:#FFF;">
+                              <th class="col-sm-1">S.No</th>
+                              <th class="col-sm-2">Material Description</th>
+                              <th class="col-sm-1">UOM</th>
+                              <th class="col-sm-2">Qty</th>
+                              <th class="col-sm-2">Shortage Qty</th>
+                              <th class="col-sm-2">Damaged Qty</th>
+                              <th class="col-sm-2">Accepted Qty</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="tdata in dcdata['transdata']">
+                              <td>{{$index+1}}</td>
+                              <td>{{tdata['storestock']['material']['name']}}</td>
+                              <td>{{tdata['storestock']['material']['units']}}</td>
+                              <td>{{tdata['quantity']}}</td>
+                              <td><input type="text" class="form-control" ng-model="tdata['shortageqty']" ng-blur="bluranotherstoreinput(tdata, $index+1)"/></td>
+                              <td><input type="text" class="form-control" ng-model="tdata['damagedqty']" ng-blur="bluranotherstoreinput(tdata, $index+1)"/></td>
+                              <td><input type="text" readonly class="form-control" ng-model="tdata['acceptedqty']"/></td>
+                            </tr>
+                            
+                          </tbody>
+                            
+                        </table>
+
+                    </div><!-- col-sm-12 ends -->
+
+                </div>
+
+                <div class="form-group smallfont col-sm-6 col-xs-12" ng-show="dcnodetails">
+                  <div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Vehicle No* </div>
+                  <div class="col-sm-5 col-xs-8">
+                    <input type="text" class="form-control" id="exampleInputEmail1" ng-model="anotherstorevehicleno">
+                  </div>
+                </div>
+
+                <div class="form-group smallfont col-sm-12 col-xs-12" ng-show="dcnodetails">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Remarks</div>
+                  <div class="col-sm-5 col-xs-8">
+                    <textarea class="form-control" id="exampleInputEmail1" rows="3" ng-model="anotherremark"></textarea>
+                  </div>
+                </div>
+
+                <div class="col-sm-7" style="padding-left:0;" ng-show="dcnodetails">
+
+                  <p>I hearby accept I have received the above materials after conducting all the neccessary checks, any discrepency in the data is solely my responsibility.</p>
+
+                  <p>Mr rama rao<br>(Store Incharge)</p>
+                </div>
+
+                <div class="col-sm-2 col-sm-offset-4 col-xs-6 submitbtn" style="padding-left:0;" ng-show="dcnodetails">
+                  <button type="button" class="btn btn-success" ng-click="add_another_store_inventory()" ng-hide="transidanotherstore">Received</button>
+                </div>
+                <div class="col-sm-3 col-xs-6">
+                  <button type="button" class="btn btn-success" ng-show="transidanotherstore" onClick="window.print()">Print</button>
+                </div>
+        </div>
+
+
+        <!-- ----------------------------------- Received from another store section ends ------------------------------------------ -->
+
+
+        <!-- ----------------------------------- Material return section ends ------------------------------------------ -->
+
+        <div class="materialreturnsection smallfont" ng-show="rectype == '4' ">
+
+        <div class="hidden-print">
+          
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select SUB Type</div>
+                <div class="col-sm-3 col-xs-8">
+                  <select class="form-control smallfont" ng-model="subtype" ng-change="changesubtype()">
+                    <option value="select">SELECT</option>
+                    <option value="5">Scrap</option>
+                    <option value="6">Return from sub contractor</option>
+                  </select>
+                </div>
+              </div>
+
+          <div class="jumbobox col-sm-8">
+          <p>* &nbsp; Please enter the below details of each material received and click add </p>
+
+
+
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Material Type</div>
+                <div class="col-sm-4 col-xs-8">
+                  <select class="form-control smallfont" ng-model="materialtypeid" ng-change="materialchange()">
+                    <option value="select">SELECT</option>
+                    <option ng-repeat="mat in materials" value="{{mat['id']}}">{{mat['name']}}</option>
+                   
+                  </select>
+                </div>
+               
+              </div>
+
+              <div class="form-group smallfont" ng-show="submaterials">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material</div>
+                <div class="col-sm-4 col-md-4 col-xs-8">
+                  <select class="form-control smallfont" ng-model="submat" ng-change="getuomreturn(submat)">
+                    <option value='select'>SELECT</option>
+                    <option ng-repeat="sub in submaterials" value="{{sub}}">{{sub.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group smallfont" ng-show="purchasedby == 'self'">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">UOM</div>
+                <div class="col-sm-3 col-xs-8">
+                  <input type="text" ng-model="uomval" class="form-control" readonly />
+                </div>
+              </div>
+
+              <div class="form-group smallfont" ng-show="subtype=='5'">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Quantity</div>
+                <div class="col-sm-3 col-xs-6">
+                  <input type="text" class="form-control" ng-model="scrapqty" id="exampleInputEmail1" placeholder="Enter quantity">
+                </div>
+              </div>
+
+              <div class="form-group smallfont" ng-show="subtype=='6'">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Usable Qty</div>
+                <div class="col-sm-3 col-xs-6">
+                  <input type="text" class="form-control" id="exampleInputEmail1" ng-model="usableqty" placeholder="Enter usable quantity">
+                </div>
+              </div>
+
+              <div class="form-group smallfont" ng-show="subtype=='6'">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Defective Qty</div>
+                <div class="col-sm-3 col-xs-6">
+                  <input type="text" class="form-control" id="exampleInputEmail1" ng-model="defectiveqty" placeholder="Enter defective quantity">
+                </div>
+              </div>
+
+              <div class="form-group smallfont" ng-show="subtype=='5'">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Value of Goods</div>
+                <div class="col-sm-3 col-xs-6">
+                  <input type="text" class="form-control" id="exampleInputEmail1" ng-model="scrapvalueofgoods" placeholder="Enter value of goods"> 
+                </div>
+              </div>
+
+              <div class="form-group smallfont" ng-show="subtype=='6'">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Value of Goods(Usable Qty)</div>
+                <div class="col-sm-3 col-xs-6">
+                  <input type="text" class="form-control" id="exampleInputEmail1" ng-model="usablevalueofgoods" placeholder="Enter value for usable qty"> 
+                </div>
+              </div>
+
+              <div class="form-group smallfont" ng-show="subtype=='6'">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Value of Goods(Defective Qty)</div>
+                <div class="col-sm-3 col-xs-6">
+                  <input type="text" class="form-control" id="exampleInputEmail1" ng-model="defectivevalueofgoods" placeholder="Enter value for defective qty"> 
+                </div>
+              </div>
+
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Manager</div>
+                <div class="col-sm-4 col-xs-8">
+                  <select class="form-control smallfont" ng-model="returnmanager" ng-change="changereturnmanager(returnmanager)">
+                    <option value="select">SELECT</option>
+                    <option ng-repeat="manager in managerlist" value="{{manager}}">{{manager.name}}</option>
+                    
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Feeder</div>
+                <div class="col-sm-4 col-xs-8">
+                  <select class="form-control smallfont" ng-model="returnfeeder">
+                    <option value="select">SELECT</option>
+                    <option ng-repeat="feeder in feederlist" value="{{feeder}}">{{feeder.name}}</option>
+                    
+                  </select>
+                </div>
+              </div>
+
+             
+              <div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn">
+                <button type="button" class="btn btn-success" ng-click="addmaterialreturntotable()">ADD</button>
+              </div>
+
+            </div>
+
+            <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;">
+
+              <table class="table table-striped">
+                  <thead>
+                  
+                    <tr style="background:#000;color:#FFF;">
+                      <th class="col-sm-1">S.No</th>
+                      <th class="col-sm-2">Material Description</th>
+                      <th class="col-sm-1">UOM</th>
+                      <th class="col-sm-1" ng-if="subtype=='5'">Qty</th>
+                      <th class="col-sm-1" ng-if="subtype=='6'">Usable Qty</th>
+                      <th class="col-sm-1" ng-if="subtype=='6'">Defective Qty</th>
+                      <th class="col-sm-1" ng-if="subtype=='5'">Value of Goods</th>
+                      <th class="col-sm-1" ng-if="subtype=='6'">Value of Goods(Usable)</th>
+                      <th class="col-sm-1" ng-if="subtype=='6'">Value of Goods(Defective)</th>
+                      <th class="col-sm-2">Sub Type</th>
+                      <th class="col-sm-2">Manager</th>
+                      <th class="col-sm-1">Feeder</th>
+                      <th class="col-sm-1">Remove</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="matreturn in recptmaterialreturnlist">
+                       <td>{{$index+1}}</td>
+                      <td>{{matreturn.materialdesc}}</td>
+                      <td>{{matreturn.materialdesc}}</td>
+                      <td ng-if="subtype == '5'">{{matreturn.qty}}</td>
+                      <td ng-if="subtype == '6'">{{matreturn.usableqty}}</td>
+                      <td ng-if="subtype == '6'">{{matreturn.defectiveqty}}</td>
+                      <td ng-if="subtype == '5'">{{matreturn.valueofgoods}}</td>
+                      <td ng-if="subtype == '6'">{{matreturn.usablevalueofgoods}}</td>
+                      <td ng-if="subtype == '6'">{{matreturn.defectivevalueofgoods}}</td>
+                      <td ng-if="subtype == '5'">Scrap</td>
+                      <td ng-if="subtype == '6'">Returned from Sub Contractor</td>
+                      <td>{{matreturn.manager}}</td>
+                      <td>{{matreturn.feeder}}</td>
+                      <td><button type="button" class="btn btn-danger btn-xs" ng-click="removerowreturn($index+1)">Remove</button></td>
+                    </tr>
+                   
+                    
+                  </tbody>
+                    
+                </table>
+
+            </div><!-- col-sm-12 ends -->
+
+            <div class="form-group smallfont" ng-show="recptmaterialreturnlist.length>0">
+              <div for="inputEmail3" class="col-sm-1 col-xs-4 control-label">Vehicle No</div>
+              <div class="col-sm-3 col-xs-6">
+                <input type="text" class="form-control" ng-model="returnvehicleno" placeholder="Enter vehicle no">
+              </div>
+            </div>
+
+            <div class="form-group smallfont" ng-show="recptmaterialreturnlist.length>0">
+              <div for="inputEmail3" class="col-sm-1 col-xs-4 control-label">Remarks</div>
+              <div class="col-sm-4 col-xs-6">
+                <textarea class="form-control" ng-model="returnremarks"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group smallfont" ng-show="recptmaterialreturnlist.length>0 && mrn_no">
+              <div for="inputEmail3" class="col-sm-1 col-xs-4 control-label">MRN No</div>
+              <div class="col-sm-2 col-xs-6">
+                <input type="text" class="form-control" ng-model="mrn_no" readonly>
+              </div>
+            </div>
+
+            <div class="col-sm-7" style="padding-left:0;" ng-show="recptmaterialreturnlist.length>0">
+
+              <p>I hearby accept I have received the above materials after conducting all the neccessary checks, any discrepency in the data is solely my responsibility.</p>
+
+              <p style="width:33%;text-align:left;float:left;">Mr rama rao<br>(Store Incharge)</p>
+
+              <p style="width:33%;text-align:left;float:left;">Mr ss rao<br>(Project Manager)</p>
+              <p style="width:33%;text-align:left;float:left;">Mr R Reddy<br>(Sub Contractor)</p>
+            </div>
+
+            <div class="col-sm-2 col-sm-offset-4 col-xs-6 col-xs-offset-3 submitbtn" style="padding-left:0;" ng-hide="mrn_no" ng-show="recptmaterialreturnlist.length>0">
+              <button type="button" class="btn btn-success" ng-click="addmaterialreturn()">Received</button>
+            </div>
+            <div class="col-sm-3 col-sm-offset-3 col-xs-6" ng-show="mrn_no && recptmaterialreturnlist.length>0">
+              <button type="button" class="btn btn-success" onClick="window.print()">Print</button>
+            </div>
+          </div>
+            
+            <!-- print section material return -->
+          <div class="visible-print-block">
+
+                <div class="col-sm-12 col-xs-12 pmstable" style="padding-left:0px;">
+
+                <table class="table table-striped">
+                     <thead>
+                  
+                        <tr style="background:#000;color:#FFF;">
+                          <th class="col-sm-1">S.No</th>
+                          <th class="col-sm-2">Material Description</th>
+                          <th class="col-sm-1">UOM</th>
+                          <th class="col-sm-1" ng-if="subtype=='5'">Qty</th>
+                          <th class="col-sm-1" ng-if="subtype=='6'">Usable Qty</th>
+                          <th class="col-sm-1" ng-if="subtype=='6'">Defective Qty</th>
+                          <th class="col-sm-1" ng-if="subtype=='5'">Value of Goods</th>
+                          <th class="col-sm-1" ng-if="subtype=='6'">Value of Goods(Usable)</th>
+                          <th class="col-sm-1" ng-if="subtype=='6'">Value of Goods(Defective)</th>
+                          <th class="col-sm-2">Sub Type</th>
+                          <th class="col-sm-2">Manager</th>
+                          <th class="col-sm-1">Feeder</th>
+                          <th class="col-sm-1">Remove</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="matreturn in recptmaterialreturnlist">
+                           <td>{{$index+1}}</td>
+                          <td>{{matreturn.materialdesc}}</td>
+                          <td>{{matreturn.materialdesc}}</td>
+                          <td ng-if="subtype == '5'">{{matreturn.qty}}</td>
+                          <td ng-if="subtype == '6'">{{matreturn.usableqty}}</td>
+                          <td ng-if="subtype == '6'">{{matreturn.defectiveqty}}</td>
+                          <td ng-if="subtype == '5'">{{matreturn.valueofgoods}}</td>
+                          <td ng-if="subtype == '6'">{{matreturn.usablevalueofgoods}}</td>
+                          <td ng-if="subtype == '6'">{{matreturn.defectivevalueofgoods}}</td>
+                          <td ng-if="subtype == '5'">Scrap</td>
+                          <td ng-if="subtype == '6'">Returned from Sub Contractor</td>
+                          <td>{{matreturn.manager}}</td>
+                          <td>{{matreturn.feeder}}</td>
+                          <td><button type="button" class="btn btn-danger btn-xs" ng-click="removerowreturn($index+1)">Remove</button></td>
+                        </tr>
+                       
+                        
+                      </tbody>
+                      
+                    </tbody>
+                      
+                  </table>
+
+                </div><!-- col-sm-12 ends -->
+
+                <div class="form-group smallfont">
+                  <div for="inputEmail3" class="col-sm-1 col-xs-4 control-label">Vehicle No</div>
+                  <div class="col-sm-3 col-xs-6">
+                    <input type="text" class="form-control" ng-model="returnvehicleno" placeholder="Enter vehicle no">
+                  </div>
+                </div>
+
+                <div class="form-group smallfont">
+                  <div for="inputEmail3" class="col-sm-1 col-xs-4 control-label">Remarks</div>
+                  <div class="col-sm-4 col-xs-6">
+                    <textarea class="form-control" ng-model="returnremarks"></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group smallfont">
+                  <div for="inputEmail3" class="col-sm-1 col-xs-4 control-label">MRN No</div>
+                  <div class="col-sm-2 col-xs-6">
+                    <input type="text" class="form-control" ng-model="mrn_no" readonly>
+                  </div>
+                </div>
+
+                <div class="col-sm-7" style="padding-left:0;">
+
+                  <p>I hearby accept I have received the above materials after conducting all the neccessary checks, any discrepency in the data is solely my responsibility.</p>
+
+                  <p style="width:33%;text-align:left;float:left;">Mr rama rao<br>(Store Incharge)</p>
+
+                  <p style="width:33%;text-align:left;float:left;">Mr ss rao<br>(Project Manager)</p>
+                  <p style="width:33%;text-align:left;float:left;">Mr R Reddy<br>(Sub Contractor)</p>
+                </div>
+                
+              </div>
+              <!-- print section material return ends -->
+        </div>
+
+        <!-- ----------------------------------- Material return section ends ------------------------------------------ -->
+
+        <!-- ----------------------------------- Inhouse section starts ------------------------------------------ -->
+
+        <div class="inhousesection smallfont" ng-show="rectype == '3' ">
+
+          <div class="hidden-print">
+
+              <div class="jumbobox col-sm-8">
+
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Material Type</div>
+                <div class="col-sm-4 col-xs-8">
+                  <select class="form-control smallfont" ng-model="materialtypeid" ng-change="materialchange()">
+                    <option value="select">SELECT</option>
+                    <option ng-repeat="mat in materials" value="{{mat['id']}}">{{mat['name']}}</option>
+                   
+                  </select>
+                </div>
+               
+              </div>
+
+              <div class="form-group smallfont" ng-show="submaterials">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select Material</div>
+                <div class="col-sm-4 col-md-4 col-xs-8">
+                  <select class="form-control smallfont" ng-model="submat" ng-change="getuomreturn(submat)">
+                    <option value='select'>SELECT</option>
+                    <option ng-repeat="sub in submaterials" value="{{sub}}">{{sub.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">UOM</div>
+                <div class="col-sm-3 col-xs-8">
+                  <input type="text" ng-model="uomval" class="form-control" readonly />
+                </div>
+              </div>
+
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Accepted Qty</div>
+                <div class="col-sm-4 col-xs-6">
+                  <input type="text" class="form-control" ng-model="quantity" ng-blur="getgoodscost('quantity')" placeholder="Enter quantity">
+                </div>
+              </div>
+
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Unit Rate(in Rs)</div>
+                <div class="col-sm-4 col-xs-6">
+                  <input type="text" class="form-control" ng-model="unitrate" ng-blur="getgoodscost('unitrate')" placeholder="Enter Unit Rate">
+                </div>
+              </div>
+
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Total Value(in Rs)</div>
+                <div class="col-sm-4 col-xs-6">
+                  <input type="text" class="form-control" ng-model="valueofgoods" readonly >
+                </div>
+              </div>
+
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Inhouse Vendor</div>
+                <div class="col-sm-5 col-xs-8">
+                  <select class="form-control smallfont" ng-model="inhousevendor">
+                    <option value="select">SELECT</option>
+                    <option ng-repeat="inven in inhousevendorlist" value="{{inven}}">{{inven.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn">
+                <button type="button" class="btn btn-success" ng-click="addinhousetotable()">ADD</button>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;">
+
+              <table class="table table-striped">
+                  <thead>
+                    <tr style="background:#000;color:#FFF;">
+                      <th class="col-sm-1">S.No</th>
+                      <th class="col-sm-2">Material Description</th>
+                      <th class="col-sm-2">Inhouse Vendor</th>
+                      <th class="col-sm-1">UOM</th>
+                      <th class="col-sm-2">Unit Rate</th>
+                      <th class="col-sm-2">Accepted Qty</th>
+                      <th class="col-sm-2">Total Cost</th>
+                      <th class="col-sm-2">Remove</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="invendormat in recptinhousemateriallist">
+                      <td>{{$index+1}}</td>
+                      <td>{{invendormat.materialdesc}}</td>
+                      <td>{{invendormat.inhousevendorname}}</td>
+                      <td>{{invendormat.uom}}</td>
+                      <td>Rs {{invendormat.unitrate}}</td>
+                      <td>{{invendormat.qty}}</td>
+                      <td>Rs {{invendormat.valueofgoods}}</td>
+                      <td><button type="button" class="btn btn-danger btn-xs" ng-click="removerowinhouse($index+1)">Remove</button></td>
+                    </tr>
+                    
+                  </tbody>
+                    
+                </table>
+
+            </div><!-- col-sm-12 ends -->
+
+            <div class="form-group smallfont" ng-show="recptinhousemateriallist.length>0">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Vehicle No</div>
+              <div class="col-sm-2 col-xs-6">
+                <input type="text" class="form-control" ng-model="inhousevehicleno" >
+              </div>
+            </div>
+
+            <div class="form-group smallfont" ng-show="recptinhousemateriallist.length>0">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">DC No</div>
+              <div class="col-sm-2 col-xs-6">
+                <input type="text" class="form-control" ng-model="inhousedcno" >
+              </div>
+            </div>
+
+            <div class="form-group smallfont" ng-show="recptinhousemateriallist.length>0">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">DC Date</div>
+              <div class="col-sm-2 col-xs-6">
+                <input type="date" class="form-control" ng-model="inhousedcdate">
+              </div>
+            </div>
+
+            <div class="form-group smallfont" ng-show="recptinhousemateriallist.length>0">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Remarks</div>
+              <div class="col-sm-4 col-xs-8">
+                <textarea class="form-control" ng-model="inhouseremarks"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group smallfont" ng-show="inhouserecptno">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Receipt No</div>
+              <div class="col-sm-4 col-xs-8">
+                <input type="text" class="form-control" ng-model="inhouserecptno" readonly>
+              </div>
+            </div>
+
+            <div class="col-sm-3 col-sm-offset-3 col-xs-10 submitbtn" ng-show="recptinhousemateriallist.length>0 && !inhouserecptno">
+                <button type="button" class="btn btn-success" ng-click="addinventoryinhouse()">Add to Inventory</button>
+            </div>
+            <div class="col-sm-3 col-sm-offset-3 col-xs-10 submitbtn" ng-show="recptinhousemateriallist.length>0 && inhouserecptno">
+                <button type="button" class="btn btn-success" onClick="window.print()">Print</button>
+            </div>
+
+        </div>
+
+        <div class="visible-print-block">
+          
+
+            <div class="col-sm-12 col-xs-12 pmstable" style="padding-left:0px;">
+
+              <table class="table table-striped">
+                  <thead>
+                    <tr style="background:#000;color:#FFF;">
+                      <th class="col-xs-1">S.No</th>
+                      <th class="col-xs-2">Material Description</th>
+                      <th class="col-xs-2">Inhouse Vendor</th>
+                      <th class="col-xs-1">UOM</th>
+                      <th class="col-xs-1">Unit Rate</th>
+                      <th class="col-xs-2">Accepted Qty</th>
+                      <th class="col-xs-2">Total Cost</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="invendormat in recptinhousemateriallist">
+                      <td>{{$index+1}}</td>
+                      <td>{{invendormat.materialdesc}}</td>
+                      <td>{{invendormat.inhousevendorname}}</td>
+                      <td>{{invendormat.uom}}</td>
+                      <td>Rs {{invendormat.unitrate}}</td>
+                      <td>{{invendormat.qty}}</td>
+                      <td>Rs {{invendormat.valueofgoods}}</td>
+                     
+                    </tr>
+                    
+                  </tbody>
+                    
+                </table>
+
+            </div><!-- col-sm-12 ends -->
+
+            <div class="form-group smallfont" ng-show="recptinhousemateriallist.length>0">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Vehicle No</div>
+              <div class="col-sm-2 col-xs-6">
+                <input type="text" class="form-control" ng-model="inhousevehicleno" >
+              </div>
+            </div>
+
+            <div class="form-group smallfont" ng-show="recptinhousemateriallist.length>0">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">DC No</div>
+              <div class="col-sm-2 col-xs-6">
+                <input type="text" class="form-control" ng-model="inhousedcno" >
+              </div>
+            </div>
+
+            <div class="form-group smallfont" ng-show="recptinhousemateriallist.length>0">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">DC Date</div>
+              <div class="col-sm-2 col-xs-6">
+                <input type="date" class="form-control" ng-model="inhousedcdate">
+              </div>
+            </div>
+
+            <div class="form-group smallfont" ng-show="recptinhousemateriallist.length>0">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Remarks</div>
+              <div class="col-sm-4 col-xs-6">
+                <textarea class="form-control" ng-model="inhouseremarks"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group smallfont" ng-show="inhouserecptno">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Receipt No</div>
+              <div class="col-sm-4 col-xs-4">
+                <input type="text" class="form-control" ng-model="inhouserecptno" readonly>
+              </div>
+            </div>
+
+        </div>
+
+
+      </div>
+
+        <!-- ----------------------------------- Inhouse section ends ------------------------------------------ -->
+
+        <!-- ----------------------------------- received from third party section starts ------------------------------------------ -->
+
+        <div class="thirdpartysection smallfont" ng-show="rectype == '5' ">
+
+        <div class="hidden-print">
+
+          <div class="form-group smallfont">
+            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Third Party</div>
+              <div class="col-sm-3 col-xs-6">
+                <select class="form-control smallfont" ng-model="thirdparty" ng-change="thirdpartychange()">
+                  <option value="select">SELECT</option>
+                  <option ng-repeat="tparty in thirdparties" value="{{tparty['id']}}">{{tparty['name']}}</option>
+                </select>
+              </div>
+            
+          </div>
+
+          <!-- <div class="form-group smallfont" ng-show="thirdpartyname != 'select' ">
+            <a data-toggle="modal" data-target="#PendingMaterialModal" class="col-md-4 col-md-offset-2"><strong>View pending material statement</strong></a>
+          </div> -->
+
+          <!--Pending material Modal -->
+          <div id="PendingMaterialModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h5 class="modal-title">Pending Material Statement for this Party</h5>
+                  
+                </div>
+                <div class="modal-body">
+                      <table class="table table-striped">
+                          <thead>
+                            <tr style="background:#000;color:#FFF;">
+                              <th class="col-sm-1">S.No</th>
+                              <th class="col-sm-2">Material Description</th>
+                              <th class="col-sm-1">UOM</th>
+                              <th class="col-sm-2">Pending Qty</th>
+                              <th class="col-sm-2">Unit Rate</th>
+                              <th class="col-sm-2">Value of Goods</th>
+                              
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>1</td>
+                              <td>Some material</td>
+                              <td>NOS</td>
+                              <td>120</td>
+                              <td>Rs 500</td>
+                              <td>Rs 2,500</td>
+                            </tr>
+                            
+                          </tbody>
+                            
+                        </table>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- modal ends -->
+
+          
+
+            <div class="jumbobox col-sm-8">
+
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Material Type</div>
+                <div class="col-sm-4 col-xs-8">
+                  <select class="form-control smallfont" ng-model="materialtypeid" ng-change="materialchange()">
+                    <option value="select">SELECT</option>
+                    <option ng-repeat="mat in materials" value="{{mat['id']}}">{{mat['name']}}</option>
+                   
+                  </select>
+                </div>
+               
+              </div>
+
+              <div class="form-group smallfont" ng-show="submaterials">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select Material</div>
+                <div class="col-sm-4 col-md-4 col-xs-8">
+                  <select class="form-control smallfont" ng-model="submat" ng-change="getuomreturn(submat)">
+                    <option value='select'>SELECT</option>
+                    <option ng-repeat="sub in submaterials" value="{{sub}}">{{sub.name}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">UOM</div>
+                <div class="col-sm-3 col-xs-8">
+                  <input type="text" ng-model="uomval" class="form-control" readonly />
+                </div>
+              </div>
+
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Received Qty</div>
+                <div class="col-sm-4 col-xs-6">
+                  <input type="text" class="form-control" ng-model="quantity" ng-blur="getgoodscost('quantity')" placeholder="Enter quantity">
+                </div>
+              </div>
+
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Unit Rate(in Rs)</div>
+                <div class="col-sm-4 col-xs-6">
+                  <input type="text" class="form-control" ng-model="unitrate" ng-blur="getgoodscost('unitrate')" placeholder="Enter Unit Rate">
+                </div>
+              </div>
+
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Total Value(in Rs)</div>
+                <div class="col-sm-4 col-xs-6">
+                  <input type="text" class="form-control" ng-model="valueofgoods" readonly >
+                </div>
+              </div>
+
+              <div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn">
+                <button type="button" class="btn btn-success" ng-click="addthirdpartytotable()">ADD</button>
+              </div>
+            </div>
+
+
+            <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;">
+
+              <table class="table table-striped">
+                  <thead>
+                    <tr style="background:#000;color:#FFF;">
+                      <th class="col-sm-1">S.No</th>
+                      <th class="col-sm-2">Material Description</th>
+                      <th class="col-sm-1">UOM</th>
+                      <th class="col-sm-2">Received Qty</th>
+                      <th class="col-sm-2">Unit Rate</th>
+                      <th class="col-sm-2">Value of Goods</th>
+                      <th class="col-sm-2">Remove</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="thirdpartymat in recptthirdpartymateriallist">
+                      <td>{{$index+1}}</td>
+                      <td>{{thirdpartymat.materialdesc}}</td>
+                      <td>{{thirdpartymat.uom}}</td>
+                      <td>{{thirdpartymat.qty}}</td>
+                      <td>Rs {{thirdpartymat.unitrate}}</td>
+                      <td>Rs {{thirdpartymat.valueofgoods}}</td>
+                      <td><button type="button" class="btn btn-danger btn-xs" ng-click="removerowthirdparty($index+1)">Remove</button></td>
+                    </tr>
+                    
+                  </tbody>
+                    
+                </table>
+
+            </div><!-- col-sm-12 ends -->
+
+
+                <div class="form-group smallfont col-sm-12 col-xs-12" ng-show="recptthirdpartymateriallist.length>0">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Vehicle No</div>
+                  <div class="col-sm-3 col-xs-8">
+                    <input type="text" class="form-control" ng-model="thirdpartyvehicleno">
+                  </div>
+                </div>
+
+                <div class="form-group smallfont col-sm-12 col-xs-12" ng-show="recptthirdpartymateriallist.length>0">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">DC No</div>
+                  <div class="col-sm-3 col-xs-8">
+                    <input type="text" class="form-control" ng-model="thirdpartydcno">
+                  </div>
+                </div>
+
+                <div class="form-group smallfont col-sm-12 col-xs-12" ng-show="recptthirdpartymateriallist.length>0">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">DC Date</div>
+                  <div class="col-sm-3 col-xs-8">
+                    <input type="date" class="form-control" ng-model="thirdpartydcdate">
+                  </div>
+                </div>
+
+                <div class="form-group smallfont col-sm-12 col-xs-12" ng-show="recptthirdpartymateriallist.length>0">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Remarks</div>
+                  <div class="col-sm-5 col-xs-8">
+                    <textarea class="form-control" rows="3" ng-model="thirdpartyremarks"></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group smallfont col-sm-12 col-xs-12" ng-show="thirdpartyrecptno">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Receipt No</div>
+                  <div class="col-sm-3 col-xs-8">
+                    <input type="text" class="form-control" ng-model="thirdpartyrecptno" readyonly>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-sm-7" style="padding-left:0;" ng-show="recptthirdpartymateriallist.length>0">
+
+                  <p>I hearby accept I have received the above materials after conducting all the neccessary checks, any discrepency in the data is solely my responsibility.</p>
+
+                  <p>Mr rama rao<br>(Store Incharge)</p>
+                </div>
+
+                <div class="col-sm-2 col-sm-offset-4 col-xs-6 submitbtn" style="padding-left:0;" ng-show="recptthirdpartymateriallist.length>0 && !thirdpartyrecptno">
+                  <button type="button" class="btn btn-success" ng-click="addthirdpartytoinventory()">Received</button>
+                </div>
+                <div class="col-sm-3 col-sm-offset-3 col-xs-6" ng-show="thirdpartyrecptno">
+                  <button type="button" class="btn btn-success" onClick="window.print()">Print</button>
+                </div>
+
+          </div>
+
+          <!-- print section for third party receipt -->
+
+          <div class="visible-print-block">
+
+
+                <div class="col-sm-12 col-xs-12 pmstable" style="padding-left:0px;">
+
+                  <table class="table table-striped">
+                      <thead>
+                        <tr style="background:#000;color:#FFF;">
+                          <th class="col-xs-1">S.No</th>
+                          <th class="col-xs-2">Material Description</th>
+                          <th class="col-xs-1">UOM</th>
+                          <th class="col-xs-2">Received Qty</th>
+                          <th class="col-xs-2">Unit Rate</th>
+                          <th class="col-xs-2">Value of Goods</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="thirdpartymat in recptthirdpartymateriallist">
+                          <td>{{$index+1}}</td>
+                          <td>{{thirdpartymat.materialdesc}}</td>
+                          <td>{{thirdpartymat.uom}}</td>
+                          <td>{{thirdpartymat.qty}}</td>
+                          <td>Rs {{thirdpartymat.unitrate}}</td>
+                          <td>Rs {{thirdpartymat.valueofgoods}}</td>
+                        </tr>
+                        
+                      </tbody>
+                        
+                    </table>
+
+                </div><!-- col-sm-12 ends -->
+
+
+                <div class="form-group smallfont col-sm-12 col-xs-6" ng-show="recptthirdpartymateriallist.length>0">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Vehicle No</div>
+                  <div class="col-sm-3 col-xs-8">
+                    <input type="text" class="form-control" ng-model="thirdpartyvehicleno">
+                  </div>
+                </div>
+
+                <div class="form-group smallfont col-sm-12 col-xs-6" ng-show="recptthirdpartymateriallist.length>0">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">DC No</div>
+                  <div class="col-sm-3 col-xs-8">
+                    <input type="text" class="form-control" ng-model="thirdpartydcno">
+                  </div>
+                </div>
+
+                <div class="form-group smallfont col-sm-12 col-xs-6" ng-show="recptthirdpartymateriallist.length>0">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">DC Date</div>
+                  <div class="col-sm-3 col-xs-8">
+                    <input type="date" class="form-control" ng-model="thirdpartydcdate">
+                  </div>
+                </div>
+
+                <div class="form-group smallfont col-sm-12 col-xs-6" ng-show="recptthirdpartymateriallist.length>0">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Remarks</div>
+                  <div class="col-sm-5 col-xs-8">
+                    <textarea class="form-control" rows="3" ng-model="thirdpartyremarks"></textarea>
+                  </div>
+                </div>
+
+                <div class="form-group smallfont col-sm-12 col-xs-4" ng-show="thirdpartyrecptno">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Receipt No</div>
+                  <div class="col-sm-3 col-xs-8">
+                    <input type="text" class="form-control" readyonly>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-sm-7 col-xs-12" style="padding-left:0;" ng-show="recptthirdpartymateriallist.length>0">
+
+                  <p>I hearby accept I have received the above materials after conducting all the neccessary checks, any discrepency in the data is solely my responsibility.</p>
+
+                  <p>Mr rama rao<br>(Store Incharge)</p>
+                </div>
+
+            
+
+
+          </div>
+
+          <!-- print section for third party receipt ends -->
+
+
+        </div>
+
+        <!-- ----------------------------------- received from third party section ends ------------------------------------------ -->
+
+
+      </form>
+
+
+      
+    </div><!-- col-sm-12 ends -->
+    
+    
+  </div> <!-- row ends -->
+</div><!-- container ends -->
+
+<!-- page right main container ends -->

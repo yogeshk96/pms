@@ -1,0 +1,940 @@
+<!--page right main container starts -->
+<div class="container-fluid hidden-print">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Purchase Order Report</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal">
+
+				<div class="form-group smallfont">
+		 			<div class="col-sm-4 col-md-4 col-xs-8 jumbobox" style="padding:5px;">
+		 				<label class="radio-inline">
+		 					<input type="radio" ng-model="poorderreportopt" ng-change="changeporeporttype()" id="inlineRadio1" value="vendorwise"> Vendor Wise
+		 				</label>
+
+		 				<label class="radio-inline">
+			 				&nbsp;
+		 				</label>
+
+		 				<!-- <label class="radio-inline">
+		 					<input type="radio" ng-model="poorderreportopt" ng-change="changeporeporttype()" id="inlineRadio1" value="poorderwise"> PO Wise
+		 				</label> -->
+
+		 				<label class="radio-inline">
+			 				&nbsp;
+		 				</label>
+
+		 				<label class="radio-inline">
+		 					<input type="radio" ng-model="poorderreportopt" ng-change="changeporeporttype()" id="inlineRadio1" value="podatewise"> Date Wise
+		 				</label>
+		 				
+		 				
+
+		 			</div>
+		 		</div>
+
+
+		 		<div class="poorderwisebox" ng-show="poorderreportopt=='poorderwise'">
+
+			 		<div class="form-group smallfont hidden-print">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="projlist.id as projlist.name for projlist in projectlist">
+			 					
+			 				</select>
+			 			</div>
+			 		</div>
+						
+						<div class="form-group smallfont hidden-print">
+			            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Vendor<span class="astrix">*</span></div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont" chosen options="vendorlist" ng-model="vendorid" ng-options="venlist.id as venlist.name for venlist in vendorlist" ng-change="getpolist()">
+			 					<option value="All">All</option>
+			 			
+			 				</select>
+			 			</div>
+			            
+			        </div>
+
+					<div class="form-group smallfont hidden-print">
+			            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Purchased Order No<span class="astrix">*</span></div>
+			            <div class="col-sm-3 col-md-3 col-xs-8">
+
+			            	<select class="form-control smallfont" chosen options="polist" ng-model="ponumber" ng-options="pol.po_no as pol.po_no for pol in polist">
+			 			
+			 				</select>
+			              
+			            </div>
+			            <div class="col-sm-2 col-xs-4 submitbtn">
+			               <button type="button" class="btn btn-success smallfont " ng-click="searchpo()">Search</button>
+			            </div>
+			        </div>
+		 			
+		 			<!-- <div class="form-group smallfont hidden-print">
+		                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Purchased Order No<span class="astrix">*</span></div>
+		                <div class="col-sm-3 col-xs-4">
+		                  <input type="text" class="form-control" ng-model="ponumber" placeholder="Enter purchased order no">
+		                </div>
+		                <div class="col-sm-2 col-xs-4 submitbtn">
+		                   <button type="button" class="btn btn-success smallfont " ng-click="searchpo()">Search</button>
+		                </div>
+		            </div> -->
+
+
+					<div style="clear:both;height:20px;"></div>
+					<div class="searchresult hidden-print" ng-repeat="po in ponodetails| orderBy:sortby">
+
+						<div class="container-fluid">
+							<div class="row">
+							<h4>Status: <span ng-if="po.status=='0'">Pending for approval</span><span ng-if="po.status=='1'">Approved</span><span ng-if="po.status=='2'">Rejected</span></h4>
+								<div class="purchaseorderbox">
+									<div class="col-xs-3"><img src="images/logo.png" style="height:30px;height: 50px;margin-left: -25px;margin-bottom:8px; float:right;"></div>
+									<div class="col-xs-9" style="font-size:14px;margin-top:5px;">
+										<p><strong>{{po['companydet']['users']['company']['compdetails']['fullname']}}</strong>, {{po['companydet']['users']['company']['compdetails']['address']}}, {{po['companydet']['users']['company']['compdetails']['city']}} - {{po['companydet']['users']['company']['compdetails']['pincode']}}, Tele No.{{po['companydet']['users']['company']['compdetails']['tele_no']}}</p>
+									</div>
+									<div style="clear:both;"></div>
+									<div class="seperatorline"></div>
+									<h4 class="text-center purchasehead"><strong>PURCHASE ORDER</strong></h4>
+									<div class="seperatorline"></div>
+
+									<div class="row smallfont">
+										<div class="col-xs-6">
+											<p style="margin:0 0 1px;"><strong>Vendor Information</strong>:</p>
+											<p style="margin:0 0 1px;">M/s {{po['vendor']['name']}}</p>
+											<p style="margin:0 0 1px;">{{po['vendor']['address']}}</p>
+											<p style="margin:0 0 1px;"><strong>Contact person</strong>: {{po['vendor']['contact_person']}}</p>
+											<p style="margin:0 0 1px;"><strong>Email</strong>: {{po['vendor']['emailid']}}</p>
+											<p style="margin:0 0 1px;"><strong>Cell no</strong>: {{po['vendor']['phoneno']}}</p>
+										</div>
+										<div class="col-xs-6">
+											<p style="margin:0 0 1px;"><strong>PO No</strong>: {{po['po_no']}}</p>	
+											<p style="margin:0 0 1px;"><strong>PO Date</strong>: {{Dates.getDate(po.po_date)}}</p>
+											<h5>Billing Address</h5>
+											<p style="margin:0 0 1px;"><strong> {{po['billingaddress']}}</strong>
+											</p>
+											<h5>Delivery Address</h5>
+											<p style="margin:0 0 1px;"><strong>Will be intimated at the time of delivery</strong></p>
+										</div>
+										<div class="col-xs-12 text-left">
+
+											<p style="margin:0 0 1px;" ng-show="companyvendorinfo['podetails']['reference'] != ''">Ref: {{po['reference']}}</p>
+										</div>
+										<div class="col-xs-12">
+											<p>We are pleased to place Purchase Order for the following items as per the terms and conditions discussed & mentioned below.</p>
+										</div>
+										<div class="col-xs-12">
+											<table class="table table-bordered smallfont" ng-repeat="pomatnew in pomateriallistnew" ng-show="pomatnew['materials'].length > 0">
+									 				<thead>
+
+									 				<tr class="innerhead">
+								 						<th class="col-sm-1">S.No</th>
+								 						<th class="col-sm-6">Material Description</th>
+								 						<th class="col-sm-1">UOM</th>
+								 						<th class="col-sm-1">Issue Qty</th>
+								 						<th class="col-sm-1">Unit Rate(in Rs.)</th>
+								 						<th class="col-sm-1">Value of Goods(in Rs.)</th>
+								 					</tr>
+								 					<tr ng-show="pomatnew['matname'] && pomatnew['type'] != '1'">
+								 						<td scope="row"></td>
+									 					<td>{{pomatnew['matname']}} <span ng-show="pomatnew['remarks']">, {{pomat['remarks']}}</span></td>
+									 					<td>{{pomatnew['units']}}</td>
+									 					<td>{{pomatnew['qty']}}</td>
+									 					<td>{{pomatnew['unitrate']}}</td>
+									 					<td>{{pomatnew['valueofgoods']}}</td>
+								 					</tr>
+									 								 				
+									 				</thead>
+									 				<tr ng-repeat="pomat in pomatnew['materials']" ng-if="pomatnew['type'] != '3'">
+									 					<td>{{$index+1}}</td>
+									                      <td>
+									                      <p>{{pomat['materialdesc']}}<span ng-show="pomat['remarks']">, {{pomat['remarks']}}</span></p>
+									                      </td>
+									                      <td>{{pomat['qty']}}</td>
+									                      <td>{{pomat['uom']}}</td>
+									                      <td>{{pomat['unitrate']}}</td>
+									                      <td>{{pomat['valueofgoods']}}</td>
+									 				</tr>
+									 				
+									 			</table>
+												<table class="table table-bordered smallfont">
+			                 
+								                    <tr>
+								                      <td colspan="5" class="text-right col-xs-11">Total(in Rs.)</td>
+								                      <td class="text-right col-xs-1">{{totalvalue}}</td>
+								                      
+								                    </tr>
+													<tr ng-repeat="tax in po['taxes']" style="page-break-inside:avoid;-webkit-region-break-inside:avoid;">
+														<td colspan="5" class="text-right">{{tax.name}} <span ng-show="(tax.taxpercentage != '0.00' || tax.lumpsum == '1')"><span ng-show="tax.lumpsum != '1'">@ {{tax.taxpercentage}} % </span></span><span ng-show="tax.tax_desc != ''">({{tax.tax_desc}})</span></td>
+														<td ng-show="(tax.taxpercentage != '0.00' || tax.lumpsum == '1') "><!-- <span ng-show="tax.type!='discount'">+</span><span ng-show="tax.type=='discount'">-</span> --> {{tax.value}}</td>
+														<td ng-show="(tax.taxpercentage == '0.00') && tax.lumpsum == '0' ">-</td>
+
+													</tr>
+													<tr>
+														<td colspan="5" class="text-right"><strong>Grand Total</strong></td>
+														<td>{{po['total_cost']}}</td>
+
+													</tr>
+													<tr>
+														<td colspan="6">RUPEES {{po['total_inwords']}} ONLY</td>			                      
+													</tr>
+													<tr>
+														<th colspan="6">Terms and Conditions</th>
+
+													</tr>
+													<tr>
+														<td colspan="6">{{po['termsnconditions']}}</td>
+
+													</tr>
+
+												</tbody>
+
+											</table>
+										</div>
+										<div class="col-xs-6" style="height:60px;">
+											<p class="text-center">If you have any quries about this purchase order, please contact at <strong>{{po['users']['email']}}</strong></p>
+										</div>
+
+										<div class="col-xs-6 smallfont" style="height:60px;">
+											<p class="text-center"><strong>For {{po['companydet']['users']['company']['compdetails']['fullname']}}</strong></p>
+											<div class="clearfix" style="height:20px;"></div>
+											<p class="text-center"><strong>Authorised Signature</strong></p>
+										</div>
+										<div class="clearfix" style="height:15px;"></div>
+										<div class="col-xs-12">
+
+										</div>
+
+
+									</div>
+
+
+
+								</div>
+
+								<div style="page-break-before: always">
+									<h6 class="text-center">To Our PO No. {{po['po_no']}}, <strong>Dated</strong>:{{Dates.getDate(po.po_date)}}</h6>
+									<h6 class="text-center"><strong>Special Terms &amp; Conditions</strong></h6>
+									<div class="purchaseorderbox col-xs-12 smallfont">
+										<table class="table table-bordered smallfont" ng-show="po['specialterms'].length>0">
+
+											<tbody>
+												<tr ng-repeat="sterm in po['specialterms']">
+													<td>{{$index+1}}</td>
+													<td>{{sterm.name}}</td>
+													<td>{{sterm.condition}}</td>
+
+												</tr>
+											</tbody>
+										</table>
+										<div class="col-xs-6 col-xs-offset-6" style="height:60px;">
+											<p class="text-center"><strong>For {{po['companydet']['users']['company']['compdetails']['fullname']}}</strong></p>
+											<div class="clearfix" style="height:20px;"></div>
+											<p class="text-center"><strong>Authorised Signature</strong></p>
+										</div>
+									</div>
+
+								</div>
+
+								<hr>
+								<div style="clear:both;height:10px;"></div>
+
+								<div class="hidden-print col-xs-12" style="page-break-before: always;" ng-show="showanexure">
+
+									<h6 class="text-center">ANEXURE</h6>
+									
+									<table class="table table-bordered smallfont" ng-repeat="pomatnew in pomateriallistnew" ng-show="pomatnew['materials'].length > 0 && pomatnew['type'] == '3'">
+						 				<thead>
+						 					
+						 					<tr ng-show="pomatnew['matname'] && pomatnew['type'] == '3'">
+						 						<th colspan="6">{{pomatnew['matname']}}</th>
+						 					</tr>
+						 					<tr>
+						                      <th class="col-xs-1">S.No</th>
+						                      <th class="col-xs-7">DESCRIPTION</th>
+						                      <th class="col-xs-1">QTY</th>
+						                      <th class="col-xs-1">UNIT</th>
+						                      <!-- <th class="col-xs-1">PRICE(in Rs.)</th>
+						                      <th class="col-xs-1">TOTAL</th> -->
+						                    </tr>
+						 				</thead>
+						 				<tr ng-repeat="pomat in pomatnew['materials']">
+						 					<td>{{$index+1}}</td>
+						                      <td>
+						                      <p>{{pomat['materialdesc']}}<span ng-show="pomat['remarks']">, {{pomat['remarks']}}</span></p>
+						                      </td>
+						                      <td>{{pomat['qty']}}</td>
+						                      <td>{{pomat['uom']}}</td>
+						                      <!-- <td>{{pomat['unitrate']}}</td>
+						                      <td>{{pomat['valueofgoods']}}</td> -->
+						 				</tr>
+							 				
+							 			</table>
+									</div>
+
+							</div>
+						</div>
+
+						<div style="clear:both;height:20px;"></div>
+
+						<div class="form-group smallfont hidden-print">
+			                <div class="col-sm-2 col-xs-4 col-sm-offset-3">
+			                  <button type="button" class="btn btn-success" onClick="window.print()" style="width:100%;">Print</button>
+			                </div>
+			               
+			            </div>
+
+						</div>
+
+						
+
+		            	
+		 		</div>
+
+
+
+		 		<div class="poorderwisebox hidden-print" ng-show="poorderreportopt=='vendorwise'">
+
+			 		<div class="form-group smallfont hidden-print">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="projlist.id as projlist.name for projlist in projectlist">
+			 					
+			 				</select>
+			 			</div>
+			 		</div>
+		 			
+		 			<div class="form-group smallfont hidden-print">
+		                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Vendor<span class="astrix">*</span></div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont" chosen options="vendorlist" ng-model="vendorid" ng-options="venlist.id as venlist.name for venlist in vendorlist">
+			 					<option value="All">All</option>
+			 			
+			 				</select>
+			 			</div>
+		                <div class="col-sm-2 col-xs-4 submitbtn">
+		                   <button type="button" class="btn btn-success smallfont " ng-click="searchvendorpolist()">Get List</button>
+		                </div>
+		            </div>
+
+		            <div class="container" ng-show="vendorpolist">
+		 			
+			 			<div class="row">
+			 				
+			 				<div class="jumbobox col-sm-6">
+			 					<h4>PO Summary</h4>
+			 					<p><strong>Total number of PO</strong>: {{vendorpolist.length}}</p>
+			 					<p><strong>Total PO Amount<span style="font-size:10px;">(in Rs)</span></strong>: {{getcommafun(totalpocost)}}</p>
+			 				</div>
+			 			</div>
+
+			 		</div>
+
+		            <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="vendorpolist" >
+
+		            		<table class="table table-striped">
+		            			<thead>
+		            				<tr style="background:#000;color:#FFF;">
+		            					<th class="col-sm-1">S.No</th>
+		            					<th class="col-sm-2">PO Number</th>
+		            					<th class="col-sm-2">Vendor Name</th>
+		            					<th class="col-sm-2">Project</th>
+		            					<th class="col-sm-2">PO Date</th>
+		            					<th class="col-sm-2">Total Qty</th>
+		            					<th class="col-sm-2">Total Cost</th>
+		            					<th class="col-sm-2">View</th>
+		            					
+		            				</tr>
+		            			</thead>
+		            			<tbody>
+		            				<tr ng-repeat="pomat in vendorpolist">
+		            					<td>{{$index+1}}</td>
+		            					<td>{{pomat.po_no}}</td>
+		            					<td>{{pomat.vendor.name}}</td>
+		            					<td>{{pomat.project.name}}</td>
+		            					<td>{{Dates.getDate(pomat.po_date)}}</td>
+		            					<td>{{pomat.total_qty}}</td>
+		            					<td>{{getcommafun(pomat.total_cost)}}</td>
+		            					<td><button class="btn btn-xs" ng-click="getpoinfo(pomat.po_no)">View</button></td>
+		            					
+		            				</tr>
+
+		            			</tbody>
+
+		            		</table>
+
+		            </div><!-- col-sm-12 ends -->
+
+
+
+
+
+		 		</div>
+
+
+		 		<div class="poorderwisebox" ng-show="poorderreportopt=='podatewise'">
+
+		 			<div class="form-group smallfont hidden-print">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="projlist.id as projlist.name for projlist in projectlist">
+			 					
+			 				</select>
+			 			</div>
+			 		</div>
+		 			
+		 			<div class="form-group smallfont hidden-print">
+		                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Date<span class="astrix">*</span></div>
+		                <div class="input-group input-group-sm col-sm-2 col-md-2 col-xs-8" style="float:left;">
+						  <span class="input-group-addon" id="sizing-addon1">From</span>
+						  <input type="date" class="form-control" ng-model="pofromdate" aria-describedby="sizing-addon1">
+
+						</div>
+						<div class="col-sm-1" style="float:left;">&nbsp</div>
+						<div class="input-group input-group-sm col-sm-2 col-md-2 col-xs-8" style="float:left;">
+						  <span class="input-group-addon" id="sizing-addon1">To</span>
+						  <input type="date" class="form-control" ng-model="potodate" aria-describedby="sizing-addon1">
+						  
+						</div>
+
+			 			
+		                <div class="col-sm-2 col-xs-4 submitbtn">
+		                   <button type="button" class="btn btn-success smallfont " ng-click="searchdatewisepolist()">Get List</button>
+		                </div>
+		            </div>
+
+		            <div class="container" ng-show="vendorpolist">
+		 			
+			 			<div class="row">
+			 				
+			 				<div class="jumbobox col-sm-6">
+			 					<h4>PO Summary</h4>
+			 					<p><strong>Total number of PO</strong>: {{vendorpolist.length}}</p>
+			 					<p><strong>Total PO Amount<span style="font-size:10px;">(in Rs)</span></strong>: {{getcommafun(totalpocost)}}</p>
+			 				</div>
+			 			</div>
+
+			 		</div>
+
+		            <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="vendorpolist" >
+
+		            		<table class="table table-striped">
+		            			<thead>
+		            				<tr style="background:#000;color:#FFF;">
+		            					<th class="col-sm-1">S.No</th>
+		            					<th class="col-sm-2">PO Number</th>
+		            					<th class="col-sm-2">Vendor Name</th>
+		            					<th class="col-sm-3">Project</th>
+		            					<th class="col-sm-3">Vendor</th>
+		            					<th class="col-sm-3">PO Date</th>
+		            					<th class="col-sm-2">Total Qty</th>
+		            					<th class="col-sm-2">Total Cost</th>
+		            					<th class="col-sm-2">View</th>
+		            					
+		            				</tr>
+		            			</thead>
+		            			<tbody>
+		            				<tr ng-repeat="pomat in vendorpolist">
+		            					<td>{{$index+1}}</td>
+		            					<td>{{pomat.po_no}}</td>
+		            					<td>{{pomat.vendor.name}}</td>
+		            					<td>{{pomat.project.name}}</td>
+		            					<td>{{pomat.vendor.name}}</td>
+		            					<td>{{Dates.getDate(pomat.po_date)}}</td>
+		            					<td>{{pomat.total_qty}}</td>
+		            					<td>{{getcommafun(pomat.total_cost)}}</td>
+		            					<td><button class="btn btn-xs" ng-click="getpoinfo(pomat.po_no)">View</button></td>
+		            					
+		            				</tr>
+
+		            			</tbody>
+
+		            		</table>
+
+		            	</div><!-- col-sm-12 ends -->
+
+
+
+		            
+					</div>
+
+
+		 		</div>
+
+
+		 	</form>
+
+		</div>
+
+
+
+	</div>
+
+</div>
+
+
+
+
+
+	<!-- -----------------------------------print box ---------------------------------------- -->
+	
+	<div class="container-fluid">
+		<div class="row">
+		<div class="searchresult" ng-repeat="po in ponodetails">
+	
+			<form class="form-horizontal">
+			<div class="container-fluid visible-print-block">
+				<div class="row">
+				<div class="purchaseorderbox" style="margin-top:-100px;">
+					<div style="display:inline-block">
+						<div class="col-xs-3"><img src="images/logo.png" style="height: 50px;margin-top:5px;"></div>
+						<div class="col-xs-9">
+							<p><strong>{{po['companydet']['users']['company']['compdetails']['fullname']}}</strong>, {{po['companydet']['users']['company']['compdetails']['address']}}, {{po['companydet']['users']['company']['compdetails']['city']}} - {{po['companydet']['users']['company']['compdetails']['pincode']}}, Tele No.{{po['companydet']['users']['company']['compdetails']['tele_no']}}</p>
+						</div>
+					</div>
+					<div style="clear:both;"></div>
+					<div class="seperatorline"></div>
+					<h4 class="text-center purchasehead" style="margin:2px;"><strong>PURCHASE ORDER</strong></h4>
+					<div class="seperatorline"></div>
+
+					<div class="row smallfont">
+						<div class="col-xs-6">
+							<p style="margin:0 0 1px;"><strong>Vendor Information</strong>:</p>
+							<p style="margin:0 0 1px;">M/s {{po['vendor']['name']}}</p>
+							<p style="margin:0 0 1px;">{{po['vendor']['address']}}</p>
+							<p style="margin:0 0 1px;"><strong>Contact person</strong>: {{po['vendor']['contact_person']}}</p>
+							<p style="margin:0 0 1px;"><strong>Email</strong>: {{po['vendor']['emailid']}}</p>
+							<p style="margin:0 0 1px;"><strong>Cell no</strong>: {{po['vendor']['phoneno']}}</p>
+
+						</div>
+
+						<div class="col-xs-6">
+							
+							<p style="margin:0 0 1px;"><strong>PO No</strong>: {{po['po_no']}}</p>
+							<p style="margin:0 0 1px;"><strong>PO Date</strong>: {{Dates.getDate(po.po_date)}}</p>
+							<h5>Billing Address</h5>
+							<p style="margin:0 0 1px;"><strong> {{po['billingaddress']}}</strong>
+							</p>
+							<h5>Delivery Address</h5>
+							<p style="margin:0 0 1px;"><strong>Will be intimated at the time of delivery</strong></p>
+
+						</div>
+
+
+						<div class="col-xs-12 text-left">
+
+							<p style="margin:0 0 1px;" ng-show="companyvendorinfo['podetails']['reference'] != ''">Ref: {{po['reference']}}</p>
+						</div>
+						<div class="col-xs-12">
+							<p>We are pleased to place Purchase Order for the following items as per the terms and conditions discussed & mentioned below.</p>
+						</div>
+						<div class="col-xs-12">
+							<table class="table table-bordered smallfont" ng-repeat="pomatnew in pomateriallistnew" ng-show="pomatnew['materials'].length > 0 || pomatnew['type'] == '3'">
+				 				<thead>
+
+				 				<tr class="innerhead">
+			 						<th class="col-sm-1">S.No</th>
+			 						<th class="col-sm-6">Material Description</th>
+			 						<th class="col-sm-1">UOM</th>
+			 						<th class="col-sm-1">Issue Qty</th>
+			 						<th class="col-sm-1">Unit Rate(in Rs.)</th>
+			 						<th class="col-sm-1">Value of Goods(in Rs.)</th>
+			 					</tr>
+			 					<tr ng-show="pomatnew['matname'] && pomatnew['type'] != '1'">
+			 						<td scope="row"></td>
+				 					<td>{{pomatnew['matname']}} <span ng-show="pomatnew['remarks']">, {{pomat['remarks']}}</span></td>
+				 					<td>{{pomatnew['units']}}</td>
+				 					<td>{{pomatnew['qty']}}</td>
+				 					<td>{{pomatnew['unitrate']}}</td>
+				 					<td>{{pomatnew['valueofgoods']}}</td>
+			 					</tr>
+				 								 				
+				 				</thead>
+				 				<tr ng-repeat="pomat in pomatnew['materials']" ng-if="pomatnew['type'] != '3'">
+				 					<td>{{$index+1}}</td>
+				                      <td>
+				                      <p>{{pomat['materialdesc']}}<span ng-show="pomat['remarks']">, {{pomat['remarks']}}</span></p>
+				                      </td>
+				                      <td>{{pomat['uom']}}</td>
+				                      <td>{{pomat['qty']}}</td>
+				                      <td>{{pomat['unitrate']}}</td>
+				                      <td>{{pomat['valueofgoods']}}</td>
+				 				</tr>
+				 				
+				 			</table>
+							<table class="table table-bordered smallfont">
+         
+			                    <tr>
+			                      <td colspan="5" class="text-right col-xs-11">Total(in Rs.)</td>
+			                      <td class="text-right col-xs-1">{{totalvalue}}</td>
+			                      
+			                    </tr>
+
+									<tr ng-repeat="tax in po['taxes']" style="page-break-inside:avoid;-webkit-region-break-inside:avoid;">
+										<td colspan="5" class="text-right">{{tax.name}} <span ng-show="(tax.taxpercentage != '0.00' || tax.lumpsum == '1')"><span ng-show="tax.lumpsum != '1'">@ {{tax.taxpercentage}} % </span></span><span ng-show="tax.tax_desc != ''">({{tax.tax_desc}})</span></td>
+										<td ng-show="(tax.taxpercentage != '0.00' || tax.lumpsum == '1') ">{{tax.value}}</td>
+										<td ng-show="(tax.taxpercentage == '0.00') && tax.lumpsum == '0' ">-</td>
+
+									</tr>
+									<tr style="page-break-inside:avoid;-webkit-region-break-inside:avoid;">
+										<td colspan="5" class="text-right"><strong>Grand Total</strong></td>
+										<td>{{po['total_cost']}}</td>
+
+									</tr>
+									<tr><td colspan="6"></td>
+									</tr>
+									<tr style="page-break-inside:avoid;-webkit-region-break-inside:avoid;">
+										<td colspan="6">RUPEES {{po['total_inwords']}} ONLY</td>			                      
+									</tr>
+									<tr style="page-break-inside:avoid;-webkit-region-break-inside:avoid;">
+										<th colspan="6" style="page-break-inside:avoid;">Terms and Conditions</th>
+
+									</tr>
+									<tr style="page-break-inside:avoid;-webkit-region-break-inside:avoid;">
+										<td colspan="6">{{po['termsnconditions']}}</td>
+
+									</tr>
+
+								</tbody>
+
+							</table>
+						</div>
+						<div class="col-xs-6" style="height:60px;page-break-inside:avoid;">
+							<p class="text-center">If you have any quries about this purchase order, please contact at <strong>{{po['users']['email']}}</strong></p>
+						</div>
+
+						<div class="col-xs-6 smallfont" style="height:60px;page-break-inside:avoid;">
+							<p class="text-center"><strong>For {{po['companydet']['users']['company']['compdetails']['fullname']}}</strong></p>
+							<div class="clearfix" style="height:20px;"></div>
+							<p class="text-center"><strong>Authorised Signature</strong></p>
+						</div>
+						<div class="clearfix" style="height:15px;"></div>
+						<div class="col-xs-12">
+
+						</div>
+
+
+					</div>
+
+
+
+				</div>
+
+				<div style="page-break-before: always;font-size:10px;">
+					<h6 class="text-center">To Our PO No. {{po['po_no']}}, <strong>Dated</strong>:{{Dates.getDate(po.po_date)}}</h6>
+					<h6 class="text-center"><strong>Special Terms &amp; Conditions</strong></h6>
+					<div class="purchaseorderbox col-xs-12">
+						<table class="table table-bordered" ng-show="po['specialterms'].length>0">
+
+							<tbody>
+								<tr ng-repeat="sterm in po['specialterms']">
+									<td>{{$index+1}}</td>
+									<td>{{sterm.name}}</td>
+									<td>{{sterm.condition}}</td>
+
+								</tr>
+							</tbody>
+						</table>
+						<div class="col-xs-6 col-xs-offset-6" style="height:60px;">
+							<p class="text-center"><strong>For {{po['companydet']['users']['company']['compdetails']['fullname']}}</strong></p>
+							<div class="clearfix" style="height:20px;"></div>
+							<p class="text-center"><strong>Authorised Signature</strong></p>
+						</div>
+					</div>
+
+				</div>
+
+				<div style="clear:both;height:10px;"></div>
+
+				<div class="col-xs-12" style="page-break-before: always;" ng-show="showanexure">
+
+					<h6 class="text-center">ANEXURE</h6>
+					
+					<table class="table table-bordered smallfont" ng-repeat="pomatnew in pomateriallistnew" ng-show="pomatnew['materials'].length > 0 && pomatnew['type'] == '3'">
+		 				<thead>
+		 					
+		 					<tr ng-show="pomatnew['matname'] && pomatnew['type'] == '3'">
+		 						<th colspan="6">{{pomatnew['matname']}}</th>
+		 					</tr>
+		 					<tr>
+		                      <th class="col-xs-1">S.No</th>
+		                      <th class="col-xs-7">DESCRIPTION</th>
+		                      <th class="col-xs-1">QTY</th>
+		                      <th class="col-xs-1">UNIT</th>
+		                      <!-- <th class="col-xs-1">PRICE(in Rs.)</th>
+		                      <th class="col-xs-1">TOTAL</th> -->
+		                    </tr>
+		 				</thead>
+		 				<tr ng-repeat="pomat in pomatnew['materials']">
+		 					<td>{{$index+1}}</td>
+		                      <td>
+		                      <p>{{pomat['materialdesc']}}<span ng-show="pomat['remarks']">, {{pomat['remarks']}}</span></p>
+		                      </td>
+		                      <td>{{pomat['qty']}}</td>
+		                      <td>{{pomat['uom']}}</td>
+		                      <!-- <td>{{pomat['unitrate']}}</td>
+		                      <td>{{pomat['valueofgoods']}}</td> -->
+		 				</tr>
+			 				
+			 			</table>
+					</div>
+				</div>
+				</div>
+
+				</form>
+
+			</div>
+		</div>
+
+		</div>
+
+
+		<!-- -----------------------------------print box ends ---------------------------------------- -->
+
+
+		<!-- ---------------------------------- po modal starts ---------------------------------------- -->
+
+<div class="container">
+			
+	<div class="row">
+
+		<div id="VendorPoModal" class="modal fade" role="dialog">
+			<div class="modal-dialog hidden-print">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h5 class="modal-title">Project Manager</h5>
+
+					</div>
+					<div class="modal-body hidden-print" ng-repeat="po in ponodetails">
+						<h5>Status: <span ng-if="po.status=='0'">Pending for approval</span><span ng-if="po.status=='1'">Approved</span><span ng-if="po.status=='2'">Rejected</span></h5>
+						<div class="searchresult" ng-repeat="po in ponodetails">
+
+							<div class="container-fluid">
+								<div class="row">
+									<div class="purchaseorderbox">
+										<div class="col-xs-3"><img src="images/logo.png" style="height: 50px;margin-left: -25px;margin-top: 16px;"></div>
+										<div class="col-xs-9">
+											<p><strong>{{po['companydet']['users']['company']['compdetails']['fullname']}}</strong>, {{po['companydet']['users']['company']['compdetails']['address']}}, {{po['companydet']['users']['company']['compdetails']['city']}} - {{po['companydet']['users']['company']['compdetails']['pincode']}}, Tele No.{{po['companydet']['users']['company']['compdetails']['tele_no']}}</p>
+										</div>
+										<div style="clear:both;"></div>
+										<div class="seperatorline"></div>
+										<h4 class="text-center purchasehead"><strong>PURCHASE ORDER</strong></h4>
+										<div class="seperatorline"></div>
+
+										<div class="row smallfont">
+											<div class="col-xs-6">
+												<p style="margin:0 0 1px;"><strong>Vendor Information</strong>:</p>
+												<p style="margin:0 0 1px;">M/s {{po['vendor']['name']}}</p>
+												<p style="margin:0 0 1px;">{{po['vendor']['address']}}</p>
+												<p style="margin:0 0 1px;"><strong>Contact person</strong>: {{po['vendor']['contact_person']}}</p>
+												<p style="margin:0 0 1px;"><strong>Email</strong>: {{po['vendor']['emailid']}}</p>
+												<p style="margin:0 0 1px;"><strong>Cell no</strong>: {{po['vendor']['phoneno']}}</p>
+
+											</div>
+
+											<div class="col-xs-6">
+												<p style="margin:0 0 1px;"><strong>PO No</strong>: {{po['po_no']}}</p>
+												<p style="margin:0 0 1px;"><strong>Date</strong>: {{Dates.getDate(po.po_date)}}</p>
+												
+												<h5>Billing Address</h5>
+												<p style="margin:0 0 1px;"><strong> {{po['billingaddress']}}</strong>
+												</p>
+												<h5>Delivery Address</h5>
+												<p style="margin:0 0 1px;"><strong>Will be intimated at the time of delivery</strong></p>
+
+											</div>
+
+
+											<div class="col-xs-12 text-left">
+
+												<p style="margin:0 0 1px;" ng-show="companyvendorinfo['podetails']['reference'] != ''">Ref: {{po['reference']}}</p>
+											</div>
+											<div class="col-xs-12">
+												<p>We are pleased to place Purchase Order for the following items as per the terms and conditions discussed & mentioned below.</p>
+											</div>
+											<div class="col-xs-12">
+												<table class="table table-bordered smallfont" ng-repeat="pomatnew in pomateriallistnew" ng-show="pomatnew['materials'].length > 0 || pomatnew['type'] == '3'">
+									 				<thead>
+
+									 				<tr class="innerhead">
+								 						<th class="col-sm-1">S.No</th>
+								 						<th class="col-sm-6">Material Description</th>
+								 						<th class="col-sm-1">UOM</th>
+								 						<th class="col-sm-1">Issue Qty</th>
+								 						<th class="col-sm-1">Unit Rate(in Rs.)</th>
+								 						<th class="col-sm-1">Value of Goods(in Rs.)</th>
+								 					</tr>
+								 					<tr ng-show="pomatnew['matname'] && pomatnew['type'] != '1'">
+								 						<td scope="row"></td>
+									 					<td>{{pomatnew['matname']}} <span ng-show="pomatnew['remarks']">, {{pomat['remarks']}}</span></td>
+									 					<td>{{pomatnew['units']}}</td>
+									 					<td>{{pomatnew['qty']}}</td>
+									 					<td>{{pomatnew['unitrate']}}</td>
+									 					<td>{{pomatnew['valueofgoods']}}</td>
+								 					</tr>
+									 								 				
+									 				</thead>
+									 				<tr ng-repeat="pomat in pomatnew['materials']" ng-if="pomatnew['type'] != '3'">
+									 					<td>{{$index+1}}</td>
+									                      <td>
+									                      <p>{{pomat['materialdesc']}}<span ng-show="pomat['remarks']">, {{pomat['remarks']}}</span></p>
+									                      </td>
+									                      <td>{{pomat['uom']}}</td>
+									                      <td>{{pomat['qty']}}</td>
+									                      <td>{{pomat['unitrate']}}</td>
+									                      <td>{{pomat['valueofgoods']}}</td>
+									 				</tr>
+									 				
+									 			</table>
+												<table class="table table-bordered smallfont">
+			                 
+								                    <tr>
+								                      <td colspan="5" class="text-right col-xs-11">Total(in Rs.)</td>
+								                      <td class="text-right col-xs-1">{{totalvalue}}</td>
+								                      
+								                    </tr>
+														<tr ng-repeat="tax in po['taxes']">
+															<td colspan="5" class="text-right">{{tax.name}} <span ng-show="tax.inclusive_taxpercentage == '0.00' && (tax.taxpercentage != '0.00' || tax.lumpsum == '1')"><span ng-show="tax.lumpsum != '1'">@ {{tax.taxpercentage}} % </span></span><span ng-show="tax.inclusive_taxpercentage != '0.00'">@ {{tax.inclusive_taxpercentage}} % </span><span ng-show="tax.tax_desc != ''">({{tax.tax_desc}})</span> </td>
+															<td ng-show="tax.taxpercentage != '0.00' || tax.lumpsum == '1' "><span ng-show="tax.type!='discount'">+</span><span ng-show="tax.type=='discount'">-</span> {{tax.value}}</td>
+															<td ng-show="tax.taxpercentage == '0.00' && tax.lumpsum == '0' ">-</td>
+														</tr>
+														
+														<tr>
+															<td colspan="5" class="text-right"><strong>Grand Total</strong></td>
+															<td>{{po['total_cost']}}</td>
+
+														</tr>
+														<tr>
+															<td colspan="6">RUPEES {{po['total_inwords']}} ONLY</td>			                      
+														</tr>
+														<tr>
+															<th colspan="6">Terms and Conditions</th>
+
+														</tr>
+														<tr>
+															<td colspan="6">{{po['termsnconditions']}}</td>
+
+														</tr>
+
+													</tbody>
+
+												</table>
+											</div>
+											<div class="col-xs-6" style="height:60px;">
+												<p class="text-center">If you have any quries about this purchase order, please contact at <strong>{{po['users']['email']}}</strong></p>
+											</div>
+
+											<div class="col-xs-6 smallfont" style="height:60px;">
+												<p class="text-center"><strong>For {{po['companydet']['users']['company']['compdetails']['fullname']}}</strong></p>
+												<div class="clearfix" style="height:20px;"></div>
+												<p class="text-center"><strong>Authorised Signature</strong></p>
+											</div>
+											<div class="clearfix" style="height:15px;"></div>
+											<div class="col-xs-12">
+
+											</div>
+
+
+										</div>
+
+
+
+									</div>
+
+									<div style="page-break-before: always">
+										<h6 class="text-center">To Our PO No. {{po['po_no']}}, <strong>Dated</strong>:{{Dates.getDate(po.po_date)}}</h6>
+										<h6 class="text-center"><strong>Special Terms &amp; Conditions</strong></h6>
+										<div class="purchaseorderbox col-xs-12 smallfont">
+											<table class="table table-bordered smallfont" ng-show="po['specialterms'].length>0">
+
+												<tbody>
+													<tr ng-repeat="sterm in po['specialterms']">
+														<td>{{$index+1}}</td>
+														<td>{{sterm.name}}</td>
+														<td>{{sterm.condition}}</td>
+
+													</tr>
+												</tbody>
+											</table>
+											<div class="col-xs-6 col-xs-offset-6" style="height:60px;">
+												<p class="text-center"><strong>For {{po['companydet']['users']['company']['compdetails']['fullname']}}</strong></p>
+												<div class="clearfix" style="height:20px;"></div>
+												<p class="text-center"><strong>Authorised Signature</strong></p>
+											</div>
+										</div>
+
+									</div>
+
+									<hr>
+									<div style="clear:both;height:10px;"></div>
+
+									<div class="hidden-print" style="page-break-before: always; display:inline-block;" ng-show="showanexure">
+
+										<h6 class="text-center">ANEXURE</h6>
+										
+										<table class="table table-bordered smallfont" ng-repeat="pomatnew in pomateriallistnew" ng-show="pomatnew['materials'].length > 0 && pomatnew['type'] == '3'">
+							 				<thead>
+							 					
+							 					<tr ng-show="pomatnew['matname'] && pomatnew['type'] == '3'">
+							 						<th colspan="6">{{pomatnew['matname']}}</th>
+							 					</tr>
+							 					<tr>
+							                      <th class="col-xs-1">S.No</th>
+							                      <th class="col-xs-7">DESCRIPTION</th>
+							                      <th class="col-xs-1">QTY</th>
+							                      <th class="col-xs-1">UNIT</th>
+							                      <!-- <th class="col-xs-1">PRICE(in Rs.)</th>
+							                      <th class="col-xs-1">TOTAL</th> -->
+							                    </tr>
+							 				</thead>
+							 				<tr ng-repeat="pomat in pomatnew['materials']">
+							 					<td>{{$index+1}}</td>
+							                      <td>
+							                      <p>{{pomat['materialdesc']}}<span ng-show="pomat['remarks']">, {{pomat['remarks']}}</span></p>
+							                      </td>
+							                      <td>{{pomat['qty']}}</td>
+							                      <td>{{pomat['uom']}}</td>
+							                      <!-- <td>{{pomat['unitrate']}}</td>
+							                      <td>{{pomat['valueofgoods']}}</td> -->
+							 				</tr>
+							 				
+							 			</table>
+									</div>
+
+								</div>
+							</div>
+
+							<div style="clear:both;height:20px;"></div>
+
+							
+						</div>
+
+
+
+
+					</div>
+					<div class="modal-footer">
+						<div class="col-sm-2 col-xs-4 col-sm-offset-8">
+							<button type="button" class="btn btn-success" onClick="window.print()" style="width:100%;">Print</button>
+						</div>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+
+
+	<!-- ------------------------------------------ po modal ends --------------------------------->

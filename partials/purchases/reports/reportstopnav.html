@@ -1,0 +1,21 @@
+<!-- page top navigation starts -->
+<ul class="nav nav-tabs hidden-print" ng-if="state['current'].url != '/purchases'">
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchases.reports.poreport">PO Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchases.reports.enquiryreport">Enquiry Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchases.reports.csreport">Comparitive Statement Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchases.reports.vendorreport">Vendor Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchases.reports.potracker">PO Tracker</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchases.reports.amdporeport">Amendment PO Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchases.reports.matwiseporpt">Material wise PO Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchases.reports.mattracker">Material Tracker</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchases.reports.indentreport">Indent Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchases.reports.indentreportfab">Fabrication Indent Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchases.reports.materialtobepurchased">Materials to be purchased Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchases.reports.inspdistatusreport">Inspection &amp; DI Status Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchases.reports.approvedindent">Approved Indent Report</a></li>
+</ul>
+
+<!-- page top navigation ends -->
+
+<div ui-view="content">
+</div>

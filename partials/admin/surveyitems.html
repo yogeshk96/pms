@@ -1,0 +1,144 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Survey Items</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal" ng-submit='get_project_schedules()'>
+
+				<div class="form-group smallfont">
+	 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project</div>
+	 				<div class="col-sm-2 col-xs-6">
+	 					<select class="form-control smallfont" ng-model='mainproject' ng-options="project.name for project in projectlist" ng-change="change_project()" required>
+	 						<option value="">SELECT</option>
+	 					</select>
+	 				</div>
+	 			</div>
+	 			<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="submit" value="Get Details" class="btn btn-success">
+		 			</div>
+		 		</div>
+
+    		</form>
+    	</div>
+
+    	<div class="col-sm-12 col-xs-12 smallfont" ng-show="schedulelist.length>0">
+
+    		<form class="form-horizontal" ng-submit='create_survey_items()'>
+				
+				<div class="jumbobox col-sm-10 col-xs-12" ng-repeat="item in items">
+					<div class="form-group smallfont">
+		 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Material Name</div>
+		 				<button type="button" class="btn btn-danger btn-xs pull-right" ng-click="remove_item($index)">Remove</button>
+		 				<div class="col-sm-3 col-xs-6">
+		 					<input type="text" class="form-control" ng-model="item.name" required />
+		 				</div>
+		 			</div>
+
+		 			<div class="form-group smallfont">
+		 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Icons</div>
+		 				<div class="col-sm-2 col-xs-6">
+		 					<select class="form-control smallfont" ng-model='item.icon' required>
+		 						<option value="">SELECT</option>
+		 						<option value="icon.png" style="background-image:url(images/icon.png);"></option>
+		 						<option value="icon1.png" style="background-image:url(images/icon1.png);"></option>
+		 					</select>
+		 				</div>
+		 			</div>
+					
+		 			<h4>Questions</h4>
+					
+		 			<div class="questionbox" ng-repeat="x in item.slist">
+		 				<hr>
+		 				<p>{{x.descr}}</p>
+
+		 				<div class="form-group smallfont">
+					 		<div class="col-sm-3 col-md-3 col-xs-8" style="padding:5px">
+					 			<label class="radio-inline">
+					 				<input type="radio" ng-model="x.applicable" id="inlineRadio1" value="1"> Applicable
+					 			</label>
+					 			
+					 			<label class="radio-inline">
+					 				<input type="radio" ng-model="x.applicable" id="inlineRadio2" value="0"> Not Applicable
+					 			</label>
+					 		</div>
+					 	</div>
+
+					 	<div class="questioninner" ng-if="x.applicable=='1'">
+
+						 	<div class="form-group smallfont">
+				 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Question</div>
+				 				<div class="col-sm-6 col-xs-6">
+				 					<textarea class="form-control" ng-model="x.question" required></textarea>
+				 				</div>
+				 			</div>
+
+				 			<div class="form-group smallfont">
+						 		<div class="col-sm-3 col-md-3 col-xs-8" style="padding:5px">
+						 			<label class="radio-inline">
+						 				<input type="radio" ng-model="x.type" id="inlineRadio2" value="1"> Number
+						 			</label>
+						 			<label class="radio-inline">
+						 				<input type="radio" ng-model="x.type" id="inlineRadio1" value="0"> Distance
+						 			</label>
+						 			
+						 		</div>
+						 	</div>
+							<div class="numberclass" ng-if="x.type=='1'">
+							 	<div class="form-group smallfont">
+							 		<div class="col-sm-3 col-md-3 col-xs-8" style="padding:5px">
+							 			<label class="radio-inline">
+							 				<input type="radio" ng-model="x.datatype" id="inlineRadio1" value="1"> User Input
+							 			</label>
+							 			
+							 			<label class="radio-inline">
+							 				<input type="radio" ng-model="x.datatype" id="inlineRadio2" value="0"> Pre-defined
+							 			</label>
+							 		</div>
+							 	</div>
+
+							 	<div class="form-group smallfont" ng-if="x.datatype=='0'">
+					 				<div for="inputEmail3" class="col-sm-1 col-xs-4 control-label">Min.</div>
+					 				<div class="col-sm-2 col-xs-6">
+					 					<input type="text" class="form-control" ng-model="x.min" required/>
+					 				</div>
+					 				<div for="inputEmail3" class="col-sm-1 col-xs-4 control-label">Max.</div>
+					 				<div class="col-sm-2 col-xs-6">
+					 					<input type="text" class="form-control" ng-model="x.max" required/>
+					 				</div>
+					 				<div for="inputEmail3" class="col-sm-1 col-xs-4 control-label">Steps</div>
+					 				<div class="col-sm-2 col-xs-6">
+					 					<input type="text" class="form-control" ng-model="x.step" required/>
+					 				</div>
+					 			</div>
+					 		</div>
+
+
+				 		</div>
+
+		 			</div>
+
+		 		</div>
+		 		<div style="clear:both"></div>
+				<div class="form-group smallfont">
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<button type="button" class="btn btn-success" ng-click="add_item()">Add Item</button>
+		 			</div>
+		 		</div>
+				<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="submit" value="Save" class="btn btn-success">
+		 			</div>
+		 		</div>
+    		</form>
+    	</div>
+
+	</div>
+
+</div>

@@ -1,0 +1,15 @@
+<!-- page top navigation starts -->
+<ul class="nav nav-tabs hidden-print" ng-if="state['current'].url != '/purchaseshead'">
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchaseshead.reports.poreport">PO Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchaseshead.reports.enquiryreport">Enquiry Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchaseshead.reports.csreport">Comparitive Statement Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchaseshead.reports.vendorreport">Vendor Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchaseshead.reports.potracker">PO Tracker</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchaseshead.reports.amdporeport">Amendment PO Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.purchaseshead.reports.approvedcs">Approved CS Report</a></li>
+</ul>
+
+<!-- page top navigation ends -->
+
+<div ui-view="content">
+</div>

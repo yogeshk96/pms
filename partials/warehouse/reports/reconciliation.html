@@ -1,0 +1,278 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Material Reconciliation Report</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal">
+
+    			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont">
+		 					<option value="select">SELECT</option>
+		 					<option>NOs</option>
+		 					<option>KG</option>
+		 					<option>3</option>
+		 					<option>4</option>
+		 				</select>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 		<div class="col-sm-4 col-md-4 col-xs-8 jumbobox" style="padding:5px;">
+		 				<label class="radio-inline">
+		 					<input type="radio" ng-model="reconciliationwise" id="inlineRadio1" value="projectmanager"> Project Manager Wise
+		 				</label>
+		 				
+		 				<label class="radio-inline">
+		 					<input type="radio" ng-model="reconciliationwise" id="inlineRadio1" value="subcontractor"> Sub Contractor Wise
+		 				</label>
+		 				
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<button type="button" class="btn btn-success" ng-click="generaterpt = reconciliationwise">Generate</button>
+		 			</div>
+		 		</div>
+
+		 		<div class="col-sm-5 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="generaterpt == 'projectmanager'">
+
+		 			<table class="table table-striped">
+		 				<thead>
+		 					<tr style="background:#000;color:#FFF;">
+		 						<th>S.No</th>
+		 						<th>Project Manager</th>
+		 						<th>View</th>
+		 						
+		 					</tr>
+		 				</thead>
+		 				<tbody>
+		 					<tr>
+		 						<td>1</td>
+		 						<td>Project manager 1</td>
+		 						<td><a data-toggle="modal" data-target="#ManagerViewModal">view</a></td>
+		 						
+		 					</tr>
+
+		 					<tr>
+		 						<td>2</td>
+		 						<td>Project manager 2</td>
+		 						<td><a data-toggle="modal" data-target="#ManagerViewModal">view</a></td>
+		 						
+		 					</tr>
+
+		 					<tr>
+		 						<td>3</td>
+		 						<td>Project manager 3</td>
+		 						<td><a data-toggle="modal" data-target="#ManagerViewModal">view</a></td>
+		 						
+		 					</tr>
+
+		 					<tr>
+		 						<td>4</td>
+		 						<td>Project manager 4</td>
+		 						<td><a data-toggle="modal" data-target="#ManagerViewModal">view</a></td>
+		 						
+		 					</tr>
+
+		 				</tbody>
+
+		 			</table>
+
+		 			<!--Manager view Modal -->
+					<div id="ManagerViewModal" class="modal fade" role="dialog">
+					  <div class="modal-dialog">
+
+					    <!-- Modal content-->
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal">&times;</button>
+					        <h5 class="modal-title">Project Manager</h5>
+					        
+					      </div>
+					      <div class="modal-body">
+					      <p class="rptdettext">Sub Station Name: SS01</p class="rptdettext"> <p>Feeder Name: D108</p>
+
+					        <div class="table-responsive">	
+
+						        <table class="table table-striped">
+					 				<thead>
+					 					<tr style="background:#000;color:#FFF;">
+					 						<th>S.No</th>
+					 						<th>Material Type</th>
+					 						<th>UOM</th>
+					 						<th>Total Issued</th>
+					 						<th>Billed Qty</th>
+					 						<th>Store Inventory</th>
+					 						<th>Balance Qty</th>
+					 						
+					 					</tr>
+					 				</thead>
+					 				<tbody>
+					 					<tr>
+					 						<td>1</td>
+					 						<td>Material 1</td>
+					 						<td>NOs</td>
+					 						<td>100</td>
+					 						<td>70</td>
+					 						<td>20</td>
+					 						<td>30</td>
+					 						
+					 					</tr>
+
+					 					<tr>
+					 						<td>2</td>
+					 						<td>Material 2</td>
+					 						<td>NOs</td>
+					 						<td>100</td>
+					 						<td>70</td>
+					 						<td>20</td>
+					 						<td>30</td>
+					 						
+					 					</tr>
+
+					 				</tbody>
+
+					 			</table>
+				 			</div>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					      </div>
+					    </div>
+
+					  </div>
+					</div>
+
+		 		</div><!-- col-sm-5 ends -->
+
+
+		 		<div class="col-sm-5 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="generaterpt == 'subcontractor'">
+
+		 			<table class="table table-striped">
+		 				<thead>
+		 					<tr style="background:#000;color:#FFF;">
+		 						<th>S.No</th>
+		 						<th>Sub Contractor</th>
+		 						<th>View</th>
+		 						
+		 					</tr>
+		 				</thead>
+		 				<tbody>
+		 					<tr>
+		 						<td>1</td>
+		 						<td>Sub Contractor 1</td>
+		 						<td><a data-toggle="modal" data-target="#SubContractorViewModal">view</a></td>
+		 						
+		 					</tr>
+
+		 					<tr>
+		 						<td>2</td>
+		 						<td>Sub Contractor 2</td>
+		 						<td><a data-toggle="modal" data-target="#SubContractorViewModal">view</a></td>
+		 						
+		 					</tr>
+
+		 					<tr>
+		 						<td>3</td>
+		 						<td>Sub Contractor 3</td>
+		 						<td><a data-toggle="modal" data-target="#SubContractorViewModal">view</a></td>
+		 						
+		 					</tr>
+
+		 					<tr>
+		 						<td>4</td>
+		 						<td>Sub Contractor 4</td>
+		 						<td><a data-toggle="modal" data-target="#SubContractorViewModal">view</a></td>
+		 						
+		 					</tr>
+
+		 				</tbody>
+
+		 			</table>
+
+		 			<!--Manager view Modal -->
+					<div id="SubContractorViewModal" class="modal fade" role="dialog">
+					  <div class="modal-dialog">
+
+					    <!-- Modal content-->
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal">&times;</button>
+					        <h5 class="modal-title">Sub Contractor</h5>
+					        
+					      </div>
+					      <div class="modal-body">
+					      <p class="rptdettext">Sub Station Name: SS01</p class="rptdettext"> <p>Feeder Name: D108</p>
+
+					        <table class="table table-striped">
+				 				<thead>
+				 					<tr style="background:#000;color:#FFF;">
+				 						<th>S.No</th>
+				 						<th>Material Type</th>
+				 						<th>UOM</th>
+				 						<th>Total Issued</th>
+				 						<th>Billed Qty</th>
+				 						<th>Recovered Qty</th>
+				 						<th>Returned Qty</th>
+				 						<th>Unbilled Qty</th>
+				 						
+				 					</tr>
+				 				</thead>
+				 				<tbody>
+				 					<tr>
+				 						<td>1</td>
+				 						<td>Material 1</td>
+				 						<td>NOs</td>
+				 						<td>100</td>
+				 						<td>70</td>
+				 						<td>70</td>
+				 						<td>20</td>
+				 						<td>30</td>
+				 						
+				 					</tr>
+
+				 					<tr>
+				 						<td>2</td>
+				 						<td>Material 2</td>
+				 						<td>NOs</td>
+				 						<td>100</td>
+				 						<td>70</td>
+				 						<td>70</td>
+				 						<td>20</td>
+				 						<td>30</td>
+				 						
+				 					</tr>
+
+				 				</tbody>
+
+				 			</table>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					      </div>
+					    </div>
+
+					  </div>
+					</div>
+
+		 		</div><!-- col-sm-5 ends -->
+
+		 		
+
+		 		
+
+    		</form>
+    	</div>
+
+	</div>
+
+</div>

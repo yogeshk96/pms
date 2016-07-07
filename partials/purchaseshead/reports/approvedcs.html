@@ -1,0 +1,178 @@
+<!-- page right main container starts -->
+
+<style type="text/css">
+	
+	@media print {
+    .printsection { 
+	        height: 9in;
+	        margin-top:-80px;
+
+	    }
+
+	    .cs-table {
+
+			height:9in !important;
+			width:100%;
+			margin:0 auto;
+			font-size:11px;
+	 	}
+	 	.quotterms {
+
+	 		font-size:8px !important;
+	 		padding: 0px;
+	 	}
+	}
+	
+</style>
+
+<form class="form-horizontal">
+<div class="container-fluid hidden-print">
+
+	<div class="row-fluid">
+
+		<div class="clearfix hidden-print" style="height:20px;"></div>
+
+		
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+				<p><strong>Approve CS</strong></p>
+
+    		
+					<div class="form-group smallfont hidden-print">
+						<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+						<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont" chosen options="projectlist" ng-model="project" ng-options="projlist as projlist.name for projlist in projectlist" ng-change="getprojectwiseenquiries()" >
+	            
+	             			</select>
+						</div>
+					</div>
+					<div class="form-group smallfont hidden-print">
+						<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Enquiry Number<span class="astrix">*</span></div>
+						<div class="col-sm-3 col-md-3 col-xs-8">
+							<select class="form-control smallfont" options="enquirylist" chosen ng-model="enquiry" ng-options="enqlist as ('E'+enqlist.id+'-'+enqlist.subject) for enqlist in enquirylist">
+			 					
+			 				</select>
+						</div>
+		                
+					</div>
+
+					<div class="form-group smallfont hidden-print" ng-show="enquiry">
+						<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select CS Reference<span class="astrix">*</span></div>
+						<div class="col-sm-3 col-md-3 col-xs-8">
+							<select class="form-control smallfont" options="enquiry.cs[0]['csref']" chosen ng-model="csref" ng-options="csref as csref.refno for csref in enquiry.cs[0]['csref'] | filter:checkcsapproved">
+			 					
+			 				</select>
+						</div>
+
+						<div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn">
+							<button type="button" class="btn btn-success" ng-click="generaterefcs()">Generate CS</button>
+						</div>
+		                
+					</div>
+	
+					<div class="panel panel-default" ng-show="enquirydetails">
+						<div class="panel-heading">CS Vendors</div>
+						<div class="panel-body">
+								<table class="table table-striped table-responsive smallfont">
+									<thead>
+										<tr class="innerhead">
+											<th class="col-sm-1">S.No</th>
+											<th class="col-sm-4">Vendor</th>
+											<th class="col-sm-4">Quotation Documents</th>
+										</tr>
+									</thead>
+									<tr ng-repeat="enqdet in enquirydetails">
+										<td scope="row">{{$index+1}}</td>
+										<td>{{enqdet['vendordetails']['name']}}</td>
+										<td><li ng-repeat="indiquot in enqdet.quotationdocs"><a download href="{{indiquot['doc_url']}}" >{{indiquot['doc_name']}}</a></li></td>					
+									</tr>
+									
+								</table>
+						</div>
+						
+					</div>
+
+					<div ng-show="csref.remarks && generatecs">
+						<h3>Remarks from purchases</h3>
+						<textarea readonly>{{csref.remarks}}</textarea>
+					</div>
+
+					<div class="container hidden-print">
+						<div class="panel panel-default" ng-show="generatecs">
+							<div class="panel-heading">Comparative Statement</div>
+							<div class="panel-body table-responsive">
+
+								<table class="table table-bordered table-condensed small cs-table">
+									<tr ng-repeat="row in cs">
+										<td ng-repeat="val in row track by $index" rowspan="{{val.rows}}" colspan="{{val.cols}}" class="{{val.class}}" style="{{val.style}}">{{val.field}}</td>
+									</tr>
+
+		 						</table>
+							</div>
+						</div>
+
+						<!-- <div class="panel panel-default" ng-show="vendorsorted">
+							<div class="panel-heading">Select Vendor(s) to raise PO for</div>
+							<div class="panel-body">
+									<table class="table table-striped table-responsive smallfont">
+										<thead>
+											<tr class="innerhead">
+												<th class="col-sm-1">S.No</th>
+												<th class="col-sm-4">Vendor</th>
+												<th class="col-sm-4">Status</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tr ng-repeat="ven in vendorsorted">
+											<td scope="row">{{$index+1}}</td>
+											<td>{{selectedVendors[ven]['vendordetails']['name']}}</td>
+											<td>L{{$index+1}}</td>	
+											<td><input type="checkbox" ng-model="selectedVendors[ven]['selected']" /></td>				
+										</tr>
+										
+									</table>
+							</div>
+							
+						</div> -->
+
+						<div class="form-group smallfont hidden-print" ng-show="generatecs">
+							<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Remarks</div>
+							<div class="col-sm-3 col-md-3 col-xs-8">
+								<textarea class="form-control" ng-model="cshodremarks"></textarea>
+							</div>
+						</div>
+
+						<div class="form-group smallfont" ng-show="generatecs">
+				 			<div class="col-sm-2 col-md-2 col-sm-offset-2 col-md-offset-2 col-xs-8">
+				 				<button type="button" class="btn btn-success" onClick="window.print()">Print</button>
+				 			</div>
+				 			<div class="col-sm-2 col-md-2 col-sm-offset-2 col-md-offset-2 col-xs-8">
+				 				<button type="button" class="btn btn-success" ng-click="approverejcs(1)">Save</button>
+				 			</div>
+				 			
+				 		</div>
+					</div>
+
+
+					
+		      
+		</div>
+
+	</div>
+</div>
+
+<!--------------------------------------- print section ------------------------------------------>
+
+<div class="container-fluid visible-print-block printsection" ng-show="generatecs">
+	<h4 style="width:800px;float:left;">COMPARITIVE STATEMENT ({{enqmattypes}})</h4><div style="width:200px;float:right;margin-top:10px;text-align:left;">{{today}}</div>
+	<div style="clear:both;"></div>
+	<p>{{project.name}}</p>
+
+		<table class="table table-bordered table-condensed small cs-table col-xs-12">
+			<tr ng-repeat="row in cs">
+				<td ng-repeat="val in row track by $index" rowspan="{{val.rows}}" colspan="{{val.cols}}" class="{{val.class}}" style="{{val.style}}">{{val.field}}</td>
+			</tr>
+		</table>
+
+</div>
+</form>

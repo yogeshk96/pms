@@ -1,0 +1,62 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+  <div class="row">
+    
+    <div class="clearfix" style="height:20px;"></div>
+
+    <p><strong>Stock Register</strong></p>
+
+    <p class="pagesubtitle">* Total stock report as of now</p>
+    
+    <div class="col-sm-9 col-xs-12 pmstable">
+
+      <table class="table table-striped">
+
+        <tbody ng-repeat="stockdata in inventorydata">
+          <tr class="innerhead">
+            <th>S.No</th>
+            <th class="coloredhead">{{stockdata['name']}}</th>
+            <th>UOM</th>
+            <th>Existing Inventory</th>
+          </tr>
+          <tr ng-repeat="stock in stockdata['submaterials']" ng-show="stock.stocks.length>0">
+            <td scope="row">{{$index+1}}</td>
+            <td>{{stock['name']}}</td>
+            <td>{{stock['units']}}</td>
+            <td>{{stock['stocks'][0]['quantity']}}</td>
+            
+          </tr>
+        </tbody>
+
+          
+      </table>
+
+    </div><!-- col-sm-9 ends -->
+    <div class="col-sm-3 col-xs-12 pull-left pmstable">
+
+      <table class="table" border="0">
+
+        <tr>
+          
+          <td>Store Name</td>
+          <td>{{storedata['users']['store']['name']}}</td>
+        </tr>
+        <tr>
+          
+          <td>Store Location</td>
+          <td>{{storedata['users']['store']['location']}}</td>
+        </tr>
+        <tr>
+          
+          <td>Store Incharge</td>
+          <td>{{storedata['users']['name']}}</td>
+        </tr>
+
+      </table>
+      
+    </div><!-- col-sm-3 ends -->
+  </div> <!-- row ends -->
+</div><!-- container ends -->
+
+<!-- page right main container ends -->

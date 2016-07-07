@@ -1,0 +1,89 @@
+<!--page right main container starts -->
+<div class="container-fluid hidden-print">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Purchase Order Report</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal">
+
+    			<div class="form-group smallfont hidden-print">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="polist.id as polist.name for polist in projectlist">
+	 					
+	 					</select>
+		 			</div>
+		 		</div>
+				<div class="form-group smallfont">
+					<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material Type<span class="astrix">*</span></div>
+					<div class="col-sm-3 col-md-3 col-xs-8">
+
+						<select class="form-control smallfont" ng-model="materialtype" ng-options="mat as mat.name for mat in materials">
+							<option value="">SELECT</option>
+ 					
+ 						</select>
+					</div>
+					
+				</div>
+
+				<div class="form-group smallfont" ng-show="materialtype">
+					<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material<span class="astrix">*</span></div>
+					<div class="col-sm-5 col-md-5 col-xs-8">
+
+						<select class="form-control smallfont" ng-model="submat" options="materialtype.submaterials" chosen ng-options="smat as smat.name for smat in materialtype.submaterials">
+							<option value="">SELECT</option>
+ 					
+ 						</select>
+					</div>
+					<div class="col-sm-2 col-md-2 col-xs-8">
+
+						<button class="btn btn-xs btn-success" ng-click="searchmatwisepo()">Search</button>
+					</div>
+				</div>
+
+				<table class="table table-striped table-responsive smallfont" ng-show="matwisepolist.length>0">
+
+	 				<thead>
+	 					<tr>
+	 						<th>S.No</th>
+	 						<th>Project Name</th>
+	 						<th>PO Number</th>
+	 						<th>Vendor</th>
+	 						<th>PO Date</th>
+	 						<th>PO Qty</th>
+	 						<th>Unit Price</th>
+	 						<th>FORD Price</th>
+	 						<th class="col-sm-1">Inspected Qty</th>
+							<th class="col-sm-1">Department DI Qty</th>
+							<th class="col-sm-1">Internal DI Qty</th>
+							<th class="col-sm-1">Received Qty</th>
+	 					</tr>
+	 				</thead>
+	 				
+	 				<tr ng-repeat="pomat in matwisepolist">
+	 				
+	 					<td>{{$index+1}}</td>
+	 					<td>{{pomat.purchaseorder.project.name}}</td>
+	 					<td>{{pomat.purchaseorder.po_no}}</td>
+	 					<td>{{pomat.purchaseorder.vendor.name}}</td>
+	 					
+	 					<td>{{pomat.purchaseorder.po_date}}</td>
+	 					<td>{{pomat.quantity}}</td>
+	 					<td>{{pomat.unit_rate}}</td>
+	 					<td>{{pomat.taxedrate}}</td>
+	 					<td>{{pomat.inspected_quantity}}</td>
+						<td>{{pomat.dispatch_quantity}}</td>
+						<td>{{pomat.internal_di_quantity}}</td>
+	 					<td>{{pomat.already_received}}</td>
+	 				</tr>
+	 				
+	 			</table>
+		    </form>
+		</div>
+	</div>
+</div>

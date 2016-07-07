@@ -1,0 +1,68 @@
+<div class="col-sm-12">
+	
+
+	<div class="row">
+
+		<div class="col-sm-12 hidden-print">
+			<h3>Schedule Materials List</h3>
+			<form class="form-horizontal">
+			<div class="form-group smallfont">
+	 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+	 			<div class="col-sm-3 col-md-3 col-xs-8">
+	 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="projlist.id as projlist.name for projlist in projectlist">
+			 					
+		 				</select>
+		 			</div>
+	 			
+	 			<div class="col-sm-3 col-md-3 col-xs-8">
+	 				
+	 				<div class="btn btn-success" ng-click="get_boq_file_info()">GET ACTIVITIES</div>
+	 			</div>
+	 		</div>
+
+
+	 		<div class="form-group smallfont" ng-show="activitylist">
+	 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Activity<span class="astrix">*</span></div>
+	 			<div class="col-sm-3 col-md-3 col-xs-8">
+	 				<select class="form-control smallfont" options="activitylist" chosen ng-model="activityinfo" ng-options="indiact as indiact.srno for indiact in activitylist"a>
+			 					
+		 				</select>
+		 			</div>
+	 			
+	 			
+	 		</div>
+			
+			
+		</div>
+		
+		<div class="col-sm-12" ng-show="activityinfo">
+			<h4>{{activityinfo.desc}}</h4>
+			<div class="table-responsive">
+				<table class="table table-striped smallfont">
+	 				<thead>
+	 					<tr class="innerhead">
+	 						<!-- <th class="col-sm-1">S.No</th> -->
+	 						<th class="col-sm-4">Material</th>
+	 						<th class="col-sm-1">UOM</th>
+	 						<th class="col-sm-1">UNIT Quantity</th>
+	 						
+	 					</tr>
+	 				</thead>
+	 					<tbody ng-repeat="indiactivity in activityinfo.sub"> 
+							<tr ng-repeat="inmat in indiactivity.matmapped">
+								
+								<!-- <th>{{matc}}</th> -->
+		 						<th>{{inmat['materialdesc']}}</th>
+		 						<th>{{inmat['uom']}}</th>
+		 						<th>{{inmat['unitqty']}}</th>	
+							</tr>
+						</tbody>
+						
+					</table>
+				</div>
+
+			</div>
+		</form>
+	</div>
+
+</div>

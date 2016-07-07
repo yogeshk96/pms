@@ -1,0 +1,150 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+  <div class="row-fluid">
+    
+    <div class="clearfix" style="height:20px;"></div>
+
+    <p><strong>Inhouse</strong></p>
+    
+   
+    <div class="col-sm-12 col-xs-12 smallfont">
+
+    	<form class="form-horizontal">
+            
+		 	<div class="form-group smallfont hidden-print">
+		 		<div for="inputEmail3" class="col-sm-2 col-md-2 col-xs-4 control-label">Issue Material to</div>
+		 		<div class="col-sm-5 col-md-5 col-xs-8 jumbobox" style="padding:5px">
+		 			<label class="radio-inline">
+		 				<input type="radio" ng-model="inhousetype" id="inlineRadio1" value="inhousefabrication" ng-click="changeinhousetype()"> Inhouse fabrication
+		 			</label>
+		 			<label class="radio-inline">
+		 				<input type="radio" ng-model="inhousetype" id="inlineRadio1" value="inhouseconsumption" ng-click="changeinhousetype()"> Inhouse consumption
+		 			</label>
+		 			<label class="radio-inline">
+		 				<input type="radio" ng-model="inhousetype" id="inlineRadio2" value="inhouseassets" ng-click="changeinhousetype()"> Inhouse assets
+		 			</label>
+		 		</div>
+		 	</div>
+			
+			<!------------------------------ Inhouse fabrication section starts ---------------------------->
+		 	<div class="inhousefabricationsec" ng-show="inhousetype=='inhousefabrication'" >
+
+			 	<div class="form-group smallfont">
+		            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Material Type</div>
+		            <div class="col-sm-3 col-xs-6">
+		              <select class="form-control smallfont" ng-model="materialtypeid" ng-change="materialchange()">
+		                <option value="select">SELECT</option>
+		                <option ng-repeat="mat in materials" value="{{mat['id']}}">{{mat['name']}}</option>
+		               
+		              </select>
+		            </div>
+		            <!-- <div class="col-sm-4 col-xs-2 linktextinput">
+		              <a href="#">add new material</a>
+		            </div> -->
+		        </div>
+
+		        <div class="form-group smallfont">
+		            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material</div>
+		            <div class="col-sm-3 col-md-3 col-xs-8">
+		              <select class="form-control smallfont" ng-model="submat" ng-change="getinventory(submat)">
+		                <option value="select">SELECT</option>
+		                <option ng-repeat="sub in submaterials" value="{{sub.id}}" id="{{sub.id}}" materialdesc="{{sub.name}}">{{sub.name}}</option>
+		              </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group smallfont" ng-show="availablefabstock>0">
+	                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">UOM</div>
+	                <div class="col-sm-2 col-xs-8">
+	                  <input type="text" ng-model="uomval" class="form-control" readonly />
+	                </div>
+	            </div>
+
+		        <div class="form-group smallfont" ng-show="availablefabstock>0">
+		            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Available Inventory</div>
+		            <div class="col-sm-2 col-md-2 col-xs-8">
+		              <input type="text" class="form-control smallfont" ng-model="availablefabstock" readonly>
+		             
+		            </div>
+		        </div>
+
+		        <div class="form-group smallfont" ng-show="availablefabstock>0">
+		            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Quantity Used</div>
+		            <div class="col-sm-2 col-md-2 col-xs-8">
+		              <input type="text" class="form-control smallfont" ng-model="fabricationqty">
+		             
+		            </div>
+		        </div>
+
+		        <div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn" ng-show="availablefabstock>0">
+	                <button type="button" class="btn btn-success" ng-click="addtofabrication('fabrication')">SUBMIT</button>
+	            </div>
+
+		    </div>
+		    <!------------------------------ Inhouse fabrication section ends ---------------------------->
+
+		    <!------------------------------ Inhouse Consumption section starts ---------------------------->
+		 	<div class="inhousefabricationsec" ng-show="inhousetype=='inhouseconsumption'" >
+
+			 	<div class="form-group smallfont">
+		            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Material Type</div>
+		            <div class="col-sm-3 col-xs-6">
+		              <select class="form-control smallfont" ng-model="materialtypeid" ng-change="materialchangecons()">
+		                <option value="select">SELECT</option>
+		                <option ng-repeat="mat in materials" value="{{mat['id']}}">{{mat['name']}}</option>
+		               
+		              </select>
+		            </div>
+		            <!-- <div class="col-sm-4 col-xs-2 linktextinput">
+		              <a href="#">add new material</a>
+		            </div> -->
+		        </div>
+
+		        <div class="form-group smallfont">
+		            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material</div>
+		            <div class="col-sm-3 col-md-3 col-xs-8">
+		              <select class="form-control smallfont" ng-model="submat" ng-change="getinventory(submat)">
+		                <option value="select">SELECT</option>
+		                <option ng-repeat="sub in submaterials" value="{{sub.id}}" id="{{sub.id}}" materialdesc="{{sub.name}}">{{sub.name}}</option>
+		              </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group smallfont" ng-show="availablefabstock>0">
+	                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">UOM</div>
+	                <div class="col-sm-2 col-xs-8">
+	                  <input type="text" ng-model="uomval" class="form-control" readonly />
+	                </div>
+	            </div>
+
+		        <div class="form-group smallfont" ng-show="availablefabstock>0">
+		            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Available Inventory</div>
+		            <div class="col-sm-2 col-md-2 col-xs-8">
+		              <input type="text" class="form-control smallfont" ng-model="availablefabstock" readonly>
+		             
+		            </div>
+		        </div>
+
+		        <div class="form-group smallfont" ng-show="availablefabstock>0">
+		            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Quantity Used</div>
+		            <div class="col-sm-2 col-md-2 col-xs-8">
+		              <input type="text" class="form-control smallfont" ng-model="fabricationqty">
+		             
+		            </div>
+		        </div>
+
+		        <div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn" ng-show="availablefabstock>0">
+	                <button type="button" class="btn btn-success" ng-click="addtofabrication('consumption')">SUBMIT</button>
+	            </div>
+
+		    </div>
+		    <!------------------------------ Inhouse consumption section ends ---------------------------->
+
+		 </form>
+
+	</div>
+
+	</div>
+
+</div>

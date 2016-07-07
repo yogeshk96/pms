@@ -1,0 +1,97 @@
+<!--page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid hidden-print">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<form class="form-horizontal">
+			<div class="col-sm-12 col-xs-12">
+
+			<p><strong>Inspection &amp; Dispatch Status Report</strong></p>
+
+	 			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="polist.id as polist.name for polist in projectlist">
+	 					
+	 					</select>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Vendor<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" options="vendorlist" chosen ng-model="vendorid" ng-options="vlist as vlist.name for vlist in vendorlist">
+	 					
+	 					</select>
+		 			</div>
+		 			
+		 		</div>
+
+		 		<div class="form-group smallfont hidden-print">
+		                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Date<span class="astrix">*</span></div>
+		                <div class="input-group input-group-sm col-sm-2 col-md-2 col-xs-8" style="float:left;margin-left:15px;">
+						  <span class="input-group-addon" id="sizing-addon1">From</span>
+						  <input type="date" class="form-control" ng-model="pofromdate" aria-describedby="sizing-addon1">
+
+						</div>
+						<div class="col-sm-1" style="float:left;">&nbsp</div>
+						<div class="input-group input-group-sm col-sm-2 col-md-2 col-xs-8" style="float:left;">
+						  <span class="input-group-addon" id="sizing-addon1">To</span>
+						  <input type="date" class="form-control" ng-model="potodate" aria-describedby="sizing-addon1">
+						  
+						</div>
+
+			 			
+		                <div class="col-sm-2 col-xs-4 submitbtn" ng-show="pofromdate && potodate">
+		                   <button type="button" class="btn btn-success smallfont " ng-click="generateinsdistatusreport()">Generate</button>
+		                </div>
+		            </div>
+		 		<table class="table table-striped table-responsive smallfont" ng-show="powiselist">
+	 				<tr>
+	 					<th>S.No</th>
+	 					<th>PO No</th>
+	 					<th>PO Date</th>
+	 					<th class="col-sm-4">Supplier Name</th>
+	 					<th>Description Of Material</th>
+	 					<th>UOM</th>
+	 					<th>PO Qty</th>
+	 					<th>Inspected Qty</th>
+	 					<th>Inspection call to site/Dept</th>
+	 					<th>Call Received From Supplier</th>
+	 					<th>Material Readiness Date</th>
+	 					<th>Inspection Memo No</th>
+	 					<th>Approved Call Date</th>
+	 					<th>Inspection Completed Date</th>
+	 					<th>DI Request Sent to site/Dept</th>
+	 					<th>DI Date</th>
+	 					<th>DI No</th>
+	 					<th>DI Qty</th>
+	 				</tr>
+	 				<tr ng-repeat="powise in powiselist" ng-style="!powise['di_qty'] && {'background-color':'yellow'}">
+	 					<td>{{$index+1}}</td>
+	 					<td>{{powise['po_no']}}</td>
+	 					<td>{{powise['po_date']}}</td>
+	 					<td>{{powise['vendorname']}}</td>
+	 					<td>{{powise['matname']}}</td>
+	 					<td>{{powise['uom']}}</td>
+	 					<td>{{powise['quantity']}}</td>
+	 					<td>{{powise['inspected_quantity']}}</td>
+	 					<td ng-show="powise['material_readiness_date'] != 0">{{powise['inspec_call_site']}}</td>
+	 					<td ng-show="powise['material_readiness_date'] != 0">{{powise['call_received_supp']}}</td>
+	 					<td ng-show="powise['material_readiness_date'] != 0">{{powise['material_readiness_date']}}</td>
+	 					<td ng-show="powise['material_readiness_date'] == 0" colspan="3" class="text-center">JOINT INSPECTION</td>
+	 					<td>{{powise['inspection_memo_no']}}</td>
+	 					<td>{{powise['approved_call_date']}}</td>
+	 					<td>{{powise['inspection_report_date']}}</td>
+	 					<td>{{powise['di_call_date']}}</td>
+	 					<td>{{powise['dispatch_date']}}</td>
+	 					<td>{{powise['dispatch_no']}}</td>
+	 					<td>{{powise['di_qty']}}</td>
+	 				</tr>
+	 			</table>
+
+			</div>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,12 @@
+<div class="backimg">
+  <div class="container">
+	
+    <div class="row placeholders martop">
+        <div class="col-xs-4 col-sm-2 placeholder text-center indimodule" ng-repeat="module in userinfo.modules">
+         <a ui-sref="user.{{module.slug}}.main"><button type="button" class="btn btn-circle btn-xl" style="background-color:{{module.color}}"><i class="{{module.icon}}"></i></button></a>
+          <p><strong>{{module.module}}</strong></p>
+        </div>
+            
+    </div>
+  </div>
+</div>

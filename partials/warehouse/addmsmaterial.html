@@ -1,0 +1,65 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+
+		<div class="col-sm-6 col-xs-12">
+
+		<p><strong>Add Material</strong></p>
+
+    		<form class="form-horizontal smallfont">
+
+			 	
+    			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Material Name</div>
+		 			<div class="col-sm-6 col-md-6 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="msmaterialname">
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Wt./Mtr</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="wtpermtr">
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-4 col-md-4 col-xs-8">
+		 				<div class="btn btn-success" ng-click="addmsmaterial()">ADD MS MATERIAL</div>
+		 			</div>
+		 		</div>
+
+    		</form>
+    	</div>
+
+    	<div class="col-sm-5 col-xs-12" style="height:500px;overflow-y:scroll;">
+
+			<p><strong>Already Existing MS Materials</strong></p>
+
+ 			<table class="table table-striped smallfont">
+ 				<tbody>
+ 					<tr class="innerhead">
+ 						<th class="col-sm-1">S.No</th>
+ 						<th class="col-sm-3">Material Name</th>
+ 						<th class="col-sm-2">Wt./Mtr</th>
+ 					</tr>
+	 				<tr ng-repeat="submat in msmaterials">
+	 					<td scope="row">{{$index+1}}</td>
+	 					<td>{{submat['name']}}</td>
+	 					<td>{{submat['wt_per_mtr']}}</td>
+	 					
+	 				</tr>
+	 			</tbody>
+ 				
+ 			</table>
+
+    	</div>
+
+	</div>
+
+</div>
+

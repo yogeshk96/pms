@@ -1,0 +1,138 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Create Project</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal" ng-submit='create_project()'>
+
+				<div class="form-group smallfont">
+	 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Office</div>
+	 				<div class="col-sm-2 col-xs-6">
+	 					<select class="form-control smallfont" ng-model='project.office' required>
+	 						<option value="">SELECT</option>
+	 						<option ng-repeat="x in offices" value="{{x.id}}">{{x.name}}</option>
+	 					</select>
+	 				</div>
+	 			</div>
+
+    			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Project Name</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="project.name" required/>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Project Description</div>
+		 			<div class="col-sm-4 col-md-4 col-xs-8">
+		 				<textarea class="form-control" ng-model="project.descr" required></textarea>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Project Value</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="project.cost" required/>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Enter First Tier</div>
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="project.code" required/>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">LOA Number</div>
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="project.loano" required/>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Client</div>
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="project.client" required/>
+		 			</div>
+		 		</div>
+
+    			<div class="form-group smallfont">
+	 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Project Head</div>
+	 				<div class="col-sm-2 col-xs-6">
+	 					<select class="form-control smallfont" ng-model="project.head" required>
+	 						<option value="">SELECT</option>
+	 						<option ng-repeat="x in projectheads | filter:{office_id:project.office}" value="{{x.id}}">{{x.name}}</option>
+	 					</select>
+	 				</div>
+	 			</div>
+
+	 			<div class="form-group smallfont">
+			 		<div for="inputEmail3" class="col-sm-2 col-md-2 col-xs-4 control-label">Type of work involved</div>
+			 		<div class="col-sm-5 col-md-5 col-xs-8 jumbobox" style="padding:5px">
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="typeofwork" id="inlineRadio1" value="hvds"> HVDS
+			 			</label>
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="typeofwork" id="inlineRadio1" value="electrification"> Electrification
+			 			</label>
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="typeofwork" id="inlineRadio2" value="substationconstruction"> Sub Station Construction
+			 			</label>
+			 		</div>
+			 	</div>
+
+			 	<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Upload Documents</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="file" id="file_upload" class="form-control" file-change="upload"/>
+		 			</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" ng-model="filedat.desc">
+	 						<option value="">SELECT</option>
+	 						<option ng-repeat="x in doctypes" value="{{x.id+'|'+x.name}}">{{x.name}}</option>
+	 					</select>
+		 			</div>
+		 			<button type="button" class="btn btn-primary smallfont" ng-click='add_doc()'>Add</button>
+		 		</div>
+
+		 		<div class="col-sm-12 col-xs-12 pmstable table-responsive" ng-show="doclist.length>0">
+		 			<table class="table table-striped">
+		 				<thead>
+		 					<tr class="innerhead">
+		 						<th class="col-sm-1">S.No</th>
+		 						<th class="col-sm-4">Document</th>
+		 						<th class="col-sm-4">File</th>
+		 						<th class="col-sm-1">Delete</th>
+		 					</tr>
+		 				</thead>
+		 				<tr ng-repeat="x in doclist">
+		 					<td scope="row">{{$index+1}}</td>
+		 					<td>{{x.docname}}</td>
+		 					<td>{{x.docpath}}</td>
+		 					<td><button type="button" class="btn btn-default smallfont" ng-click="remove_doc($index)"><i class="fa fa-times"></i></button></td>
+		 				</tr>
+		 			</table>
+		 		</div>
+    			
+		 		<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<!-- <button type="button" class="btn btn-success" ui-sref="user.admin.createproject.hvds" ng-show="typeofwork == 'hvds'">Create</button>
+		 				<button type="button" class="btn btn-success" ui-sref="user.admin.createproject.electrification" ng-show="typeofwork == 'electrification' ">Create</button>
+		 				<button type="button" class="btn btn-success" ui-sref="user.admin.createproject.substationconstruction" ng-show="typeofwork == 'substationconstruction' ">Create</button> -->
+		 				<input type="submit" value="Create" class="btn btn-success">
+		 			</div>
+		 		</div>
+
+    		</form>
+    	</div>
+
+	</div>
+
+</div>

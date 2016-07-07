@@ -1,0 +1,94 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<div class="mainproject">
+
+		<p><strong>Create Project</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal" ng-submit="add_ss_feeder()">
+    			<div class="form-group smallfont">
+			 		<div for="inputEmail3" class="col-sm-2 col-md-2 col-xs-4 control-label">Project Code</div>
+			 		<div class="col-sm-5 col-md-5 col-xs-8" style="padding:5px">
+			 			<label class="radio-inline">
+			 				<input type="text" ng-model='project.projectcode' readonly>
+			 			</label>
+			 			<label class="radio-inline">
+			 				<input type="text" ng-model='project.projecttype' readonly>
+			 			</label>
+			 		</div>
+			 	</div>
+
+		 		<div class="form-group smallfont">
+	 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">No of Divisions</div>
+	 				<div class="col-sm-2 col-xs-6">
+	 					<select class="form-control smallfont" ng-model="substationno" ng-change='sschange()'>
+	 						<option value="select">SELECT</option>
+	 						<option value="1">1</option>
+	 						<option value="2">2</option>
+	 						<option value="3">3</option>
+	 						<option value="4">4</option>
+	 						<option value="5">5</option>
+							<option value="6">6</option>
+	 						<option value="7">7</option>
+	 						<option value="8">8</option>
+	 						<option value="9">9</option>
+	 						<option value="10">10</option>
+	 						<option value="11">11</option>
+	 						<option value="12">12</option>
+	 						<option value="13">13</option>
+	 					</select>
+	 				</div>
+	 			</div>
+
+		 		<div class="form-group smallfont" ng-repeat='x in dat' style='padding-bottom:20px;border-bottom:1px solid #e5e5e5;'>
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Division {{$index+1}} Name</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="text" class="form-control" required ng-model='x.ssname' required/>
+		 			</div>
+		 			<div class="clearfix" style="height:20px;"></div>
+		 			<div class="col-sm-12 smallfont" style='margin-top:20px;'>
+		 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Sub Divisions</div>
+		 				<div class="col-sm-2 col-xs-6">
+		 					<select class="form-control smallfont" ng-model="x.feederno" ng-change="feederchange(x)">
+		 						<option value="select">SELECT</option>
+		 						<option value="1">1</option>
+		 						<option value="2">2</option>
+		 						<option value="3">3</option>
+		 						<option value="4">4</option>
+		 					</select>
+		 				</div>
+		 			</div>
+					<div class="clearfix" style="height:20px;"></div>
+			 		<div class="col-sm-12 smallfont" style='margin-top:20px;' ng-repeat="y in x.feederdat">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Sub Division {{$index+1}} Name</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<input type="text" class="form-control" ng-model="y.feedername" required/>
+			 			</div>
+			 			<div class="col-sm-2 col-md-2 col-xs-8">
+			 				<input type="text" class="form-control" placeholder="No of Works" ng-model="y.mdtrno" required/>
+			 			</div>
+			 		</div>
+
+		 		</div>
+    			    			
+		 		<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="submit" value="Next" class="btn btn-success">
+		 			</div>
+		 		</div>
+		 	
+
+    		</form>
+    	</div>
+
+    	</div>
+
+	</div>
+
+</div>

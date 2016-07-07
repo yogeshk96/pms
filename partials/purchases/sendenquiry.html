@@ -1,0 +1,251 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<form class="form-horizontal" ng-submit="sendenquirypre()">
+		<div class="col-sm-12 col-xs-12 hidden-print">
+
+		<p><strong>Send Enquiry</strong></p>
+
+		<div class="form-group smallfont">
+ 			<div class="col-sm-4 col-md-4 col-xs-8 jumbobox" style="padding:5px;">
+ 				<label class="radio-inline">
+ 					<input type="radio" ng-model="enquirytype" ng-change="changeenquirytype()" id="inlineRadio1" value="normal" ui-sref="user.purchases.sendenquiry"> Send Normal Enquiry
+ 				</label>
+
+ 				<label class="radio-inline">
+	 				&nbsp;
+ 				</label>
+
+ 				<label class="radio-inline">
+ 					<input type="radio" ng-model="enquirytype" ng-change="changeenquirytype()" id="inlineRadio1" value="resend" ui-sref="user.purchases.resendenquiry"> Re-send Enquiry
+ 				</label>
+
+ 			</div>
+ 		</div>
+
+    		
+		<div class="form-group smallfont">
+ 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+ 			<div class="col-sm-5 col-md-5 col-xs-8">
+ 				<select class="form-control smallfont" options="projectlist" multiple chosen ng-model="projectid" ng-options="polist.id as polist.name for polist in projectlist">
+		 					
+		 		</select>
+ 			</div>
+ 		</div>	
+
+		<div class="form-group smallfont">
+			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material Type<span class="astrix">*</span></div>
+			<div class="col-sm-3 col-md-3 col-xs-8">
+				<select class="form-control smallfont" ng-model="materialtype" ng-options="mat as mat.name for mat in materials">
+					<option value="">SELECT</option>
+			
+				</select>
+			</div>
+			
+		</div>
+
+		<div class="jumbobox col-sm-6" ng-show="materialtype.submaterials">
+			<div class="form-group smallfont">
+				<div for="inputEmail3" class="col-sm-4 col-xs-5 control-label">Select Material<span class="astrix">*</span></div>
+				<div class="col-sm-7 col-md-7 col-xs-7">
+					<select class="form-control smallfont" ng-model="submat" ng-options="sub as sub.name for sub in materialtype.submaterials | filter: matfilter" ng-change="matchange()">
+						<option value="">SELECT</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group smallfont" ng-show="submat">
+				<div for="inputEmail3" class="col-sm-4 col-xs-5 control-label">UOM<span class="astrix">*</span></div>
+				<div class="col-sm-4 col-md-4 col-xs-8">
+
+					<select class="form-control smallfont" ng-model="uomval" ng-options="smatu as smatu.stmatuom.uom for smatu in submat.matuom">
+					<option value="">SELECT</option>
+				
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group smallfont" ng-show="materialtype.submaterials">
+				<div for="inputEmail3" class="col-sm-4 col-xs-5 control-label">Quantity<span class="astrix">*</span></div>
+				<div class="col-sm-4 col-md-4 col-xs-7">
+					<input type="text" class="form-control" ng-model="quantity"  ng-blur="getgoodscost()"/>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-xs-12 smallfont" ng-show="submat.type=='2'">
+	 			<table class="table table-striped table-responsive smallfont" ng-show="submat.level1mat.length>0">
+
+	 				<thead>
+	 					<tr class="innerhead">
+	 						<th><input type="checkbox" ng-model="selectallmat" ng-checked="isselectallsub()" ng-click="selectallclick()" /></th>
+	 						<th>Material Description</th>
+	 						<th>UOM</th>
+	 						<th>Qty</th>
+	 					</tr>
+	 				</thead>
+	 				
+	 				<tr ng-repeat="pomat in submat.level1mat">
+	 				
+	 					<td class="col-sm-1"><input type="checkbox" ng-model="pomat.selected" ng-click="levelmatclick(pomat)"/></td>
+	 					<td class="col-sm-3">{{pomat.storematerial.name}}</td>
+	 					<td class="col-sm-2">
+		 					<select class="form-control smallfont col-sm-2" ng-model="pomat.uom" ng-options="smatu as smatu.stmatuom.uom for smatu in pomat.storematerial.matuom track by smatu.id">
+							<option value="">SELECT</option>
+ 					
+ 							</select>
+						</td>
+	 					<td class="col-sm-2"><input class="form-control smallfont col-sm-2" type="text" ng-model="pomat.qtythis"/></td>
+	 					
+	 				</tr>
+	 				
+	 			</table>
+
+	 		</div>
+
+			<div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn">
+				<button type="button" class="btn btn-success" ng-click="addmattotable()">ADD</button>
+			</div>
+
+		</div>
+
+    		
+    	</div>
+
+    	<div class="col-sm-6 text-center smallfont" ng-show="novendor"><p><strong>No Vendors available.</strong></p></div>
+		
+		<div class="enquirymaterialbox col-sm-8 col-xs-12" ng-show="enqmateriallist.length>0">
+			<p><strong>Material list</strong></p>
+	    	<table class="table table-striped smallfont">
+				<thead>
+					<tr class="innerhead">
+						<th>S.No</th>
+						<th>Material Description</th>
+						<th>UOM</th>
+						<th>Quantity</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tr ng-repeat="enqmat in enqmateriallist">
+					<td scope="row">{{$index+1}}</td>
+					<td>{{enqmat.name}}</td>
+					<td>{{enqmat.units}}</td>
+					<td>{{enqmat.quantity}}</td>
+					<td><button type="button" class="btn btn-success btn-xs" ng-click="removeenqmat($index, enqmat)">Remove</button></td> 					
+				</tr>
+
+			</table>
+		</div>
+
+		<div class="col-sm-8 col-xs-8 smallfont taxselectbox" ng-show="materialvendorslist.length>0">
+				
+				<div class="form-group smallfont">
+			 		<div class="col-sm-8 col-md-8 col-xs-8" style="padding:5px;margin-left:10px;">
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="attachmenttype" id="inlineRadio1" value="same" ng-click="changeattachmenttype()"> Same attachment to all vendors
+			 			</label>
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="attachmenttype" id="inlineRadio1" value="different" ng-click="changeattachmenttype()"> Different attachments for different vendors
+			 			</label>
+			 			
+			 		</div>
+			 	</div>	
+				<div class="form-group smallfont" ng-show="attachmenttype=='same'">
+				 	<div class="col-sm-4 col-md-4 col-xs-8">
+	                    <input type="file" id="file_sameattachment" class="form-control" file-change="uploadsameattachment"/>
+	                </div>	
+	            </div>	
+
+	            <div class="col-sm-10 col-xs-12 pmstable table-responsive smallfont" ng-show="sameattachementdocs.length>0 && attachmenttype=='same'">
+                  <p><strong>Attachment Files</strong></p>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr class="innerhead">
+                      	<th class="col-sm-1">S.No</th>
+                        <th class="col-sm-4">File</th>
+                        <th class="col-sm-1">Delete</th>
+                      </tr>
+                    </thead>
+                    <tr ng-repeat="doc in sameattachementdocs">
+                      <td>{{$index+1}}</td>
+                      <td>{{doc.doc_name}}</td>
+                      <td><button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_sameattachmentdoc($index)"><i class="fa fa-times"></i></button></td>
+                    </tr>
+                  </table>
+                </div>
+
+		</div>
+
+    	<div class="col-sm-12 col-xs-12 smallfont" ng-show="materialvendorslist.length>0">
+
+			<p><strong>Available Vendors</strong></p>
+
+ 			<table class="table table-striped smallfont">
+ 				<thead>
+ 					<tr class="innerhead">
+ 						<th class="col-sm-1">S.No</th>
+ 						<th class="col-sm-2">Vendor Name</th>
+ 						<th class="col-sm-3">Materials</th>
+ 						<th class="col-sm-2">Email ID</th>
+ 						<th class="col-sm-2" ng-show="attachmenttype=='different'">Upload</th>
+ 						<th class="col-sm-3" ng-show="attachmenttype=='different'">Files List</th>
+ 						<th class="col-sm-1">Select All <input type="checkbox" id="selectall" totcount="{{materialvendorslist.length}}" ng-click="selectall()" /></th>
+ 					</tr>
+ 				</thead>
+ 				<tr ng-repeat="vendor in materialvendorslistli">
+ 					<td scope="row">{{$index+1}}</td>
+ 					<td>{{vendor['name']}}</td>
+ 					<td><htmldiv content="vendor['material']"></htmldiv></td>
+ 					<td><input type="text" ng-model="vendor.emailid" style="width:100%;" /></td>
+ 					<td ng-show="attachmenttype=='different'"><input type="file" class="form-control file_differentattachment" accept="image/*" onchange="angular.element(this).scope().uploaddifferentattachment(this, angular.element(this).scope().vendor)"/></td>
+ 					<td ng-show="attachmenttype=='different'"><p ng-repeat="docfile in vendor.enqdocs">-> {{docfile.doc_name}} <span ng-click="removevenenqdoc($parent.$index, $index, docfile.doc_url)" style="cursor:pointer;color:#a40004;">[X]</span></p></td>
+ 					<td class="text-center"><input type="checkbox" value="{{vendor.id}}" ng-click="toggleSelection(vendor)" class="childcheckbox" /></td> 					
+ 				</tr>
+
+ 			</table>
+
+ 			<div class="form-group smallfont">
+ 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">CC:</div>
+ 				<div class="col-sm-6 col-xs-6">
+ 					<input type="text" class="form-control" ng-model="cc" placeholder="Enter Comma(,) seperated email ids">
+ 				</div>
+ 			</div>
+
+ 			<div class="form-group smallfont">
+ 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Subject<span class="astrix">*</span></div>
+ 				<div class="col-sm-6 col-xs-6">
+ 					<input type="text" class="form-control" ng-model="subject">
+ 				</div>
+ 			</div>
+
+ 			<div class="form-group smallfont">
+ 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Email Text<span class="astrix">*</span></div>
+ 				<div class="col-sm-8 col-xs-8">
+ 					<textarea class="form-control" placeholder="Write email text here..." rows="6" ng-model="emailcontent"></textarea>
+ 				</div>
+ 			</div>
+
+ 			<div class="form-group smallfont" ng-show="enqno">
+ 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Enquiry No</div>
+ 				<div class="col-sm-2 col-xs-2">
+ 					<input type="text" class="form-control" ng-model="enqno" readyonly>
+ 				</div>
+ 			</div>
+
+ 			<div class="form-group smallfont submitbtn hidden-print">
+	 			<div class="col-sm-3 col-md-3 col-xs-8">
+	 				<button type="submit" class="btn btn-success" ng-show="!enqno">Send Enquiry</button>
+	 				<button type="button" class="btn btn-success" ng-show="enqno" onClick="window.print()">Print</button>
+	 			</div>
+	 		</div>
+
+    	</div>
+
+    	</form>
+
+	</div>
+
+</div>

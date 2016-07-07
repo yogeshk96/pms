@@ -1,0 +1,89 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+	 	<div class="createschedule">
+
+	 		<p><strong>Create schedule for the created project</strong></p>
+				<div class="col-sm-12 col-xs-12">
+	 				<button type="button" class="btn btn-success smallfont" style='float:right;margin-bottom:20px;' ng-click="add_new_sch()">Add New Schedule</button>
+	 			</div>
+		<form class="form-horizontal" ng-submit="save_sch()">
+    		<div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;">
+				
+	 			<table class="table table-striped" ng-repeat="x in dat">
+	 				<thead>
+	 					<tr>
+	 						<th class="col-sm-1" align="center">Schedule Name
+	 						</th>
+	 						<th class="col-sm-2" align="center"><input type="text" ng-model="x.name" class="form-control" required/></th>
+	 						<th class="col-sm-1" align="center">Description
+	 						</th>
+	 						<th class="col-sm-4" align="center"><input type="text" ng-model="x.desc" class="form-control" required/></th>
+	 						<th class="col-sm-1" align="center">Quantity
+	 						</th>
+	 						<th class="col-sm-1"><input type="text" ng-model="x.qty" class="form-control" required/></th>
+	 						<th></th>
+	 						<th></th>
+	 						<th><button type="button" class="btn btn-default btn-xs" ng-click="remove_sch($index)"><i class="fa fa-times"></i></button></th>
+	 					</tr>
+	 					<tr style="background:#000;color:#FFF;">
+	 						<th class="col-sm-1">Sub No</th>
+	 						<th class="col-sm-4">Description</th>
+	 						<th class="col-sm-1">Material Category</th>
+	 						<th class="col-sm-2">BOQ Material</th>
+	 						<th class="col-sm-1">Qty</th>
+	 						<th class="col-sm-1">Unit Rate</th>
+	 						<th class="col-sm-1">Erection Rate</th>
+	 						<th class="col-sm-1">Budget Rate</th>
+	 						<th class="col-sm-1">Total</th>
+	 						<th class="col-sm-1">Remove</th>
+	 					</tr>
+	 				</thead>
+	 				<tbody>
+	 					<tr ng-repeat="y in x.subschedule">
+	 						<td><input type="text" class='form-control' ng-model="y.no" required/></td>
+	 						<td><textarea class="form-control" ng-model="y.descr" required></textarea></td>
+	 						<td>
+	 							<select class="form-control smallfont" ng-model="y.matcat" ng-options="material.name for material in materials" required>
+			 						<option value="">SELECT</option>
+			 					</select>
+	 						</td>
+	 						<td>
+	 							<select class="form-control smallfont" ng-model="y.boqmat" ng-options="smat.name for smat in y.matcat.submaterials" required>
+			 						<option value="">SELECT</option>
+			 					</select>
+	 						</td>
+	 						<td><input type="number" class='form-control' ng-model="y.qty" required></td>
+	 						<td><input type="number" class='form-control' ng-model="y.unitrate" required></td>
+	 						<td><input type="number" class='form-control' ng-model="y.erectrate" required></td>
+	 						<td><input type="number" class='form-control' ng-model="y.budgetrate" required></td>
+	 						<td><input type="number" style="min-width:100px;" class='form-control' readonly ng-value="get_tot(y)"></td>
+	 						<td><button type="button" class="btn btn-default btn-xs" ng-click="remove_sub(x,$index)"><i class="fa fa-times"></i></button></td>
+	 					</tr>
+						<tr>
+							<td>
+								<button type="button" class="btn btn-success smallfont" ng-click='add_sub_sch(x)'>Add New Row</button>
+							</td>
+						</tr>
+	 				</tbody>
+
+	 			</table>
+
+	 			<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<!-- <button type="button" class="btn btn-success">Save</button> -->
+		 				<input type="submit" value="Save" class="btn btn-success">
+		 			</div>
+		 		</div>
+			</form>
+	 		</div><!-- col-sm-12 ends -->
+	 		
+
+	 	</div>
+
+	</div>
+
+</div>

@@ -1,0 +1,541 @@
+<!-- page right main container starts  -->
+<style type="text/css">
+	.paymenttable p{
+		
+		line-height:20px;
+	}
+</style>
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<form class="form-horizontal" ng-submit="sendenquiry()">
+			<div class="col-sm-12 col-xs-12 hidden-print">
+
+				<p><strong>Payments</strong></p>
+				<!-- <div class="form-group smallfont hidden-print">
+					<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+					<div class="col-sm-3 col-md-3 col-xs-8">
+						<select class="form-control smallfont" chosen options="projectlist" ng-model="projectid" ng-options="projlist.id as projlist.name for projlist in projectlist" readonly>
+            
+             			</select>
+					</div>
+				</div>
+				<div class="form-group smallfont hidden-print">
+					<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Vendor<span class="astrix">*</span></div>
+					<div class="col-sm-3 col-md-3 col-xs-8">
+						<select class="form-control smallfont" chosen options="vendorlist" ng-model="vendorid" ng-options="venlist.id as venlist.name for venlist in vendorlist" ng-change="getpolist()" readonly >
+            
+             			</select>
+						
+					</div>
+				</div>
+				<div class="form-group smallfont hidden-print">
+					<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Purchase Order No<span class="astrix">*</span></div>
+					<div class="col-sm-6 col-md-6 col-xs-8">
+						<select class="form-control smallfont" chosen options="vendorpolist" ng-model="ponumber" multiple ng-options="pol.id as pol.po_no for pol in vendorpolist">
+            
+             			</select>
+						
+					</div>
+					<div class="col-sm-3 col-md-3 col-xs-8">
+						<div class="btn btn-success" ng-click="pochange()">Search</div>
+						
+					</div>
+				</div> -->
+				
+			</div>
+
+
+			<div class="table-responsive col-sm-12" ng-show="pomateriallist.length>0" ng-repeat="pomat in pomateriallist">
+				<div class="jumbobox col-sm-12">
+					<h3>{{pomat.po_no}}</h3>
+		            <table class="table table-striped smallfont">
+		 				<thead>
+		 					<tr class="innerhead">
+		 						<th class="col-sm-1">S.No</th>
+		 						<th class="col-sm-6">Name</th>
+		 						<th class="col-sm-1">Purchase Qty</th>
+		 						<th class="col-sm-1">Unit rate</th>
+		 						<th class="col-sm-1">Total payment qty<span style="font-size:10px;">(till now)</span></th>
+		 						<th class="col-sm-1">Pending payment qty<span style="font-size:10px;">(for the current Internal DI)</span></th>
+		 						<th class="col-sm-1">Current payment qty</th>
+		 						<th class="col-sm-1">Current payment cost</th>
+		 					</tr>
+		 				</thead>
+		 				<tr ng-repeat="indipomat in pomat.pomaterials">
+		 					<td scope="row">{{$index+1}}</td>
+		 					<td>{{indipomat.storematerial['name']}}</td>
+		 					<td>{{indipomat.quantity}}</td>
+		 					<td>{{indipomat.unit_rate}}</td>
+		 					<td>{{indipomat.payment_qty}}</td>
+		 					<td>{{indipomat.pendingpayqty}}</td>
+		 					<td><input type="text" ng-model="indipomat.currentpayqty" class="col-sm-12" ng-blur="caltotalpaycost(indipomat, pomat)"/></td>
+		 					<td>{{indipomat.currentpaycostn}}</td>
+		 				</tr>
+		 				<tr>
+		 					<td colspan="6" class="text-right"><strong>Total (in Rs.)</strong></td>
+		 					<td>{{pomat.totalmatcostn}}</td>
+		 				</tr>
+		 			</table>
+
+					<h3>Taxes</h3>
+		            <table class="table table-striped smallfont col-sm-8">
+		 				<thead>
+		 					<tr class="innerhead">
+		 						<th class="col-sm-1">S.No</th>
+		 						<th class="col-sm-6">Tax</th>
+		 						<th class="col-sm-4">Description</th>
+		 						<th class="col-sm-2">Amount</th>
+		 					</tr>
+		 				</thead>
+		 				<tr ng-repeat="indipotax in pomat.taxes">
+		 					<td scope="row">{{$index+1}}</td>
+		 					<td>{{indipotax.name}}</td>
+		 					<td>{{indipotax.tax_desc}} <span ng-show="indipotax.taxpercentage != '0.00'">({{indipotax.taxpercentage}}%)</span></td>
+		 					<td>{{indipotax.newtaxvalue}}</td>
+		 				</tr>
+		 				<tr>
+		 					<td colspan="3" class="text-right"><strong>Total (in Rs.)</strong></td>
+		 					<td>{{pomat.totaltaxcost}}</td>
+
+		 				</tr>
+		 			</table>
+		 		</div>
+
+	 		</div>
+
+	 		<div class="jumbobox col-sm-6" ng-show="totalmatcost">
+	 			<h4>Cost summary</h4>
+
+	 			<div class="form-group smallfont">
+ 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Total payment cost (a)</div>
+ 					<div class="col-sm-8 col-xs-8 control-label">
+	 					{{totalmatcostn}}
+					</div>
+				</div>
+
+				<div class="form-group smallfont">
+ 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Total tax cost (b)</div>
+ 					<div class="col-sm-8 col-xs-8 control-label">
+	 					{{totaltaxcostn}}
+					</div>
+				</div>
+
+				<div class="form-group smallfont">
+ 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Net (a+b)</div>
+ 					<div class="col-sm-8 col-xs-8 control-label">
+	 					{{netcost}}
+					</div>
+				</div>
+				
+	 		</div>
+
+	 		<div style="clear:both;height:10px;"></div>
+
+	 		<div class="jumbobox col-sm-6" ng-show="pomateriallist.length>0">
+				<h6><strong>Add Payment Terms</strong></h6>
+
+ 				<div class="form-group smallfont">
+ 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Payment Type</div>
+ 					<div class="col-sm-8 col-xs-8">
+	 					<input type="radio" ng-model="payterms['payment_type']" value="PDC" /> PDC &nbsp; &nbsp; <input type="radio" ng-model="payterms['payment_type']" value="LC" /> LC &nbsp; &nbsp;  <input type="radio" ng-model="payterms['payment_type']" value="BG" /> BG &nbsp; &nbsp; <input type="radio" ng-model="payterms['payment_type']" value="Direct payment" /> Direct payment
+					</div>
+				</div>
+
+				<div class="form-group smallfont" ng-show="payterms['payment_type'] == 'LC'">
+ 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">LC time period</div>
+ 					<div class="col-sm-3 col-xs-3">
+	 					<input type="text" class="form-control" ng-model="payterms['lc_time_period']" ng-blur="changeoflctimeperiod()" />
+					</div>
+
+				</div>
+
+				
+
+				<div class="form-group smallfont" ng-show="payterms['payment_type'] == 'PDC'">
+ 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">PDC time period</div>
+ 					<div class="col-sm-3 col-xs-3">
+	 					<input type="text" class="form-control" ng-model="payterms['pdc_time_period']" />
+					</div>
+
+				</div>
+
+				<div class="form-group smallfont" ng-show="payterms['payment_type'] == 'Direct payment'">
+ 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Description</div>
+ 					<div class="col-sm-6 col-xs-6">
+	 					<textarea type="text" class="form-control" ng-model="payterms['direct_payment_desc']" >{{payterms['direct_payment_desc']}}</textarea>
+					</div>
+
+				</div>
+
+				<div class="form-group smallfont" ng-show="payterms['payment_type'] == 'BG'">
+ 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">BG time period (in Rs.)</div>
+ 					<div class="col-sm-3 col-xs-3">
+	 					<input type="text" class="form-control" ng-model="payterms['bg_time_period']" />
+					</div>
+
+				</div>
+
+				<div class="form-group smallfont" ng-show="payterms['payment_type'] == 'LC'">
+ 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">LC interest %</div>
+
+ 					<div class="col-sm-3 col-xs-3">
+	 					<input type="text" class="form-control" ng-blur="calculatelcinterest()" ng-model="payterms['lc_interest_percentage']" />
+					</div>
+				</div>
+
+
+				<div class="form-group smallfont" ng-show="payterms['payment_type'] == 'LC'">
+ 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Interest days on vendor</div>
+ 					<div class="col-sm-3 col-xs-3">
+	 					<input type="text" class="form-control" ng-model="payterms['lc_interest_days_vendor']" ng-blur="calculate_vendor_sse_interest()" />
+					</div>
+
+				</div>
+
+				<div class="form-group smallfont" ng-show="payterms['payment_type'] == 'LC'">
+ 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Interest days on SSE</div>
+ 					<div class="col-sm-3 col-xs-3">
+	 					<input type="text" class="form-control" ng-model="payterms['lc_interest_days_sse']" readonly />
+					</div>
+
+				</div>
+
+				<div class="form-group smallfont" ng-show="payterms['payment_type'] == 'LC'">
+ 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">LC interest value on Total</div>
+
+					<div class="col-sm-3 col-xs-3">
+	 					<input type="text" class="form-control lcinterestvalue" ng-model="payterms['lc_interest_value']" readonly />
+					</div>
+				</div>
+
+				
+				<div class="form-group smallfont" ng-show="payterms['payment_type'] == 'LC'">
+ 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Interest amount on SSEL A/c</div>
+					<div class="col-sm-4 col-xs-4">
+	 					<input type="text" class="form-control sseintamt" ng-model="payterms['interest_amount_sselac']" readonly>
+					</div>
+				</div>
+
+				<div class="form-group smallfont" ng-show="payterms['payment_type'] == 'LC'">
+ 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Interest amount on vendor A/c</div>
+
+					<div class="col-sm-4 col-xs-4">
+	 					<input type="text" class="form-control vendorintamt" ng-model="payterms['interest_amount_vendorac']" readonly>
+					</div>
+ 				</div>
+
+	 				
+            </div>
+
+            <div class="form-group smallfont col-sm-12" ng-show="pomateriallist.length>0">
+		 		<div for="inputEmail3" class="col-sm-2 col-md-2 col-xs-4 control-label"></div>
+		 		<div class="col-sm-4 col-md-4 col-xs-8 jumbobox" style="padding:5px">
+		 			<label class="radio-inline">
+		 				<input type="radio" ng-model="actype" value="existing" > Existing bank account
+		 			</label>
+		 			<label class="radio-inline">
+		 				<input type="radio" ng-model="actype" value="new" > New bank account
+		 			</label>
+		 		
+		 		</div>
+		 	</div>
+
+            <div class="form-group smallfont hidden-print" ng-show="actype=='existing' && pomateriallist.length>0">
+				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Vendor account<span class="astrix">*</span></div>
+				<div class="col-sm-3 col-md-3 col-xs-8">
+					<select class="form-control smallfont" chosen options="vendordetails.accountdetails" ng-model="vendoraccid" ng-options="indiac as (indiac.bank_name+'('+indiac.account_number+')') for indiac in vendordetails.accountdetails" >
+        
+         			</select>
+					
+				</div>
+				<div style="clear:both;height:20px;"></div>
+				<div class="jumbobox col-sm-6" ng-show="vendoraccid">
+		 			<h4>Bank account details</h4>
+						
+		 			<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Account Number</div>
+			 			<div class="col-sm-5 col-md-5 col-xs-8 control-label">
+			 				{{vendoraccid.account_number}}
+			 			</div>
+			 		</div>
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">IFSC code</div>
+			 			<div class="col-sm-5 col-md-5 col-xs-8 control-label">
+			 				{{vendoraccid.ifsc_code}}
+			 			</div>
+			 		</div>
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Bank name</div>
+			 			<div class="col-sm-5 col-md-5 col-xs-8 control-label">
+			 				{{vendoraccid.bank_name}}
+			 			</div>
+			 		</div>
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Bank branch</div>
+			 			<div class="col-sm-5 col-md-5 col-xs-8 control-label">
+			 				{{vendoraccid.bank_branch}}
+			 			</div>
+			 		</div>
+			 		
+				</div>
+
+			</div>
+
+			<div class="jumbobox col-sm-10" ng-show="actype=='new' && pomateriallist.length>0">
+	 			<h4>Enter Bank account details</h4>
+					
+	 			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Account Number</div>
+		 			<div class="col-sm-4 col-md-4 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="accountno" />
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">IFSC code</div>
+		 			<div class="col-sm-4 col-md-4 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="ifsccode" />
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Bank name</div>
+		 			<div class="col-sm-4 col-md-4 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="bankname" />
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Bank branch</div>
+		 			<div class="col-sm-4 col-md-4 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="bankbranch" />
+		 			</div>
+		 		</div>
+		 		
+			</div>
+
+	 		<div class="form-group smallfont submitbtn hidden-print col-sm-12" ng-show="pomateriallist.length>0 && !interofmemourl">
+	 			<div class="col-sm-offset-3 col-sm-3 col-md-3 col-xs-8">
+	 				<div class="btn btn-success" ng-click="save_payment()">Generate Inter Office Memo</div>
+	 			</div>
+	 		</div>
+
+
+			<div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont" style="margin-top:15px;" ng-show="interofmemourl">
+    			<p><strong>Inter Office Memo File</strong></p>
+    			<table class="table table-striped">
+    				<thead>
+    					<tr class="innerhead">
+
+    						<th class="col-sm-4">File</th>
+    						<th class="col-sm-1">Download</th>
+    					</tr>
+    				</thead>
+    				<tr>
+    					<td>INTERMEMO-{{payid}}</td>
+    					<td><a href="{{interofmemourl}}" download style="color:blue;">Download</a></td>
+    				</tr>
+    			</table>
+    		</div>
+
+    		<div style="clear:both;"></div>
+
+	 		<div class="form-group smallfont hidden-print" ng-show="memono">
+	 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Payment Raising option:</div>
+	 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+	 				<input type="radio" name="call" ng-model="paymentraisetype" value="manual">Manual
+	 				<input type="radio" name="call" ng-model="paymentraisetype" value="mail">Mail
+	 			</div>
+          	</div>
+          	<div style="clear:both;"></div>
+          <div class="panel panel-default" ng-show="paymentraisetype=='mail' && memono">
+            <div class="panel-heading">Payment Raising(Mail)</div>
+            <div class="panel-body">
+            	<div class="form-group smallfont">
+            		<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">To:<span class="astrix">*</span></div>
+            		<div class="col-sm-6 col-xs-6">
+            			<input type="text" class="form-control" ng-model="to" placeholder="Enter email id">
+            		</div>
+            	</div>
+            	<div class="form-group smallfont">
+            		<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">CC:</div>
+            		<div class="col-sm-6 col-xs-6">
+            			<input type="text" class="form-control" ng-model="cc" placeholder="Enter Comma(,) seperated email ids">
+            		</div>
+            	</div>
+
+            	<div class="form-group smallfont">
+            		<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Subject<span class="astrix">*</span></div>
+            		<div class="col-sm-6 col-xs-6">
+            			<input type="text" class="form-control" ng-model="subject">
+            		</div>
+            	</div>
+            	<div class="form-group smallfont">
+            		<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Attachment:</div>
+            		<div class="col-sm-6 col-xs-6">
+            			<input type="file" id="file_inspinternal" class="form-control" file-change="uploaddidoc"/>
+            		</div>
+            		<div class="col-sm-2 col-xs-4 submitbtn">
+            			<button type="button" class="btn btn-success smallfont " ng-click="add_payment_doc()">Add</button>
+            		</div>
+            		<div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont" style="margin-top:15px;">
+            			<p><strong>Inspection call Raise Attachment Files</strong></p>
+            			<table class="table table-striped">
+            				<thead>
+            					<tr class="innerhead">
+
+            						<th class="col-sm-4">File</th>
+            						<th class="col-sm-1">Download</th>
+            						<th class="col-sm-1">Delete</th>
+            					</tr>
+            				</thead>
+            				<tr ng-repeat="doc in file_attachments">
+            					<td>{{doc.doc_name}}</td>
+            					<td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+            					<td><button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_paymentdoc(doc.doc_url)"><i class="fa fa-times"></i></button></td>
+            				</tr>
+            			</table>
+            		</div>
+
+            		<div style="clear:both;height:10px;"></div>
+              	</div>
+
+              	<div class="form-group smallfont">
+              		<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Email Text<span class="astrix">*</span></div>
+              		<div class="col-sm-6 col-xs-6">
+              			<textarea class="form-control" placeholder="Write email text here..." rows="6" ng-model="emailcontent"></textarea>
+              		</div>
+                
+              	</div>
+            </div>
+          	</div>
+         	
+          <!------Manual ---->
+          	<div class="panel panel-default" ng-show="paymentraisetype=='manual' && memono">
+          		<div class="panel-heading">Payment Raising Details(Manual)</div>
+          		<div class="panel-body">
+          			<!-- {{inspdetails.inspectioncallraises}} -->
+          			<div class="form-group smallfont">
+          				<div for="inputEmail3" class="col-sm-1 col-xs-1 control-label">Payment Raise Date</div>
+          				<div class="col-sm-4 col-xs-6">
+          					<input type="date" class="form-control" ng-model="paymentdate" aria-describedby="sizing-addon1">
+          				</div>
+          			</div>
+
+          			<div class="form-group smallfont">
+          				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Attachment:</div>
+          				<div class="col-sm-6 col-xs-6">
+          					<input type="file" id="file_inspinternal" class="form-control" file-change="uploaddidoc"/>
+          				</div>
+          				<div class="col-sm-2 col-xs-4 submitbtn">
+          					<button type="button" class="btn btn-success smallfont " ng-click="add_payment_doc()">Add</button>
+          				</div>
+          				<div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont" style="margin-top:15px;">
+          					<p><strong>Payment Raise Attachment Files</strong></p>
+          					<table class="table table-striped">
+          						<thead>
+          							<tr class="innerhead">
+
+          								<th class="col-sm-4">File</th>
+          								<th class="col-sm-1">Download</th>
+          								<th class="col-sm-1">Delete</th>
+          							</tr>
+          						</thead>
+          						<tr ng-repeat="doc in file_attachments">
+          							<td>{{doc.doc_name}}</td>
+          							<td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+          							<td><button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_paymentdoc(doc.doc_url)"><i class="fa fa-times"></i></button></td>
+          						</tr>
+          					</table>
+          				</div>
+
+          				<div style="clear:both;height:10px;"></div>
+          			</div>
+
+
+            	</div>
+        	</div>
+
+        	<div class="form-group smallfont submitbtn hidden-print col-sm-12" ng-show="memono">
+	 			<div class="col-sm-offset-3 col-sm-3 col-md-3 col-xs-8">
+	 				<div class="btn btn-success" ng-click="submit_payment()">SEND MAIL &amp; SUBMIT</div>
+	 			</div>
+	 		</div>
+
+		</form>
+
+	</div>
+
+</div>
+
+<!-- Modal -->
+<div id="paymentModal" class="modal fade" role="dialog">
+  	<div class="modal-dialog">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	    	<div class="modal-header">
+	        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+	        	<h4 class="modal-title">INTER OFFICE MEMO</h4>
+	    	</div>
+	    	<div class="modal-body paymentcontent" style="display:inline-block">
+
+	    		<div class="col-sm-12">
+	    			
+	    			<div class="col-sm-6">
+	    				{{memono}}
+	    			</div>
+
+	    			<div class="col-sm-6">
+	    				DATE: {{today}}
+	    			</div>
+				</div>
+				<div class="col-sm-12">
+	    			<table class="table table-bordered smallfont paymenttable" border="1">
+		 				<thead>
+		 					<tr class="innerhead">
+		 						<th class="col-sm-6 text-center">FROM: {{userinfo['designation']}}</th>
+		 						<th class="col-sm-6 text-center">TO: F&amp;A</th>
+		 					
+		 					</tr>
+		 					<tr class="innerhead">
+		 						<th class="col-sm-6 text-center">DEPARTMENT   :  SCM</th>
+		 						<th class="col-sm-6 text-center">DEPARTMENT : Finance</th>
+		 					
+		 					</tr>
+		 				</thead>
+		 				<tr>
+							<td colspan="2" class="text-center"><strong>Through :  President (Projects)</strong></td>
+		 				</tr>
+		 				<tr>
+							<td colspan="2"><strong>Sub:- Payment Request for {{uniqmat}}  thr' <span ng-if="payterms['payment_type']=='LC'">{{payterms['lc_time_period']}} days LC</span><span ng-if="payterms['payment_type']=='BG'">{{payterms['bg_time_period']}} days Bank Guarantee</span><span ng-if="payterms['payment_type']=='PDC'">{{payterms['pdc_time_period']}} days PDC</span><span ng-if="payterms['payment_type']=='Direct payment'">Direct payment</span> to {{vendorid.name}} -  {{projectid.name}} - Reg. </strong></td>
+		 				</tr>
+		 				</table>
+								
+						<p>Dear Sir,</p>
+
+						<p>With reference to aforementioned subject, we request you to arrange payment as per our payment terms i.e., <span ng-if="payterms['payment_type']=='LC'">{{payterms['lc_time_period']}} days LC</span><span ng-if="payterms['payment_type']=='BG'">{{payterms['bg_time_period']}} days Bank Guarantee</span><span ng-if="payterms['payment_type']=='PDC'">{{payterms['pdc_time_period']}} days PDC</span><span ng-if="payterms['payment_type']=='Direct payment'">Direct payment</span> <span ng-if="payterms['payment_type']=='LC'"> <span ng-if="payterms['lc_interest_days_sse'] != '0'">({{payterms['lc_interest_days_sse']}} Days Interest to SSEL @ {{payterms['lc_interest_percentage']}}% PA &amp; </span>{{payterms['lc_interest_days_vendor']}} days to {{vendorid.name}})</span> for amounting to Rs {{netcost}} (<strong>{{totalmatcostinwords}} ONLY</strong>) against PO No: <span ng-repeat="indipo in poinfo">{{indipo.pono}} dt: {{dateconv(indipo.podate)}} <span ng-show="poinfo.length > 1 && poinfo.length != ($index+1)"></span></span> for {{projectid.client}} ({{projectid.name}}).</p>
+
+						<p>Thanks and Regards,</p>
+
+
+						<p>{{userinfo.name}} </p>
+						<p>{{userinfo.designation}}  </p>
+
+						<p><strong>Encl:</strong></p>
+						<ol>
+						<li>PO Acknowledgment</li>
+						<li>Proforma Invoice</li>
+						</ol>
+
+	    		</div>
+	        
+	    	</div>
+	    	<div class="modal-footer">
+	        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	    	</div>
+	    </div>
+
+  	</div>
+</div>

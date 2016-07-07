@@ -1,0 +1,363 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Material Issue Report</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal">
+
+				<div class="form-group smallfont">
+		 			<div class="col-sm-6 col-md-6 col-xs-8 jumbobox" style="padding:5px;">
+		 				<label class="radio-inline">
+		 					<input type="radio" ng-model="materialissueopt" id="inlineRadio1" value="projectmanager"> Issued to Project
+		 				</label>
+		 				
+		 				<label class="radio-inline">
+		 					<input type="radio" ng-model="materialissueopt" id="inlineRadio1" value="subcontractor"> Issued to Sub Contractor
+		 				</label>
+
+		 				<label class="radio-inline">
+		 					<input type="radio" ng-model="materialissueopt" id="inlineRadio1" value="thirdparty"> Issued to Third Party
+		 				</label>
+		 				
+		 			</div>
+		 		</div>
+
+		 		<!-- ----------------------------------- Issued to project manager section starts ---------------------------------------- -->
+
+		 		<div class="issuetoprojmanager" ng-show="materialissueopt == 'projectmanager'">
+
+		 			<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Sub Station</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont">
+			 					<option value="select">SELECT</option>
+			 					<option>NOs</option>
+			 					<option>KG</option>
+			 					<option>3</option>
+			 					<option>4</option>
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont">
+			 					<option value="select">SELECT</option>
+			 					<option>NOs</option>
+			 					<option>KG</option>
+			 					<option>3</option>
+			 					<option>4</option>
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Feeder</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont">
+			 					<option value="select">SELECT</option>
+			 					<option>NOs</option>
+			 					<option>KG</option>
+			 					<option>3</option>
+			 					<option>4</option>
+			 				</select>
+			 			</div>
+			 		</div>
+
+
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material Type</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont">
+			 					<option value="select">SELECT</option>
+			 					<option>NOs</option>
+			 					<option>KG</option>
+			 					<option>3</option>
+			 					<option>4</option>
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont submitbtn">
+			 			<div class="col-sm-2 col-md-2 col-xs-8">
+			 				<button type="button" class="btn btn-success" ng-click="generaterpt = materialissueopt">Generate</button>
+			 			</div>
+			 		</div>
+
+
+			 		<div class="jumbobox col-sm-12" ng-show="generaterpt == 'projectmanager'">
+
+			 			<div for="inputEmail3" class="col-sm-12 col-xs-12 control-label"><strong>Project Name:</strong> &nbsp; &nbsp; Ananthapur 33</div>
+			 					
+
+		 				<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label"><strong>Project Manager:</strong> &nbsp; &nbsp; SR Reddy</div>
+		 				
+
+		 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label"><strong>Sub Station:</strong> &nbsp; &nbsp; SS04</div>
+		 				
+		 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label"><strong>Feeder:</strong> &nbsp; &nbsp; HDGS</div>
+		 				
+		 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label"><strong>Year:</strong> &nbsp; &nbsp; 2015</div>
+		 				
+
+		 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label"><strong>Month:</strong> &nbsp; &nbsp; May</div>
+		 				
+
+
+				 	</div>
+
+
+			 		<div class="col-sm-8 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="generaterpt == 'projectmanager'">
+
+
+			 			<table class="table table-striped">
+			 				<thead>
+			 					<tr class="innerhead">
+			 						<th>S.No</th>
+			 						<th class="coloredhead">Transformers</th>
+			 						<th>Total Issued Qty</th>
+			 						<th>View</th>
+			 					</tr>
+			 				</thead>
+			 				<tr>
+			 					<td scope="row">1</td>
+			 					<td>16 Kva 3 Phase Transformer</td>
+			 					<td>142</td>
+			 					<td>View details</td>
+			 				</tr>
+			 				<tr>
+			 					<td scope="row">1</td>
+			 					<td>16 Kva 3 Phase Transformer</td>
+			 					<td>142</td>
+			 					<td>View details</td>
+			 				</tr>
+			 				
+			 			</table>
+
+			 			
+
+			 		</div><!-- col-sm-8 ends -->
+
+
+			 	</div>
+
+
+		 		<!-- ----------------------------------- Issued to project manager section ends ---------------------------------------- -->
+
+				
+				<!-- ----------------------------------- Issued to sub contractor section starts ---------------------------------------- -->
+
+		 		<div class="issuetoprojmanager" ng-show="materialissueopt == 'subcontractor'">
+
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont">
+			 					<option value="select">SELECT</option>
+			 					<option>NOs</option>
+			 					<option>KG</option>
+			 					<option>3</option>
+			 					<option>4</option>
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Manager</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont">
+			 					<option value="select">SELECT</option>
+			 					<option>NOs</option>
+			 					<option>KG</option>
+			 					<option>3</option>
+			 					<option>4</option>
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Sub Contractor</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont">
+			 					<option value="select">SELECT</option>
+			 					<option>NOs</option>
+			 					<option>KG</option>
+			 					<option>3</option>
+			 					<option>4</option>
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material Type</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont">
+			 					<option value="select">SELECT</option>
+			 					<option>NOs</option>
+			 					<option>KG</option>
+			 					<option>3</option>
+			 					<option>4</option>
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont submitbtn">
+			 			<div class="col-sm-2 col-md-2 col-xs-8">
+			 				<button type="button" class="btn btn-success" ng-click="generaterpt = materialissueopt">Generate</button>
+			 			</div>
+			 		</div>
+
+
+			 		<div class="jumbobox col-sm-12" ng-show="generaterpt == 'subcontractor'">
+
+			 			<div for="inputEmail3" class="col-sm-12 col-xs-12 control-label"><strong>Project Name:</strong> &nbsp; &nbsp; Ananthapur 33</div>
+			 					
+
+		 				<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label"><strong>Sub Contractor:</strong> &nbsp; &nbsp; S K Singh</div>
+		 				
+
+		 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label"><strong>Sub Station:</strong> &nbsp; &nbsp; SS04</div>
+		 				
+		 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label"><strong>Feeder:</strong> &nbsp; &nbsp; HDGS</div>
+		 				
+		 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label"><strong>Year:</strong> &nbsp; &nbsp; 2015</div>
+		 				
+
+		 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label"><strong>Month:</strong> &nbsp; &nbsp; May</div>
+		 				
+
+
+				 	</div>
+
+
+			 		<div class="col-sm-8 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="generaterpt == 'subcontractor'">
+
+
+			 			<table class="table table-striped">
+			 				<thead>
+			 					<tr class="innerhead">
+			 						<th>S.No</th>
+			 						<th class="coloredhead">Transformers</th>
+			 						<th>Total Issued Qty</th>
+			 						<th>View</th>
+			 					</tr>
+			 				</thead>
+			 				<tr>
+			 					<td scope="row">1</td>
+			 					<td>16 Kva 3 Phase Transformer</td>
+			 					<td>142</td>
+			 					<td>View details</td>
+			 				</tr>
+			 				<tr>
+			 					<td scope="row">1</td>
+			 					<td>16 Kva 3 Phase Transformer</td>
+			 					<td>142</td>
+			 					<td>View details</td>
+			 				</tr>
+			 				
+			 			</table>
+
+			 			
+
+			 		</div><!-- col-sm-8 ends -->
+
+
+			 	</div>
+
+
+		 		<!-- ----------------------------------- Issued to project manager section ends ---------------------------------------- -->
+
+
+				<!-- ----------------------------------- Issued to third party section starts ---------------------------------------- -->
+
+		 		<div class="issuetoprojmanager" ng-show="materialissueopt == 'thirdparty'">
+
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Third Party</div>
+			 			<div class="col-sm-3 col-md-3 col-xs-8">
+			 				<select class="form-control smallfont">
+			 					<option value="select">SELECT</option>
+			 					<option>NOs</option>
+			 					<option>KG</option>
+			 					<option>3</option>
+			 					<option>4</option>
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont submitbtn">
+			 			<div class="col-sm-2 col-md-2 col-xs-8">
+			 				<button type="button" class="btn btn-success" ng-click="generaterpt = materialissueopt">Generate</button>
+			 			</div>
+			 		</div>
+
+
+			 		<div class="jumbobox col-sm-12" ng-show="generaterpt == 'thirdparty'">
+
+		 				<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label"><strong>Third Party:</strong> &nbsp; &nbsp; S K Singh</div>
+		 				
+		 				
+		 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label"><strong>Year:</strong> &nbsp; &nbsp; 2015</div>
+		 				
+
+		 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label"><strong>Month:</strong> &nbsp; &nbsp; May</div>
+		 				
+
+
+				 	</div>
+
+
+			 		<div class="col-sm-8 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="generaterpt == 'thirdparty'">
+
+
+			 			<table class="table table-striped">
+			 				<thead>
+			 					<tr class="innerhead">
+			 						<th>S.No</th>
+			 						<th class="coloredhead">Transformers</th>
+			 						<th>Total Issued Qty</th>
+			 						<th>View</th>
+			 					</tr>
+			 				</thead>
+			 				<tr>
+			 					<td scope="row">1</td>
+			 					<td>16 Kva 3 Phase Transformer</td>
+			 					<td>142</td>
+			 					<td>View details</td>
+			 				</tr>
+			 				<tr>
+			 					<td scope="row">1</td>
+			 					<td>16 Kva 3 Phase Transformer</td>
+			 					<td>142</td>
+			 					<td>View details</td>
+			 				</tr>
+			 				
+			 			</table>
+
+			 			
+
+			 		</div><!-- col-sm-8 ends -->
+
+
+			 	</div>
+
+
+		 		<!-- ----------------------------------- Issued to project manager section ends ---------------------------------------- -->
+
+
+
+
+		 	</form>
+		 </div>
+
+
+	</div>
+</div>

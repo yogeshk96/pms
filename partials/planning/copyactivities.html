@@ -1,0 +1,42 @@
+
+<div class="container">
+	<form class="form-horizontal">
+
+		<div class="row">
+
+			<div class="col-sm-12">
+
+				
+				<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Source Project <span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" chosen options="projectlist" ng-model="sourceprojectid" ng-options="projlist.id as projlist.name for projlist in projectlist" >
+            
+             			</select>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Destination Project <span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" chosen options="projectlist" ng-model="destprojectid" ng-options="projlist.id as projlist.name for projlist in projectlist" >
+            
+             			</select>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label"></div>
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<button class="btn btn-success btn-sm smallfont" ng-click="copyactivity()">COPY ACTIVITIES</button>
+		 			</div>
+		 		</div>
+				
+			</div>
+			
+		</div>
+
+	</form>
+
+</div>
+

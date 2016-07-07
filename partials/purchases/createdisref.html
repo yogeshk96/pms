@@ -1,0 +1,198 @@
+<div class="container-fluid">
+	<div class="row-fluid">
+    	<div class="clearfix" style="height:20px;"></div>
+      	<form class="form-horizontal">
+	        <div class="col-sm-12 col-xs-12 hidden-print">
+	          	<p><strong>Create Dispatch Reference</strong></p>
+	          	<div class="form-group smallfont hidden-print">
+	          		<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+	          			Select Project<span class="astrix">*</span>
+	          		</div>
+		        	<div class="col-sm-3 col-md-3 col-xs-8">
+		          		<select class="form-control smallfont" chosen options="projectlist" ng-model="projectid" ng-options="projlist.id as projlist.name for projlist in projectlist" ng-change="hideall()">
+		         		</select>
+		        	</div>
+		        </div>
+	          	<div class="form-group smallfont hidden-print">
+	            	<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+	            		Select Vendor<span class="astrix">*</span>
+	            	</div>
+		            <div class="col-sm-3 col-md-3 col-xs-8">
+		              <select class="form-control smallfont" chosen ng-model="vendorid" options="vendorlist" ng-options="venlist.id as venlist.name for venlist in vendorlist" ng-change="changevend()">
+		              </select>
+		            </div>
+		            
+	          	</div>
+	          	<div class="form-group smallfont hidden-print" ng-show="polist">
+		            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Purchase Order No<span class="astrix">*</span></div>
+		            <div class="col-sm-3 col-md-3 col-xs-8" style="padding-left:0px;margin-left:16px;" >
+		              <select class="form-control smallfont" chosen  multiple options="polist" ng-model="ponumber" ng-options="thispo.id as thispo.po_no for thispo in polist">
+		            
+		              </select>
+		            </div>
+		            <div class="col-sm-2 col-xs-4 submitbtn">
+		               <button type="button" class="btn btn-success smallfont " ng-click="getinslist()">Get Inspections</button>
+		            </div>
+		        </div>
+		        <div class="form-group smallfont hidden-print" ng-show="showinsbox">
+		            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+		            	Select Inspection Reference<span class="astrix">*</span>
+		            </div>
+		            <div class="col-sm-3 col-md-3 col-xs-8" style="padding-left:0px;margin-left:14px;">
+		            	<select class="form-control smallfont" chosen options="inslist" ng-model="insnumber" ng-options="thisins.id as thisins.inspection_ref_no for thisins in inslist" ng-change="inschangefunc()">
+		            
+		            	</select>
+		            </div>
+		             <div class="col-sm-2 col-xs-4 submitbtn">
+		               <button type="button" class="btn btn-success smallfont " ng-click="getdisdata()">Get Dispatch Data</button>
+		            </div>
+	            </div>
+	            <hr>
+	            <div ng-show="showdidets">
+		            <div class="form-group smallfont hidden-print">
+			            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+			            	Existing Dispatch References<span class="astrix">*</span>
+			            </div>
+			            <ol style="float:left;">
+			            	<li ng-repeat="x in dilist">{{x.dispatch_reference}}</li>
+			            </ol>
+		            </div>
+		            <!-- <div class="form-group smallfont hidden-print">
+			            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+			            	New Reference Name<span class="astrix">*</span>:
+			            </div>
+			            <div class="col-sm-3 col-md-3 col-xs-8" style="padding-left:0px;">
+			              <input type="text" class="form-control" ng-model="newrefname">
+			            </div>
+			        </div> -->
+			        <div class="form-group smallfont hidden-print">
+			            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+			            	Select Inspection Call Raising option:
+			            </div>
+			            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+			            	<input type="radio" name="call" ng-model="callraisetype" value="manual">Manual
+			            	<input type="radio" name="call" ng-model="callraisetype" value="mail">Mail
+			            </div>
+			        </div>
+					<div class="panel panel-default" ng-show="callraisetype=='mail'">
+			            <div class="panel-heading">Dispatch Request to Department (Mail)</div>
+			            <div class="panel-body">
+			              <div class="form-group smallfont">
+			               <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">To:<span class="astrix">*</span></div>
+			                <div class="col-sm-6 col-xs-6">
+			                  <input type="text" class="form-control" ng-model="to" placeholder="Enter email id">
+			                </div>
+			              </div>
+			              <div class="form-group smallfont">
+			               <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">CC:</div>
+			                <div class="col-sm-6 col-xs-6">
+			                  <input type="text" class="form-control" ng-model="cc" placeholder="Enter Comma(,) seperated email ids">
+			                </div>
+			              </div>
+
+			              <div class="form-group smallfont">
+			                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Subject<span class="astrix">*</span></div>
+			                <div class="col-sm-6 col-xs-6">
+			                  <input type="text" class="form-control" ng-model="subject">
+			                </div>
+			              </div>
+			              <div class="form-group smallfont">
+			                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Attachment:</div>
+			                <div class="col-sm-6 col-xs-6">
+			                  <input type="file" id="file_inspinternal" class="form-control" file-change="uploaddidoc"/>
+			                </div>
+			                 <div class="col-sm-2 col-xs-4 submitbtn">
+			                   <button type="button" class="btn btn-success smallfont " ng-click="add_di_doc('inspection_call_raise')">Add</button>
+			                </div>
+			                <div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont" style="margin-top:15px;">
+			                  <p><strong>Inspection call Raise Attachment Files</strong></p>
+			                  <table class="table table-striped">
+			                    <thead>
+			                     <tr class="innerhead">
+
+			                        <th class="col-sm-4">File</th>
+			                        <th class="col-sm-1">Download</th>
+			                        <th class="col-sm-1">Delete</th>
+			                      </tr>
+			                    </thead>
+			                    <tr ng-repeat="doc in file_attachments">
+			                      <td>{{doc.doc_name}}</td>
+			                      <td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+			                      <td><button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_didoc(doc.doc_url)"><i class="fa fa-times"></i></button></td>
+			                    </tr>
+			                  </table>
+			                </div>
+
+			                <div style="clear:both;height:10px;"></div>
+			              </div>
+
+			              <div class="form-group smallfont">
+			                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Email Text<span class="astrix">*</span></div>
+			                <div class="col-sm-6 col-xs-6">
+			                 <textarea class="form-control" placeholder="Write email text here..." rows="6" ng-model="emailcontent"></textarea>
+			                </div>
+			                <!--  <div class="col-sm-2 col-xs-4 submitbtn">
+			                   <button type="button" class="btn btn-success smallfont " ng-click="raiseinspcall()">Send Email</button>
+			                </div> -->
+			              </div>
+			            </div>
+			        </div>
+		          	<div class="col-sm-2 col-xs-4 submitbtn" ng-show="callraisetype=='mail'">
+		             	<button type="button" class="btn btn-success smallfont " style="width:200px;" ng-click="createref()">
+		             		Create Reference & send Mail
+		            	</button>
+		        	</div>
+		    		<div class="panel panel-default" ng-show="callraisetype=='manual'">
+			            <div class="panel-heading">Dispatch Request to Department (Manual)</div>
+			            <div class="panel-body">
+			            <!-- {{inspdetails.inspectioncallraises}} -->
+			              <div class="form-group smallfont">
+			                <div for="inputEmail3" class="col-sm-1 col-xs-1 control-label">Call Raise Date</div>
+			                <div class="col-sm-4 col-xs-6">
+			                   <input type="date" class="form-control" ng-model="refdate" aria-describedby="sizing-addon1">
+			                </div>
+			              </div>
+
+			              <div class="form-group smallfont">
+			                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Attachment:</div>
+			                <div class="col-sm-6 col-xs-6">
+			                  <input type="file" id="file_inspinternal" class="form-control" file-change="uploaddidoc"/>
+			                </div>
+			                 <div class="col-sm-2 col-xs-4 submitbtn">
+			                   <button type="button" class="btn btn-success smallfont " ng-click="add_di_doc('inspection_call_raise')">Add</button>
+			                </div>
+			                <div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont" style="margin-top:15px;">
+			                  <p><strong>Inspection call Raise Attachment Files</strong></p>
+			                  <table class="table table-striped">
+			                    <thead>
+			                     <tr class="innerhead">
+
+			                        <th class="col-sm-4">File</th>
+			                        <th class="col-sm-1">Download</th>
+			                        <th class="col-sm-1">Delete</th>
+			                      </tr>
+			                    </thead>
+			                    <tr ng-repeat="doc in file_attachments">
+			                      <td>{{doc.doc_name}}</td>
+			                      <td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+			                      <td><button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_didoc(doc.doc_url)"><i class="fa fa-times"></i></button></td>
+			                    </tr>
+			                  </table>
+			                </div>
+
+			                <div style="clear:both;height:10px;"></div>
+			              </div>
+
+
+			            </div>
+			        </div>
+		          	<div class="col-sm-2 col-xs-4 submitbtn" ng-show="callraisetype=='manual'">
+			            <button type="button" class="btn btn-success smallfont " style="width:200px;" ng-click="createrefmanual()">
+			              	Create Reference & Save Details
+			            </button>
+		          	</div>
+	          	</div>
+	        </div>
+     	</form>
+    </div>
+</div>

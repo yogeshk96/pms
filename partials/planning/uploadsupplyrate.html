@@ -1,0 +1,54 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12">
+			<form class="form-horizontal">
+			<div class="form-group smallfont">
+	 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+	 			<div class="col-sm-3 col-md-3 col-xs-8">
+	 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="projlist.id as projlist.name for projlist in projectlist" ng-change="hidedownload='true'">
+			 					
+		 			</select>
+	 			</div>
+
+	 			<div class="col-sm-3 col-md-3 col-xs-8">
+	 				
+	 				<div class="btn btn-success" ng-click="generate_supply_rate_file()">GENERATE SAMPLE FILE</div>
+	 			</div>
+	 		</div>
+
+	 		<a href="{{filepath}}" download ng-show="filepath && !hidedownload">Download</a>
+
+	 		<div class="form-group smallfont">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Upload Supply Rate file</div>
+
+              
+              <div class="col-sm-3 col-md-3 col-xs-8">
+                <input type="file" id="file_inspcall" class="form-control" file-change="uploadsupplyfile"/>
+              </div>
+              
+              <button type="button" class="btn btn-primary smallfont" ng-click='Updatesupplyrate()'>Get Data</button>
+            </div>
+			
+		</div>
+
+		<table class="table table-striped table-responsive smallfont" ng-show="filedata">
+			<thead>
+				<tr class="innerhead">
+					<th class="col-sm-1">LOA Sl No</th>
+					<th class="col-sm-3">Description of Items</th>
+					<th class="col-sm-1">Supply Rate</th>
+					<th class="col-sm-1">F&amp;I Rate</th>
+				</tr>
+			</thead>	
+			<tr ng-repeat="filein in filedata">
+				<td>{{filein.no}}</td>
+				<td>{{filein.descr}}</td>
+				<td>{{filein.supply_rate}}</td>
+				<td>{{filein.fi_rate}}</td>					
+			</tr>
+		</table>
+
+		<button type="button" class="btn btn-primary smallfont" ng-click='savesupplyrate()' ng-show='filedata'>Save Supply rate</button>
+	</form>
+
+</div>

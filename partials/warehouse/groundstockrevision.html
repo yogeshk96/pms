@@ -1,0 +1,51 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+  <div class="row">
+    
+    <div class="clearfix" style="height:20px;"></div>
+
+    <p><strong>Ground Stock Revision</strong></p>
+
+    <p class="pagesubtitle">* Total stock report as of now</p>
+    
+    <div class="col-sm-12 col-xs-12 pmstable table-responsive">
+
+      <table class="table table-striped">
+
+        <tbody ng-repeat="stockdata in inventorydata">
+          <tr class="innerhead">
+            <th>S.No</th>
+            <th class="coloredhead">{{stockdata['name']}}</th>
+            <th>UOM</th>
+            <th>Existing Inventory</th>
+            <th class="col-sm-1">Physical Inventory</th>
+            <th class="col-sm-4">Remarks</th>
+          </tr>
+          <tr ng-repeat="stock in stockdata['submaterials']">
+            <td scope="row">{{$index+1}}</td>
+            <td>{{stock['name']}}</td>
+            <td>{{stock['units']}}</td>
+            <td>{{stock['stocks'][0]['quantity']}}</td>
+            <td><input type="text" class="form-control" ng-model="stock['stocks'][0]['physical_qty']"/></td>
+            <td><input type="text" class="form-control" ng-model="stock['stocks'][0]['remarks']"/></td>
+            
+          </tr>
+        </tbody>
+          
+      </table>
+
+    </div><!-- col-sm-9 ends -->
+
+    <div class="col-sm-2 col-xs-6 submitbtn hidden-print">
+      <button type="button" class="btn btn-success" ng-click="savegstockrevision()" ng-show="!printstock">Save</button>
+    </div>
+    <div class="col-sm-3 col-xs-6 hidden-print">
+      <button type="button" class="btn btn-success" onClick="window.print()" ng-show="printstock">Print</button>
+    </div>
+
+    
+  </div> <!-- row ends -->
+</div><!-- container ends -->
+
+<!-- page right main container ends -->

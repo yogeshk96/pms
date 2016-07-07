@@ -1,0 +1,26 @@
+<!--page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<form class="form-horizontal">
+			<div class="col-sm-12 col-xs-12">
+
+			<p><strong>Raise Request for closing PO</strong></p>
+
+	 			<div class="form-group smallfont hidden-print">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="polist.id as polist.name for polist in projectlist">
+	 					
+	 					</select>
+		 			</div>
+		 		</div>
+
+			</div>
+			
+		</form>
+	</div>
+</div>

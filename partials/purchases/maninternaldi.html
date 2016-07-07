@@ -1,0 +1,387 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="clearfix" style="height:20px;"></div>
+    <form class="form-horizontal">
+      <div class="col-sm-12 col-xs-12 hidden-print">
+        <p><strong>Internal Dispatch Instructions</strong></p>
+        <div class="form-group smallfont hidden-print">
+          <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+            Select Project<span class="astrix">*</span>
+          </div>
+          <div class="col-sm-3 col-md-3 col-xs-8">
+            <select class="form-control smallfont" chosen options="projectlist" ng-model="projectid" ng-options="projlist.id as projlist.name for projlist in projectlist" ng-change="hideall()">
+            </select>
+          </div>
+        </div>
+        <div class="form-group smallfont hidden-print">
+          <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+            Select Vendor<span class="astrix">*</span>
+          </div>
+          <div class="col-sm-3 col-md-3 col-xs-8">
+            <select class="form-control smallfont" chosen ng-model="vendorid" options="vendorlist" ng-options="venlist.id as venlist.name for venlist in vendorlist" ng-change="hideall()">
+            </select>
+          </div>
+          <div class="col-sm-2 col-xs-4 submitbtn" style="margin-left:13px;">
+            <button type="button" class="btn btn-success smallfont " ng-click="getpoquantities()">Get POS list</button>
+          </div>
+        </div>
+      </div>
+      <h4 ng-show="intdilist.length>0">
+        Already Raised Internal DIs
+        <span style="margin-left:20px;">
+           <button type="button" class="btn btn-default btn-xs" ng-show = "!showprev" ng-click="showprevintdi('show')">
+            Show 
+           </button>
+           <button type="button" class="btn btn-default btn-xs" ng-show="showprev" ng-click="showprevintdi('hide')">
+              hide
+             
+           </button>
+        </span>
+      </h4>
+      <div class="col-sm-12 col-xs-12 pmstable table-responsive"  ng-repeat="x in intdilist"  ng-show="showprev" style="background:#f9f9f9;border:1px solid #bababa;padding:2%;margin-bottom:10px;">
+            <div class="form-group smallfont hidden-print">
+                <div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">
+                  <b>Internal DI Ref Name:</b> {{x.ref_name}}
+                </div>
+                <div for="inputEmail3" class="col-sm-2 col-xs-2 control-label">
+                  <b>Internal DI ID:</b> {{x.id}}
+                </div>
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+                  <span><b>Call Raised On:</b> {{x.raisedate}}</span>
+                </div>
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+                  <span><b>Call Raised Type:</b> 
+                    <span ng-show="x.manual_flag=='1'">Manual</span>
+                    <span ng-show="x.manual_flag=='0'">Mail</span>
+                  </span>
+                </div>
+                 <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label" ng-show="x.manual_flag=='0'">
+                  <span><b>Mail Sent To:</b> 
+                    <span >{{x.to}}</span>
+                   
+                  </span>
+                </div>
+                
+            </div>
+            <div class="form-group smallfont" >
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Attachments:</div>
+               <!--  <div class="col-sm-6 col-xs-6">
+                  <input type="file" id="file_inspinternal" class="form-control" file-change="uploadintdidoc"/>
+                </div>
+                 <div class="col-sm-2 col-xs-4 submitbtn">
+                   <button type="button" class="btn btn-success smallfont " style="width:50%;" ng-click="add_intdi_doc(x)">Add Files</button>
+                </div> -->
+                <div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont" style="margin-top:15px;">
+                  <p><strong>Internal DI call Raise Attachment Files</strong></p>
+                  <table class="table table-striped">
+                    <thead>
+                     <tr class="innerhead">
+
+                        <th class="col-sm-4">File</th>
+                        <th class="col-sm-1">Download</th>
+                       
+                      </tr>
+                    </thead>
+                    <tr ng-repeat="doc in x.intdidocs">
+                      <td>{{doc.doc_name}}</td>
+                      <td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+                     
+                    </tr>
+                  </table>
+                </div>
+
+                <div style="clear:both;height:10px;"></div>
+            </div>
+            <table class="table table-striped" >
+                <thead>
+                  <tr style="background:#000;color:#FFF;">
+                    <th class="col-sm-1">S.No</th>
+                    <th class="col-sm-2">Material Description</th>
+                    <th class="col-sm-1">POS</th>
+                    <th class="col-sm-1">UOM</th>
+                    <th class="col-sm-1">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="y in x.intdimat">
+                    <td>{{$index+1}}</td>
+                    <td>{{y.matdesonmatid.name}}</td>
+                    <td>
+                      <ol class="insp_ol" style="padding-left:0px;">
+                         <li ng-repeat="z in y.intdipo">
+                          {{z.podets.po_no}} <br>
+                         <!--  <input type="text"  class="form-control" style="width:150px;font-size:12px;" placeholder="Enter Internal DI Qty" ng-model="z.quantity" ng-blur="changeinternaldi(y)"> -->
+                          <b style="float:left;margin-top:5px;margin-right:5px;">IDI Qty:</b> 
+                          <input type="text" class="form-control" ng-model="z.quantity" ng-blur="update_blurqty(z,x)" style="width:100px;float:left;"> 
+                          <button type="button" class="btn btn-info btn-xs" ng-click="updatedimat(z)" style="float:left;margin-left:10px;">Update</button>
+                          <div style="clear:both;"></div>
+                          <br>
+                          <b>Received:</b> {{z.already_received}} <br>
+                          <b>Delivery Address:</b> <br>
+
+                          <span ng-show="z.storename">{{z.storename.location}}</span>
+                          <span ng-show="z.siteareas">{{z.siteareas.address}}</span>
+                        </li>
+                      </ol>
+                    </td>
+                    <td>{{y.matdesonmatid.units}}</td>
+                    <td>{{y.quantity}}</td>
+                  </tr>
+                </tbody>
+            </table>
+            <div style="clear:both;height:10px;"></div>
+      </div>
+      <div style="clear:both;height:10px;"></div>
+      <hr>
+      <div style="clear:both;height:10px;"></div>
+      <div ng-show="showidicontent">
+        <h4>Raise New Internal DI</h4>
+        <div class="jumbobox col-sm-8">
+          <div class="form-group smallfont">
+            <p style="margin-left:16px;font-size:13px;"><b>Add Materials to Raise New Internal DI</b></p>
+            <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+              Select PO
+            </div>
+            <div class="col-sm-4 col-xs-8">
+             <select class="form-control smallfont" ng-model="mainpo" ng-change="cleardets()" ng-options="polist as polist.po_no for polist in polist">
+                <option value="">SELECT</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group smallfont">
+            <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+              Select Material 
+              <span class="astrix">*</span>
+            </div>
+            <div class="col-sm-4 col-md-4 col-xs-8">
+              <select class="form-control smallfont" ng-model="inspomat" ng-options="mat as mat.storematerial.name for mat in mainpo.pomaterials">
+                <option value="">SELECT</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group smallfont">
+            <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Total Purchased Quantity in this PO</div>
+            <div class="col-sm-4 col-xs-6">
+              <input type="text" class="form-control" ng-model="inspomat.quantity" id="exampleInputEmail1" readonly>
+            </div>
+          </div>
+          <div class="form-group smallfont">
+            <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Total Internal DI Qty raised till now</div>
+            <div class="col-sm-4 col-xs-6">
+              <input type="text" class="form-control" ng-model="inspomat.internal_di_quantity" id="exampleInputEmail1" readonly>
+            </div>
+          </div>
+          <div class="form-group smallfont">
+            <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+              Current Internal DI Quantity
+            </div>
+            <div class="col-sm-4 col-xs-8">
+              <input type="text" class="form-control" ng-model="inspomat.current_intdi" id="exampleInputEmail1">
+            </div>
+          </div>
+          <div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn">
+            <button type="button" class="btn btn-success" ng-click="addmattointarr()">ADD</button>
+          </div>
+        </div> 
+        <div style="clear:both;height:10px;"></div>
+        <div ng-show="intdiarray.length>0">
+          <div>
+            <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;">
+              <table class="table table-striped">
+                <thead>
+                  <tr style="background:#000;color:#FFF;">
+                    <th class="col-sm-1">S.No</th>
+                    <th class="col-sm-2">Material Description</th>
+                    <th class="col-sm-1">POS</th>
+                    <th class="col-sm-1">UOM</th>
+                    <th class="col-sm-1">Total New Internal DI Qty</th>
+                    <th class="col-sm-1">Remove</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="x in intdiarray">
+                    <td>{{$index+1}}</td>
+                    <td>{{x.matdes}}</td>
+                    <td>
+                      <ol class="insp_ol" style="padding-left:0px;">
+                        <li ng-repeat="y in x.pos">
+                          {{y.pono}} <br>
+                          <b>
+                          (IDI Qty - {{y.intdiqty}} ) 
+                          </b>
+                        </li>
+                      </ol>
+                    </td>
+                    <td>{{x.units}}</td>
+                    <td>{{x.total}}</td>
+                    <td><button type="button" class="btn btn-default smallfont btn-danger" ng-click="removemat($index)"><i class="fa fa-times"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="form-group smallfont hidden-print">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+                Select Delivery Location Type:
+              </div>
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label" style="background:#f4f4f4;padding:4px;text-align:center;border-radius:5px;border:1px solid #bababa;margin-left:15px;">
+                <input type="radio" name="dloc" ng-model="dloctype" value="store">Store
+                <input type="radio" name="dloc" ng-model="dloctype" value="site">Site
+              </div>
+          </div>
+          <div class="form-group smallfont hidden-print"  ng-show="dloctype=='store'">
+             <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+                Select Store<span class="astrix">*</span>
+             </div>
+             <div class="col-sm-3 col-md-3 col-xs-8">
+                 <select class="form-control smallfont" chosen options="storeslist" ng-model="storeid" ng-options="list.id as list.location for list in storeslist">
+                 </select>
+             </div>
+          </div>
+          <div class="form-group smallfont hidden-print"  ng-show="dloctype=='site'">
+             <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+                Select Site Address<span class="astrix">*</span>
+             </div>
+             <div class="col-sm-3 col-md-3 col-xs-8">
+                <select class="form-control smallfont" chosen options="siteareaslist" ng-model="siteareaid" ng-options="list.id as list.address for list in siteareaslist">
+                </select>
+             </div>
+          </div>
+          <div class="form-group smallfont">
+            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+              New Internal DI Ref Name:<span class="astrix">*</span>
+            </div>
+            <div class="col-sm-6 col-xs-6">
+              <input type="text" class="form-control" ng-model="refname" placeholder="Enter Ref Name">
+            </div>
+          </div>
+          <div class="form-group smallfont hidden-print">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+                Select Internal DI Raising option:
+              </div>
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label" style="background:#f4f4f4;padding:4px;text-align:center;border-radius:5px;border:1px solid #bababa;margin-left:15px;">
+                <input type="radio" name="call" ng-model="callraisetype" value="manual">Manual
+                <input type="radio" name="call" ng-model="callraisetype" value="mail">Mail
+              </div>
+          </div>
+          <div class="panel panel-default" ng-show="callraisetype=='mail'">
+            <div class="panel-heading">Internal Dispatch Request to Vendor (Mail)</div>
+            <div class="panel-body">
+              <div class="form-group smallfont">
+               <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">To:<span class="astrix">*</span></div>
+                <div class="col-sm-6 col-xs-6">
+                  <input type="text" class="form-control" ng-model="to" placeholder="Enter email id">
+                </div>
+              </div>
+              <div class="form-group smallfont">
+               <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">CC:</div>
+                <div class="col-sm-6 col-xs-6">
+                  <input type="text" class="form-control" ng-model="cc" placeholder="Enter Comma(,) seperated email ids">
+                </div>
+              </div>
+
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Subject<span class="astrix">*</span></div>
+                <div class="col-sm-6 col-xs-6">
+                  <input type="text" class="form-control" ng-model="subject">
+                </div>
+              </div>
+
+
+              <div class="form-group smallfont">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Attachment:</div>
+                  <div class="col-sm-6 col-xs-6">
+                    <input type="file" id="file_inspinternal" class="form-control" file-change="uploaddidoc"/>
+                  </div>
+                   <div class="col-sm-2 col-xs-4 submitbtn">
+                     <button type="button" class="btn btn-success smallfont " ng-click="add_di_doc()">Add</button>
+                  </div>
+                  <div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont" style="margin-top:15px;">
+                    <p><strong>Internal DI call Raise Attachment Files</strong></p>
+                    <table class="table table-striped">
+                      <thead>
+                       <tr class="innerhead">
+                          <th class="col-sm-4">File</th>
+                          <th class="col-sm-1">Download</th>
+                          <th class="col-sm-1">Delete</th>
+                        </tr>
+                      </thead>
+                      <tr ng-repeat="doc in intdidocs">
+                        <td>{{doc.doc_name}}</td>
+                        <td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+                        <td><button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_didoc(doc.doc_url,$index)"><i class="fa fa-times"></i></button></td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div style="clear:both;height:10px;"></div>
+              </div>
+
+              <div style="clear:both;height:10px;"></div>
+    
+
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Email Text<span class="astrix">*</span></div>
+                <div class="col-sm-6 col-xs-6">
+                 <textarea class="form-control" placeholder="Write email text here..." rows="6" ng-model="emailcontent"></textarea>
+                </div>
+                <!--  <div class="col-sm-2 col-xs-4 submitbtn">
+                   <button type="button" class="btn btn-success smallfont " ng-click="raiseinspcall()">Send Email</button>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2 col-xs-4 submitbtn" ng-show="callraisetype=='mail'">
+            <button type="button" class="btn btn-success smallfont " style="width:200px;" ng-click="raisemanidimail()">
+              Raise Internal DI & send Mail
+            </button>
+          </div>
+          <div class="panel panel-default" ng-show="callraisetype=='manual'">
+              <div class="panel-heading">Internal Dispatch Request to Vendor (Manual)</div>
+              <div class="panel-body">
+              <!-- {{inspdetails.inspectioncallraises}} -->
+                <div class="form-group smallfont">
+                  <div for="inputEmail3" class="col-sm-1 col-xs-1 control-label">Request Raise Date</div>
+                  <div class="col-sm-4 col-xs-6">
+                     <input type="date" class="form-control" ng-model="refdate" aria-describedby="sizing-addon1">
+                  </div>
+                </div>
+
+                <div class="form-group smallfont">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Attachment:</div>
+                  <div class="col-sm-6 col-xs-6">
+                    <input type="file" id="file_inspinternal" class="form-control" file-change="uploaddidoc"/>
+                  </div>
+                   <div class="col-sm-2 col-xs-4 submitbtn">
+                     <button type="button" class="btn btn-success smallfont " ng-click="add_di_doc()">Add</button>
+                  </div>
+                  <div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont" style="margin-top:15px;">
+                    <p><strong>Internal DI call Raise Attachment Files</strong></p>
+                    <table class="table table-striped">
+                      <thead>
+                       <tr class="innerhead">
+                          <th class="col-sm-4">File</th>
+                          <th class="col-sm-1">Download</th>
+                          <th class="col-sm-1">Delete</th>
+                        </tr>
+                      </thead>
+                      <tr ng-repeat="doc in intdidocs">
+                        <td>{{doc.doc_name}}</td>
+                        <td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+                        <td><button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_didoc(doc.doc_url,$index)"><i class="fa fa-times"></i></button></td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div style="clear:both;height:10px;"></div>
+                </div>
+              </div>
+          </div>
+          <div class="col-sm-2 col-xs-4 submitbtn" ng-show="callraisetype=='manual'">
+            <button type="button" class="btn btn-success smallfont " style="width:200px;" ng-click="raisemanidimanual()">
+                Raise & Save Details
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

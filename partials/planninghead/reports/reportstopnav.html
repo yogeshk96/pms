@@ -1,0 +1,16 @@
+<!-- page top navigation starts -->
+<ul class="nav nav-tabs hidden-print" ng-if="state['current'].url != '/planninghead'">
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.planninghead.reports.poreport">PO Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.planninghead.reports.enquiryreport">Enquiry Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.planninghead.reports.csreport">Comparitive Statement Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.planninghead.reports.vendorreport">Vendor Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.planninghead.reports.potracker">PO Tracker</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.planninghead.reports.amdporeport">Amendment PO Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.planninghead.reports.indentpending">Pending Indent Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.planninghead.reports.approvedindent">Approved Indent Report</a></li>
+</ul>
+
+<!-- page top navigation ends -->
+
+<div ui-view="content">
+</div>

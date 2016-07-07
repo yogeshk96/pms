@@ -1,0 +1,242 @@
+<!doctype html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" type="image/x-icon" href="/images/logo.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<script type="text/javascript" src="scripts/jquery.js"></script>
+	<script type="text/javascript" src="scripts/jquery_ui.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="styles/common.css">
+	<link rel="stylesheet" href="fontawesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="styles/sweet-alert.css">
+	<link rel='stylesheet' href='chosen/chosen.css'>
+	<script type="text/javascript" src='bootstrap/js/bootstrap.min.js'></script>
+	<script type="text/javascript" src='scripts/sweet-alert.min.js'></script>
+	<title>BOQ Report</title>
+</head>
+<body>
+<div class="container-fluid">
+	
+
+	<div class="row">
+
+		<div class="col-sm-12">
+
+			<form class="form-horizontal">
+
+			<div class="form-group smallfont">
+		 		<div for="inputEmail3" class="col-sm-2 col-md-2 col-xs-4 control-label"></div>
+		 		<div class="col-sm-3 col-md-3 col-xs-8 jumbobox" style="padding:5px">
+		 			<label class="radio-inline">
+		 				<input type="radio" ng-model="schtype" id="inlineRadio1" value="1"> Supply
+		 			</label>
+		 			<label class="radio-inline">
+		 				<input type="radio" ng-model="schtype" id="inlineRadio1" value="2"> Erection
+		 			</label>
+		 		
+		 		</div>
+		 	</div>
+
+			<div class="form-group smallfont">
+	 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+	 			<div class="col-sm-3 col-md-3 col-xs-8">
+	 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="projlist.id as projlist.name for projlist in projectlist" ng-change="projchange()">
+			 					
+		 			</select>
+	 			</div>
+	 		</div>
+
+			<div class="form-group smallfont">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Upload BOQ CSV file</div>
+
+              
+              <div class="col-sm-3 col-md-3 col-xs-8">
+                <input type="file" id="file_inspcall" class="form-control" file-change="uploadboqfile"/>
+              </div>
+              
+              <button type="button" class="btn btn-primary smallfont" ng-click='get_boq_file_info()'>Get Data</button>
+            </div>
+			
+		</div>
+		
+		<div class="col-sm-12" ng-show="filedata">
+			
+			<table class="table table-striped table-responsive smallfont">
+ 				<thead>
+ 					<tr class="innerhead">
+ 						<th class="col-sm-1">LOA Sl No</th>
+ 						<th class="col-sm-3">Description of Items</th>
+ 						<th class="col-sm-1">Units</th>
+ 						<th class="col-sm-1">Unit Quantity</th>
+ 						<!-- <th class="col-sm-1" ng-repeat="sproj in subprojects[0]['multiplier']">{{sproj.multiplier_name}} Quantity</th> -->
+ 						<th class="col-sm-1" ng-repeat="smulti in submultiplier">{{smulti.multiplier_name}} LOA Quantity</th>
+ 						<th class="col-sm-1">Total Quantity</th>
+ 						<th class="col-sm-1" ng-if="schtype=='1'">Supply Rate</th>
+ 						<th class="col-sm-1" ng-if="schtype=='2'">Erection Rate</th>
+ 						<th class="col-sm-1">F&amp;I Rate</th>
+ 						<th class="col-sm-1">Map Materials</th>
+ 						<th class="col-sm-2">Mapped Materials</th>
+ 						<th></th>
+ 						
+ 					</tr>
+ 				</thead>
+ 				
+					<tbody ng-repeat="filed in filedata">
+					<tr style="background:#bababa;">
+						
+						<th><input type="text" ng-model="filed.srno" /></th>
+ 						<th><textarea ng-model="filed.desc" class="col-sm-12" style="height:100px;width:300px;">{{filed.desc}}</textarea></th>
+ 						<th>{{filed.uom}}</th>
+ 						<th>{{filed.unit_qty}}</th>
+ 						<td ng-repeat="indiq in filed.qty">{{indiq['indiqty']}}</td>
+ 						<th>{{filed.tot_qty}}</th>
+ 						<th></th>
+ 						<th></th>
+ 						<th></th>
+ 						<th></th>
+ 						<th>Remove</th>
+ 						
+					</tr>
+					<tr ng-repeat="filein in filed.sub">
+						<td><input type="text" ng-model="filein.srno" /></td>
+ 						<td><textarea ng-model="filein.desc" class="col-sm-12" style="height:100px;width:300px;">{{filein.desc}}</textarea></td>
+ 						<td>{{filein.uom}}</td>
+ 						<td>{{filein.unit_qty}}</td>
+ 						<td ng-repeat="indiq in filein.qty">{{indiq['indiqty']}}</td>
+ 						<!-- <td>{{filein.qty2}}</td> -->
+ 						<td>{{filein.tot_qty}}</td>
+ 						<td ng-if="schtype=='1'">{{filein.supply_rate}}</td>
+ 						<td ng-if="schtype=='2'">{{filein.erection_rate}}</td>
+ 						<td>{{filein.fi_rate}}</td>
+ 						<td>
+
+ 						
+							<button class="btn col-sm-12 smallfont" ng-click="addmattoact(filein)">ADD MATERIAL</button>
+ 						</td>
+ 						<td>
+ 							<ul>
+ 								<li ng-repeat="mat in filein.matmapped">{{mat.materialdesc}}({{mat.uom}})({{mat.qty}})</li>
+
+ 							</ul>
+ 						</td>
+ 						<td><button type="button" class="btn btn-danger btn-xs smallfont" ng-click="removeactrow($index, filed.sub)">Remove Activity</button></td>
+ 						
+					</tr>
+					</tbody>
+				</table>
+
+				<div class="col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3 submitbtn">
+ 					<button type="button" class="btn btn-success" ng-click="addactivitytoproject()">ADD</button>
+ 				</div>
+			</form>
+		</div>
+	</div>
+
+</div>
+
+
+<!--PO Modal -->
+<div id="AddMaterialModal" class="modal fade hidden-print" role="dialog">
+	<div class="modal-dialog" style="width:50%;">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h5 class="modal-title"><strong>ADD MATERIALS</strong></h5>
+
+			</div>
+			<div class="modal-body">
+			<form class="form-horizontal">
+				<div class="col-sm-12 col-xs-12">
+
+					<div class="jumbobox col-sm-8">
+
+		 				<div class="form-group smallfont">
+							<div for="inputEmail3" class="col-sm-4 col-xs-5 control-label">Select Material Type<span class="astrix">*</span></div>
+							<div class="col-sm-6 col-md-6 col-xs-8">
+								<select class="form-control smallfont" ng-model="thisfile.materialtype" ng-options="mat as mat.name for mat in materials">
+									<option value="">SELECT</option>
+								</select>
+							</div>
+							
+						</div>
+
+						<div class="form-group smallfont" ng-show="thisfile.materialtype.submaterials">
+							<div for="inputEmail3" class="col-sm-4 col-xs-5 control-label">Select Material<span class="astrix">*</span></div>
+							<div class="col-sm-6 col-md-6 col-xs-8">
+								<select class="form-control smallfont" ng-model="thisfile.submat" ng-options="submat as submat.name for submat in thisfile.materialtype.submaterials">
+									<option value="">SELECT</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group smallfont">
+		 					<div for="inputEmail3" class="col-sm-4 col-xs-5 control-label">UOM</div>
+		 					<div class="col-sm-6 col-xs-8">
+		 						<input type="text" class="form-control" ng-model="thisfile.submat.units" id="exampleInputEmail1" readonly >
+		 					</div>
+		 				</div>
+
+		 				<div class="form-group smallfont">
+		 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Unit Quantity<span class="astrix">*</span></div>
+		 					<div class="col-sm-4 col-xs-6">
+		 						<input type="text" class="form-control" ng-model="thisfile.thisunitqty" placeholder="Enter unit quantity">
+		 					</div>
+		 				</div>
+
+
+		 				<div class="form-group smallfont">
+		 					<div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Quantity<span class="astrix">*</span></div>
+		 					<div class="col-sm-4 col-xs-6">
+		 						<input type="text" class="form-control" ng-model="thisfile.thisqtyy" placeholder="Enter quantity">
+		 					</div>
+		 				</div>
+
+		 				<div class="col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3 submitbtn">
+		 					<button type="button" class="btn btn-success" ng-click="addtomaptable()">ADD</button>
+		 				</div>
+
+		 				
+
+					</div>
+
+					<div class="col-sm-12 col-xs-12 smallfont">
+
+			 			<table class="table table-striped table-responsive smallfont" ng-show="maptable.length>0">
+			 				<thead>
+			 					<tr class="innerhead">
+			 						<th>S.No</th>
+			 						<th>Material Description</th>
+			 						<th>UOM</th>
+			 						<th>Qty</th>
+			 						<th>Remove</th>
+			 					</tr>
+			 				</thead>
+			 				<tr ng-repeat="pomat in maptable">
+			 					<td scope="row">{{$index+1}}</td>
+			 					<td>{{pomat['materialdesc']}}</td>
+			 					<td>{{pomat['uom']}}</td>
+			 					<td>{{pomat['qty']}}</td>
+			 					<td><button type="button" class="btn btn-danger btn-xs" ng-click="removerow($index)">Remove</button></td>
+			 				</tr>
+			 				
+			 			</table>
+			 		</div>
+				</div>
+			</form>
+
+			</div>
+			<div style="clear:both;height:10px;"></div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" ng-click="addtothisact()">Submit</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!-- modal ends
+<div class="loader_wrap" ng-show="showloader"><div class="loading"><i class="fa fa-spinner fa-pulse"></i></div></div>

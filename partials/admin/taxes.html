@@ -1,0 +1,101 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Tax and Discount</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal">
+    			<div class="form-group smallfont">
+			 		<div class="col-sm-5 col-md-5 col-xs-8 jumbobox" style="padding:5px">
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="typeofwork" id="inlineRadio1" value="add">Add a Tax/Discount
+			 			</label>
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="typeofwork" id="inlineRadio1" value="edit"> Edit Tax/Discount
+			 			</label>
+			 		</div>
+			 	</div>
+    		</form>
+    	</div>
+			
+		<div class="col-sm-12 col-xs-12 smallfont" ng-show="typeofwork=='add'">
+			<form class="form-horizontal" ng-submit="add_tax()">
+    			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Name</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="text" class="form-control" ng-model='add.name' required/>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Percent</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="text" class="form-control" ng-model='add.percent' required/>
+		 			</div>
+		 		</div>
+    			<div class="form-group smallfont">
+	 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Type</div>
+	 				<div class="col-sm-2 col-xs-6">
+	 					<select class="form-control smallfont" ng-model='add.type' required>
+	 						<option value="">SELECT</option>
+	 						<option value="Tax">Tax</option>
+	 						<option value="Discount">Discount</option>
+	 					</select>
+	 				</div>
+	 			</div>
+		 		<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="submit" value="Add" class="btn btn-success">
+		 			</div>
+		 		</div>
+
+    		</form>
+    	</div>
+
+    	<div class="col-sm-12 col-xs-12 smallfont" ng-show="typeofwork=='edit'">
+			<form class="form-horizontal" ng-submit="edit_tax()">
+				<div class="form-group smallfont">
+	 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Tax</div>
+	 				<div class="col-sm-2 col-xs-6">
+	 					<select class="form-control smallfont" ng-options="tax.tax for tax in taxlist" ng-model='taxmain' required>
+	 						<option value="">SELECT</option>
+	 					</select>
+	 				</div>
+	 			</div>
+    			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Name</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="text" class="form-control" ng-model='taxmain.tax' required/>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Percent</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="text" class="form-control" ng-model='taxmain.percentage' required/>
+		 			</div>
+		 		</div>
+    			<div class="form-group smallfont">
+	 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Type</div>
+	 				<div class="col-sm-2 col-xs-6">
+	 					<select class="form-control smallfont" ng-model='taxmain.type' required>
+	 						<option value="">SELECT</option>
+	 						<option value="Tax">Tax</option>
+	 						<option value="Discount">Discount</option>
+	 					</select>
+	 				</div>
+	 			</div>
+		 		<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="submit" value="Save" class="btn btn-success">
+		 			</div>
+		 		</div>
+
+    		</form>
+    	</div>
+	</div>
+
+</div>

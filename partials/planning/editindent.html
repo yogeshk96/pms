@@ -1,0 +1,119 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Raise Indent</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal" ng-submit="get_workorder_data()">
+    			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Work Order</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" ng-model="project" ng-options="work.name for work in works" required>
+		 					<option value="">SELECT</option>
+		 				</select>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont" ng-show="project">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Indent</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" ng-model="indent" ng-options="ind.name for ind in project.indents" required>
+		 					<option value="">SELECT</option>
+		 				</select>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="submit" value="Search" class="btn btn-success">
+		 			</div>
+		 		</div>
+    		</form>
+    		<form class="form-horizontal" ng-submit="addtotable()"  ng-show="mats">
+	    		<div class="jumbobox col-sm-8">
+					<div class="form-group smallfont">
+						<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select Material<span class="astrix">*</span></div>
+						<div class="col-sm-4 col-md-4 col-xs-8">
+							<select class="form-control smallfont" ng-options="mat.materials.name for mat in mats | filter:hidemat" ng-model="mainmat" required>
+								<option value="">SELECT</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group smallfont" ng-show="mainmat">
+						<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">UOM<span class="astrix">*</span></div>
+						<div class="col-sm-4 col-md-4 col-xs-8">
+							{{mainmat.boquom.stmatuom.uom}}
+						</div>
+					</div>
+					<div class="form-group smallfont" ng-show="mainmat">
+						<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">BOQ Quantity<span class="astrix">*</span></div>
+						<div class="col-sm-4 col-md-4 col-xs-8">
+							{{mainmat.quantity}}
+						</div>
+					</div>
+					<div class="form-group smallfont" ng-show="mainmat">
+						<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Indent Quantity (already raised)<span class="astrix">*</span></div>
+						<div class="col-sm-4 col-md-4 col-xs-8">
+							{{mainmat.indent_qty}}
+						</div>
+					</div>
+					<div class="form-group smallfont" ng-show="mainmat">
+						<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Indent Quantity<span class="astrix">*</span></div>
+						<div class="col-sm-4 col-md-4 col-xs-8">
+							<input type="text" ng-model="mainmat.newindentqty" required>
+						</div>
+					</div>
+	 				<div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn" ng-show="mainmat">
+	 					<input type="submit" class="btn btn-success" value="Add">
+	 				</div>
+				</div>
+    		</form>
+			<br>
+			<table class="table table-striped" ng-show="showtable()">
+				<tbody>
+					<tr>
+						<th>S.No</th>
+						<th>Material</th>
+						<th>UOM</th>
+						<th>Quantity</th>
+						<th>Indent Quantity (already raised)</th>
+						<th>Indent Quantity</th>
+						<th>Remove</th>
+					</tr>
+					<tr ng-repeat="mat in mats | filter:showmat">
+						<td>{{$index+1}}</td>
+						<td>{{mat.materials.name}}</td>
+						<td>{{mat.boquom.stmatuom.uom}}</td>
+						<td>{{mat.quantity}}</td>
+						<td>{{mat.indent_qty}}</td>
+						<td>{{mat.mainqty}}</td>
+						<td><button type="button" class="btn btn-danger btn-xs" ng-click="removemat(mat)">Remove</button></td>
+          			</tr>
+				</tbody>          
+			</table>
+			<br>
+			<form class="form-horizontal" ng-show="showtable()" ng-submit="saveindent()">
+				<div class="form-group smallfont">
+					<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Indent Name<span class="astrix">*</span></div>
+					<div class="col-sm-4 col-md-4 col-xs-8">
+						<input type="text" ng-model="indent.name" required>
+					</div>
+				</div>
+				<div class="form-group smallfont">
+					<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Indent Description<span class="astrix">*</span></div>
+					<div class="col-sm-4 col-md-4 col-xs-8">
+						<textarea cols="30" rows="10" ng-model="indent.descr" required></textarea>
+					</div>
+				</div>
+				<input type="submit" class="btn btn-success" value="Save">
+			</form>
+			<!-- <div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn" ng-show="mainproject">
+				<button type="button" class="btn btn-success" ng-click="save_boq()">Save</button>
+			</div> -->
+    	</div>
+	</div>
+
+</div>

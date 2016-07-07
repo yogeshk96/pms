@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en" ng-app="PMSApp" ng-controller="MainController">
+<head>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" type="image/x-icon" href="/images/logo.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv='cache-control' content='no-cache'>
+	<meta http-equiv='expires' content='0'>
+	<meta http-equiv='pragma' content='no-cache'>
+	
+	<script type="text/javascript" src="scripts/jquery.js"></script>
+	<script type="text/javascript" src="scripts/jquery_ui.js"></script>
+	<script type="text/javascript" src='chosen/chosen.jquery.js'></script>
+	<script type="text/javascript" src="scripts/angular.js"></script>
+	<script type="text/javascript" src="scripts/route.js"></script>
+	<script type="text/javascript" src="scripts/app.js"></script>
+	<script type="text/javascript" src="scripts/controller.js"></script>
+	<script type="text/javascript" src="scripts/warehouseController.js"></script>
+	<script type="text/javascript" src="scripts/purchasesController.js"></script>
+	<script type="text/javascript" src="scripts/purchasesController_p.js"></script>
+	<script type="text/javascript" src="scripts/billingController.js"></script>
+	<script type="text/javascript" src="scripts/adminController.js"></script>
+	<script type="text/javascript" src="scripts/profileController.js"></script>
+	<script type="text/javascript" src="scripts/surveyController.js"></script>
+	<script type="text/javascript" src="scripts/planningController.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="styles/common.css">
+	<link rel="stylesheet" href="fontawesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="styles/sweet-alert.css">
+	<link rel='stylesheet' href='chosen/chosen.css'>
+	<script type="text/javascript" src='bootstrap/js/bootstrap.min.js'></script>
+	<script type="text/javascript" src='scripts/sweet-alert.min.js'></script>
+
+	<title>{{title}}</title>
+</head>
+<body>
+
+<div class="container-fluid">
+	<!-- Navigation bar -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+      	<div class="container">
+      		<div class="row">
+	      		<div class="col-xs-1 hidden-sm hidden-md hidden-lg">
+		        	<div class="navbar-header" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="sidebar">
+			          <i class="fa fa-list">
+			          </i>
+			        </div>
+		        </div>
+
+		        <div class="col-xs-10 col-sm-12">
+					
+					<div ui-view="nav">
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+</div>
+
+
+    <div class="clearfix" style="height:80px;"></div>
+
+    <div ui-view="main">
+	</div>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-2 col-md-2 col-xs-12">
+
+				<div ui-view="sidebar">
+				</div>
+			</div>
+			<div class="col-sm-10 col-md-10">
+				
+				<div ui-view="contentmain">
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<div class="clearfix" style="height:10px;"></div>
+	<footer>
+
+	<!-- <div class="footer">
+			<div class="container">
+				<div class="copyright">
+					&copy; Copyright Finance Dept.,Govt of A.P, Powered By 
+					<a href="http://www.pixelvide.com">Pixelvide</a> <br>
+					<span>
+						Technology: Angularjs and Laravel Framework.Best Viewed In All Latest Browsers.
+					</span><br>
+					<span>
+						IF IE: supported only in IE8 and above
+					</span>
+				</div>
+				<div class="footer_info">
+					<div class="logo_dv">
+						<div class="pix_logo_img_dv">
+							<a href="http://www.pixelvide.com">
+								<img src="images/pixelvide_logo.png" alt="pixelvide logo" style="width:105px;">
+							</a>
+						</div>
+						<p class="eff_web_txt">
+							Efficient Web.Secure Web
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		 -->
+	</footer>
+	<div class="loader_wrap" ng-show="showloader"><div class="loading"><i class="fa fa-spinner fa-pulse"></i></div></div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+
+		<div class="col-sm-6 col-xs-12">
+
+		<p><strong>Add Material Type</strong></p>
+
+    		<form class="form-horizontal smallfont" ng-submit="addmaterialtype()">
+    			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Material Type Name</div>
+		 			<div class="col-sm-5 col-md-5 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="materialtypename" />
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-4 col-md-4 col-xs-8">
+		 				<button type="submit" class="btn btn-success">ADD</button>
+		 			</div>
+		 		</div>
+
+    		</form>
+    	</div>
+
+    	<div class="col-sm-5 col-xs-12" style="height:500px;overflow-y:scroll;">
+
+			<p><strong>Already Existing Materials</strong></p>
+
+ 			<table class="table table-striped smallfont">
+ 				<thead>
+ 					<tr class="innerhead">
+ 						<th>S.No</th>
+ 						<th>Material Type</th>
+ 						
+ 					</tr>
+ 				</thead>
+ 				<tr ng-repeat="mat in materials">
+ 					<td scope="row">{{$index+1}}</td>
+ 					<td>{{mat['name']}}</td>
+ 					
+ 				</tr>
+ 								
+ 				
+ 			</table>
+
+    	</div>
+
+	</div>
+
+</div>

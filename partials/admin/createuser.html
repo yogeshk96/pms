@@ -1,0 +1,87 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Create User</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal" ng-submit="create_user()">
+
+    			<div class="form-group smallfont">
+	 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">User Type</div>
+	 				<div class="col-sm-2 col-xs-6">
+	 					<select class="form-control smallfont" ng-model='user.role' required>
+	 						<option value="">SELECT</option>
+	 						<option ng-repeat="x in userroles" value="{{x.role}}">{{x.name}}</option>
+	 					</select>
+	 				</div>
+	 			</div>
+
+	 			<div class="form-group smallfont">
+	 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Office</div>
+	 				<div class="col-sm-2 col-xs-6">
+	 					<select class="form-control smallfont" ng-model='user.office' required>
+	 						<option value="">SELECT</option>
+	 						<option ng-repeat="x in offices" value="{{x.id}}">{{x.name}}</option>
+	 					</select>
+	 				</div>
+	 			</div>
+
+    			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Name</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="text" class="form-control" ng-model='user.name' required/>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Login User Name</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="text" class="form-control" ng-model='user.username' required/>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Designation</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="text" class="form-control" ng-model='user.designation' required/>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">E-Mail Id</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="email" class="form-control" ng-model='user.email' required/>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Address</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<textarea ng-model='user.address' required></textarea>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Phone Number</div>
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="text" class="form-control" ng-model='user.phone' required/>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="submit" value="Create" class="btn btn-success">
+		 			</div>
+		 		</div>
+
+    		</form>
+    	</div>
+
+	</div>
+
+</div>

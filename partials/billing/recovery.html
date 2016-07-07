@@ -1,0 +1,271 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+  <div class="row-fluid">
+    
+    <div class="clearfix" style="height:20px;"></div>
+
+    <p><strong>Recovery</strong></p>
+    
+   
+    <div class="col-sm-12 col-xs-12 smallfont">
+
+    	<form class="form-horizontal">
+            
+		 	<div class="form-group smallfont">
+		 		<div class="col-sm-3 col-md-3 col-md-offset-1 col-sm-offset-1 col-xs-8 jumbobox" style="padding:5px">
+		 			<label class="radio-inline">
+		 				<input type="radio" ng-model="recoverytype" value="addrecovery"> Add Recovery
+		 			</label>
+		 			<label class="radio-inline">
+		 				<input type="radio" ng-model="recoverytype" value="approverecovery"> Approve Recovery
+		 			</label>
+		 		</div>
+		 	</div>
+
+		 	<!-- ----------------------------------- add recovery section starts ---------------------------------------- -->
+
+		 	<div class="addrecoverysection" ng-show="recoverytype == 'addrecovery' ">
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont">
+		 					<option value="select">SELECT</option>
+		 					<option>NOs</option>
+		 					<option>KG</option>
+		 					<option>3</option>
+		 					<option>4</option>
+		 				</select>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project Manager</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont">
+		 					<option value="select">SELECT</option>
+		 					<option>NOs</option>
+		 					<option>KG</option>
+		 					<option>3</option>
+		 					<option>4</option>
+		 				</select>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Sub Contractor</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont">
+		 					<option value="select">SELECT</option>
+		 					<option>NOs</option>
+		 					<option>KG</option>
+		 					<option>3</option>
+		 					<option>4</option>
+		 				</select>
+		 			</div>
+		 		</div>
+
+		 		
+
+		 		<div class="jumbobox col-sm-8">
+
+		 			<div class="form-group smallfont">
+		 				<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Material Type</div>
+		 				<div class="col-sm-5 col-xs-6">
+		 					<select class="form-control smallfont">
+		 						<option value="select">SELECT</option>
+		 						<option>Some description</option>
+		 						<option>Something</option>
+		 						<option>3</option>
+		 						<option>4</option>
+		 					</select>
+		 				</div>
+		 			</div>
+
+		 			<div class="form-group smallfont">
+		 				<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Quantity</div>
+		 				<div class="col-sm-4 col-xs-6">
+		 					<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter quantity">
+		 				</div>
+		 			</div>
+
+		 			<div class="form-group smallfont">
+		 				<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">UOM</div>
+		 				<div class="col-sm-3 col-xs-6">
+		 					<select class="form-control smallfont">
+		 						<option value="select">SELECT</option>
+		 						<option>Some description</option>
+		 						<option>Something</option>
+		 						<option>3</option>
+		 						<option>4</option>
+		 					</select>
+		 				</div>
+		 			</div>
+
+		 			<div class="form-group smallfont">
+		 				<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Unit Rate</div>
+		 				<div class="col-sm-4 col-xs-6">
+		 					<input type="text" class="form-control" id="exampleInputEmail1">
+		 				</div>
+		 			</div>
+
+		 			<div class="form-group smallfont">
+		 				<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Value of Goods</div>
+		 				<div class="col-sm-4 col-xs-6">
+		 					<input type="text" class="form-control" id="exampleInputEmail1" readonly>
+		 				</div>
+		 			</div>
+
+		 			<div class="form-group smallfont">
+		 				<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Remarks</div>
+		 				<div class="col-sm-6 col-xs-6">
+		 					<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter remarks">
+		 				</div>
+		 			</div>
+
+		 			<div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn">
+		 				<button type="button" class="btn btn-success">ADD</button>
+		 			</div>
+		 		</div>
+
+		 		<div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;">
+
+		 			<table class="table table-striped">
+		 				<thead>
+		 					<tr style="background:#000;color:#FFF;">
+		 						<th class="col-sm-1">S.No</th>
+		 						<th class="col-sm-2">Material Description</th>
+		 						<th class="col-sm-1">UOM</th>
+		 						<th class="col-sm-2">Issue Qty</th>
+		 						<th class="col-sm-2">Unit Rate</th>
+		 						<th class="col-sm-2">Value of Goods</th>
+		 						<th class="col-sm-2">Remove</th>
+		 					</tr>
+		 				</thead>
+		 				<tbody>
+		 					<tr>
+		 						<td>1</td>
+		 						<td>Some material</td>
+		 						<td>NOS</td>
+		 						<td>120</td>
+		 						<td>Rs 500</td>
+		 						<td>Rs 2,500</td>
+		 						<td><button type="button" class="btn btn-danger btn-xs">Remove</button></td>
+		 					</tr>
+
+		 				</tbody>
+
+		 			</table>
+
+		 		</div><!-- col-sm-12 ends -->
+
+	 			<div class="col-sm-3 col-xs-8 submitbtn" style="padding:0px;margin-bottom:15px;">
+                  <button type="button" class="btn  btn-success">Add Recovery</button>
+                </div>
+
+		 	</div>
+
+
+		 	<!-- ----------------------------------- Add recovery section ends ---------------------------------------- -->
+
+
+		 	<!-- ----------------------------------- Approve recovery section starts ---------------------------------------- -->
+
+		 	<div class="approverecoverysection" ng-show="recoverytype == 'approverecovery' ">
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont">
+		 					<option value="select">SELECT</option>
+		 					<option>NOs</option>
+		 					<option>KG</option>
+		 					<option>3</option>
+		 					<option>4</option>
+		 				</select>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project Manager</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont">
+		 					<option value="select">SELECT</option>
+		 					<option>NOs</option>
+		 					<option>KG</option>
+		 					<option>3</option>
+		 					<option>4</option>
+		 				</select>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Sub Contractor</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont">
+		 					<option value="select">SELECT</option>
+		 					<option>NOs</option>
+		 					<option>KG</option>
+		 					<option>3</option>
+		 					<option>4</option>
+		 				</select>
+		 			</div>
+		 		</div>
+
+		 		
+		 		
+
+		 		<div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;">
+
+		 			<table class="table table-striped">
+		 				<thead>
+		 					<tr style="background:#000;color:#FFF;">
+		 						<th class="col-sm-1">S.No</th>
+		 						<th class="col-sm-2">Material Description</th>
+		 						<th class="col-sm-1">UOM</th>
+		 						<th class="col-sm-2">Recovery Qty</th>
+		 						<th class="col-sm-2">Unit Rate</th>
+		 						<th class="col-sm-2">Value of Goods</th>
+		 						<th class="col-sm-2">Remarks</th>
+		 					</tr>
+		 				</thead>
+		 				<tbody>
+		 					<tr>
+		 						<td>1</td>
+		 						<td>Some material</td>
+		 						<td>NOS</td>
+		 						<td>120</td>
+		 						<td>Rs 500</td>
+		 						<td>Rs 2,500</td>
+		 						<td>some remarks here</td>
+		 					</tr>
+
+		 				</tbody>
+
+		 			</table>
+
+		 		</div><!-- col-sm-12 ends -->
+
+	 			<div class="col-sm-3 col-xs-8 submitbtn" style="padding:0px;margin-bottom:15px;">
+                  <button type="button" class="btn btn-success">Approve Recovery</button>
+                </div>
+
+		 	</div>
+
+
+		 	<!-- ----------------------------------- Approve recovery section ends ---------------------------------------- -->
+
+
+		 	
+
+		</form>
+
+
+    </div><!-- col-sm-12 ends -->
+    
+    
+  </div> <!-- row ends -->
+</div><!-- container ends -->
+
+<!-- page right main container ends -->

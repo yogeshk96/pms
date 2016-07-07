@@ -1,0 +1,183 @@
+<div class="container-fluid hidden-print">
+	<div class="row-fluid">
+		<div class="clearfix" style="height:20px;"></div>
+		<p><strong>PO Tracker</strong></p>
+		<div class="col-sm-12 col-xs-12 smallfont">
+    		<form class="form-horizontal">
+				<div class="form-group smallfont hidden-print">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="projlist.id as projlist.name for projlist in projectlist" ng-change="hidestuff()">
+		 					
+		 				</select>
+		 			</div>
+		 		</div>
+	 			<div class="form-group smallfont hidden-print">
+	                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Vendor<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" chosen options="vendorlist" ng-model="vendorid" ng-options="venlist.id as venlist.name for venlist in vendorlist" ng-change="hidestuff()">
+		 					<option value="All">All</option>
+		 			
+		 				</select>
+		 			</div>
+	                
+	            </div>
+
+	            <div class="form-group smallfont hidden-print">
+		                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Date<span class="astrix">*</span></div>
+		                <div class="input-group input-group-sm col-sm-2 col-md-2 col-xs-8" style="float:left;padding-left:16px;">
+						  <span class="input-group-addon" id="sizing-addon1">From</span>
+						  <input type="date" class="form-control" ng-model="pofromdate" aria-describedby="sizing-addon1">
+
+						</div>
+						<div class="col-sm-1" style="float:left;">&nbsp</div>
+						<div class="input-group input-group-sm col-sm-2 col-md-2 col-xs-8" style="float:left;">
+						  <span class="input-group-addon" id="sizing-addon1">To</span>
+						  <input type="date" class="form-control" ng-model="potodate" aria-describedby="sizing-addon1">
+						  
+						</div>
+
+			 			
+		                <div class="col-sm-2 col-xs-4 submitbtn">
+		                   <button type="button" class="btn btn-success smallfont " ng-click="searchvendorpolist()">Get List</button>
+		                </div>
+		            </div>
+	            <div class="form-group smallfont hidden-print" ng-show="shopobox">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select PO<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" options="polist" chosen ng-model="mainpo" ng-options="polist as polist.po_no for polist in polist">
+		 					
+		 				</select>
+		 			</div>
+		 		</div>
+		 	</form>
+		</div>
+		<div class="clearfix" style="height:20px;"></div>
+		<div class="clearfix" style="height:20px;"></div>
+		<div ng-show="mainpo && mainpo.po_no!='All'">
+			<p><strong>Vendor Details</strong></p>
+			<div class="clearfix" style="height:10px;"></div>
+			<div class="col-xs-12">
+				<table class="table table-striped table-responsive smallfont">
+					<thead>
+						<tr class="innerhead">
+							<th class="col-sm-1">S.No</th>
+							<th class="col-sm-1">Vendor Name</th>
+							<th class="col-sm-1">Contact Person</th>
+							<th class="col-sm-1">Phone</th>
+							<th class="col-sm-1">Email</th>
+							<th class="col-sm-1">Address</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{$index+1}}</td>
+							<td>{{mainpo.vendor.name}}</td>
+							<td>{{mainpo.vendor.contact_person}}</td>
+							<td>{{mainpo.vendor.phoneno}}</td>
+							<td>{{mainpo.vendor.emailid}}</td>
+							<td>{{mainpo.vendor.address}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="clearfix" style="height:20px;"></div>
+			<p><strong>Material Details</strong></p>
+			<div class="clearfix" style="height:10px;"></div>
+			<div class="col-xs-12">
+				<table class="table table-striped table-responsive smallfont">
+					<thead>
+						<tr class="innerhead">
+							<th class="col-sm-1">S.No</th>
+							<th class="col-sm-1">Material Name</th>
+							<th class="col-sm-1">Purchased Qty</th>
+							<th class="col-sm-1">Unit Rate</th>
+							<th class="col-sm-1">Inspected Qty</th>
+							<th class="col-sm-1">Department DI Qty</th>
+							<th class="col-sm-1">Internal DI Qty</th>
+							<th class="col-sm-1">Received Qty</th>
+							<th class="col-sm-1">Payment Qty</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in mainpo.pomaterials">
+							<td>{{$index+1}}</td>
+							<td>{{x.storematerial.name}}</td>
+							<td>{{x.quantity}}</td>
+							<td>Rs {{x.unit_rate}}/-</td>
+							<td>{{x.inspected_quantity}}</td>
+							<td>{{x.dispatch_quantity}}</td>
+							<td>{{x.internal_di_quantity}}</td>
+							<td>--</td>
+							<td>{{x.payment_qty}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div ng-show="mainpo && mainpo.po_no=='All' && $index>0" ng-repeat="inpo in polist" class="jumbobox">
+			<p><strong>{{inpo.po_no}}</strong></p>
+			<p>Date: {{inpo.po_date}}</p>
+			<p><strong>Vendor Details</strong></p>
+			<div class="clearfix" style="height:10px;"></div>
+			<div class="col-xs-12">
+				<table class="table table-striped table-responsive smallfont">
+					<thead>
+						<tr class="innerhead">
+							<th class="col-sm-1">S.No</th>
+							<th class="col-sm-1">Vendor Name</th>
+							<th class="col-sm-1">Contact Person</th>
+							<th class="col-sm-1">Phone</th>
+							<th class="col-sm-1">Email</th>
+							<th class="col-sm-1">Address</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{$index}}</td>
+							<td>{{inpo.vendor.name}}</td>
+							<td>{{inpo.vendor.contact_person}}</td>
+							<td>{{inpo.vendor.phoneno}}</td>
+							<td>{{inpo.vendor.emailid}}</td>
+							<td>{{inpo.vendor.address}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="clearfix" style="height:20px;"></div>
+			<p><strong>Material Details</strong></p>
+			<div class="clearfix" style="height:10px;"></div>
+			<div class="col-xs-12">
+				<table class="table table-striped table-responsive smallfont">
+					<thead>
+						<tr class="innerhead">
+							<th class="col-sm-1">S.No</th>
+							<th class="col-sm-1">Material Name</th>
+							<th class="col-sm-1">Purchased Qty</th>
+							<!-- <th class="col-sm-1">Unit Rate</th> -->
+							<th class="col-sm-1">Inspected Qty</th>
+							<th class="col-sm-1">Department DI Qty</th>
+							<th class="col-sm-1">Internal DI Qty</th>
+							<th class="col-sm-1">Received Qty</th>
+							<th class="col-sm-1">Payment Qty</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in inpo.pomaterials">
+							<td>{{$index+1}}</td>
+							<td>{{x.storematerial.name}}</td>
+							<td>{{x.quantity}}</td>
+							<!-- <td>Rs {{x.unit_rate}}/-</td> -->
+							<td>{{x.inspected_quantity}}</td>
+							<td>{{x.dispatch_quantity}}</td>
+							<td>{{x.internal_di_quantity}}</td>
+							<td>--</td>
+							<td>{{x.payment_qty}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

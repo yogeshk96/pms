@@ -1,0 +1,57 @@
+<div class="container-fluid">
+
+	<div class="row-fluid hidden-print">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<form class="form-horizontal">
+		<div class="col-sm-12 col-xs-12">
+
+			<p><strong>PO Report</strong></p>
+			<p><strong>Total POs: </strong>{{totalpos.length}}</p>
+			<p><strong>Total Doc Approved by company: </strong>{{totalcompanyapproved}}</p>
+			<p><strong>Total Doc Approved by vendor: </strong>{{totalvendorapproved}}</p>
+			<p><strong>Total Department Inspection: </strong>{{totalinspected}}</p>
+			<p><strong>Total Department Instructions: </strong>{{totalinspdispatch}}</p>
+
+				<table class="table table-striped table-responsive smallfont">
+	 				<thead>
+	 					<tr class="innerhead">
+	 						<th>S.No</th>
+	 						<th>PO Number</th>
+	 						<th>Created By</th>
+	 						<th>Created On</th>
+	 						<th>Doc Approved by company</th>
+	 						<th>Inspected</th>
+	 						<th>Approved</th>
+	 						<th>Department Instructions</th>
+	 						<th>Internal DI</th>
+	 					</tr>
+	 				</thead>
+	 				<tr ng-repeat="posingle in totalpos">
+	 					<td scope="row">{{$index+1}}</td>
+	 					<td>{{posingle.po_no}}</td>
+	 					<td>{{posingle.users.name}}</td>
+	 					<td>{{posingle.created_at}}</td>
+	 					<td ng-show="posingle.company_approved_po != ''">Yes</td>
+	 					<td ng-show="posingle.company_approved_po == ''">No</td>
+	 					<td ng-repeat-start="mat in posingle.pomaterials">
+	 					<td>{{mat.inspected_quantity}}</td>
+	 					<!-- <td ng-show="mat.inspected_quantity.length > 0"></td> -->
+	 					<!-- <td ng-show="posingle.vendor_approved_po !=''">Yes</td> -->
+	 					<!-- <td ng-show="posingle.vendor_approved_po == ''">No</td> -->
+	 					<!-- <td ng-show="posingle.inspections.length > 0">Yes</td> -->
+	 					<!-- <td ng-show="posingle.inspections.length == 0">No</td> -->
+	 					<!-- <td ng-show="posingle.inspectiondispatchcheck">Yes</td> -->
+	 					<!-- <td ng-show="!posingle.inspectiondispatchcheck">No</td> -->
+	 					<td ng-repeat-end></td>
+	 				</tr>
+	 				
+	 			</table>
+
+
+		</div>
+		</form>
+	</div>
+
+</div>

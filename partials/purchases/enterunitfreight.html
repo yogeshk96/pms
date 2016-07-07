@@ -1,0 +1,56 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<form class="form-horizontal">
+		<div class="col-sm-12 col-xs-12 hidden-print">
+
+		<p><strong>Enter Unit Freight</strong></p>    		
+		<div class="form-group smallfont">
+ 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+ 			<div class="col-sm-3 col-md-3 col-xs-8">
+ 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="polist.id as polist.name for polist in projectlist" ng-change="getpowithoutfreight()">
+		 					
+		 		</select>
+ 			</div>
+ 		</div>
+ 		<div class="form-group smallfont">
+			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Purchase Order<span class="astrix">*</span></div>
+			<div class="col-sm-3 col-md-3 col-xs-8">
+				<select class="form-control smallfont" ng-model="podet" ng-options="pol as pol.po_no for pol in polist">
+					<option value="">SELECT</option>
+			
+				</select>
+			</div>
+			
+		</div>
+
+
+		<div class="enquirymaterialbox col-sm-8 col-xs-12" ng-show="podet">
+			<p><strong>Material list</strong></p>
+	    	<table class="table table-striped smallfont">
+				<thead>
+					<tr class="innerhead">
+						<th>S.No</th>
+						<th>Material Description</th>
+						<th class="col-sm-1">unit rate F&I</th>
+					</tr>
+				</thead>
+				<tr ng-repeat="pomat in podet.pomaterials">
+					<td scope="row">{{$index+1}}</td>
+					<td>{{pomat.storematerial.name}}</td>
+					<td><input type="text" ng-model="pomat.freightinsurance_rate"/></td>
+				</tr>
+
+			</table>
+		</div>
+		<div style="clear:both;"></div>
+
+		<div class="form-group smallfont submitbtn hidden-print">
+ 			<div class="col-sm-3 col-md-3 col-xs-8">
+ 				<button type="submit" class="btn btn-success" ng-show="podet" ng-click="saveunitfreight()">Save</button>
+ 			</div>
+ 		</div>

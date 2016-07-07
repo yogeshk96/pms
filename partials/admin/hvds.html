@@ -1,0 +1,77 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal" ng-submit="save_workids()">
+
+    			<div class="form-group smallfont">
+	 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project</div>
+	 				<div class="col-sm-2 col-xs-6">
+	 					<select class="form-control smallfont" ng-model="project" ng-change="project_change()">
+	 						<option value="select">SELECT</option>
+	 						<option ng-repeat="x in projects" value="{{x.id}}">{{x.name}}</option>
+	 					</select>
+	 				</div>
+	 			</div>
+
+	 			<div class="form-group smallfont" ng-show="project!='select'">
+	 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Feeder</div>
+	 				<div class="col-sm-2 col-xs-6">
+	 					<select class="form-control smallfont" ng-model="feeder" ng-change="feeder_change()">
+	 						<option value="select">SELECT</option>
+	 						<option ng-repeat="x in feeders" value="{{x.id}}">{{x.name}}</option>
+	 					</select>
+	 				</div>
+	 			</div>
+
+	 			<div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="feeder != 'select' ">
+
+		 			<table class="table table-striped">
+		 				<thead>
+		 					<tr style="background:#000;color:#FFF;">
+		 						<th class="col-sm-1">S.No</th>
+		 						<th class="col-sm-5">Work ID</th>
+		 						<th class="col-sm-1">Name of MDTR</th>
+		 						<th class="col-sm-2">Assigned To</th>
+		 					</tr>
+		 				</thead>
+		 				<tbody>
+		 					<tr ng-repeat="x in workids">
+		 						<td>{{$index+1}}</td>
+		 						<td>
+		 							<input type="text" class="col-sm-2" style="margin-right:10px;" ng-value="x.feederdata.workdata.code" readonly/>
+		 							<input type="text" class="col-sm-2" style="margin-right:10px;" value="HVDS" readonly/><input type="text" class="col-sm-2" style="margin-right:10px;" ng-value="x.feederdata.ssdata.name" readonly/>
+		 							<input type="text" class="col-sm-2" style="margin-right:10px;" ng-value="x.feederdata.name" readonly/>
+		 							<input type="text" class="col-sm-2" style="margin-right:10px;" ng-value="x.code" readonly/>
+		 						</td>
+		 						<td><input type="text" placeholder="Enter name of MDTR" ng-model="x.name" required/></td>
+		 						<td>
+		 							<select class="form-control" ng-model="x.sitedata.user_id">
+		 								<option value="select">SELECT</option>
+		 								<option ng-repeat="y in userlist" value="{{y.id}}">{{y.name}}</option>
+		 							</select>
+		 						</td>
+		 					</tr>
+		 				</tbody>
+
+		 			</table>
+
+		 		</div><!-- col-sm-12 ends -->
+
+		 		<div class="form-group smallfont submitbtn" ng-show="feeder != 'select' ">
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="submit" class="btn btn-success" value="Save">
+		 			</div>
+		 		</div>
+
+    		</form>
+    	</div>
+
+	</div>
+
+</div>

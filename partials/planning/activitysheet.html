@@ -1,0 +1,356 @@
+<div class="container-fluid">
+	
+
+	<div class="row">
+
+		<div class="col-sm-12 hidden-print">
+
+			<form class="form-horizontal">
+			<div class="form-group smallfont">
+	 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+	 			<div class="col-sm-3 col-md-3 col-xs-8">
+	 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="projlist.id as projlist.name for projlist in projectlist">
+			 					
+		 				</select>
+		 			</div>
+	 			
+	 			<div class="col-sm-3 col-md-3 col-xs-8">
+	 				
+	 				<div class="btn btn-success" ng-click="get_boq_file_info()">GET ACTIVITIES</div>
+	 			</div>
+	 		</div>
+
+
+	 		<div class="form-group smallfont" ng-show="activitylist">
+	 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Activity<span class="astrix">*</span></div>
+	 			<div class="col-sm-3 col-md-3 col-xs-8">
+	 				<select class="form-control smallfont" options="activitylist" chosen ng-model="activityinfo" ng-options="indiact as indiact.srno for indiact in activitylist">
+			 					
+		 				</select>
+		 			</div>
+	 			
+	 			
+	 		</div>
+			
+			
+		</div>
+
+		<div class="col-sm-12 hidden-print" ng-show="activityinfo">
+			
+			<table class="table table-striped table-responsive smallfont">
+ 				<thead>
+ 					<tr class="innerhead">
+ 						<th class="col-sm-1">LOA Sl No</th>
+ 						<th class="col-sm-3">Description of Items</th>
+ 						<th class="col-sm-1">Units</th>
+ 						<th class="col-sm-1">Unit Quantity</th>
+ 						<th class="col-sm-1" ng-repeat="smulti in submultiplier">{{smulti.multiplier_name}} Current Indent Quantity</th>
+ 						<th class="col-sm-1">Total Current Indent Quantity</th>
+ 						<!-- <th class="col-sm-1">Map Materials</th> -->
+ 						<th class="col-sm-2">Mapped Materials</th>
+ 						<!-- <th></th> -->
+ 						
+ 					</tr>
+ 				</thead>
+ 				
+					<tbody>
+					<tr style="background:#bababa;">
+						
+						<th>{{activityinfo.srno}}</th>
+ 						<th><textarea ng-model="activityinfo.desc" class="col-sm-12" style="height:100px;width:300px;">{{activityinfo.desc}}</textarea></th>
+ 						<th>{{activityinfo.uom}}</th>
+ 						<th>{{activityinfo.unit_qty}}</th>
+ 						<td ng-repeat="indiq in activityinfo.qty">
+							<span style="font-size:9px;">LOA Qty</span> <br>
+	 						<input type="text" class="form-control col-sm-10" ng-model="indiq['indiqty']" readonly /><br>
+	 						<span style="font-size:9px;">Total Indent Raised</span><br>
+	 						<input type="text" class="form-control col-sm-10" ng-model="indiq['total_indent_qty']" readonly /><br>
+	 						<span style="font-size:9px;">Current Indent</span><br>
+	 						<input type="text" class="form-control col-sm-10" ng-model="indiq['indiqtycurrentindent']" ng-blur="calculateallvariables(indiq)"/>
+
+ 						<td>{{activityinfo.tot_qty}}</td>
+ 						<!-- <th></th> -->
+ 						<th></th>
+ 						<th>Edit Material</th>
+ 						
+					</tr>
+					<tr ng-repeat="filein in activityinfo.sub">
+						<td>{{filein.srno}}</td>
+ 						<td>{{filein.desc}}</td>
+ 						<td>{{filein.uom}}</td>
+ 						<td>{{filein.unit_qty}}</td>
+ 						<td ng-repeat="indiq in filein.qty">
+							
+ 							<input type="text" class="form-control" ng-model="indiq['indiqtycurrentindent']" style="width:80px;" readonly />
+ 						</td>
+ 						<td>{{filein.tot_qty}}</td>
+ 						<td>
+ 							<ul>
+ 								<li ng-repeat="mat in filein.matmapped">{{mat.materialdesc}}({{mat.uom}})({{mat.totalprojqty}})</li>
+
+ 							</ul>
+ 						</td>
+ 						<td>					
+							<button class="btn col-sm-12 smallfont" ng-click="addmattoact(filein)">EDIT MATERIAL</button>
+ 						</td>
+
+					</tr>
+					</tbody>
+			</table>
+
+			<div class="col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3 submitbtn">
+				<button type="button" class="btn btn-success" ng-click="addactivitiytotable()">ADD</button>
+			</div>
+ 		</div>
+
+ 		<div style="clear:both;height:20px;"></div>
+
+
+ 		<div class="col-sm-12 jumbobox hidden-print" ng-show="mainactivityinfo.length>0">
+
+ 			<h4>Added Activities</h4>
+			
+			<table class="table table-striped table-responsive smallfont">
+ 				<thead>
+ 					<tr class="innerhead">
+ 						<th class="col-sm-1">LOA Sl No</th>
+ 						<th class="col-sm-3">Description of Items</th>
+ 						<th class="col-sm-1">Units</th>
+ 						<th class="col-sm-1">Unit Quantity</th>
+ 						<th class="col-sm-1" ng-repeat="smulti in submultiplier">{{smulti.multiplier_name}} LOA Quantity</th>
+ 						<th class="col-sm-1">Total Quantity</th>
+ 						<th class="col-sm-1">Map Materials</th>
+ 						<th class="col-sm-2">Mapped Materials</th>
+ 						<th></th>
+ 						
+ 					</tr>
+ 				</thead>
+ 				
+					<tbody ng-repeat="filed in mainactivityinfo">
+					<tr style="background:#bababa;">
+						
+						<th>{{filed.srno}}</th>
+ 						<th>{{filed.desc}}</th>
+ 						<th>{{filed.uom}}</th>
+ 						<th>{{filed.unit_qty}}</th>
+ 						<td ng-repeat="indiq in filed.qty">{{indiq['indiqty']}}</td>
+ 						<td>{{filed.tot_qty}}</td>
+ 						<th></th>
+ 						<th><button type="button" class="btn btn-danger btn-xs smallfont" ng-click="removeact($index)">Remove Activity</button></th>
+ 						
+					</tr>
+					<tr ng-repeat="filein in filed.sub">
+						<td>{{filein.srno}}</td>
+ 						<td>{{filein.desc}}</td>
+ 						<td>{{filein.uom}}</td>
+ 						<td>{{filein.unit_qty}}</td>
+ 						<td ng-repeat="indiq in filein.qty">{{indiq['indiqtycurrentindent']}}</td>
+ 						<td>{{filein.tot_qty}}</td>
+ 						
+ 						<td>
+ 							<ul>
+ 								<li ng-repeat="mat in filein.matmapped">{{mat.materialdesc}}({{mat.uom}})({{mat.currentindentqty}})</li>
+
+ 							</ul>
+ 						</td>
+ 						<td></td>
+ 						
+					</tr>
+					</tbody>
+			</table>
+			
+			<div class="form-group smallfont">
+	 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Buy Between<span class="astrix">*</span></div>
+	 			<div class="col-sm-2 col-md-2 col-xs-8">
+	 				<input type="date" class="form-control smallfont" ng-model="buy_from" placeholder="From date" />
+			 					
+		 			</select>
+		 		</div>
+		 		<div class="col-sm-2 col-md-2 col-xs-8">
+	 				<input type="date" class="form-control smallfont" ng-model="buy_to" placeholder="To date" />
+			 					
+		 			</select>
+		 		</div>
+	 		</div>
+	 		<div style="clear:both;height:10px;"></div>
+
+			<div class="col-sm-4 col-sm-offset-2 col-xs-6 col-xs-offset-2 submitbtn">
+				<button type="button" class="btn btn-success" ng-click="generatesampleboq()">View Consolidated Material Report</button>
+			</div>
+			<div class="col-sm-4 col-xs-6 submitbtn">
+				<button type="button" class="btn btn-success" ng-click="saveindent()" ng-show="activitydata">Raise Indent</button>
+			</div>
+
+			
+ 		</div>
+
+	</form>
+
+</div>
+
+<!--BOQ Modal -->
+<div id="BoqModal" class="modal fade hidden-print" role="dialog">
+	<div class="modal-dialog modal-lg">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h5 class="modal-title"><strong>Consolidated Material Report</strong></h5>
+
+			</div>
+			<div class="modal-body">
+				<div class="col-sm-12 col-xs-12" ng-show="activitydata">
+
+					<div><strong ng-show="indentinf">Indent No.: </strong> INDENT-PROJ{{projectid}}{{indentinf.id}}</div>
+					<div><strong>Raised Date.: </strong> {{today}}</div>
+					<div ng-show="buy_from && buy_to"><strong>Buy Between.: </strong> {{dateconv(buy_from)}} to {{dateconv(buy_to)}}</div>
+
+					<div class="table-responsive">
+				
+						<table class="table table-striped smallfont">
+							<thead>
+								<tr class="innerhead">
+									<th class="col-sm-1 col-xs-1">S.No</th>
+									<th class="col-sm-6 col-xs-5">Material</th>
+									<th class="col-sm-1 col-xs-1">Units</th>
+									<th class="col-sm-1 col-xs-1">LOA Qty</th>
+									<th class="col-sm-1 col-xs-1">Total Indent Already raised</th>
+									<th class="col-sm-1 col-xs-1">Current Indent Quantity</th>
+									<th class="col-sm-2 col-xs-2">Activities</th>
+								</tr>
+							</thead>
+							
+							<tr ng-repeat="indiactivity in activitydata">
+								
+								<th>{{$index+1}}</th>
+									<th>{{indiactivity['name']}}</th>
+									<th>{{indiactivity['uom']}}</th>
+									<th>{{indiactivity['loa_qty']}}</th>
+									<th>{{indiactivity['totalindentqty']}}</th>
+									<th>{{indiactivity['qty']}}</th>
+									<th>{{indiactivity['activities']}}</th>
+							</tr>
+							
+						</table>
+					</div>
+
+				</div>
+
+			</div>
+			<div style="clear:both;height:10px;"></div>
+			<div class="modal-footer hidden-print">
+				<div class="col-sm-2 col-xs-4 col-sm-offset-8">
+					<button type="button" class="btn btn-success" onClick="window.print()" style="width:100%;">Print</button>
+				</div>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="container visible-print-block">
+	
+	<div class="row">
+		
+		<div class="col-sm-12 col-xs-12" ng-show="activitydata">
+
+
+			<div><strong ng-show="indentinf">Indent No.: </strong> INDENT-PROJ{{projectid}}{{indentinf.id}}</div>
+			<div><strong>Date.: </strong> {{today}}</div>
+			<div ng-show="buy_from && buy_to"><strong>Buy Between.: </strong> {{dateconv(buy_from)}} to {{dateconv(buy_to)}}</div>
+			<div class="table-responsive">
+				<table class="table table-striped smallfont">
+					<thead>
+						<tr class="innerhead">
+							<th class="col-sm-1 col-xs-1">S.No</th>
+							<th class="col-sm-6 col-xs-5">Material</th>
+							<th class="col-sm-1 col-xs-1">Units</th>
+							<th class="col-sm-1 col-xs-1">LOA Qty</th>
+							<th class="col-sm-1 col-xs-1">Total Indent Already raised</th>
+							<th class="col-sm-1 col-xs-1">Current Indent Quantity</th>
+							<th class="col-sm-2 col-xs-2">Activities</th>
+						</tr>
+					</thead>
+					
+					<tr ng-repeat="indiactivity in activitydata">
+						
+						<th>{{$index+1}}</th>
+							<th>{{indiactivity['name']}}</th>
+							<th>{{indiactivity['uom']}}</th>
+							<th>{{indiactivity['loa_qty']}}</th>
+							<th>{{indiactivity['totalindentqty']}}</th>
+							<th>{{indiactivity['qty']}}</th>
+							<th>{{indiactivity['activities']}}</th>
+					</tr>
+					
+				</table>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+<!--PO Modal -->
+<div id="AddMaterialModal" class="modal fade hidden-print" role="dialog">
+	<div class="modal-dialog modal-lg">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h5 class="modal-title"><strong>EDIT MATERIALS</strong></h5>
+
+			</div>
+			<div class="modal-body">
+			<form class="form-horizontal">
+				<div class="col-sm-12 col-xs-12">
+					<div class="col-sm-12 col-xs-12 smallfont">
+			 			<table class="table table-striped table-responsive smallfont" ng-show="maptable.length>0">
+			 				<thead>
+			 					<tr class="innerhead">
+			 						<th class="col-sm-1">S.No</th>
+			 						<th class="col-sm-5">Material Description</th>
+			 						<th class="col-sm-1">UOM</th>
+			 						<th class="col-sm-1">Unit Qty</th>
+			 						<th class="col-sm-1" ng-repeat="smulti in submultiplier">{{smulti.multiplier_name}} Current Indent Quantity</th>
+			 						<!-- <th class="col-sm-2">Reason</th> -->
+			 						<th class="col-sm-1">Edit</th>
+			 					</tr>
+			 				</thead>
+			 				<tr ng-repeat="pomat in maptable">
+			 					<td scope="row">{{$index+1}}</td>
+			 					<td>{{pomat['materialdesc']}}</td>
+			 					<td>{{pomat['uom']}}</td>
+			 					<td>{{pomat['unitqty']}}</td>
+			 					<td ng-repeat="indiq in pomat.projqty">
+									
+		 							<input type="text" class="form-control" ng-model="indiq['indiqtycurrentindentpre']" style="width:80px;" readonly  ng-show="!pomat.editindimat"/>
+		 							<input type="text" class="form-control" ng-model="indiq['indiqtycurrentindentpre']" style="width:80px;"  ng-show="pomat.editindimat" ng-blur="matindiindenthange(indiq)" />
+		 						</td>
+			 					<!-- <td ng-show="pomat.editindimat">{{pomat['totalprojqty']}}+<input type="text" ng-model="pomat['addprojqty']" style="width:50px;"/></td> -->
+			 					<!-- <td ng-show="pomat.editindimat"><textarea ng-model="pomat['reason']"></textarea></td> -->
+			 					<!-- <td ng-show="!pomat.editindimat">{{pomat['reason']}}</textarea></td> -->
+			 					<td ng-show="!pomat.editindimat"><button type="button" class="btn btn-danger btn-xs" ng-click="pomat.editindimat=true">EDIT</button></td>
+			 					<td ng-show="pomat.editindimat"><button type="button" class="btn btn-danger btn-xs" ng-click="saveeditmat(pomat)">SAVE</button></td>
+			 				</tr>
+			 				
+			 			</table>
+
+			 		</div>
+				</div>
+			</form>
+
+			</div>
+			<div style="clear:both;height:10px;"></div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" ng-click="addtothisact()">Submit</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>

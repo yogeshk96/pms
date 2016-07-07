@@ -1,0 +1,448 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="clearfix" style="height:20px;"></div>
+  		<form class="form-horizontal">
+            <div class="col-sm-12 col-xs-12 hidden-print">
+	           <p><strong>Road Permits</strong></p>
+	           <div class="form-group smallfont hidden-print">
+                 <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+            			  Select Project<span class="astrix">*</span>
+            		 </div>
+		             <div class="col-sm-3 col-md-3 col-xs-8">
+		          	     <select class="form-control smallfont" chosen options="projectlist" ng-model="projectid" ng-options="projlist.id as projlist.name for projlist in projectlist" ng-change="hideall()">
+		         		</select>
+		        	</div>
+		         </div>
+	           <div class="form-group smallfont hidden-print">
+              	<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+              		Select Vendor<span class="astrix">*</span>
+              	</div>
+                <div class="col-sm-3 col-md-3 col-xs-8">
+                  <select class="form-control smallfont" chosen ng-model="vendorid" options="vendorlist" ng-options="venlist.id as venlist.name for venlist in vendorlist" ng-change="hideall()">
+                  </select>
+                </div>
+                <div class="col-sm-2 col-xs-4 submitbtn" style="margin-left:13px;">
+                   <button type="button" class="btn btn-success smallfont " ng-click="getinslist()">Get Inspections</button>
+                </div>
+	           </div>
+  		       <div class="form-group smallfont hidden-print" ng-show="showinsbox">
+  		            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+  		            	Select Inspection Reference<span class="astrix">*</span>
+  		            </div>
+  		            <div class="col-sm-3 col-md-3 col-xs-8" style="padding-left:0px;margin-left:14px;">
+  		            	<select class="form-control smallfont" chosen  options="inslist" ng-model="insnumber" ng-options="thisins.id as thisins.inspection_ref_no for thisins in inslist" ng-change="inschangefunc()">
+  		            
+  		            	</select>
+  		            </div>
+  		            <div class="col-sm-2 col-xs-4 submitbtn">
+  		               <button type="button" class="btn btn-success smallfont " ng-click="getdisdata()">Get Dispatch Data</button>
+  		            </div>
+  	          </div>
+              <div class="form-group smallfont hidden-print" ng-show="showdibox">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+                    Select Dispatch Reference<span class="astrix">*</span>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-8" style="padding-left:0px;margin-left:14px;">
+                    <select class="form-control smallfont" chosen  options="dilist" ng-model="dinumber" ng-options="thisdi.id as thisdi.dispatch_reference for thisdi in dilist" ng-change="dichangefunc()">
+                  
+                    </select>
+                  </div>
+              </div>
+              <div class="form-group smallfont hidden-print" ng-show="showdibox">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+                    Select Internal Dispatch Reference<span class="astrix">*</span>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-8" style="padding-left:0px;margin-left:14px;">
+                    <select class="form-control smallfont" chosen  options="didetails.intdi" ng-model="idinumbers" ng-options="thisidi as thisidi.ref_name for thisidi in didetails.intdi" multiple ng-change="idichangefunc()">
+                  
+                    </select>
+                  </div>
+                  <span data-toggle="modal" data-target="#myModal" class="viewcls" ng-show="aroadpermits.length>0">View Already raised Road Permits</span>
+              </div>
+     			</div>
+
+     			<div style="clear:both;height:10px;"></div>
+          <div ng-show="showrpdets&&idinumbers.length>0">
+            <div class="jumbobox col-sm-8" >
+              <div class="form-group smallfont">
+                <p style="margin-left:16px;font-size:13px;"><b>Add Quantity to a Road Permit</b></p>
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                  Select Material
+                </div>
+                <div class="col-sm-4 col-xs-8">
+                <!--  <select class="form-control smallfont" ng-model="mainmat" ng-options="mat as mat.name for mat in materials">
+                    <option value="">SELECT</option>
+                  </select> -->
+                   <select class="form-control smallfont"  options="materials" ng-model="mainmat" ng-options="thismat[0] as thismat[0].name for thismat in materials">
+                        
+                  </select>
+                </div>
+              </div>
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                  Total Internal DI Qty: 
+                  <span class="astrix">*</span>
+                </div>
+                <div class="col-sm-4 col-md-4 col-xs-8">
+                  <input type="text" class="form-control" ng-model="mainmat.quantity" id="exampleInputEmail1" disabled>
+                </div>
+              </div>
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                  Total Road Permit Qty already Dispatched
+                  <span class="astrix">*</span>
+                </div>
+                <div class="col-sm-4 col-md-4 col-xs-8">
+                  <input type="text" class="form-control" ng-model="mainmat.road_permit_quantity" id="exampleInputEmail1" disabled>
+                </div>
+              </div>
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                  Qty <span style="font-size:10px;">(To depart in the vehicle)</span>
+                  <span class="astrix">*</span>
+                </div>
+                <div class="col-sm-4 col-xs-6">
+                  <input type="text" class="form-control" ng-model="vehqty" id="exampleInputEmail1" placeholder="Enter quantity">
+                </div>
+              </div>
+              <div class="form-group smallfont">
+                  <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                    Invoice No <span class="astrix">*</span>
+                  </div>
+                  <div class="col-sm-4 col-md-4 col-xs-8">
+                    <input type="text" class="form-control" ng-model="roadpermit.invoice_no" id="exampleInputEmail1">
+                  </div>
+              </div>
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                  Invoice Date: 
+                  <span class="astrix">*</span>
+                </div>
+                <div class="col-sm-4 col-md-4 col-xs-8">
+                  <input type="date" class="form-control" ng-model="roadpermit.invoice_date" id="exampleInputEmail1">
+                </div>
+              </div>
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                  Total Invoice Qty: 
+                  <span class="astrix">*</span>
+                </div>
+                <div class="col-sm-4 col-md-4 col-xs-8">
+                  <input type="text" class="form-control" ng-model="roadpermit.invoice_quantity" id="exampleInputEmail1">
+                </div>
+              </div>
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                  Total Invoice Value(in Rs): 
+                  <span class="astrix">*</span>
+                </div>
+                <div class="col-sm-4 col-md-4 col-xs-8">
+                  <input type="text" class="form-control" ng-model="roadpermit.invoice_value" id="exampleInputEmail1">
+                </div>
+              </div>
+              <div class="col-sm-5 col-md-5" >
+                  <input type="file" id="file_approvedinsp" class="form-control" file-change="uploaddidoc"/>
+              </div>
+              <button type="button" class="btn btn-primary smallfont" ng-click='add_di_doc("rpinvoice")'>Add</button>
+              <div style="clear:both;height:10px;"></div>
+              <div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont">
+                <p>
+                  <strong> Invoice Files</strong>
+                </p>
+                <table class="table table-striped">
+                  <thead>
+                    <tr class="innerhead">
+                      <th class="col-sm-4">File</th>
+                      <th class="col-sm-1">Download</th>
+                      <th class="col-sm-1">Delete</th>
+                    </tr>
+                  </thead>
+                  <tr ng-repeat="doc in invoice.docs">
+                    <td>{{doc.doc_name}}</td>
+                    <td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+                    <td>
+                      <button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_didoc(doc.doc_url,$index,'rpinvoice')"><i class="fa fa-times"></i></button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div style="clear:both;height:10px;"></div>
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                 Road Permit Raised Date
+                  <span class="astrix">*</span>
+                </div>
+                <div class="col-sm-4 col-md-4 col-xs-8">
+                  <input type="date" ng-model="roadpermit.raisedate" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                 Road Permit Valid Till
+                  <span class="astrix">*</span>
+                </div>
+                <div class="col-sm-4 col-md-4 col-xs-8">
+                  <input type="date" ng-model="roadpermit.validtill" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                 Road Permit Number
+                  <span class="astrix">*</span>
+                </div>
+                <div class="col-sm-4 col-md-4 col-xs-8">
+                  <input type="text" class="form-control" ng-model="roadpermit.rpno" placeholder="Road Permit Number" />
+                </div>
+              </div>
+              <div class="col-sm-5 col-md-5" >
+                  <input type="file" id="file_approvedinsp" class="form-control" file-change="uploaddidoc"/>
+              </div>
+              <button type="button" class="btn btn-primary smallfont" ng-click='add_di_doc("roadpermitdocs")'>Add</button>
+              <div style="clear:both;height:10px;"></div>
+              <div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont">
+                <p><strong>Road permit Files</strong></p>
+                <table class="table table-striped">
+                  <thead>
+                    <tr class="innerhead"> 
+                      <th class="col-sm-4">File</th>
+                      <th class="col-sm-1">Download</th>
+                      <th class="col-sm-1">Delete</th>
+                    </tr>
+                  </thead>
+                  <tr ng-repeat="doc in roadpermit.docs">
+                    <td>{{doc.doc_name}}</td>
+                    <td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+                    <td><button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_didoc(doc.doc_url,$index,'roadpermitdocs')"><i class="fa fa-times"></i></button></td>
+                  </tr>
+                </table>
+              </div>
+              <div style="clear:both;height:10px;"></div>
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                 Truck No
+                  <span class="astrix">*</span>
+                </div>
+                <div class="col-sm-4 col-md-4 col-xs-8">
+                 <input type="text" class="form-control" ng-model="roadpermit.truckno">
+                </div>
+              </div>
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                  Check Post Likely to cross
+                  <span class="astrix">*</span>
+                </div>
+                <div class="col-sm-4 col-md-4 col-xs-8">
+                 <input type="text" class="form-control" ng-model="roadpermit.checkpost">
+                </div>
+              </div>
+              <div class="form-group smallfont">
+                <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                  Transporter Name
+                  <span class="astrix">*</span>
+                </div>
+                <div class="col-sm-4 col-md-4 col-xs-8">
+                 <input type="text" class="form-control" ng-model="roadpermit.transportername">
+                </div>
+              </div>
+              <div class="form-group smallfont">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Remarks</div>
+                  <div class="col-sm-5 col-xs-6">
+                    <textarea class="form-control" ng-model="roadpermit.remarks"></textarea>
+                  </div>
+              </div>
+              <div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn">
+                <button type="button" class="btn btn-success" ng-click="addmattorparray()">ADD</button>
+              </div>
+            </div>
+            <div class="col-sm-12 col-xs-12 smallfont hidden-print" >
+                <h5><strong>Added Road Permits</strong></h5>
+                <table class="table table-striped table-responsive smallfont tablesmallfontcls">
+                  <thead>
+                    <tr class="innerhead">
+                      <th class="col-sm-1">S.No</th>
+                      <th class="col-sm-1">Material</th>
+                      <th class="col-sm-1">Quantity</th>
+                      <th class="col-sm-2">Inv No</th>
+                      <th class="col-sm-1">Inv Qty</th>
+                      <th class="col-sm-2">Inv Value</th>
+                      <th class="col-sm-1">Raise Date</th>
+                      <th class="col-sm-1">Valid Till</th>
+                      <th class="col-sm-2">Rp No</th>
+                      <th class="col-sm-1">Truck No</th>
+                      <th class="col-sm-1">Checkpost</th>
+                      <th class="col-sm-1">Transporter</th>
+                      <th class="col-sm-1">Remarks</th>
+                      <th class="col-sm-1">Invoice File</th>
+                      <th class="col-sm-1">RP File</th>
+                      <th class="col-sm-1">Delete</th>
+                    </tr>
+                  </thead>
+                  <tr>
+                    <td>1</td>
+                    <td>8M Poles</td>
+                    <td><input type="text"  class="form-control"></td>
+                    <td><textarea class="form-control" ng-model="" style="font-size:9px;"></textarea></td>
+                    <td><input type="text"  class="form-control"></td>
+                    <td><input type="text"  class="form-control"></td>
+                    <td><input type="date"  class="form-control"></td>
+                    <td><input type="date"  class="form-control"></td>
+                    <td><textarea class="form-control" ng-model="" style="font-size:9px;"></textarea></td>
+                    <td><input type="text"  class="form-control"></td>
+                    <td><input type="text"  class="form-control"></td>
+                    <td><input type="text"  class="form-control"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                      <button type="button" class="btn btn-default smallfont btn-danger" ng-click="removerpmat($index)"><i class="fa fa-times"></i></button>
+                    </td>
+                  </tr>
+                 <!--  <tr ng-repeat="x in roadpermit.materials">
+                    <td>{{$index+1}}</td>
+                    <td>{{x.name}}</td>
+                    <td>{{x.units}}</td>
+                    <td>{{x.quantity}}</td>
+                    <td>
+                       <button type="button" class="btn btn-default smallfont btn-danger" ng-click="removerpmat($index)"><i class="fa fa-times"></i></button>
+                    </td>
+                  </tr> -->
+                </table>
+            </div>
+           
+            <div class="col-sm-2 col-xs-4 submitbtn">
+               <button type="button" class="btn btn-success smallfont " style="width:200px;" ng-click="raiseroadpermit()">
+                Save Road Permit Details
+              </button>
+            </div>
+          </div>
+ 		  </form>
+
+ 	</div>
+</div>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Already Added Road Permits (Total:{{aroadpermits.length}})</h4>
+      </div>
+      <div class="modal-body">
+        <div ng-repeat="x in aroadpermits">
+          <p><b>Road Permit No:</b> {{x.no}}</p>
+          <div class="col-sm-12 col-xs-12 smallfont hidden-print">
+            <h5><strong>Added Materials</strong></h5>
+            <table class="table table-striped table-responsive smallfont">
+              <thead>
+                <tr class="innerhead">
+                  <th class="col-sm-1">S.No</th>
+                  <th class="col-sm-4">Material Description</th>
+                  <th class="col-sm-1">UOM</th>
+                  <th class="col-sm-2">Quantity</th>
+                </tr>
+              </thead>
+              <tr ng-repeat="y in x.material">
+                <td>{{$index+1}}</td>
+                <td>{{y.matdes.name}}</td>
+                <td>{{y.matdes.units}}</td>
+                <td>{{y.quantity}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-sm-12 col-xs-12 smallfont hidden-print">
+                <h5><strong>Added Invoices</strong></h5>
+                <table class="table table-striped table-responsive smallfont">
+                  <thead>
+                    <tr class="innerhead">
+                      <th class="col-sm-1">S.No</th>
+                      <th class="col-sm-4">Invoice No</th>
+                      <th class="col-sm-1">Invoice Date</th>
+                      <th class="col-sm-2">Invoice Quantity</th>
+                      <th class="col-sm-2">Invoice Amount(in Rs.)</th>
+                      <th class="col-sm-2">Invoice Files</th>
+                      
+                    </tr>
+                  </thead>
+                  <tr ng-repeat= "y in x.invoices">
+                    <td>{{$indey+1}}</td>
+                    <td>{{y.no}}</td>
+                    <td>{{y.formatdate}}</td>
+                    <td>{{y.quantity}}</td>
+                    <td>{{y.value}}</td>
+                    <td>
+                      <span ng-repeat="doc in y.docs">
+                       <span>{{doc.doc_name}}</span>
+                       <span><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></span> <br>
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+          </div>
+
+           <div class="panel panel-default">
+              <div class="panel-heading">Road Permit Details </div>
+              <div class="panel-body">
+                <div class="form-group smallfont">
+                  <div>
+                    <div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Road Permit Raised Date</div>
+                    <div class="col-sm-4 col-md-4 col-xs-8">
+                      <input type="date" ng-model="x.raise_date" class="form-control" disabled/>
+                    </div> 
+                    <div style="clear:both;height:10px;"></div>
+                    <div for="inputEmail3" class="col-sm-4 col-xs-4 control-label">Road Permit Valid Till</div>
+                    <div class="col-sm-4 col-md-4 col-xs-8">
+                      <input type="date" ng-model="x.valid_till" class="form-control" disabled/>
+                    </div>
+                  </div>                  
+                </div>
+                 <div style="clear:both;height:10px;"></div>
+                <div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont">
+                  <p><strong>Road permit Files</strong></p>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr class="innerhead"> 
+                        <th class="col-sm-4">File</th>
+                        <th class="col-sm-1">Download</th>
+                      </tr>
+                    </thead>
+                    <tr ng-repeat="doc in x.rpdocs">
+                      <td>{{doc.doc_name}}</td>
+                      <td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+                    </tr>
+                  </table>
+                </div>
+                <div style="clear:both;height:10px;"></div>
+                <div class="form-group smallfont">
+                  <div>
+                    <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Truck no</div>
+                    <div class="col-sm-3 col-xs-6">
+                      <input type="text" class="form-control" ng-model="x.truck_no" disabled>
+                    </div>
+                    <div style="clear:both;height:10px;"></div>
+                    <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">checkpost Likely to cross</div>
+                    <div class="col-sm-3 col-xs-6">
+                      <input type="text" class="form-control" ng-model="x.checkpost" disabled>
+                    </div>
+                  </div>
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Transporter Name</div>
+                  <div class="col-sm-3 col-xs-6">
+                   <input type="text" class="form-control" ng-model="x.transporter_name" disabled>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+        <div style="clear:both;height:10px;"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

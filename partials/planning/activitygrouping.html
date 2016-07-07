@@ -1,0 +1,175 @@
+<div class="col-sm-12">
+	<div class="row">
+		<form class="form-horizontal">
+			<div class="col-sm-12">
+				<h3 style="margin-bottom:20px;">Activity Grouping</h3>
+				<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="polist.id as polist.name for polist in projectlist" ng-change="projectchange()">
+		 					
+		 				</select>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Activity Name<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="activityname" />
+		 			</div>
+		 		</div>
+
+
+		 		<div class="jumbobox col-sm-8" ng-show="projectid">
+
+		 				<div class="form-group smallfont">
+							<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select Material Type<span class="astrix">*</span></div>
+							<div class="col-sm-4 col-md-4 col-xs-8">
+
+								<select class="form-control smallfont" ng-model="materialtype" ng-options="mat as mat.name for mat in materials | filter:enqmattypecheck">
+									<option value="">SELECT</option>
+		 					
+		 						</select>
+							</div>
+							
+						</div>
+
+						<div class="form-group smallfont" ng-show="materialtype">
+							<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select Material<span class="astrix">*</span></div>
+							<div class="col-sm-4 col-md-4 col-xs-8">
+
+								<select class="form-control smallfont" ng-model="submat" ng-options="smat as smat.name for smat in materialtype.submaterials | filter: matfilter" ng-change="matchange()">
+									<option value="">SELECT</option>
+		 					
+		 						</select>
+							</div>
+						</div>
+
+						<div class="form-group smallfont" ng-show="submat">
+		 					<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">UOM<span class="astrix">*</span></div>
+		 					<div class="col-sm-3 col-xs-8">
+
+		 						<select class="form-control smallfont" ng-model="uomval" ng-options="smatu as smatu.stmatuom.uom for smatu in submat.matuom">
+									<option value="">SELECT</option>
+		 					
+		 						</select>
+		 					</div>
+		 				</div>
+		 				<div class="form-group smallfont">
+		 					<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Quantity<span class="astrix">*</span></div>
+		 					<div class="col-sm-3 col-xs-6">
+		 						<input type="text" class="form-control" ng-model="quantity" placeholder="Enter quantity">
+		 					</div>
+		 				</div>
+
+		 				<div class="col-sm-12 col-xs-12 smallfont" ng-show="submat.type!='1'">
+				 			<table class="table table-striped table-responsive smallfont" ng-show="submat.level1mat.length>0">
+
+				 				<thead>
+				 					<tr class="innerhead">
+				 						<th><input type="checkbox" ng-model="selectall" ng-checked="isselectallsub()" ng-click="selectallclick()" /></th>
+				 						<th>Material Description</th>
+				 						<th>UOM</th>
+										<th>Qty</th>
+				 						<th>Section</th>
+				 						<th>Length as per dwg</th>
+				 						<th>Wt per pc</th>
+				 						
+				 					</tr>
+				 				</thead>
+				 				
+				 				<tr ng-repeat="pomat in submat.level1mat | filter:matfiltersub">
+				 				
+				 					<td class="col-sm-1"><input type="checkbox" ng-model="pomat.selected" ng-click="levelmatclick(pomat)"/></td>
+				 					<td class="col-sm-3">{{pomat.storematerial.name}}</td>
+				 					<td class="col-sm-2">
+					 					<select class="form-control smallfont col-sm-2" ng-model="pomat.uom" ng-options="smatu as smatu.stmatuom.uom for smatu in pomat.storematerial.matuom track by smatu.id">
+										<option value="">SELECT</option>
+			 					
+			 							</select>
+		 							</td>
+		 							<td class="col-sm-1">
+		 								<input type="text" class="form-control" ng-model="pomat.qtythis">
+		 							</td>
+		 							<td class="col-sm-1">{{pomat.msmat.name}}</td>
+		 							<td class="col-sm-1">{{pomat.length_asper_dwg}}</td>
+		 							<td class="col-sm-1">{{pomat.wt_per_pc}}</td>
+		 							
+				 				</tr>
+				 				
+				 			</table>
+
+				 		</div>
+
+				 		<div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn">
+		 					<button type="button" class="btn btn-success" ng-click="addtotable()">ADD</button>
+		 				</div>
+
+		 				
+	            	</div>
+
+
+
+	            	<div class="col-sm-12 col-xs-12 smallfont">
+
+			 			<table class="table table-striped table-responsive smallfont" ng-repeat="pomatnew in pomateriallistnew" ng-show="pomatnew['materials'].length > 0">
+			 				<thead>
+			 					
+			 					<tr class="innerhead">
+			 						<th class="col-sm-1">S.No</th>
+			 						<th class="col-sm-6">Material Description</th>
+			 						<th class="col-sm-1">UOM</th>
+			 						<th class="col-sm-1">Qty</th>
+			 					</tr>
+			 					<tr>
+			 						<td scope="row"></td>
+				 					<td>{{pomatnew['matname']}}</td>
+				 					<td>{{pomatnew['units']}}</td>
+				 					<td>{{pomatnew['quantity']}}</td>
+
+			 					</tr>
+			 				</thead>
+			 				<tr ng-repeat="pomat in pomatnew['materials']">
+			 					<td scope="row">{{$index+1}}</td>
+			 					<td>{{pomat['materialdesc']}}</td>
+			 					<td>{{pomat['uom']}}</td>
+			 					<td>{{pomat['qty']}}</td>
+			 				</tr>
+			 				
+			 			</table>
+			 		</div>
+
+	            	<div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn" ng-show="pomateriallistnew">
+	 					<button type="button" class="btn btn-success" ng-click="saveactivitygroup()">SAVE</button>
+	 				</div>
+
+	 				<div class="col-sm-12 col-xs-12 smallfont" ng-show="actgrplist.length>0">
+						<h3>Already Existing Activity Groups</h3>
+			 			<table class="table table-striped table-responsive smallfont">
+			 				<thead>
+			 					<tr class="innerhead">
+			 						<th>S.No</th>
+			 						<th colspan="4">Description</th>
+			 						
+			 					</tr>
+			 				</thead>
+			 				<tbody ng-repeat="pomat in actgrplist">
+				 				<tr>
+				 					<td scope="row">{{$index+1}}</td>
+				 					<td>{{pomat['name']}}</td>
+				 				</tr>
+				 				<tr ng-repeat="actsubmat in pomat.submatarr">
+				 					<td></td>
+									<td class="col-sm-1">{{$index+1}}</td>
+				 					<td>{{actsubmat['matname']}}</td>
+				 					<td>{{actsubmat['msmatname']}}</td>
+				 					<td></td>
+				 					<td></td>
+					 			</tr>
+					 		</tbody>
+			 				
+			 			</table>
+			 		</div>
+		 	</div>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,86 @@
+<!--page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid hidden-print">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<form class="form-horizontal">
+			<div class="col-sm-12 col-xs-12">
+
+			<p><strong>ADD STOCK</strong></p>
+
+	 			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Project Name<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<!-- <select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="polist as polist.name for polist in projectlist">
+	 					
+	 					</select> -->
+	 					<input class="form-control" type="text" ng-model="projectdet.project.name" readonly />
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont" ng-show="projectdet">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Stock Date<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="date" class="form-control smallfont" ng-model="projectdet.project.stock_date">
+	 					
+	 					</select>
+		 			</div>
+		 			
+		 		</div>
+		 		<div class="form-group smallfont">
+					<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material Type<span class="astrix">*</span></div>
+					<div class="col-sm-4 col-md-4 col-xs-8">
+
+						<select class="form-control smallfont" chosen options="fabmattype" ng-model="materialtype" ng-options="mat as mat.name for mat in fabmattype">
+							<option value="">SELECT</option>
+ 					
+ 						</select>
+					</div>
+					
+				</div>
+
+				<div class="form-group smallfont" ng-show="materialtype">
+					<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material<span class="astrix">*</span></div>
+					<div class="col-sm-4 col-md-4 col-xs-8">
+
+						<select class="form-control smallfont" ng-model="submat" chosen options="materialtype.submaterials" ng-options="smat as smat.name for smat in materialtype.submaterials | filter: matfilter" ng-change="matchange()">
+							<option value="">SELECT</option>
+ 					
+ 						</select>
+					</div>
+				</div>
+		 		<table class="table table-striped table-responsive smallfont" ng-show="submat">
+	 				<tr>
+	 					<th>S.No</th>
+	 					<th>Name</th>
+	 					<th>UOM</th>
+	 					<th>ERE Code</th>
+	 					<th>Section</th>
+	 					<th>Total Received Qty</th>
+	 					<th>Total Issued Qty</th>
+	 					<th>Total Stock Qty</th>
+	 				</tr>
+	 				<tr ng-repeat="mat in submat.level1mat">
+	 					<td>{{$index+1}}</td>
+	 					<td>{{mat['storematerial']['name']}}</td>
+	 					<td>{{mat['storematerial']['matuom'][0]['stmatuom']['uom']}}</td>
+	 					<td>{{mat['ere_code']}}</td>
+	 					<td>{{mat['msmat']['name']}}</td>
+	 					<td><input type="text" ng-model="mat['total_received']" /></td>
+	 					<td><input type="text" ng-model="mat['total_issued']" /></td>
+	 					<td><input type="text" ng-model="mat['total_stock']" /></td>
+	 				</tr>
+	 				</tr>
+	 			</table>
+
+	 			<div class="form-group smallfont submitbtn" ng-show="submat">
+		 			<div class="col-sm-3 col-md-3 col-xs-8 col-sm-offset-4">
+		 				<button type="button" class="btn btn-success" ng-click="addfabstocks()">ADD STOCKS</button>
+		 			</div>
+		 		</div>
+
+			</div>
+		</form>
+	</div>
+</div>

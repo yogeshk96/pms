@@ -1,0 +1,112 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12">
+			<form class="form-horizontal">
+			<div class="form-group smallfont">
+	 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+	 			<div class="col-sm-3 col-md-3 col-xs-8">
+	 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="projlist.id as projlist.name for projlist in projectlist" ng-change="hidedownload='true'">
+			 					
+		 			</select>
+	 			</div>
+
+	 			<!-- <div class="col-sm-3 col-md-3 col-xs-8">
+	 				
+	 				<div class="btn btn-success" ng-click="generate_supply_rate_file()">GENERATE SAMPLE FILE</div>
+	 			</div> -->
+	 		</div>
+
+	 		<!-- <a href="{{filepath}}" download ng-show="filepath && !hidedownload">Download</a> -->
+
+	 		<div class="form-group smallfont">
+              <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Upload Indent file</div>
+
+              
+              <div class="col-sm-3 col-md-3 col-xs-8">
+                <input type="file" id="file_inspcall" class="form-control" file-change="uploadindentfile"/>
+              </div>
+              
+              <button type="button" class="btn btn-primary smallfont" ng-click='getindentdata()'>Get Data</button>
+            </div>
+			
+		</div>
+
+		<table class="table table-striped table-responsive smallfont" ng-show="filedata">
+			<thead>
+				<tr class="innerhead">
+					<th class="col-sm-1">LOA Sl No</th>
+					<th class="col-sm-3">Description of Items</th>
+					<th class="col-sm-1">Supply Rate</th>
+				</tr>
+			</thead>	
+			<tr ng-repeat="filein in filedata">
+				<td>{{filein.no}}</td>
+				<td>{{filein.descr}}</td>
+				<td>{{filein.supply_rate}}</td>					
+			</tr>
+		</table>
+
+		<button type="button" class="btn btn-primary smallfont" ng-click='savesupplyrate()' ng-show='filedata'>Save Supply rate</button>
+	</form>
+
+</div>
+
+<!--BOQ Modal -->
+<div id="BoqModal" class="modal fade hidden-print" role="dialog">
+	<div class="modal-dialog modal-lg">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h5 class="modal-title"><strong>Consolidated Material Report</strong></h5>
+
+			</div>
+			<div class="modal-body">
+				<div class="col-sm-12 col-xs-12" ng-show="activitydata">
+
+					<div><strong ng-show="indentinf">Indent No.: </strong> INDENT-PROJ{{projectid}}{{indentinf.id}}</div>
+					<div><strong>Raised Date.: </strong> {{today}}</div>
+
+					<div class="table-responsive">
+				
+						<table class="table table-striped smallfont">
+		 				<thead>
+							<tr class="innerhead">
+								<th class="col-sm-1 col-xs-1">S.No</th>
+								<th class="col-sm-6 col-xs-6">Material</th>
+								<th class="col-sm-1 col-xs-1">Units</th>
+								<th class="col-sm-1 col-xs-1">Total Indent Already raised</th>
+								<th class="col-sm-1 col-xs-1">Current Indent Quantity</th>
+								<th class="col-sm-2 col-xs-2">Activities</th>
+							</tr>
+						</thead>
+						
+						<tr ng-repeat="indiactivity in activitydata">
+							
+							<th>{{$index+1}}</th>
+								<th>{{indiactivity['name']}}</th>
+								<th>{{indiactivity['uom']}}</th>
+								<th>{{indiactivity['totalindentqty']}}</th>
+								<th>{{indiactivity['qty']}}</th>
+								<th>{{indiactivity['activities']}}</th>
+						</tr>
+								
+						</table>
+					</div>
+
+				</div>
+
+			</div>
+			<div style="clear:both;height:10px;"></div>
+			<div class="modal-footer hidden-print">
+
+				<div class="col-sm-2 col-xs-4 col-sm-offset-8">
+					<button type="button" class="btn btn-success" ng-click="saveindent()" ng-hide="indentinf" style="width:100%;">Raise Indent</button>
+				</div>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>

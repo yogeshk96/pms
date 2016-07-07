@@ -1,0 +1,145 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Material Receipt Report</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+			<form class="form-horizontal">
+
+				<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont">
+		 					<option value="select">SELECT</option>
+		 					<option>NOs</option>
+		 					<option>KG</option>
+		 					<option>3</option>
+		 					<option>4</option>
+		 				</select>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Store</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont">
+		 					<option value="select">SELECT</option>
+		 					<option>NOs</option>
+		 					<option>KG</option>
+		 					<option>3</option>
+		 					<option>4</option>
+		 				</select>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Type</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont">
+		 					<option value="select">SELECT</option>
+		 					<option>NOs</option>
+		 					<option>KG</option>
+		 					<option>3</option>
+		 					<option>4</option>
+		 				</select>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+			 			<div class="col-sm-6 col-md-6 col-xs-8">
+			 				<label class="radio-inline">
+			 					<input type="radio" ng-model="periodselect" id="inlineRadio1" value="yearwise"> Year wise
+			 				</label>
+			 				
+			 				<label class="radio-inline">
+			 					<input type="radio" ng-model="periodselect" id="inlineRadio1" value="monthwise"> Month wise
+			 				</label>
+
+			 				<label class="radio-inline">
+			 					<input type="radio" ng-model="periodselect" id="inlineRadio1" value="asondate"> As on Date
+			 				</label>
+			 				
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont">
+			 			<div for="inputEmail3" class="col-sm-1 col-xs-4 control-label">Select Year</div>
+			 			<div class="col-sm-2 col-md-2 col-xs-6">
+			 				<select class="form-control smallfont">
+			 					<option value="select">SELECT</option>
+			 					<option>2014</option>
+			 					<option>2015</option>
+			 					
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont" ng-show="periodselect == 'monthwise'">
+			 			<div for="inputEmail3" class="col-sm-1 col-xs-4 control-label">Select Month</div>
+			 			<div class="col-sm-2 col-md-2 col-xs-8">
+			 				<select class="form-control smallfont">
+			 					<option value="select">SELECT</option>
+			 					<option>Jan</option>
+			 					<option>Feb</option>
+			 					<option>Mar</option>
+			 					<option>Apr</option>
+			 					<option>May</option>
+			 					<option>June</option>
+			 					<option>July</option>
+			 					<option>Aug</option>
+			 					<option>Sep</option>
+			 				</select>
+			 			</div>
+			 		</div>
+
+			 		<div class="form-group smallfont submitbtn">
+			 			<div class="col-sm-2 col-md-2 col-xs-8">
+			 				<button type="button" class="btn btn-success" ng-click="generaterpt = 'showmatreceiptreport'">Generate</button>
+			 			</div>
+			 		</div>
+
+			 		<div class="col-sm-8 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="generaterpt == 'showmatreceiptreport'">
+
+
+			 			<table class="table table-striped">
+			 				<thead>
+			 					<tr class="innerhead">
+			 						<th>S.No</th>
+			 						<th class="coloredhead">Transformers</th>
+			 						<th>UOM</th>
+			 						<th>Total Issued Qty</th>
+			 						<th>View</th>
+			 					</tr>
+			 				</thead>
+			 				<tr>
+			 					<td scope="row">1</td>
+			 					<td>16 Kva 3 Phase Transformer</td>
+			 					<td>NOs</td>
+			 					<td>142</td>
+			 					<td>View details</td>
+			 				</tr>
+			 				<tr>
+			 					<td scope="row">1</td>
+			 					<td>16 Kva 3 Phase Transformer</td>
+			 					<th>NOs</th>
+			 					<td>142</td>
+			 					<td>View details</td>
+			 				</tr>
+			 				
+			 			</table>
+
+			 			
+
+			 		</div><!-- col-sm-8 ends -->
+
+
+
+			</form>
+		</div>
+	</div>
+</div>

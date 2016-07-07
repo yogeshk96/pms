@@ -1,0 +1,62 @@
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Add Default Special Terms &amp; Conditions</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal">
+
+    			<div class="jumbobox col-sm-8">
+    				<h6><strong>Special Terms &amp; Conditions</strong></h6>
+    				<div class="form-group smallfont">
+    					<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Terms title<span class="astrix">*</span></div>
+    					<div class="col-sm-4 col-xs-6">
+    						<input type="text" class="form-control" ng-model="specialtermtitle" placeholder="Enter term title">
+    					</div>
+    				</div>
+
+    				<div class="form-group smallfont">
+    					<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Terms Description</div>
+    					<div class="col-sm-8 col-xs-8">
+    						<textarea name="" ng-model="specialtermdesc" class="form-control" rows="3"></textarea>
+    					</div>
+    				</div>
+
+    				<div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn">
+    					<button type="button" class="btn btn-success" ng-click="addtospecial()">ADD</button>
+    				</div>
+    			</div>
+
+    			<div class="table-responsive col-sm-12" ng-show="specialterms.length>0">
+    				<h4>Existing Terms &amp; Conditions</h4>
+
+    				<table class="table table-striped smallfont">
+    					<thead>
+    						<tr class="innerhead">
+    							<th>S.No</th>
+    							<th>Term title</th>
+    							<th>Term Description</th>
+    							<th>Remove</th>
+    						</tr>
+    					</thead>
+    					<tr ng-repeat="specialt in specialterms">
+    						<td scope="row">{{$index+1}}</td>
+    						<td><textarea class="form-control" ng-model="specialt.termtitle"></textarea></td>
+    						<td><textarea class="form-control" ng-model="specialt.termdesc"></textarea></td>
+    						<td><button type="button" class="btn btn-danger btn-xs" ng-click="removespecialrow($index+1)">Remove</button></td>
+    					</tr>
+    				</table>
+    			</div>
+
+    			<div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitterms">
+    				<button type="button" class="btn btn-success" ng-click="saveterms()">Save</button>
+    			</div>
+			</form>
+		</div>
+	
+	</div>
+</div>

@@ -1,0 +1,23 @@
+<!-- page top navigation starts -->
+<ul class="nav nav-tabs hidden-print" ng-if="state['current'].url != '/warehouse'">
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.warehouse.inventorymanagement.stockinventory">Stock inventory</a></li>
+  <!-- <li role="presentation" ui-sref-active="active"><a ui-sref="user.warehouse.inventorymanagement.receipts">Receipt</a></li> -->
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.warehouse.inventorymanagement.receipt">Receipt</a></li>
+  <li role="presentation" class="hidden-xs" ui-sref-active="active"><a ui-sref="user.warehouse.inventorymanagement.issue">Issue</a></li>
+  <li role="presentation" class="hidden-xs" ui-sref-active="active"><a ui-sref="user.warehouse.inventorymanagement.groundstockrevision">Ground Stock Revision</a></li>
+  <li role="presentation" class="dropdown hidden-lg hidden-md hidden-sm">
+    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+      Others <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu smallfont" role="menu">
+      <li role="presentation" ui-sref-active="active"><a ui-sref="user.warehouse.inventorymanagement.issue">Issue</a></li>
+	  <li role="presentation" ui-sref-active="active"><a ui-sref="user.warehouse.inventorymanagement.groundstockrevision">Ground Stock Revision</a></li>
+    </ul>
+  </li>
+  
+</ul>
+
+<!-- page top navigation ends -->
+
+<div ui-view="content">
+</div>

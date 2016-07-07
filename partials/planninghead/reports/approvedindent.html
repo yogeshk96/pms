@@ -1,0 +1,60 @@
+<!--page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<form class="form-horizontal">
+			<div class="col-sm-12 col-xs-12">
+
+			<p class="hidden-print"><strong>Approve Indent</strong></p>
+
+	 			<div class="form-group smallfont hidden-print">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" options="projectlist" chosen ng-model="project" ng-options="polist as polist.name for polist in projectlist">
+	 					
+	 					</select>
+		 			</div>
+		 			
+		 		</div>
+
+		 		<div class="form-group smallfont hidden-print">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Indent<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" options="project.approvedindents" chosen ng-model="indentid" ng-options="pendint as ('INDENT'+pendint.id) for pendint in project.approvedindents">
+	 					
+	 					</select>
+		 			</div>
+		 			<div class="col-sm-2 col-xs-4 submitbtn">
+		               <button type="button" class="btn btn-success smallfont " ng-click="getindentreport()">Get Indent</button>
+		            </div>
+		 		</div>
+		 		<div class="col-sm-12 col-xs-12" ng-show="indentlist">
+			 		<p><strong>Indent: </strong>INDENT{{indentid.id}} for <strong>{{project.name}}</strong></p>
+			 		<table class="table table-striped table-responsive smallfont">
+		 				<tr>
+		 					<th>S.No</th>
+		 					<th>Name</th>
+		 					<th>UOM</th>
+		 					<!-- <th>Already Raised Indent Qty</th> -->
+		 					<th>Indent Qty</th>
+		 					
+		 				</tr>
+		 				<tr ng-repeat="matin in indentlist">
+		 					<td>{{$index+1}}</td>
+		 					<td>{{matin.mat['name']}}</td>
+		 					<td>{{matin.mat.matuom[0]['stmatuom']['uom']}}</td>
+		 					<!-- <td>{{matin['tot_indent']}}</td> -->
+		 					<td>{{matin['indent_qty']}}</td>
+		 				</tr>
+		 				</tr>
+		 			</table>
+		 		</div>
+
+			</div>
+	 		
+		</form>
+	</div>
+</div>

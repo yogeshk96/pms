@@ -1,0 +1,18 @@
+<!-- page top navigation starts -->
+<ul class="nav nav-tabs hidden-print" ng-if="state['current'].url != '/planning'">
+  <!-- <li role="presentation" ui-sref-active="active"><a ui-sref="user.planning.reports.poreport">PO Report</a></li> -->
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.planning.reports.enquiryreport">Enquiry Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.planning.reports.csreport">Comparitive Statement Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.planning.reports.vendorreport">Vendor Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.planning.reports.potracker">PO Tracker</a></li>
+  <!-- <li role="presentation" ui-sref-active="active"><a ui-sref="user.planning.reports.amdporeport">Amendment PO Report</a></li> -->
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.planning.reports.matwiseporpt">Material wise PO Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.planning.reports.mattracker">Material Tracker</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.planning.reports.indentreport">Indent Report</a></li>
+  <li role="presentation" ui-sref-active="active"><a ui-sref="user.planning.reports.schedulematerials">Schedule Materials Report</a></li>
+</ul>
+
+<!-- page top navigation ends -->
+
+<div ui-view="content">
+</div>

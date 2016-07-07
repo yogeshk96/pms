@@ -1,0 +1,86 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Create BOQ</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal" ng-submit="get_workorder_data()">
+    			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Work Order</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" ng-model="project" ng-options="work.name for work in works" required>
+		 					<option value="">SELECT</option>
+		 				</select>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="submit" value="Search" class="btn btn-success">
+		 			</div>
+		 		</div>
+    		</form>
+    		<div class="jumbobox col-sm-8" ng-show="mainproject">
+ 				<div class="form-group smallfont">
+					<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select Material Type<span class="astrix">*</span></div>
+					<div class="col-sm-4 col-md-4 col-xs-8">
+						<select class="form-control smallfont" ng-model="materialtype" ng-options="mat.name for mat in mats" ng-change="matuom='';submat=''">
+							<option value="">SELECT</option>
+						</select>
+					</div>
+				</div>
+				<div style="clear:both;"></div><br>
+				<div class="form-group smallfont" ng-show="materialtype">
+					<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select Material<span class="astrix">*</span></div>
+					<div class="col-sm-4 col-md-4 col-xs-8">
+						<select class="form-control smallfont" ng-model="submat" ng-options="submat.name for submat in materialtype.submaterials | filter: hidemat" ng-change="matuom=''">
+							<option value="">SELECT</option>
+						</select>
+					</div>
+				</div>
+				<div style="clear:both;"></div><br>
+				<div class="form-group smallfont" ng-show="submat">
+					<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select UOM<span class="astrix">*</span></div>
+					<div class="col-sm-4 col-md-4 col-xs-8">
+						<select class="form-control smallfont" ng-model="matuom" ng-options="uom.stmatuom.uom for uom in submat.matuom">
+							<option value="">SELECT</option>
+						</select>
+					</div>
+				</div>
+				<div style="clear:both;"></div><br>
+ 				<div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn" ng-show="matuom">
+ 					<button type="button" class="btn btn-success" ng-click="addtotable()">ADD</button>
+ 				</div>
+			</div>
+			
+			<table class="table table-striped">
+				<tbody ng-repeat="mat in mats | filter : showcat">
+					<tr class="innerhead">
+						<th>S.No</th>
+						<th class="coloredhead">{{mat.name}}</th>
+						<th>UOM</th>
+						<th>Quantity</th>
+						<th>Indent Quantity</th>
+						<th>Remove</th>
+					</tr>
+					<tr ng-repeat="submat in mat.submaterials | filter : showmat">
+						<td scope="row">{{$index+1}}</td>
+						<td>{{submat.name}}</td>
+						<td>{{submat.boquom.stmatuom.uom}}</td>
+						<td><input type="text" ng-model="submat.quantity"></td>
+						<td>{{submat.indent_qty}}</td>
+						<td><button type="button" class="btn btn-danger btn-xs" ng-click="removemat(submat)">Remove</button></td>
+          			</tr>
+				</tbody>          
+			</table>
+			<div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn" ng-show="mainproject">
+				<button type="button" class="btn btn-success" ng-click="save_boq()">Save</button>
+			</div>
+    	</div>
+	</div>
+
+</div>

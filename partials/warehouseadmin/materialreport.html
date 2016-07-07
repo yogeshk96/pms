@@ -1,0 +1,64 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Material Report</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+			<form ng-submit="generate_report()" class="form-horizontal">
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material Category</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" ng-options="matcat as matcat.name for matcat in matcats" ng-model="mainmatcat" required>
+		 					<option value="">SELECT</option>
+		 				</select>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont" ng-show="mainmatcat">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" ng-options="mat as mat.name for mat in mainmatcat.submaterials" ng-model="mainmat" required>
+		 					<option value="">SELECT</option>
+		 				</select>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="submit" class="btn btn-primary" value="Generate">
+		 			</div>
+		 		</div>
+			</form>
+			<table class="table table-striped table-responsive smallfont" ng-show="stores.length>0">
+				<thead>
+ 					<tr class="innerhead">
+ 						<th>S.No</th>
+ 						<th>Name</th>
+ 						<th>Stock</th>
+ 						<th>Received From</th>
+ 						<th>View</th>
+ 					</tr>
+ 				</thead>
+ 				<tbody>
+ 					<tr ng-repeat="mat in mats">
+ 						<td>{{$index+1}}</td>
+ 						<td ng-if="mat.receipt_type=='5'">MRV No:{{mat.mrvdata.mrv_sno}}</td>
+ 						<td ng-if="mat.receipt_type=='4'">MRN No:{{mat.mrndata.mrn_sno}}</td>
+ 						<td ng-if="mat.receipt_type=='3'">DC No:{{mat.dcdata.dc_no}}</td>
+ 						<td ng-if="mat.receipt_type=='2'">MRN No:{{mat.mrndata.mrn_sno}}</td>
+ 						<td>{{Dates.getDate(mat.created_at)}}</td>
+ 						<td ng-if="mat.receipt_type=='5'">Company Purchase</td>
+ 						<td ng-if="mat.receipt_type=='4' && mat.subcon_id!='0'">{{mat.subconname.name}}</td>
+ 						<td ng-if="mat.receipt_type=='3'">{{mat.dcdata.storename}}</td>
+ 						<td ng-if="mat.receipt_type=='4' && mat.third_party_id!='0'">{{mat.tptname.name}}</td>
+ 						<td ng-if="mat.receipt_type=='1'">Local Purchase</td>
+ 						<td><button class="btn btn_success" ng-click="view_dc(mat)">View</button></td>
+ 					</tr>
+ 				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,555 @@
+<!-- page right main container starts  -->
+<div class="container-fluid">
+
+  <div class="row-fluid">
+
+    <div class="clearfix" style="height:20px;"></div>
+
+      <form class="form-horizontal" ng-submit="sendenquiry()">
+        <div class="col-sm-12 col-xs-12 hidden-print">
+
+          <p><strong>Inspection Details</strong></p>
+
+        
+          <div class="form-group smallfont hidden-print">
+            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+            <div class="col-sm-3 col-md-3 col-xs-8">
+              <select class="form-control smallfont" chosen options="projectlist" ng-model="projectid" ng-options="projlist.id as projlist.name for projlist in projectlist" ng-change="resetpos()" >
+            
+              </select>
+            </div>
+          </div>
+          <div class="form-group smallfont hidden-print">
+            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Vendor<span class="astrix">*</span></div>
+            <div class="col-sm-3 col-md-3 col-xs-8">
+              <select class="form-control smallfont" chosen ng-model="vendorid" options="vendorlist" ng-options="venlist.id as venlist.name for venlist in vendorlist" ng-change="getpolist()">
+            
+              </select>
+            </div>
+          </div>
+          <div class="form-group smallfont hidden-print">
+            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Purchase Order No<span class="astrix">*</span></div>
+            <div class="col-sm-3 col-md-3 col-xs-8" style="padding-left:0px;">
+              <select class="form-control smallfont" chosen  options="polist" ng-model="ponumber" ng-options="thispo.po_no as thispo.po_no for thispo in polist">
+            
+              </select>
+            </div>
+            <div class="col-sm-2 col-xs-4 submitbtn">
+               <button type="button" class="btn btn-success smallfont " ng-click="searchpo()">Search</button>
+            </div>
+          </div>
+
+             
+
+              <div class="searchresult hidden-print" ng-show="ponumber && ponodetails && ponumber==ponodetails.po_no">
+                <hr>
+
+                <div class="clearfix" style="height:20px;"></div>
+
+                <div class="form-group smallfont">
+                  
+                  <div class="col-sm-4 col-xs-6">
+
+                    <div class="col-sm-6"><strong>Purchased Date</strong>: </div>
+                    <div class="col-sm-6"> {{Dates.getDate(ponodetails.created_at)}}</div>
+
+                  </div>
+                  <div class="col-sm-4 col-xs-6">
+                    <div class="col-sm-6"><strong>Vendor Name</strong>: </div>
+                    <div class="col-sm-6"> {{ponodetails.vendor.name}}</div>
+
+                  </div>
+                 
+
+                  <div class="col-sm-4 col-xs-6">
+
+                    <div class="col-sm-6"><strong>Total cost of Materials</strong>: </div>
+                    <div class="col-sm-6">Rs {{ponodetails.total_cost}}</div>
+
+                  </div>
+                  <div class="col-sm-4 col-xs-6">
+                    <div class="col-sm-6"><strong>PO No</strong>: </div>
+                    <div class="col-sm-6"> {{ponodetails.po_no}}</div>
+
+                  </div>
+
+                </div>
+
+                 <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="ponodetails.pomaterials.length>0">
+
+                  <table class="table table-striped">
+                      <thead>
+                        <tr style="background:#000;color:#FFF;">
+                          <th class="col-sm-1">S.No</th>
+                          <th class="col-sm-2">Material Description</th>
+                          <th class="col-sm-2">Purchased Quantity</th>
+                          <th class="col-sm-2">Total Inspected Qty</th>
+                          <th class="col-sm-1">Total Approved Qty</th>
+                          <th class="col-sm-1">Total Dispatch Qty</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="pomat in ponodetails.pomaterials">
+                          <td>{{$index+1}}</td>
+                          <td>{{pomat.storematerial.name}}</td>
+                          <td>{{pomat.quantity}}</td>
+                          <td>{{pomat.inspected_quantity}}</td>
+                          <td>{{pomat.approved_quantity}}</td>
+                          <td>{{pomat.dispatch_quantity}}</td>
+                        </tr>
+                        
+                      </tbody>
+                        
+                   </table>
+
+                </div><!-- col-sm-12 ends -->
+
+                
+                <div style="clear:both;height:10px;"></div>
+
+                <div class="form-group smallfont hidden-print">
+                    <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Inspection Reference<span class="astrix">*</span></div>
+                    <div class="col-sm-3 col-xs-4">
+                        <select class="form-control smallfont" ng-model="inspdetails" ng-options="poinspection as poinspection.inspection_ref_no for poinspection in ponodetails.inspections" ng-change="changerefno()">
+                          <option value="">SELECT</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3 col-xs-4 col-sm-offset-1">
+                        <a style="color:blue;" data-toggle="modal" data-target="#CreateInspectionModal">Create Inspection reference</a>
+                    </div>
+                      
+                </div>
+
+              <div style="clear:both;height:10px;"></div>
+              
+              <div ng-show="inspdetails">
+
+                <div class="jumbobox col-sm-8">
+
+                  <div class="form-group smallfont">
+                    <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select Material Type<span class="astrix">*</span></div>
+                    <div class="col-sm-4 col-md-4 col-xs-8">
+                      <select class="form-control smallfont" ng-model="inspomat" ng-options="pomat as pomat.storematerial.name for pomat in ponodetails.pomaterials">
+                        <option value="">SELECT</option>
+                      </select>
+                    </div>
+                    
+                  </div>
+
+                  <div class="form-group smallfont">
+                    <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Purchased Quantity</div>
+                    <div class="col-sm-4 col-xs-6">
+                      <input type="text" class="form-control" ng-model="inspomat.quantity" id="exampleInputEmail1" readonly>
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont">
+                    <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Approved Quantity</div>
+                    <div class="col-sm-4 col-xs-6">
+                      <input type="text" class="form-control" ng-model="inspomat.approved_quantity" id="exampleInputEmail1" readonly>
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont">
+                    <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Current Inspected<span class="astrix">*</span></div>
+                    <div class="col-sm-4 col-xs-6">
+                      <input type="text" class="form-control" ng-model="inspomat.current_inspected" id="exampleInputEmail1" placeholder="Enter quantity">
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont">
+                    <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Approved Quantity</div>
+                    <div class="col-sm-4 col-xs-8">
+                      <input type="text" class="form-control" ng-model="inspomat.approved_insp_quantity" id="exampleInputEmail1" ng-blur="checkapprovedlen(inspomat.current_inspected, inspomat.approved_insp_quantity, inspomat)" >
+                    </div>
+                  </div>
+
+                  <div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn">
+                    <button type="button" class="btn btn-success" ng-click="addtoinspectionmat(inspomat.id)">ADD</button>
+                  </div>
+                </div> 
+
+
+                <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="inspdetails.inspectionmaterials.length>0">
+
+                  <table class="table table-striped">
+                      <thead>
+                        <tr style="background:#000;color:#FFF;">
+                          <th class="col-sm-1">S.No</th>
+                          <th class="col-sm-2">Material Description</th>
+                          <th class="col-sm-1">UOM</th>
+                          <th class="col-sm-2">Purchased Qty</th>
+                          <th class="col-sm-1">current Inspected Qty</th>
+                          <th class="col-sm-1">Approved Qty</th>
+                          <th class="col-sm-1"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="inspmat in inspdetails.inspectionmaterials">
+                          <td>{{$index+1}}</td>
+                          <td>{{inspmat.pomaterial.storematerial.name}}</td>
+                          <td>{{inspmat.pomaterial.storematerial.units}}</td>
+                          <td>{{inspmat.pomaterial.quantity}}</td>
+                          <td><input type="text" class="form-control" ng-model="inspmat.inspected_quantity" /></td>
+                          <td><input type="text" class="form-control" ng-model="inspmat.approved_quantity" /></td>
+                          <td><button type="button" class="btn btn-default smallfont btn-danger" ng-blur="checkapprovedlen(inspmat.inspected_quantity, inspmat.approved_quantity, inspmat)" ng-click="remove_inspmat($index)"><i class="fa fa-times"></i></button></td>
+                        </tr>
+                        
+                      </tbody>
+                        
+                   </table>
+
+                </div><!-- col-sm-12 ends -->
+
+                <div style="clear:both;height:10px"></div>
+
+                <div class="panel panel-default" >
+                  <div class="panel-heading">Supplier Call Details</div>
+                  <div class="panel-body">
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Inspection call received from supplier date</div>
+
+                      <div class="col-sm-2 col-md-2 col-xs-8">
+                       <input type="date" ng-model="inspdetails.inspec_call_supplier_date" class="form-control" />
+                      </div>
+
+                      <div class="col-sm-3 col-md-3 col-xs-8">
+                        <input type="text" class="form-control" ng-model="inspdetails.inspec_call_supplier_refno" placeholder="Inspection call reference number" />
+                      </div>
+
+                      <div class="col-sm-3 col-md-3 col-xs-8">
+                       <input type="file" id="file_inspcall" class="form-control" file-change="uploaddidoc"/>
+                      </div>
+
+                      <button type="button" class="btn btn-primary smallfont" ng-click='add_di_doc("inspection_call")'>Add</button>
+                    </div>
+
+
+                    <div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont" ng-show="inspdetails.inspectiondocs.length>0">
+                      <p><strong>Inspection call Files</strong></p>
+                      <table class="table table-striped">
+                        <thead>
+                         <tr class="innerhead">
+
+                            <th class="col-sm-4">File</th>
+                            <th class="col-sm-1">Download</th>
+                            <th class="col-sm-1">Delete</th>
+                          </tr>
+                        </thead>
+                        <tr ng-repeat="doc in inspdetails.inspectiondocs" ng-if="doc.doc_type==1">
+                          <td>{{doc.doc_name}}</td>
+                          <td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+                          <td><button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_didoc(doc.doc_url)"><i class="fa fa-times"></i></button></td>
+                        </tr>
+                      </table>
+                    </div>
+
+                    <div style="clear:both;height:10px;"></div>
+
+
+
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Inspection Readiness Date</div>
+                      <div class="col-sm-2 col-xs-6">
+                       <input type="date" class="form-control" ng-model="inspdetails.inspection_readiness_date">
+                      </div>
+                      <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Remarks</div>
+                      <div class="col-sm-2 col-xs-6">
+                       <input type="text" class="form-control" ng-model="inspdetails.inspec_call_supplier_remarks">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Here goes sending mail for inspection ready date -->
+                <div class="panel panel-default" ng-hide="1">
+                  <div class="panel-heading">Inspection Call Raise Details</div>
+                  <div class="panel-body">
+                  <!-- {{inspdetails.inspectioncallraises}} -->
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-1 col-xs-1 control-label">Reference</div>
+                      <div class="col-sm-4 col-xs-6">
+                        <input type="text" class="form-control" ng-model="inspdetails.inspectioncallraises.ref" id="exampleInputEmail1" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-1 col-xs-1 control-label">Sent to</div>
+                      <div class="col-sm-4 col-xs-6">
+                        <input type="text" class="form-control" ng-model="inspdetails.inspectioncallraises.tomail" id="exampleInputEmail1" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-1 col-xs-1 control-label">CC</div>
+                      <div class="col-sm-4 col-xs-6">
+                        <input type="text" class="form-control" ng-model="inspdetails.inspectioncallraises.cc" id="exampleInputEmail1" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-1 col-xs-1 control-label">Sent on</div>
+                      <div class="col-sm-4 col-xs-6">
+                        <input type="text" class="form-control" ng-model="inspdetails.inspectioncallraises.created_at" id="exampleInputEmail1" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-1 col-xs-1 control-label">Subject</div>
+                      <div class="col-sm-4 col-xs-6">
+                        <input type="text" class="form-control" ng-model="inspdetails.inspectioncallraises.subject" id="exampleInputEmail1" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-1 col-xs-1 control-label">Content</div>
+                      <div class="col-sm-4 col-xs-6">
+                        <textarea type="text" class="form-control" ng-model="inspdetails.inspectioncallraises.content" id="exampleInputEmail1" readonly></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-1 col-xs-1 control-label">Sent by</div>
+                      <div class="col-sm-4 col-xs-6">
+                        <input type="text" class="form-control" ng-model="inspdetails.inspectioncallraises.sender.name" id="exampleInputEmail1" readonly>
+                      </div>
+                    </div>
+                    <div class="form-group smallfont">
+                      <div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont" ng-show="inspdetails.inspectiondocs.length>0">
+                        <p><strong>Inspection Call Raise Attachment Files</strong></p>
+                        <table class="table table-striped">
+                          <thead>
+                           <tr class="innerhead">
+
+                              <th class="col-sm-4">File</th>
+                              <th class="col-sm-1">Download</th>
+                              <th class="col-sm-1">Delete</th>
+                            </tr>
+                          </thead>
+                          <tr ng-repeat="doc in inspdetails.inspectiondocs" ng-if="doc.doc_type==5">
+                            <td>{{doc.doc_name}}</td>
+                            <td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+                            <td><button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_didoc(doc.doc_url)"><i class="fa fa-times"></i></button></td>
+                          </tr>
+                        </table>
+                      </div>
+
+                      <div style="clear:both;height:10px;"></div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="panel panel-default" >
+                  <div class="panel-heading">Inspection Call Raising</div>
+                  <div class="panel-body">
+                    <div class="form-group smallfont">
+                     <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">To:<span class="astrix">*</span></div>
+                      <div class="col-sm-6 col-xs-6">
+                        <input type="text" class="form-control" ng-model="to" placeholder="Enter email id">
+                      </div>
+                    </div>
+                    <div class="form-group smallfont">
+                     <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">CC:</div>
+                      <div class="col-sm-6 col-xs-6">
+                        <input type="text" class="form-control" ng-model="cc" placeholder="Enter Comma(,) seperated email ids">
+                      </div>
+                    </div>
+
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Subject<span class="astrix">*</span></div>
+                      <div class="col-sm-6 col-xs-6">
+                        <input type="text" class="form-control" ng-model="subject">
+                      </div>
+                    </div>
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Attachment:</div>
+                      <div class="col-sm-6 col-xs-6">
+                        <input type="file" id="file_inspinternal" class="form-control" file-change="uploaddidoc"/>
+                      </div>
+                       <div class="col-sm-2 col-xs-4 submitbtn">
+                         <button type="button" class="btn btn-success smallfont " ng-click="add_di_doc('inspection_call_raise')">Add</button>
+                      </div>
+                      <div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont" ng-show="inspdetails.inspectiondocs.length>0">
+                        <p><strong>Inspection call Raise Attachment Files</strong></p>
+                        <table class="table table-striped">
+                          <thead>
+                           <tr class="innerhead">
+
+                              <th class="col-sm-4">File</th>
+                              <th class="col-sm-1">Download</th>
+                              <th class="col-sm-1">Delete</th>
+                            </tr>
+                          </thead>
+                          <tr ng-repeat="doc in inspdetails.inspectiondocs" ng-if="doc.doc_type==5">
+                            <td>{{doc.doc_name}}</td>
+                            <td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+                            <td><button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_didoc(doc.doc_url)"><i class="fa fa-times"></i></button></td>
+                          </tr>
+                        </table>
+                      </div>
+
+                      <div style="clear:both;height:10px;"></div>
+                    </div>
+
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Email Text<span class="astrix">*</span></div>
+                      <div class="col-sm-6 col-xs-6">
+                       <textarea class="form-control" placeholder="Write email text here..." rows="6" ng-model="emailcontent"></textarea>
+                      </div>
+                       <div class="col-sm-2 col-xs-4 submitbtn">
+                         <button type="button" class="btn btn-success smallfont " ng-click="raiseinspcall()">Send Email</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">Call Approval Status</div>
+                  <div class="panel-body">
+                    <div class="form-group smallfont">
+                     <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Approved Inspection call received date</div>
+
+                      <div class="col-sm-2 col-md-2 col-xs-8">
+                        <input type="date" ng-model="inspdetails.approved_inspec_date" class="form-control" />
+                      </div>
+
+                      <div class="col-sm-3 col-md-3 col-xs-8">
+                       <input type="text" class="form-control" ng-model="inspdetails.approved_inspec_refno" placeholder="Approved Inspection call reference number" />
+                      </div>
+
+                      <div class="col-sm-3 col-md-3 col-xs-8">
+                        <input type="file" id="file_approvedinsp" class="form-control" file-change="uploaddidoc"/>
+                      </div>
+
+                     <button type="button" class="btn btn-primary smallfont" ng-click='add_di_doc("approved_inspection")'>Add</button>
+                    </div>
+                    <div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont" ng-show="inspdetails.inspectiondocs.length>0">
+                      <p><strong>Inspection Call Approval Files</strong></p>
+                      <table class="table table-striped">
+                        <thead>
+                          <tr class="innerhead">
+                            <th class="col-sm-4">File</th>
+                            <th class="col-sm-1">Download</th>
+                            <th class="col-sm-1">Delete</th>
+                          </tr>
+                        </thead>
+                        <tr ng-repeat="doc in inspdetails.inspectiondocs" ng-if="doc.doc_type==4">
+                          <td>{{doc.doc_name}}</td>
+                          <td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+                          <td><button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_didoc(doc.doc_url)"><i class="fa fa-times"></i></button></td>
+                        </tr>
+                      </table>
+                    </div>
+
+                    <div style="clear:both;height:10px;"></div>
+
+                    <div class="form-group smallfont">
+                     <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Inspector Name</div>
+                      <div class="col-sm-3 col-xs-6">
+                        <input type="text" class="form-control" ng-model="inspdetails.inspector_name">
+                      </div>
+                      <!--                 </div>
+                      <div class="form-group smallfont">
+                      -->
+                      <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Inspection Location</div>
+                      <div class="col-sm-3 col-xs-6">
+                       <input type="text" class="form-control" ng-model="inspdetails.inspection_location">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">Inspection Status</div>
+                  <div class="panel-body">
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Inspection report date</div>
+
+                      <div class="col-sm-2 col-md-2 col-xs-8">
+                        <input type="date" ng-model="inspdetails.inspec_report_date" class="form-control" />
+                      </div>
+
+                      <div class="col-sm-3 col-md-3 col-xs-8">
+                        <input type="text" class="form-control" ng-model="inspdetails.inspec_report_refno" placeholder="Inspection report reference number" />
+                      </div>
+
+                      <div class="col-sm-3 col-md-3 col-xs-8">
+                        <input type="file" id="file_inspreport" class="form-control" file-change="uploaddidoc"/>
+                      </div>
+                      
+                      <button type="button" class="btn btn-primary smallfont" ng-click='add_di_doc("inspection_report")'>Add</button>
+                    </div>
+
+                    <div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont" ng-show="inspdetails.inspectiondocs.length>0">
+                      <p><strong>Inspection report Files</strong></p>
+                      <table class="table table-striped">
+                        <thead>
+                          <tr class="innerhead">
+                            
+                            <th class="col-sm-4">File</th>
+                            <th class="col-sm-1">Download</th>
+                            <th class="col-sm-1">Delete</th>
+                          </tr>
+                        </thead>
+                        <tr ng-repeat="doc in inspdetails.inspectiondocs" ng-if="doc.doc_type==2">
+                          <td>{{doc.doc_name}}</td>
+                          <td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+                          <td><button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_didoc(doc.doc_url)"><i class="fa fa-times"></i></button></td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div style="clear:both;height:10px;"></div>
+
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Remarks</div>
+                      <div class="col-sm-5 col-xs-6">
+                        <textarea class="form-control" ng-model="inspdetails.remarks"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+               
+
+                  <div class="col-sm-2 col-sm-offset-4 col-xs-6 submitbtn" style="padding-left:0;">
+                    <button type="button" class="btn btn-success" ng-click="saveinspection()" ng-show="editflag==0">Submit</button>
+                    <button type="button" class="btn btn-success" ng-click="saveinspection()" ng-show="editflag==1">Save</button>
+                  </div>
+
+                </div>
+
+              </div>
+
+      </form>
+
+  </div>
+
+</div>
+
+
+<!--Inspection Modal -->
+<div id="CreateInspectionModal" class="modal fade hidden-print" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h5 class="modal-title"><strong>Create Inspection Reference</strong></h5>
+
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group smallfont">
+          <div for="inputEmail3" class="col-sm-5 col-xs-6 control-label">Enter reference name</div>
+          <div class="col-sm-5 col-xs-6">
+            <input type="text" class="form-control" ng-model="new_reference_no">
+          </div>
+        </div>
+
+      </div>
+      <div style="clear:both;height:10px;"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="createnewinspecref()">create</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- modal ends

@@ -1,0 +1,231 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+
+		<div class="col-sm-6 col-xs-12">
+
+		<p><strong>Add Material</strong></p>
+
+
+    		<form class="form-horizontal smallfont" ng-submit="addmaterial()">
+
+				<div class="form-group smallfont">
+			 		<div for="inputEmail3" class="col-sm-2 col-md-2 col-xs-4 control-label"></div>
+			 		<div class="col-sm-8 col-md-8 col-xs-8 jumbobox" style="padding:5px">
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="mataddtype" value="newm"> New Material
+			 			</label>
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="mataddtype" value="existingm"> Existing Material
+			 			</label>
+			 			
+			 		</div>
+			 	</div>
+
+			 	<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select Material Type</div>
+		 			<div class="col-sm-5 col-md-5 col-xs-8">
+		 				<select class="form-control smallfont" ng-model="materialtype" ng-options="matlist as matlist.name for matlist in materials">
+							<option value="">SELECT</option>
+						</select>
+		 				
+		 			</div>
+		 		</div> 		
+
+			 	<div class="form-group smallfont" ng-show="mataddtype=='existingm' && materialtype">
+					<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select Material<span class="astrix">*</span></div>
+					<div class="col-sm-4 col-md-4 col-xs-8">
+
+						<select class="form-control smallfont" ng-model="submat" ng-options="smat as smat.name for smat in materialtype.submaterials" ng-change="matchange()">
+							<option value="">SELECT</option>
+ 					
+ 						</select>
+					</div>
+				</div>
+
+			 	<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+		 			<div class="col-sm-9 col-md-9 col-xs-8">
+		 				<select class="form-control smallfont" multiple options="projectlist" chosen ng-model="projectid" ng-options="projlist.id as projlist.name for projlist in projectlist">
+			 					
+			 			</select>
+		 			</div>
+		 		</div>
+	
+    			<div class="form-group smallfont" ng-show="mataddtype=='newm' && materialtype">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Material Name</div>
+		 			<div class="col-sm-9 col-md-9 col-xs-8">
+		 				<textarea type="text" class="form-control" ng-model="materialname"></textarea>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont">
+			 		<div for="inputEmail3" class="col-sm-2 col-md-2 col-xs-4 control-label">Type</div>
+			 		<div class="col-sm-8 col-md-8 col-xs-8 jumbobox" style="padding:5px">
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="submattype" value="1"> Normal
+			 			</label>
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="submattype" value="2"> Aggregator
+			 			</label>
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="submattype" value="3"> Fabrication
+			 			</label>
+			 			
+			 		</div>
+			 	</div>
+
+			 	<div class="form-group smallfont" ng-show="submattype=='3'">
+			 		<div for="inputEmail3" class="col-sm-2 col-md-2 col-xs-4 control-label">Fabrication Type</div>
+			 		<div class="col-sm-8 col-md-8 col-xs-8 jumbobox" style="padding:5px">
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="fabtype" value="1"> GI Material
+			 			</label>
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="fabtype" value="2"> GI Nut &amp; Bolt
+			 			</label>
+			 			
+			 		</div>
+			 	</div>
+
+
+		 		<!-- <div class="form-group smallfont" ng-show="materialname">
+			 		<div for="inputEmail3" class="col-sm-2 col-md-2 col-xs-4 control-label">UOM Type</div>
+			 		<div class="col-sm-8 col-md-8 col-xs-8 jumbobox" style="padding:5px">
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="uomtype" value="single"> Single
+			 			</label>
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="uomtype" value="multiple"> Multiple
+			 			</label>
+			 			
+			 			
+			 		</div>
+			 	</div> -->
+
+		 		<div class="form-group smallfont" ng-show="uomtype=='single' && mataddtype=='newm'">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">UOM</div>
+		 			<div class="col-sm-5 col-md-5 col-xs-8">
+		 				
+		 				<select class="form-control smallfont" ng-model="materialuom" ng-options="indiuom.id as indiuom.uom for indiuom in uomlist">
+							<option value="">SELECT</option>
+						</select>
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont" ng-show="uomtype=='single' && mataddtype=='existingm' && submat">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">UOM</div>
+		 			<div class="col-sm-5 col-md-5 col-xs-8">
+		 				
+		 				{{submat.matuom[0]['stmatuom']['uom']}}
+		 			</div>
+		 		</div>
+
+		 		<div class="jumbobox col-sm-11" ng-show="uomtype=='multiple'">
+
+		 			<h3>Select UOMs</h3>
+
+		 				<div class="form-group smallfont">
+				 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Primary UOM</div>
+				 			<div class="col-sm-5 col-md-5 col-xs-8 control-label" ng-hide="mapstart">
+				 				
+				 				<select class="form-control smallfont" ng-model="primaryuom" ng-options="indiuom as indiuom.uom for indiuom in uomlist">
+									<option value="">SELECT</option>
+								</select>
+				 			</div>
+				 			<div class="col-sm-5 col-md-5 col-xs-8 control-label" ng-show="mapstart">
+				 				
+				 				{{primaryuom.uom}}
+				 			</div>
+				 			<div class="col-sm-4 col-md-4 col-xs-4 control-label" ng-hide="mapstart">
+				 				
+				 				<div class="btn btn-success btn-xs" ng-click="mapstartclick()">Start Mapping</div>
+				 			</div>
+				 		</div>
+
+
+						<div class="form-group smallfont" ng-show="mapstart">
+				 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Secondary UOM</div>
+				 			<div class="col-sm-5 col-md-5 col-xs-8">
+				 				
+				 				<select class="form-control smallfont" ng-model="secondaryuom" ng-options="indiuom as indiuom.uom for indiuom in uomlist">
+									<option value="">SELECT</option>
+								</select>
+				 			</div>
+				 		</div>
+
+						<div class="form-group smallfont" ng-show="primaryuom && secondaryuom">
+		 					<div class="col-sm-12 col-xs-12 control-label">
+		 						<input type="text" class="col-sm-2" ng-model="uommultiplier" > &nbsp; {{primaryuom.uom}} = 1 {{secondaryuom.uom}}
+		 					</div>
+		 				</div>
+
+		 				<div class="form-group smallfont" ng-show="mapstart">
+				 			<div class="col-sm-4 col-md-4 col-xs-8">
+				 				<div class="btn btn-success" ng-click="adduomtotable()">ADD</div>
+				 			</div>
+				 		</div>
+
+		 		</div>
+
+		 		<div class="col-sm-12 col-xs-12 smallfont">
+
+		 			<table class="table table-striped table-responsive smallfont" ng-show="materialuoms.length>0">
+		 				<thead>
+		 					<tr class="innerhead">
+		 						<th>S.No</th>
+		 						<th>UOM Description</th>
+		 						<th>Remove</th>
+		 					</tr>
+		 				</thead>
+		 				<tr ng-repeat="indiuom in materialuoms">
+		 					<td scope="row">{{$index+1}}</td>
+		 					<td>{{indiuom.uommultiplier}} {{indiuom.primaryuom}} of {{materialname}} makes 1 {{indiuom.secondaryuom}} of {{materialname}}</td>
+		 					<td><button type="button" class="btn btn-danger btn-xs" ng-click="removerow($index)">Remove</button></td>
+		 				</tr>
+		 				
+		 			</table>
+	 			</div>
+
+		 		<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-4 col-md-4 col-xs-8">
+		 				<button type="submit" class="btn btn-success">ADD MATERIAL</button>
+		 			</div>
+		 		</div>
+
+    		</form>
+    	</div>
+
+    	<div class="col-sm-5 col-xs-12" style="height:500px;overflow-y:scroll;">
+
+			<p><strong>Already Existing Materials</strong></p>
+
+ 			<table class="table table-striped smallfont">
+ 				<tbody ng-repeat="mat in materials">
+ 					<tr class="innerhead">
+ 						<th class="col-sm-1">S.No</th>
+ 						<th class="col-sm-3">Material Code</th>
+ 						<th class="coloredhead text-center col-sm-6">{{mat['name']}}</th>
+ 						<th class="col-sm-2">UOM</th>
+ 					</tr>
+	 				<tr ng-repeat="submat in mat['submaterials']">
+	 					<td scope="row">{{$index+1}}</td>
+	 					<td>{{submat['material_code']}}</td>
+	 					<td>{{submat['name']}}</td>
+	 					<td>{{submat['matuom'][0]['stmatuom']['uom']}}</td>
+	 					
+	 				</tr>
+	 			</tbody>
+ 				
+ 			</table>
+
+    	</div>
+
+	</div>
+
+</div>
+

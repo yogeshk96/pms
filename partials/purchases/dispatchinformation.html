@@ -1,0 +1,359 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+  <div class="row-fluid">
+
+    <div class="clearfix" style="height:20px;"></div>
+
+    <form class="form-horizontal" ng-submit="sendenquiry()">
+    <div class="col-sm-12 col-xs-12 hidden-print">
+
+    <p><strong>Dispatch Instructions (DI)</strong></p>
+
+          <div class="form-group smallfont hidden-print">
+            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+            <div class="col-sm-3 col-md-3 col-xs-8">
+              <select class="form-control smallfont" chosen options="projectlist" ng-model="projectid" ng-options="projlist.id as projlist.name for projlist in projectlist" ng-change="resetpos()" >
+            
+              </select>
+            </div>
+          </div>
+          <div class="form-group smallfont hidden-print">
+                    <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Vendor<span class="astrix">*</span></div>
+            <div class="col-sm-3 col-md-3 col-xs-8">
+              <select class="form-control smallfont" chosen ng-model="vendorid" options="vendorlist" ng-options="venlist.id as venlist.name for venlist in vendorlist" ng-change="getpolist()">
+            
+              </select>
+            </div>
+          </div>
+        
+          <div class="form-group smallfont hidden-print">
+            <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Purchase Order No<span class="astrix">*</span></div>
+            <div class="col-sm-3 col-md-3 col-xs-8" style="padding-left:0px;">
+              <select class="form-control smallfont" chosen options="polist" ng-model="ponumber" ng-options="thispo.po_no as thispo.po_no for thispo in polist">
+            
+              </select>
+            </div>
+            <div class="col-sm-2 col-xs-4 submitbtn">
+                       <button type="button" class="btn btn-success smallfont " ng-click="searchpo()">Search</button>
+                    </div>
+          </div>
+
+             
+
+              <div class="searchresult hidden-print" ng-show="ponumber && ponodetails && ponumber == ponodetails.po_no">
+                <hr>
+
+                <div class="clearfix" style="height:20px;"></div>
+
+                <div class="form-group smallfont">
+                  
+                  <div class="col-sm-4 col-xs-6">
+
+                    <div class="col-sm-6"><strong>Purchased Date</strong>: </div>
+                    <div class="col-sm-6"> {{Dates.getDate(ponodetails.created_at)}}</div>
+
+                  </div>
+                  <div class="col-sm-4 col-xs-6">
+                    <div class="col-sm-6"><strong>Vendor Name</strong>: </div>
+                    <div class="col-sm-6"> {{ponodetails.vendor.name}}</div>
+
+                  </div>
+                 
+
+                  <div class="col-sm-4 col-xs-6">
+
+                    <div class="col-sm-6"><strong>Total cost of Materials</strong>: </div>
+                    <div class="col-sm-6">Rs {{ponodetails.total_cost}}</div>
+
+                  </div>
+                  <div class="col-sm-4 col-xs-6">
+                    <div class="col-sm-6"><strong>PO No</strong>: </div>
+                    <div class="col-sm-6"> {{ponodetails.po_no}}</div>
+
+                  </div>
+
+                </div>
+
+                <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="ponodetails.pomaterials.length>0">
+
+                  <table class="table table-striped">
+                      <thead>
+                        <tr style="background:#000;color:#FFF;">
+                          <th class="col-sm-1">S.No</th>
+                          <th class="col-sm-2">Material Description</th>
+                          <th class="col-sm-2">Purchased Quantity</th>
+                          <th class="col-sm-2">Total Inspected Qty</th>
+                          <th class="col-sm-1">Total Approved Qty</th>
+                          <th class="col-sm-1">Total Dispatch Qty</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="pomat in ponodetails.pomaterials">
+                          <td>{{$index+1}}</td>
+                          <td>{{pomat.storematerial.name}}</td>
+                          <td>{{pomat.quantity}}</td>
+                          <td>{{pomat.inspected_quantity}}</td>
+                          <td>{{pomat.approved_quantity}}</td>
+                          <td>{{pomat.dispatch_quantity}}</td>
+                        </tr>
+                        
+                      </tbody>
+                        
+                   </table>
+
+                </div><!-- col-sm-12 ends -->
+                <div style="clear:both;height:10px;"></div>
+
+                <div class="form-group smallfont hidden-print">
+                    <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Inspection Reference<span class="astrix">*</span></div>
+                    <div class="col-sm-3 col-xs-4">
+                        <select class="form-control smallfont" ng-model="inspdetails" ng-options="poinspection as poinspection.inspection_ref_no for poinspection in ponodetails.inspections" ng-change="changerefno()">
+                          <option value="">SELECT</option>
+                        </select>
+                    </div>
+                      
+                </div>
+
+              <div style="clear:both;height:10px;"></div>
+              
+              <div ng-show="inspdetails">
+
+                <div class="form-group smallfont">
+                  <div for="inputEmail3" class="col-sm-2 col-md-2 col-xs-4 control-label">Delivery Location</div>
+                  <div class="col-sm-3 col-md-3 col-xs-8 jumbobox" style="padding:5px;margin-left:12px;">
+                    <label class="radio-inline">
+                      <input type="radio" ng-model="deliverylocation" value="single"> Single
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" ng-model="deliverylocation" value="multiple"> Multiple
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group smallfont" ng-show="deliverylocation == 'single'">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Delivery Address<span class="astrix">*</span></div>
+                  <div class="col-sm-5 col-xs-6">
+                    <textarea class="form-control" ng-model="deliveryaddress" placeholder="Write delivery address here..." rows="4"></textarea>
+                  </div>
+                </div>
+
+                <div class="jumbobox col-sm-8">
+
+                  <div class="form-group smallfont">
+                    <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select Material Type<span class="astrix">*</span></div>
+                    <div class="col-sm-4 col-md-4 col-xs-8">
+                      <select class="form-control smallfont" ng-model="inspomat" ng-options="inspmat as inspmat.pomaterial.storematerial.name for inspmat in inspdetails.inspectionmaterials">
+                        <option value="">SELECT</option>
+                      </select>
+                    </div>
+                    
+                  </div>
+
+                  <div class="form-group smallfont">
+                    <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Total Purchased Quantity<span class="astrix">*</span></div>
+                    <div class="col-sm-4 col-xs-6">
+                      <input type="text" class="form-control" ng-model="inspomat.pomaterial.quantity" id="exampleInputEmail1" readonly>
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont">
+                    <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Total Approved Quantity<span class="astrix">*</span></div>
+                    <div class="col-sm-4 col-xs-6">
+                      <input type="text" class="form-control" ng-model="inspomat.approved_quantity" id="exampleInputEmail1" readonly>
+                    </div>
+                  </div>
+
+                   <div class="form-group smallfont">
+                    <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Already Dispatch Quantity<span class="astrix">*</span></div>
+                    <div class="col-sm-4 col-xs-6">
+                      <input type="text" class="form-control" ng-model="inspomat.dispatch_quantity" id="exampleInputEmail1" readonly>
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont">
+                    <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Current DI Quantity<span class="astrix">*</span></div>
+                    <div class="col-sm-4 col-xs-8">
+                      <input type="text" class="form-control" ng-blur="approved_di_change()" ng-model="inspomat.approved_di_quantity" id="exampleInputEmail1" >
+                    </div>
+                  </div>
+
+                  <div class="form-group smallfont" ng-show="deliverylocation == 'multiple'">
+                  <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Delivery Address<span class="astrix">*</span></div>
+                    <div class="col-sm-5 col-xs-6">
+                      <textarea class="form-control" ng-model="deliveryaddress" placeholder="Write delivery address here..." rows="3"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn">
+                    <button type="button" class="btn btn-success" ng-click="addtodimat(inspomat.id)">ADD</button>
+                  </div>
+                </div> 
+
+
+                <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="dimaterials.length>0">
+
+                  <table class="table table-striped">
+                      <thead>
+                        <tr style="background:#000;color:#FFF;">
+                          <th class="col-sm-1">S.No</th>
+                          <th class="col-sm-2">Material Description</th>
+                          <th class="col-sm-2">Total Purchased Qty</th>
+                          <th class="col-sm-2">Total Approved Qty</th>
+                          <th class="col-sm-1">Already Dispatch Qty</th>
+                          <th class="col-sm-1">Current Dispatch Qty</th>
+                          <th class="col-sm-1"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="inspdimat in dimaterials">
+                          <td>{{$index+1}}</td>
+                          <td>{{inspdimat.material_name}}</td>
+                          <td>{{inspdimat.purchased_quantity}}</td>
+                          <td>{{inspdimat.approved_qty}}</td>
+                          <td>{{inspdimat.already_dispatch_qty}}</td>
+                          <td><input type="text" class="form-control" ng-blur="approved_ditable_change(inspdimat)" ng-model="inspdimat.dispatch_quantity" /></td>
+                          <td><button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_dipmat($index)"><i class="fa fa-times"></i></button></td>
+                        </tr>
+                        
+                      </tbody>
+                        
+                   </table>
+
+                </div><!-- col-sm-12 ends -->
+
+                <div style="clear:both;height:10px"></div>
+
+               
+                <div class="form-group smallfont">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Dispatch Information date</div>
+
+                  <div class="col-sm-2 col-md-2 col-xs-8">
+                    <input type="date" ng-model="inspec_dispatch_date" class="form-control" />
+                  </div>
+
+                  <div class="col-sm-3 col-md-3 col-xs-8">
+                    <input type="file" id="file_dispatch" class="form-control" file-change="uploaddidoc"/>
+                  </div>
+                  
+                  <button type="button" class="btn btn-primary smallfont" ng-click='add_di_doc("dispatchinfo")'>Add</button>
+                </div>
+
+
+                <div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont" ng-show="dispatchdocs.length>0">
+                  <p><strong>Dispatch Information Files</strong></p>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr class="innerhead">
+                        <th class="col-sm-1">S.No</th>
+                        <th class="col-sm-4">File</th>
+                        <th class="col-sm-1">Delete</th>
+                      </tr>
+                    </thead>
+                    <tr ng-repeat="doc in dispatchdocs"  ng-if="doc.doc_type==3">
+                      <td scope="row">{{$index+1}}</td>
+                      <td><a href="{{doc.doc_url}}" download>{{doc.doc_name}}</a></td>
+                      <td><button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_didoc(doc.doc_url, $index)"><i class="fa fa-times"></i></button></td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div style="clear:both;height:10px;"></div>
+
+                <div class="panel panel-default" >
+                  <div class="panel-heading">Dispatch Instructions Mailer</div>
+                  <div class="panel-body">
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-2 col-md-2 col-xs-4 control-label">Receipent Type</div>
+                      <div class="col-sm-5 col-md-5 col-xs-8" style="padding:5px">
+                        <label class="radio-inline">
+                          <input type="radio" ng-model='rec_type' value="dept" ng-change="dim_type_change()">Department
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" ng-model='rec_type' value="vendor" ng-change="dim_type_change()">Vendor
+                        </label>
+                      </div>
+                    </div>
+                    <div class="form-group smallfont" ng-show="rec_type=='dept'">
+                     <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">To:<span class="astrix">*</span></div>
+                      <div class="col-sm-6 col-xs-6">
+                        <input type="text" class="form-control" ng-model="to" placeholder="Enter email id">
+                      </div>
+                    </div>
+                    <div class="form-group smallfont">
+                     <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">CC:</div>
+                      <div class="col-sm-6 col-xs-6">
+                        <input type="text" class="form-control" ng-model="cc" placeholder="Enter Comma(,) seperated email ids">
+                      </div>
+                    </div>
+
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Subject<span class="astrix">*</span></div>
+                      <div class="col-sm-6 col-xs-6">
+                        <input type="text" class="form-control" ng-model="subject">
+                      </div>
+                    </div>
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Attachment:</div>
+                      <div class="col-sm-6 col-xs-6">
+                        <input type="file" id="file_inspinternal" class="form-control" file-change="uploaddidoc"/>
+                      </div>
+                       <div class="col-sm-2 col-xs-4 submitbtn">
+                         <button type="button" class="btn btn-success smallfont " ng-click="add_di_doc(dim_doc_type.name)">Add</button>
+                      </div>
+                      <div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont" ng-show="dispatchdocs.length>0">
+                        <p><strong>Dispatch Info Attachment Files</strong></p>
+                        <table class="table table-striped">
+                          <thead>
+                           <tr class="innerhead">
+
+                              <th class="col-sm-4">File</th>
+                              <th class="col-sm-1">Download</th>
+                              <th class="col-sm-1">Delete</th>
+                            </tr>
+                          </thead>
+                          <tr ng-repeat="doc in dispatchdocs" ng-if="doc.doc_type==dim_doc_type.id">
+                            <td>{{doc.doc_name}}</td>
+                            <td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+                            <td><button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_didoc(doc.doc_url)"><i class="fa fa-times"></i></button></td>
+                          </tr>
+                        </table>
+                      </div>
+
+                      <div style="clear:both;height:10px;"></div>
+                    </div>
+
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Email Text<span class="astrix">*</span></div>
+                      <div class="col-sm-6 col-xs-6">
+                       <textarea class="form-control" placeholder="Write email text here..." rows="6" ng-model="emailcontent"></textarea>
+                      </div>
+                       <div class="col-sm-2 col-xs-4 submitbtn">
+                         <button type="button" class="btn btn-success smallfont " ng-click="dispatchinfomailer(rec_type)">Send Email</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group smallfont">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Remarks</div>
+                  <div class="col-sm-5 col-xs-6">
+                    <textarea class="form-control" ng-model="diremarks"></textarea>
+                  </div>
+                </div>
+
+               
+
+                  <div class="col-sm-2 col-sm-offset-4 col-xs-6 submitbtn" style="padding-left:0;">
+                    <button type="button" class="btn btn-success" ng-click="savedispatch()">Submit</button>
+                  </div>
+
+                </div>
+
+              </div>
+
+      </form>
+
+  </div>
+
+</div>

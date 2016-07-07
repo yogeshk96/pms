@@ -1,0 +1,62 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+  <div class="row">
+    
+    <div class="clearfix" style="height:20px;"></div>
+
+    <p><strong>Stock Revision Report</strong></p>
+	<form class="form-horizontal">
+
+		<div class="form-group smallfont">
+ 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Store</div>
+ 			<div class="col-sm-3 col-md-3 col-xs-8">
+ 				<select class="form-control smallfont" ng-model="storeid" ng-change="storeselect()">
+ 					<option value="select">SELECT</option>
+ 					<option  ng-repeat="store in stores" value="{{store.id}}">{{store.name}}</option>
+ 					
+ 				</select>
+ 			</div>
+ 		</div>
+	    
+	    <div class="col-sm-12 col-xs-12 pmstable table-responsive" ng-show="storename != 'select' && inventorydata.length>0 ">
+
+
+	      <table class="table table-striped">
+
+	      		<tbody ng-repeat="stockdata in inventorydata">
+		          <tr class="innerhead">
+		            <th>S.No</th>
+		            <th>Store</th>
+		            <th class="coloredhead">{{stockdata['name']}}</th>
+		            <th>UOM</th>
+		            <th class="col-sm-1">Existing Inventory</th>
+		            <th class="col-sm-1">Physical Inventory</th>
+	                <th>Remarks</th>
+	                <th>Central store Remarks</th>
+	                <th>Shift</th>
+		          </tr>
+		          <tr ng-repeat="stock in stockdata['submaterials']">
+		            <td scope="row">{{$index+1}}</td>
+		            <td>{{stock['stocks'][0]['store']['name']}}</td>
+		            <td>{{stock['name']}}</td>
+		            <td>{{stock['units']}}</td>
+		            <td>{{stock['stocks'][0]['quantity']}}</td>
+		            <td><input type="text" class="form-control" ng-model="stock['stocks'][0]['physical_qty']"/></td>
+	                <td><input type="text" class="form-control" ng-model="stock['stocks'][0]['remarks']" readonly /></td>
+	                <td><input type="text" class="form-control" ng-model="stock['stocks'][0]['central_store_remarks']" /></td>
+	                <td><button class="btn btn-success" ng-click="shiftphysicaltomain(stock)">Shift</button></td>
+		            
+		          </tr>
+		        </tbody>
+	          
+	          
+	        </table>
+
+	    </div><!-- col-sm-12 ends -->
+	</form>
+    
+  </div> <!-- row ends -->
+</div><!-- container ends -->
+
+<!-- page right main container ends -->

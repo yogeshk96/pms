@@ -1,0 +1,368 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="clearfix" style="height:20px;"></div>
+         <form class="form-horizontal">
+             <div class="col-sm-12 col-xs-12 hidden-print">
+             <p><strong>Dispatch Instructions</strong></p>
+             <div class="form-group smallfont hidden-print">
+                 <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+                    Select Project<span class="astrix">*</span>
+                 </div>
+                 <div class="col-sm-3 col-md-3 col-xs-8">
+                     <select class="form-control smallfont" chosen options="projectlist" ng-model="projectid" ng-options="projlist.id as projlist.name for projlist in projectlist" ng-change="hideall()">
+                </select>
+              </div>
+             </div>
+             <div class="form-group smallfont hidden-print">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+                  Select Vendor<span class="astrix">*</span>
+                </div>
+                <div class="col-sm-3 col-md-3 col-xs-8">
+                  <select class="form-control smallfont" chosen ng-model="vendorid" options="vendorlist" ng-options="venlist.id as venlist.name for venlist in vendorlist" ng-change="changevend()">
+                  </select>
+                </div>
+                
+             </div>
+
+              <div class="form-group smallfont hidden-print" ng-show="polist">
+                <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Purchase Order No<span class="astrix">*</span></div>
+                <div class="col-sm-3 col-md-3 col-xs-8" style="padding-left:0px;margin-left:16px;" >
+                  <select class="form-control smallfont" chosen  multiple options="polist" ng-model="ponumber" ng-options="thispo.id as thispo.po_no for thispo in polist">
+                
+                  </select>
+                </div>
+                <div class="col-sm-2 col-xs-4 submitbtn">
+                   <button type="button" class="btn btn-success smallfont " ng-click="getinslist()">Get Inspections</button>
+                </div>
+              </div>
+             <div class="form-group smallfont hidden-print" ng-show="showinsbox">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+                    Select Inspection Reference<span class="astrix">*</span>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-8" style="padding-left:0px;margin-left:14px;">
+                    <select class="form-control smallfont" chosen  options="inslist" ng-model="insnumber" ng-options="thisins.id as thisins.inspection_ref_no for thisins in inslist" ng-change="inschangefunc()">
+                  
+                    </select>
+                  </div>
+                  <div class="col-sm-2 col-xs-4 submitbtn">
+                     <button type="button" class="btn btn-success smallfont " ng-click="getdisdata()">Get Dispatch Data</button>
+                  </div>
+              </div>
+              <div class="form-group smallfont hidden-print" ng-show="showdibox">
+                  <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+                    Select Dispatch Reference<span class="astrix">*</span>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-8" style="padding-left:0px;margin-left:14px;">
+                    <select class="form-control smallfont" chosen  options="dilist" ng-model="dinumber" ng-options="thisdi.id as thisdi.dispatch_reference for thisdi in dilist" ng-change="dichangefunc()">
+                  
+                    </select>
+                  </div>
+                  <!-- <div class="col-sm-2 col-xs-4 submitbtn">
+                     <button type="button" class="btn btn-success smallfont " ng-click="getdisdata()">Get Dispatch Data</button>
+                  </div> -->
+              </div>
+              <hr>
+              <p ng-show="inspdetails.insmat.length==0">* Add Materials in inspection first, no data to show!</p>
+              <div  ng-show="showdiboxdets && inspdetails.insmat.length>0">
+                <p style="font-size:10px;" ng-show="inspdetails.insmat.length>0">*Details of Materials Inspected in the selected Inspection Reference</p>
+                <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="inspdetails.insmat.length>0">
+                    <table class="table table-striped">
+                        <thead>
+                          <tr style="background:#000;color:#FFF;">
+                            <th class="col-sm-1">S.No</th>
+                            <th class="col-sm-2">Material Description</th>
+                            <th class="col-sm-1">POS</th>
+                            <th class="col-sm-1">UOM</th>
+                            <th class="col-sm-1">Inspected Qty <span style="font-size:10px;">(In this Inspection)</span></th>
+                            <th class="col-sm-1">Approved Qty <span style="font-size:10px;">(In this Inspection)</span></th>
+                            <th class="col-sm-1">Total Dispatch Qty <span style="font-size:10px;">(In this Inspection)</span></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="x in inspdetails.insmat">
+                            <td>{{$index+1}}</td>
+                            <td>{{x.matdes.name}}</td>
+                            <td>
+                              <ol class="insp_ol" style="padding-left:0px;">
+                                 <li ng-repeat="y in x.inseachpomat">
+                                  {{y.podets.po_no}} <br>
+                                  <b>
+                                    (I - {{y.inspected_quantity}}, A - {{y.approved_quantity}},  D - {{y.dispatch_quantity}} ) 
+                                  </b>
+                                </li>
+                              </ol>
+                            </td>
+                            <td>{{x.matdes.units}}</td>
+                            <td>{{x.inspected_quantity}}</td>
+                            <td>{{x.approved_quantity}}</td>
+                            <td>{{x.dispatch_quantity}}</td>
+                          </tr>
+                        </tbody>
+                     </table>
+                </div>
+                <p><b>Call Raising Details(to department)</b></p>
+                <div class="form-group smallfont">
+                    <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                      Raise Type:
+                    </div>
+                    <div class="col-sm-4 col-xs-8">
+                      <span ng-show="didetails.callraise.manual_flag==1">Manual</span>
+                      <span ng-show="didetails.callraise.manual_flag==0">By Mail</span>
+                    </div>
+                </div>
+                <div class="form-group smallfont">
+                    <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                        Call Raised On:
+                    </div>
+                    <div class="col-sm-4 col-xs-8">
+                        <span>{{didetails.callraise.raisedate}}</span>
+                    </div>
+                </div>
+                <div ng-show="didetails.callraise.manual_flag==0">
+                   <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                        Mail Status:
+                      </div>
+                      <div class="col-sm-4 col-xs-8">
+                        <span ng-show="didetails.callraise.successflag==1">Success</span>
+                        <span ng-show="didetails.callraise.successflag==0">Failed</span>
+                      </div>
+                   </div>
+                   <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                        Mail Sent To:
+                      </div>
+                      <div class="col-sm-4 col-xs-8">
+                        <span>{{didetails.callraise.tomail}}</span>
+                      </div>
+                   </div>
+                   <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                        CC Sent To:
+                      </div>
+                      <div class="col-sm-4 col-xs-8">
+                        <span>{{didetails.callraise.cc}}</span>
+                      </div>
+                   </div>
+                   <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                        Mail Content:
+                      </div>
+                      <div class="col-sm-4 col-xs-8">
+                        <span>{{didetails.callraise.content}}</span>
+                      </div>
+                   </div>
+                </div>
+                <div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont" style="padding-left:0px;">
+                  <p><strong>Dispatch call Files</strong></p>
+                  <table class="table table-striped">
+                    <thead>
+                     <tr class="innerhead">
+                        <th class="col-sm-4">File</th>
+                        <th class="col-sm-1">Download</th>
+                      </tr>
+                    </thead>
+                    <tr ng-repeat="doc in didetails.callraise.attachments" >
+                      <td>{{doc.doc_name}}</td>
+                      <td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="jumbobox col-sm-8" ng-show="inspdetails.insmat.length>0">
+                    <div class="form-group smallfont">
+                      <p style="margin-left:16px;font-size:13px;"><b>Add Quantity to Dispatch</b></p>
+                      <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                        Select PO
+                      </div>
+                      <div class="col-sm-4 col-xs-8">
+                       <select class="form-control smallfont" chosen options="polist" ng-model="mainpo" ng-change="cleardets()" ng-options="polist as polist.po_no for polist in polist">
+                          <option value="">SELECT</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                        Select Material 
+                        <span class="astrix">*</span>
+                      </div>
+                      <div class="col-sm-8 col-md-8 col-xs-8">
+                        <select class="form-control smallfont" options="mainpo.pomaterials" chosen ng-model="inspomat" ng-options="mat as mat.storematerial.name for mat in mainpo.pomaterials">
+                          <option value="">SELECT</option>
+                        </select>
+                      </div>
+                    </div>
+                   <!--  <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Total Purchased Quantity in this PO</div>
+                      <div class="col-sm-4 col-xs-6">
+                        <input type="text" class="form-control" ng-model="inspomat.quantity" id="exampleInputEmail1" readonly>
+                      </div>
+                    </div>ng-blur
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Total Inspected Qty till now</div>
+                      <div class="col-sm-4 col-xs-6">
+                        <input type="text" class="form-control" ng-model="inspomat.inspected_quantity" id="exampleInputEmail1" readonly>
+                      </div>
+                    </div> -->
+                    <!--  <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Total Approved Qty till now</div>
+                      <div class="col-sm-4 col-xs-6">
+                        <input type="text" class="form-control" ng-model="inspomat.approved_quantity" id="exampleInputEmail1" readonly>
+                      </div>
+                    </div> -->
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                        Dispatch Qty <span style="font-size:10px;">(Approved by Department in this inspection)</span>
+                        <span class="astrix">*</span>
+                      </div>
+                      <div class="col-sm-4 col-xs-6">
+                        <input type="text" class="form-control" ng-model="inspomat.dispatch" id="exampleInputEmail1" placeholder="Enter dispatch quantity">
+                      </div>
+                    </div>
+                   <!--  <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">
+                        Delivery Address
+                        <span class="astrix">*</span>
+                      </div>
+                      <div class="col-sm-4 col-xs-6">
+                        <textarea class="form-control"  ng-model="inspomat.deliveryadd"></textarea>
+                      </div>
+                    </div> -->
+                    <div class="col-sm-3 col-sm-offset-3 col-xs-6 col-xs-offset-3 submitbtn">
+                      <button type="button" class="btn btn-success" ng-click="adddismattomainarr()">ADD</button>
+                    </div>
+                </div>
+                <div style="clear:both;height:10px;"></div>
+                <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="didetails.dimat.length>0">
+                    <table class="table table-striped">
+                        <thead>
+                          <tr style="background:#000;color:#FFF;">
+                            <th class="col-sm-1">S.No</th>
+                            <th class="col-sm-2">Material Description</th>
+                            <th class="col-sm-1">POS</th>
+                            <th class="col-sm-1">UOM</th>
+                            <th class="col-sm-1">Dispatch Qty added in this Dispatch reference</th>
+                            <th class="col-sm-1">Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="x in didetails.dimat">
+                            <td>{{$index+1}}</td>
+                            <td>{{x.matdes.name}}</td>
+                            <td>
+                              <ol class="insp_ol" style="padding-left:0px;">
+                                 <li ng-repeat="y in x.dieachpomat">
+                                  {{y.podets.po_no}} <br>
+                                  <b>
+                                    (D - {{y.dispatch_quantity}} ) <br>
+                                   <!--  (Delivery Address - {{y.delivery_address}} ) <br> -->
+                                   <!--  <input type="text" class="form-control" ng-model="y.dispatch_quantity" style="font-size:12px;width:150px;" placeholder="Dispatch Qty" ng-blur="changedispatchqty(y)" > -->
+                                  </b>
+                                </li>
+                              </ol>
+                            </td>
+                            <td>{{x.matdes.units}}</td>
+                            <td>{{x.quantity}}</td>
+                            <td>
+                              <button type="button" class="btn btn-default smallfont btn-danger" ng-show="x.internal_di=='0.00'" ng-click="remove_dimat($index)"><i class="fa fa-times"></i></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                     </table>
+                </div>
+                <!--  <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-show="disarray.length>0">
+                    <table class="table table-striped">
+                        <thead>
+                          <tr style="background:#000;color:#FFF;">
+                            <th class="col-sm-1">S.No</th>
+                            <th class="col-sm-2">Material Description</th>
+                            <th class="col-sm-1">POS</th>
+                            <th class="col-sm-1">Dispatch Qty to be Added</th>
+                            <th class="col-sm-1">Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="x in disarray">
+                            <td>{{$index+1}}</td>
+                            <td>{{x.matname}}</td>
+                            <td>
+                              <ol class="insp_ol" style="padding-left:0px;">
+                                 <li ng-repeat="y in x.pos">
+                                  {{y.po_no}} <br>
+                                  <b>
+                                    (D - {{y.diqty}} )  <br>
+                                    (Delivery Address:{{y.delivery_address}})
+                                  </b>
+                                </li>
+                              </ol>
+                            </td>
+                            <td>{{x.diqty}}</td>
+                            <td>
+                             <button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_inspmat($index)"><i class="fa fa-times"></i></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                     </table>
+                </div> -->
+                <div style="clear:both;height:10px;"></div>
+               
+                <div style="clear:both;height:10px;"></div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    Dispatch Call Approval Status from Department
+                  </div>
+                  <div class="panel-body">
+                    <div class="form-group smallfont">
+                      <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+                        Approved Dispatch call received date(form department)
+                      </div>
+                      <div class="col-sm-2 col-md-2 col-xs-8">
+                        <input type="date" ng-model="didetails.dispatch_date" class="form-control" />
+                      </div>
+                       <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">
+                        Dispatch No:
+                      </div>
+                      <div class="col-sm-2 col-md-2 col-xs-8">
+                        <input type="text" ng-model="didetails.dispatch_no" class="form-control" />
+                      </div>
+                     
+                      <div class="col-sm-3 col-md-3 col-xs-8" >
+                        <input type="file" id="file_approvedinsp" class="form-control" file-change="uploaddidoc"/>
+                      </div>
+                      <button type="button" class="btn btn-primary smallfont" ng-click='add_di_doc("approved_dispatch")'>Add</button>
+                    </div>
+                    <div class="col-sm-8 col-xs-12 pmstable table-responsive smallfont">
+                      <p>
+                        <strong>Dispatch Call Approval Files</strong>
+                      </p>
+                      <table class="table table-striped">
+                        <thead>
+                          <tr class="innerhead">
+                            <th class="col-sm-4">File</th>
+                            <th class="col-sm-1">Download</th>
+                            <th class="col-sm-1">Delete</th>
+                          </tr>
+                        </thead>
+                        <tr ng-repeat="doc in didetails.didocs">
+                          <td>{{doc.doc_name}}</td>
+                          <td><a href="{{doc.doc_url}}" download style="color:blue;">Download</a></td>
+                          <td>
+                            <button type="button" class="btn btn-default smallfont btn-danger" ng-click="remove_didoc(doc.doc_url)"><i class="fa fa-times"></i></button>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div style="clear:both;height:10px;"></div>
+                    
+                  </div>
+                  <div style="clear:both;height:10px;"></div>
+                </div>
+                <div class="col-sm-2 col-xs-4 submitbtn">
+                   <button type="button" class="btn btn-success smallfont " style="width:200px;" ng-click="savedidata()">
+                    Save DI Details
+                   </button>
+                </div>
+            </div>
+          </div>
+      </form>
+  </div>
+</div>

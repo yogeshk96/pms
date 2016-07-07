@@ -1,0 +1,49 @@
+<!--page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid hidden-print">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<form class="form-horizontal">
+			<div class="col-sm-12 col-xs-12">
+
+			<p><strong>Approve Indent</strong></p>
+
+	 			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="polist.id as polist.name for polist in projectlist">
+	 					
+	 					</select>
+		 			</div>
+		 			<div class="col-sm-2 col-xs-4 submitbtn">
+		               <button type="button" class="btn btn-success smallfont " ng-click="getpendingindentreport()">Get Report</button>
+		            </div>
+		 			
+		 		</div>
+		 		
+		 		<table class="table table-striped table-responsive smallfont" ng-show="indentpendinglist">
+	 				<tr>
+	 					<th>S.No</th>
+	 					<th>Name</th>
+	 					<th>UOM</th>
+	 					<th>Already Raised Indent Qty</th>
+	 					<th>Indent Qty pending for approval</th>
+	 					
+	 				</tr>
+	 				<tr ng-repeat="matin in indentpendinglist">
+	 					<td>{{$index+1}}</td>
+	 					<td>{{matin['matname']}}</td>
+	 					<td>{{matin['uom']}}</td>
+	 					<td>{{matin['tot_indent']}}</td>
+	 					<td>{{matin['indentqty']}}</td>
+	 				</tr>
+	 				</tr>
+	 			</table>
+
+			</div>
+	 		
+		</form>
+	</div>
+</div>

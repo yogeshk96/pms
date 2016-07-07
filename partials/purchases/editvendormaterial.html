@@ -1,0 +1,252 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+		<p><strong>Edit Vendor</strong></p>
+		<form class="form-horizontal smallfont">
+		<div class="col-sm-12 col-xs-12">
+  		
+			<div class="form-group smallfont">
+	 			<div for="inputEmail3" class="col-sm-2 col-xs-2 control-label">Select Vendor<span class="astrix">*</span></div>
+	 			<div class="col-sm-5 col-md-5 col-xs-7">
+
+	 				<select class="form-control smallfont" options="vendorlist" chosen ng-model="vendorid" ng-options="venlist.id as venlist.name for venlist in vendorlist" ng-change="vendorchange()">
+			 					
+			 		</select>
+	 				
+	 			</div>
+	 			<div class="col-sm-2 col-xs-2 submitbtn">
+		           <button type="button" class="btn btn-success smallfont " ng-click="searchvendormat()">Edit</button>
+		        </div>
+	 		</div>
+
+	 		<div ng-show="vendor.name">
+
+	 			<div class="form-group smallfont col-sm-6">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Vendor Name<span class="astrix">*</span></div>
+		 			<div class="col-sm-7 col-md-7 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="vendor.name" />
+		 			</div>
+		 		</div>
+
+				<div class="form-group smallfont col-sm-6">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Contact Person Name<span class="astrix">*</span></div>
+		 			<div class="col-sm-7 col-md-7 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="vendor.contact_person" />
+		 			</div>
+		 		</div>
+
+		 		
+		 		<div class="form-group smallfont col-sm-6">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Vendor Email ID<span class="astrix">*</span></div>
+		 			<div class="col-sm-7 col-md-7 col-xs-8">
+		 				<input type="email" class="form-control" ng-model="vendor.emailid" />
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont col-sm-6">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Vendor Alternate Email ID</div>
+		 			<div class="col-sm-7 col-md-7 col-xs-8">
+		 				<input type="email" class="form-control" ng-model="vendor.alternate_emailid" />
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont col-sm-6">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Vendor Phone No<span class="astrix">*</span></div>
+		 			<div class="col-sm-7 col-md-7 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="vendor.phoneno" />
+		 			</div>
+		 		</div>
+				<div style="clear:both;"></div>
+		 		<div class="form-group smallfont col-sm-6">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Vendor Alernate Phone No</div>
+		 			<div class="col-sm-7 col-md-7 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="vendor.alternate_phoneno" />
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont col-sm-6">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">CIN</div>
+		 			<div class="col-sm-7 col-md-7 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="vendor.cin" />
+		 			</div>
+		 		</div>
+
+		 		<div style="clear:both;"></div>
+
+		 		<div class="form-group smallfont col-sm-6">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">TIN</div>
+		 			<div class="col-sm-7 col-md-7 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="vendor.tin" />
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont col-sm-6">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">PAN</div>
+		 			<div class="col-sm-7 col-md-7 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="vendor.pan" />
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont col-sm-6">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Service Tax Registration Number</div>
+		 			<div class="col-sm-7 col-md-7 col-xs-8">
+		 				<input type="text" class="form-control" ng-model="vendor.servicetaxno" />
+		 			</div>
+		 		</div>
+
+		 		<div class="form-group smallfont col-sm-6">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Vendor Address<span class="astrix">*</span></div>
+		 			<div class="col-sm-9 col-md-9 col-xs-8">
+		 				<textarea class="form-control" rows="4" ng-model="vendor.address"></textarea>
+		 			</div>
+		 		</div>
+
+		 		
+		 	</div>
+
+    			
+    	</div>
+
+    	<div class="jumbobox col-sm-10" ng-show="vendor.name">
+ 			<h3>Bank account details</h3>
+				
+ 			<div class="form-group smallfont">
+	 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Account Number</div>
+	 			<div class="col-sm-4 col-md-4 col-xs-8">
+	 				<input type="text" class="form-control" ng-model="accountno" />
+	 			</div>
+	 		</div>
+	 		<div class="form-group smallfont">
+	 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">IFSC code</div>
+	 			<div class="col-sm-4 col-md-4 col-xs-8">
+	 				<input type="text" class="form-control" ng-model="ifsccode" />
+	 			</div>
+	 		</div>
+	 		<div class="form-group smallfont">
+	 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Bank name</div>
+	 			<div class="col-sm-4 col-md-4 col-xs-8">
+	 				<input type="text" class="form-control" ng-model="bankname" />
+	 			</div>
+	 		</div>
+	 		<div class="form-group smallfont">
+	 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Bank branch</div>
+	 			<div class="col-sm-4 col-md-4 col-xs-8">
+	 				<input type="text" class="form-control" ng-model="bankbranch" />
+	 			</div>
+	 		</div>
+	 		<div class="col-sm-3 col-md-3 col-xs-8">
+				<div class="btn btn-success btn-sm" ng-click="addaccountdetails()">ADD</div>
+			</div>
+		</div>
+
+		<div class="table-responsive col-sm-12" ng-show="vendor.accountdetails.length>0">
+			<h4>Bank Account details</h4>
+			<div class="jumbobox col-sm-12">
+	            <table class="table table-striped smallfont">
+	 				<thead>
+	 					<tr class="innerhead">
+	 						<th class="col-sm-1">S.No</th>
+	 						<th class="col-sm-3">Bank name</th>
+	 						<th class="col-sm-2">Bank branch</th>
+	 						<th class="col-sm-2">IFSC code</th>
+	 						<th class="col-sm-3">Account number</th>
+	 						<th class="col-sm-1"></th>
+	 					</tr>
+	 				</thead>
+	 				<tr ng-repeat="venacdet in vendor.accountdetails">
+	 					<td scope="row">{{$index+1}}</td>
+	 					<td>{{venacdet['bank_name']}}</td>
+	 					<td>{{venacdet['bank_branch']}}</td>
+	 					<td>{{venacdet['ifsc_code']}}</td>
+	 					<td>{{venacdet['account_number']}}</td>
+	 					<td><button type="button" class="btn btn-danger btn-xs" ng-click="removeacrow($index)">Remove</button></td>
+	 				</tr>
+	 			</table>
+	 		</div>
+ 		</div>
+
+    	<div class="col-sm-12 col-xs-12" ng-show="materials.length>0">
+
+			<p><strong>Already Existing Materials</strong></p>
+
+			<table class="table table-striped smallfont">
+ 				<tbody ng-repeat="mat in materials">
+ 					<tr class="innerhead">
+ 						<th>S.No</th>
+ 						<th>Material Code</th>
+ 						<th class="coloredhead text-center">{{mat['name']}}</th>
+ 						<th>UOM</th>
+ 						<th></th>
+ 					</tr>
+	 				<tr ng-repeat="submat in mat['submaterials']">
+	 					<td scope="row">{{$index+1}}</td>
+	 					<td>{{submat['material_code']}}</td>
+	 					<td>{{submat['name']}}</td>
+	 					<td>{{submat['units']}}</td>
+	 					<td><button type="button" class="btn btn-xs btn-danger" ng-click="deletematerial(submat['id'], $index, $parent.$index)" >Delete</button>
+	 					
+	 				</tr>
+	 			</tbody>
+ 				
+ 			</table>
+
+ 			
+    	</div>
+		<div style="clear:both;height:30px;"></div>
+    	<div class="form-group smallfont" ng-show="showaddbox">
+			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material Type<span class="astrix">*</span></div>
+			<div class="col-sm-3 col-md-3 col-xs-8">
+				<select class="form-control smallfont" ng-model="materialtype" ng-options="mat as mat.name for mat in venmaterials">
+					<option value="">SELECT</option>
+				
+				</select>
+				
+			</div>
+			<div class="col-sm-3 col-md-3 col-xs-8">
+				<div class="btn btn-success btn-sm" ng-click="addmaterialbox()">ADD</div>
+			</div>
+		</div>
+
+
+ 		<div class="form-group smallfont col-sm-12" ng-repeat="submat in submaterials">
+ 			<h4>{{submat.name}}</h4>
+ 			<div class="jumbobox col-sm-10">
+ 				<p>
+ 					<label>
+						<input  type="checkbox" ng-click="selectall(submat)" ng-checked="isallselected(submat)"> Select Material Type available with vendor
+					</label>
+ 				</p>
+
+ 				<div class="checkbox col-sm-12" ng-repeat="sub in submat.submaterials | filter: matfilter">
+				    <label>
+				      <input type="checkbox" ng-click="toggleSelection(sub)" ng-model="sub.selected"  ng-if="materialvalues.indexOf(sub.id) != '-1'" checked="checked">
+				      <input type="checkbox" ng-click="toggleSelection(sub)" ng-model="sub.selected"  ng-if="materialvalues.indexOf(sub.id) == '-1'"> {{sub.name}}
+				    </label>
+				    <div class="checkbox col-sm-12" ng-repeat="insub in sub.level1mat" ng-if="sub.selected && sub.type=='2'">
+					    <label>
+					      <input type="checkbox" ng-click="toggleSelection(insub.storematerial)" ng-model="insub.selected"  ng-if="materialvalues.indexOf(sub.id) != '-1'" checked="checked">
+					      <input type="checkbox" ng-click="toggleSelection(insub.storematerial)" ng-model="insub.selected"  ng-if="materialvalues.indexOf(sub.id) == '-1'"> {{insub.storematerial.name}}
+					    </label>
+					</div>
+				</div>
+	 			
+			</div>
+			
+ 		</div>
+
+ 		<div style="clear:both;height:20px;"></div>
+
+ 		<div class="col-sm-2 col-xs-2 col-sm-offset-2 submitbtn" ng-show="vendor.name">
+            	<button type="button" class="btn btn-success smallfont " ng-click="savevendormat()">save</button>
+        </div>
+ 			
+
+
+        </form>
+
+	</div>
+
+</div>

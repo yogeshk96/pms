@@ -1,0 +1,47 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+
+		<div class="col-sm-12 col-xs-12">
+
+		<p><strong>Edit Material</strong></p>
+
+    		<form class="form-horizontal smallfont">
+
+    			<div class="form-group smallfont">
+					<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material Type<span class="astrix">*</span></div>
+					<div class="col-sm-3 col-md-3 col-xs-8">
+
+						<select class="form-control smallfont" ng-model="materialtype" ng-options="mat as mat.name for mat in materials">
+							<option value="">SELECT</option>
+ 					
+ 						</select>
+					</div>
+					
+				</div>
+
+				<div class="form-group smallfont" ng-show="materialtype">
+					<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Material<span class="astrix">*</span></div>
+					<div class="col-sm-3 col-md-3 col-xs-8">
+
+						<select class="form-control smallfont" ng-model="submat" ng-options="smat as smat.name for smat in materialtype.submaterials">
+							<option value="">SELECT</option>
+ 					
+ 						</select>
+					</div>
+					<div class="col-sm-3 col-xs-6 submitbtn">
+	 					<button type="button" class="btn btn-success" ng-click="getmathistoryreport()">SHOW REPORT</button>
+	 				</div>
+				</div>
+
+				
+		 		<zingchart id="chart-1" zc-json="myJson" zc-height=400 zc-width=600 ng-if="myJson"></zingchart>    			
+    		</form>
+    	</div>
+
+    </div>
+</div>

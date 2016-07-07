@@ -1,0 +1,85 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+<style type="text/css">
+	
+	.chosen-container {
+
+		width:300px !important;
+	}
+</style>
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+
+		<div class="col-sm-6 col-xs-12">
+
+		<p><strong>Edit Material</strong></p>
+
+    		<form class="form-horizontal smallfont" ng-submit="addmaterial()">
+
+    			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Select Material Type</div>
+		 			<div class="col-sm-5 col-md-5 col-xs-8">
+		 				<select class="form-control smallfont" ng-model="materialtypeid" ng-change="materialchange()">
+		 					<option value="select">SELECT</option>
+		 					<option ng-repeat="mat in materials" value="{{mat['id']}}">{{mat['name']}}</option>
+		 					
+		 				</select>
+		 			</div>
+		 		</div>
+
+    			
+    		</form>
+    	</div>
+    	<form class="form-horizontal smallfont">
+
+	    	<div class="col-sm-12 col-xs-12" ng-show="submaterials">
+
+				<p><strong>Already Existing Materials</strong></p>
+
+	 			<table class="table table-striped smallfont">
+	 				<tbody>
+	 					<tr class="innerhead">
+	 						<th class="col-sm-1">S.No</th>
+	 						<th class="col-sm-1">Material Code</th>
+	 						<th class="coloredhead col-sm-4">{{submaterials['name']}}</th>
+	 						<th class="col-sm-3">Projects</th>
+	 						<th class="col-sm-1">UOM</th>
+	 						<th class="col-sm-1">Edit</th>
+	 						<th class="col-sm-1">Delete</th>
+	 					</tr>
+		 				<tr ng-repeat="submat in submaterials['submaterials']">
+		 					<td scope="row">{{$index+1}}</td>
+		 					<td ng-show="!submat['edit']">{{submat['material_code']}}</td>
+		 					<td ng-show="submat['edit']"><input type="text" ng-model="submat['material_code']" class="col-md-8"/></td>
+		 					<td ng-show="!submat['edit']">{{submat['name']}}</td>
+							<td>
+								<select class="form-control smallfont col-sm-5" options="projectlist" multiple chosen ng-model="submaterials['projectarr'][submat['id']]['projectarr']" ng-options="projlist.id as projlist.name for projlist in projectlist">
+				 					
+				 				</select>
+							</td>
+		 					<td ng-show="submat['edit']"><textarea ng-model="submat['name']" class="col-md-10">{{submat['name']}}</textarea></td>
+		 					<td ng-show="!submat['edit']">{{submat['units']}}</td>
+		 					<td ng-show="submat['edit']">
+			 					<select ng-model="submat['unitss']">
+			 						<option ng-repeat="uom in uomlist" value="{{uom['uom']}}">{{uom['uom']}}</option>
+			 						
+			 					</select>
+		 					</td>
+		 					<td ng-show="!submat['edit']"><button type="button" class="btn btn-xs" ng-click="editmaterial(submat)" >Edit</button></td>
+		 					<td ng-show="submat['edit']"><button type="button" class="btn btn-xs" ng-click="savematerial(submat)" >Save</button></td>
+		 					<td><button type="button" class="btn btn-xs" ng-click="deletematerial(submat['id'], $index)" >Delete</button></td>
+		 					
+		 				</tr>
+		 			</tbody>
+	 				
+	 			</table>
+
+	    	</div>
+    	</form>
+
+	</div>
+
+</div>

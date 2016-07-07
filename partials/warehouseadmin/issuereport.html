@@ -1,0 +1,163 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Material Issue Report</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+			
+			<div class="col-sm-12 col-xs-12 smallfont">
+			<form ng-submit="generate_report()" class="form-horizontal">
+				<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">From Date</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="date" class="form-control" ng-model="dates.fromdate" required>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">To Date</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="date" class="form-control" ng-model="dates.todate" required>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Store</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<select class="form-control smallfont" ng-options="store as store.name for store in stores" ng-model="mainstore" required>
+		 					<option value="">SELECT</option>
+		 				</select>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont">
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="submit" class="btn btn-primary" value="Generate">
+		 			</div>
+		 		</div>
+			</form>
+			<table class="table table-striped table-responsive smallfont" ng-show="mats.length>0">
+				<thead>
+ 					<tr class="innerhead">
+ 						<th>S.No</th>
+ 						<th>DC No</th>
+ 						<th>Dated</th>
+ 						<th>Issued To</th>
+ 						<th>Vehicle No</th>
+ 						<th>Transporter</th>
+ 						<th>Driver Name</th>
+ 						<th>View</th>
+ 					</tr>
+ 				</thead>
+ 				<tbody>
+ 					<tr ng-repeat="mat in mats">
+ 						<td>{{$index+1}}</td>
+ 						<td>{{mat.dc_no}}</td>
+ 						<td>{{Dates.getDate(mat.dc_date)}}</td>
+ 						<td ng-if="mat.issue_type=='1'">{{mat.storename.name}}</td>
+ 						<td ng-if="mat.issue_type=='2'">{{mat.subconname.name}}</td>
+ 						<td ng-if="mat.issue_type=='3'">{{mat.tptname.name}}</td>
+ 						<td>{{mat.vehicle_no}}</td>
+ 						<td>{{mat.transporter_name}}</td>
+ 						<td>{{mat.driver_name}}</td>
+ 						<td><button class="btn btn_success" ng-click="view_dc(mat)">View</button></td>
+ 					</tr>
+ 				</tbody>
+			</table>
+    	</div>
+
+		</div>
+	</div>
+</div>
+<div id="GeneratePoModal" class="modal fade smallfont" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content col-xs-12">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h5 class="modal-title" style="text-align:center;"><strong>Delivery Challan</strong></h5>
+			</div>
+			<div class="modal-body">
+				<div class="purchaseorderbox col-sm-12 col-xs-12" style"display:inlineblock">
+					<div class="col-sm-3 col-xs-3"><img src="images/logo.png" style="height: 50px;margin-left: -25px;margin-top: 16px;"></div>
+					<div class="col-sm-9 col-xs-9 text-right">
+						<p><strong>Shirdi Sai Electricals Ltd.</strong><br>RATNA VILLA:Flat No 401<br>Budda Colony:East Canal Boring Road <br>Patna Bihar 800001</p>
+					</div>
+					<div style="clear:both;height:10px;"></div>
+					<h5 class="modal-title" style="text-align:center;text-decoration:underline;"><strong>Material Issue : Store to <span ng-show="mainissue.issue_type=='1'">Store</span><span ng-show="mainissue.issue_type=='3'">Third Party</span><span ng-show="mainissue.issue_type=='2'">Sub Contractor</span></strong></h5>
+					<div style="clear:both;height:10px;"></div>
+					<div class="col-sm-6 col-xs-6 text-left">
+						<div class="col-sm-12 col-xs-12 text-left"><strong>DC NO :</strong> {{mainissue.dc_no}}</div>
+						<div class="col-sm-12 col-xs-12 text-left" ng-show="mainissue.issue_type=='1'"><strong>Store :</strong> {{mainissue.storename.name}}</div>
+						<div class="col-sm-12 col-xs-12 text-left" ng-show="mainissue.issue_type=='3'"><strong>Third Party :</strong> {{mainissue.tptname.name}}</div>
+						<div class="col-sm-12 col-xs-12 text-left" ng-show="mainissue.issue_type=='2'"><strong>Sub Contractor :</strong> {{mainissue.subconname.name}}</div>
+					</div>
+					<div class="col-sm-6 col-xs-6 text-right">
+						<div class="col-sm-3 col-xs-3">&nbsp;</div>
+						<div class="col-sm-9 col-xs-9 text-left"><strong>Date :</strong> {{Dates.getDate(mainissue.dc_date)}}</div>
+						<div class="col-sm-3 col-xs-3">&nbsp;</div>
+						<div class="col-sm-9 col-xs-9 text-left"><strong>Incharge :</strong> {{mainissue.userdata.name}}</div>
+					</div>
+
+					<div style="clear:both;height:20px;"></div>
+
+					<div class="col-sm-12 col-xs-12 smallfont">
+
+			 			<table class="table table-striped table-responsive smallfont col-xs-12">
+			 				<thead>
+			 					<tr class="innerhead">
+			 						<th class="col-xs-2">S.No</th>
+			 						<th class="col-xs-2">Item Description</th>
+			 						<th class="col-xs-2">UOM</th>
+			 						<th class="col-xs-2">Supplied Qty</th>
+			 					</tr>
+			 				</thead>
+			 				<tr ng-repeat="mat in mainissue.transdata">
+			 					<td scope="row">{{$index+1}}</td>
+			 					<td>{{mat.matname.name}}</td>
+			 					<td>{{mat.matname.units}}</td>
+			 					<td>{{mat.quantity}}</td>
+			 				</tr>
+			 			</table>
+			 		</div>
+
+			 		<div class="col-sm-12 col-xs-12">
+				 		<div class="col-sm-6 col-xs-6"><strong>Vehicle No :</strong> {{mainissue.vehicle_no}}</div>
+				 		<div class="col-sm-6 col-xs-6"><strong>Dated :</strong> {{Dates.getDate(mainissue.dc_date)}}</div>
+				 		<div class="col-sm-6 col-xs-6"><strong>Sent By :</strong> {{mainissue.transporter_name}}</div>
+				 		<div class="col-sm-6 col-xs-6"><strong>Driver Name :</strong> {{mainissue.driver_name}}</div>
+				 	</div>
+
+				 	<div style="clear:both;height:20px;"></div>
+
+				 	<div class="col-sm-12 col-xs-12">
+
+					 	<div class="col-sm-6 col-xs-6">
+					 		<div class="col-sm-12 col-xs-12"><strong>Issued By</strong></div>
+					 		
+					 		<div class="col-sm-12 col-xs-12"><strong>Name:</strong> {{mainissue.userdata.name}}</div>
+					 		<div class="col-sm-12 col-xs-12"><strong>Designation:</strong> {{mainissue.userdata.designation}}</div>
+					 		<div class="col-sm-12 col-xs-12"><strong>Signature:</strong> ...............</div>
+					 	</div>
+
+					 	<div class="col-sm-6 col-xs-6">
+					 		<div class="col-sm-12 col-xs-12"><strong>Received By</strong></div>
+					 		
+					 		<div class="col-sm-12 col-xs-12"><strong>Name:</strong> ...............</div>
+					 		<div class="col-sm-12 col-xs-12"><strong>Designation:</strong> ...............</div>
+					 		<div class="col-sm-12 col-xs-12"><strong>Signature:</strong> ...............</div>
+					 	</div>
+
+					 </div>
+
+				</div>
+			</div>
+			<div style="clear:both;height:10px;"></div>
+			<div class="modal-footer hidden-print">
+				<button type="button" class="btn btn-default" onClick="window.print()">Print</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>

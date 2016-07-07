@@ -1,0 +1,69 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<p><strong>Assign Store to Project</strong></p>
+
+		<div class="col-sm-12 col-xs-12 smallfont">
+
+    		<form class="form-horizontal">
+    			<div class="form-group smallfont">
+			 		<div class="col-sm-5 col-md-5 col-xs-8 jumbobox" style="padding:5px">
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="typeofwork" id="inlineRadio1" value="add">Add a UOM
+			 			</label>
+			 			<label class="radio-inline">
+			 				<input type="radio" ng-model="typeofwork" id="inlineRadio1" value="edit"> Edit UOM
+			 			</label>
+			 		</div>
+			 	</div>
+    		</form>
+    	</div>
+			
+		<div class="col-sm-12 col-xs-12 smallfont" ng-show="typeofwork=='add'">
+			<form class="form-horizontal" ng-submit="add_uom()">
+    			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Name</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="text" class="form-control" ng-model='add.uom' required/>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="submit" value="Add" class="btn btn-success">
+		 			</div>
+		 		</div>
+
+    		</form>
+    	</div>
+
+    	<div class="col-sm-12 col-xs-12 smallfont" ng-show="typeofwork=='edit'">
+			<form class="form-horizontal" ng-submit="edit_uom()">
+				<div class="form-group smallfont">
+	 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Tax</div>
+	 				<div class="col-sm-2 col-xs-6">
+	 					<select class="form-control smallfont" ng-options="uom.uom for uom in uomlist" ng-model='uommain'>
+	 						<option value="">SELECT</option>
+	 					</select>
+	 				</div>
+	 			</div>
+    			<div class="form-group smallfont">
+		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Name</div>
+		 			<div class="col-sm-3 col-md-3 col-xs-8">
+		 				<input type="text" class="form-control" ng-model='uommain.uom' required/>
+		 			</div>
+		 		</div>
+		 		<div class="form-group smallfont submitbtn">
+		 			<div class="col-sm-2 col-md-2 col-xs-8">
+		 				<input type="submit" value="Save" class="btn btn-success">
+		 			</div>
+		 		</div>
+
+    		</form>
+    	</div>
+	</div>
+
+</div>

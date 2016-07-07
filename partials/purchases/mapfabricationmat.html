@@ -1,0 +1,69 @@
+<!-- page right main container starts -->
+<div class="container-fluid">
+
+	<div class="row-fluid">
+
+		<div class="clearfix" style="height:20px;"></div>
+
+		<form class="form-horizontal">
+		<div class="col-sm-12 col-xs-12 hidden-print">
+
+		<p><strong>Map Fabrication Materials to PO</strong></p>    		
+		<div class="form-group smallfont">
+ 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Project<span class="astrix">*</span></div>
+ 			<div class="col-sm-3 col-md-3 col-xs-8">
+ 				<select class="form-control smallfont" options="projectlist" chosen ng-model="projectid" ng-options="polist.id as polist.name for polist in projectlist" ng-change="getpowithoutfabmap()">
+		 					
+		 		</select>
+ 			</div>
+ 		</div>
+ 		<div class="form-group smallfont">
+			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Purchase Order<span class="astrix">*</span></div>
+			<div class="col-sm-6 col-md-6 col-xs-8">
+				<select class="form-control smallfont" ng-model="podet" ng-options="pol as pol.po_no for pol in polist">
+					<option value="">SELECT</option>
+			
+				</select>
+			</div>
+			
+		</div>
+
+
+		<div class="enquirymaterialbox col-sm-8 col-xs-12" ng-show="activitygrouplist.length > 0">
+			<p><strong>Material list</strong></p>
+			<div ng-repeat="actgrp in activitygrouplist">
+				<p><strong>{{actgrp.name}}</strong></p>
+		    	<table class="table table-striped smallfont" ng-repeat="inact in actgrp.material">
+					<thead>
+						<tr class="innerhead">
+							<th>S.No</th>
+							<th><input type="checkbox" ng-model="actgrp.selectall" ng-click="selectallsub(actgrp)" /></th>
+							<th>Material Description</th>
+							<th>ERE CODE</th>
+							<th>Section</th>
+							<th>Quantity</th>
+						</tr>
+					</thead>
+					<tr ng-repeat="pomat in inact.submaterial">
+						<td scope="row">{{$index+1}}</td>
+						<td><input type="checkbox" ng-model="pomat.selected" ng-click="inmatclick(actgrp, pomat)"/></td>
+						<td>{{pomat.storelevel1mat.storematerial.name}}</td>
+						<td>{{pomat.storelevel1mat.ere_code}}</td>
+						<td>{{pomat.storelevel1mat.msmat.name}}</td>
+						<td><input type="text" ng-model="pomat.storelevel1mat.thisqty" /></td>
+					</tr>
+
+				</table>
+			</div>
+		</div>
+		<div class="enquirymaterialbox col-sm-8 col-xs-12" ng-show="activitygrouplist.length == 0">
+			<p><strong>Fabrication Materials are not added for the selected project</strong></p>
+	    	
+		</div>
+		<div style="clear:both;"></div>
+
+		<div class="form-group smallfont submitbtn hidden-print" ng-show="podet.pomaterials[0]['level1mat'].length > 0">
+ 			<div class="col-sm-3 col-md-3 col-xs-8">
+ 				<button type="submit" class="btn btn-success" ng-show="podet" ng-click="savefabmat()">Save</button>
+ 			</div>
+ 		</div>

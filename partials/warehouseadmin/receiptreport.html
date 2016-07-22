@@ -66,3 +66,203 @@
 		</div>
 	</div>
 </div>
+
+<!-- Modal -->
+<div id="myReceiptModal" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="width:800px;">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" style="width:77%;line-height:10px;">
+        	<span>Material Receipt Voucher(MRV)</span><br><br>
+        	<span style="font-size:11px;"><b>Store Details:</b> {{mainstore.name}} <br> {{mainstore.location}}</span>
+        	<img src="images/logo.png" alt="" class="mrvimg">
+        </h4>
+      </div>
+      <div class="modal-body">
+      	<div>
+			<div class="form-group smallfont col-sm-6 col-xs-8 marginbtmcls" >
+				<div for="inputEmail3" class="col-sm-5 col-xs-4 control-label"><b>Vendor Name:</b></div>
+				<div class="col-sm-7 col-xs-8">
+				{{}}
+				</div>
+			</div>
+			<div class="form-group smallfont col-sm-5 col-xs-8 marginbtmcls" >
+				<div for="inputEmail3" class="col-sm-6 col-xs-4 control-label"><b>MRV Date:</b></div>
+				<div class="col-sm-5 col-xs-8">
+					{{Dates.getDate(receipt.mrvdata.created_at)}}
+				</div>
+			</div>
+			<div style="height:3px;clear:both;"></div>
+	      	<div class="form-group smallfont col-sm-6 col-xs-8 marginbtmcls" >
+				<div for="inputEmail3" class="col-sm-5 col-xs-4 control-label"><b>DC No:</b></div>
+				<div class="col-sm-7 col-xs-6">
+					{{receipt.dc_no}}
+				</div>
+			</div>
+			<div class="form-group smallfont col-sm-5 col-xs-8 marginbtmcls" >
+				<div for="inputEmail3" class="col-sm-6 col-xs-4 control-label"><b>MRV No:</b></div>
+				<div class="col-sm-5 col-xs-8">
+					{{receipt.mrvdata.mrv_sno}}
+				</div>
+			</div>
+			<div style="height:3px;clear:both;"></div>
+			<div class="form-group smallfont col-sm-6 col-xs-8 marginbtmcls" >
+				<div for="inputEmail3" class="col-sm-5 col-xs-4 control-label"><b>DC Date:</b></div>
+				<div class="col-sm-7 col-xs-8">
+					{{receipt.dc_date}}
+				</div>
+			</div>
+			<div class="form-group smallfont col-sm-5 col-xs-8 marginbtmcls" >
+				<div for="inputEmail3" class="col-sm-6 col-xs-4 control-label"><b>Invoice Nos:</b></div>
+				<div class="col-sm-5 col-xs-8">
+					<!-- <span ng-repeat="x in invs">{{x.invoice_no}},</span> -->
+				</div>
+			</div>
+			<div style="height:3px;clear:both;"></div>
+			<div class="form-group smallfont col-sm-6 col-xs-8 marginbtmcls" >
+				<div for="inputEmail3" class="col-sm-5 col-xs-4 control-label"><b>Invoice Dates:</b></div>
+				<div class="col-sm-7 col-xs-8">
+					<!-- <span ng-repeat="x in invs">{{x.format_invoice_date}},</span> -->
+				</div>
+			</div>
+			<div class="form-group smallfont col-sm-5 col-xs-8 marginbtmcls" >
+				<div for="inputEmail3" class="col-sm-6 col-xs-4 control-label"><b>Transporter Name:</b></div>
+				<div class="col-sm-5 col-xs-8">
+					{{receipt.transporter_name}}
+				</div>
+			</div>
+			<div style="height:3px;clear:both;"></div>
+			<div class="form-group smallfont col-sm-6 col-xs-8 marginbtmcls" >
+				<div for="inputEmail3" class="col-sm-5 col-xs-4 control-label"><b>LR No:</b></div>
+				<div class="col-sm-7 col-xs-8">
+					{{receipt.lr_no}}
+				</div>
+			</div>
+			<div class="form-group smallfont col-sm-5 col-xs-8 marginbtmcls" >
+				<div for="inputEmail3" class="col-sm-6 col-xs-4 control-label"><b>Vehicle No:</b></div>
+				<div class="col-sm-5 col-xs-8">
+					{{receipt.vehicle_no}}
+				</div>
+			</div>
+			<div style="height:3px;clear:both;"></div>
+			<div class="form-group smallfont col-sm-6 col-xs-8 marginbtmcls" >
+				<div for="inputEmail3" class="col-sm-5 col-xs-4 control-label"><b>LR Date:</b></div>
+				<div class="col-sm-7 col-xs-8">
+					{{receipt.lr_date}}
+				</div>
+			</div>
+		</div>
+		<hr>
+       	<!-- <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-repeat="x in podata"> -->
+       	<!-- <div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;"> -->
+       	<div class="col-sm-12 col-xs-12 pmstable table-responsive" style="padding-left:0px;" ng-repeat="x in receipt.transdata">
+       		<p>
+       			<div class="form-group smallfont col-sm-6 col-xs-8" >
+					<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label"><b>PO No:</b></div>
+					<div class="col-sm-6 col-xs-8">
+						{{x.pomaterial.purchaseorder.po_no}}
+					</div>
+				</div>
+				<div class="form-group smallfont col-sm-5 col-xs-8" >
+					<div for="inputEmail3" class="col-sm-5 col-xs-4 control-label"><b>PO Date:</b></div>
+					<div class="col-sm-5 col-xs-8">
+						{{Dates.getDate(x.pomaterial.purchaseorder.po_date)}}
+					</div>
+				</div>
+       		</p>
+			<table class="table table-striped">
+				<thead>
+					<tr style="background:#000;color:#FFF;">
+					<th class="col-sm-1">S.No</th>
+					<th class="col-sm-2">Material Description</th>
+					<th class="col-sm-1">UOM</th>
+					
+					<th class="col-sm-1">PO Qty</th>
+					<th class="col-sm-1">DC Qty</th>
+					<th class="col-sm-1">Shortage Qty</th>
+					<th class="col-sm-1">Damaged Qty</th>
+					<th class="col-sm-1">Accepted Qty</th>
+					<th class="col-sm-1">Unit Rate <span style="font-size:10px;">(in Rs.)</span></th>
+					<th class="col-sm-2" style="text-align:right;">Total<span style="font-size:10px;">(in Rs.)</span></th>
+				</tr>
+				</thead>
+				<tbody>
+					<!-- <tr ng-repeat="y in receipt.transdata" ng-show="y.matname.length>0"> -->
+					<!-- <tr ng-repeat="y in receipt.transdata"> -->
+					<tr>
+
+
+						<td>{{$index+1}}</td>
+						<td>{{x.matname.name}}</td>
+						<td>{{x.matname.units}}</td>
+						<td>{{}}</td>
+						<td ng-if="receipt.old_flag!=1">{{x.dc_received_qty}}</td>
+						<td ng-if="receipt.old_flag==1">{{x.old_dc_received_qty}}</td>
+						<td ng-if="receipt.old_flag!=1">{{x.shortage_qty}}</td>
+						<td ng-if="receipt.old_flag==1">{{x.old_shortage_qty}}</td>
+						<td ng-if="receipt.old_flag!=1">{{x.damaged_qty}}</td>
+						<td ng-if="receipt.old_flag==1">{{x.old_damaged_qty}}</td>
+						<td ng-if="receipt.old_flag!=1">{{x.accepted_qty}}</td>
+						<td ng-if="receipt.old_flag==1">{{x.old_accepted_qty}}</td>
+						<td>{{x.unit_rate}}</td>
+						<td style="text-align:right;" ng-if="receipt.old_flag!=1">{{x.unit_rate*y.accepted_qty}}</td>
+						<td style="text-align:right;" ng-if="receipt.old_flag==1">{{x.unit_rate*y.old_accepted_qty}}</td>
+					</tr>
+					<tr ng-repeat="intax in x.pomaterial.purchaseorder.taxes">
+						<td colspan="9" class="text-right">{{intax.name}} <span ng-if="intax.lumpsum != 1 && intax.taxpercentage != '0.00'">@ {{intax.taxpercentage}}</span></td>
+						
+						<td style="text-align:right;">{{intax.value}}</td>
+					</tr>
+					<tr>
+						<td colspan="9" class="text-right"><b>Total</b></td>
+						<!-- <td style="text-align:right;">{{x.netcost}}</td> -->
+						<td style="text-align:right;">cost</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<hr>
+		<div style="height:3px;clear:both;"></div>
+		<div class="form-group smallfont col-sm-5 col-xs-8 marginbtmcls" >
+			<div for="inputEmail3" class="col-sm-5 col-xs-4 control-label"><b>Total MRV Value:</b></div>
+			<div class="col-sm-5 col-xs-8">
+				<!-- Rs {{netcost}} -->
+				Rs cost
+
+			</div>
+		</div>
+		<div class="form-group smallfont col-sm-5 col-xs-8" >
+			<div for="inputEmail3" class="col-sm-5 col-xs-4 control-label"><b>In Words:</b></div>
+			<div class="col-sm-7 col-xs-8">
+				<!-- RUPEES {{netcostinwords}} ONLY -->
+				RUPEES costinwords ONLY
+			</div>
+		</div>
+		<div style="height:50px;clear:both;"></div>
+		<div>
+			<div class="form-group smallfont col-sm-2 col-xs-8" >
+				<div for="inputEmail3" class="col-sm-12 col-xs-4 control-label"><b>Prepared By</b></div>
+			</div>
+			<div class="form-group smallfont col-sm-2 col-xs-8" style="padding:0px;">
+				<div for="inputEmail3" class="col-sm-12 col-xs-4 control-label"><b>Stores Officer</b></div>
+			</div>
+			<div class="form-group smallfont col-sm-2 col-xs-8" style="padding:0px;">
+				<div for="inputEmail3" class="col-sm-12 col-xs-4 control-label"><b>Accounts Officer</b></div>
+			</div>
+			<div class="form-group smallfont col-sm-2 col-xs-8" style="padding:0px;">
+				<div for="inputEmail3" class="col-sm-12 col-xs-4 control-label"><b>Inspected By</b></div>
+			</div>
+			<div class="form-group smallfont col-sm-2 col-xs-8" style="padding:0px;">
+				<div for="inputEmail3" class="col-sm-12 col-xs-4 control-label"><b>Authorized By</b></div>
+			</div>
+		</div>
+      </div>
+      <div class="modal-footer">
+      	 <button type="button" class="btn btn-primary" style="margin-right:10px;" ng-click="window.print()">Print</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

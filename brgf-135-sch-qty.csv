@@ -1,0 +1,57 @@
+A,33/11 KV Substation Works - Partly outdoor type substation( 2x 10 MVA ) (with 33 KV outdoor type bay 2 nos. and 11 KV bay indoor type 8 Nos.),0,3,3
+B,33/11 KV Substation Works - Partly outdoor type substation ( 2x 5 MVA ) (with 33 KV outdoor type bay 2 nos. and 11 KV bay indoor type 4 Nos. ),0,1,1
+D,33 KV Lines on Rail pole with ACSR Wolf Conductor,0,107,107
+E,Reconductoring of 33 KV Line By ACSR Wolf Conductor,0,13,13
+F,33 KV Bay Extension,0,5,5
+G,33 KV Railway Crossing (Double Circuit),0,1,1
+H,33 KV Metering System,0,5,5
+I,Construction of Single Circuit 11 KV Line with ACSR Dog Conductor on Rail Pole :,0,22,22
+J,11 KV Lines on  13 M 52 Kg /M  Rail Pole with ACSR Dog Conductor (Double Circuit),0,22,22
+K,"Construction of Single Circuit 11 KV Line with ACSR Dog Conductor on 9 M, 400 Kg PSC Pole :",0,154,154
+L,11 KV Lines on 9 mtr./400 kgs PSC pole with ACSR Rabbit conductor,0,207,207
+M,11 KV Lines on 8 m/ 200 kgs PSC pole with Rabbit conductor,0,207,207
+N,11 KV Lines on 8 mtr./ 200 kgs PSC pole with ACSR Weasel conductor,0,103,103
+Q,Reconductoring of 11 KV Line With ACSR Rabbit Conductor on PSC Pole ,0,54,54
+S,11 KV Railway Crossing (Double Circuit),0,1,1
+U,Capacitor Bank,0,14,14
+V,Distribution Transformer Substations ( 200 KVA) on Rail pole,0,26,26
+W,Distribution Transformer Substations  200 KVA on 9 Mtr. 400 Kg PSC Pole,0,60,60
+X,Distribution Transformer Substations  100 KVA on 9 Mtr. 400 kg PSC Pole,0,74,74
+Y,Distribution Transformer Substations  100 KVA on 8 Mtr. 200 kg PSC Pole,0,74,74
+Z,Distribution Transformer Substations  63 KVA on 8 Mtr. PSC pole,0,122,122
+AA,Augmentation of 100 KVA Distribution Transformer by 200 KVA new Distribution Transformer,0,66,66
+AB,Augmentation of 63 KVA Distribution Transformer by 100 KVA Distribution Transformer (NEW),0,0,0
+AC,Augmentation of 63 KVA Distribution Transformer by 100 KVA Released Distribution Transformer (Released),0,66,66
+AD,R & M of Existing  Distribution  Substations ,0,319,319
+AE,"Construction of 3 Phase 4 Wire LT Line on 8M, 200 Kg PSC with ACSR Weasel Conductor in Vertical configuration ",0,90,90
+AF,"Construction of 3 Phase 4 Wire LT Line on 8M, 200 Kg PSC with ACSR Weasel Conductor in Horizontal configuration ",0,210,210
+AG,"Construction of 3 Phase 4 Wire LT Line on 8M, 200 Kg PSC with ACSR Rabbit Conductor in Horizontal configuration ",0,79,79
+AH,"R&M of 3-Ph, 4 Wire LT line with ACSR Rabbit conductor",0,15.72,15.72
+AI,"R&M of 3-Ph, 4 Wire LT line with ACSR Weasel conductor",0,36.68,36.68
+AJ,"R&M of existing Single phase & 2 phase line with Conversion in to Three Phase , 4 wire Line by ACSR Weasel conductor",0,78.6,78.6
+AK,New LT Line on 3 phase ABC  [3 X95Sq mm {Phase}+{1x70 Sq mm Messenger cum Neutral wire}] ,0,7,7
+AL,New LT Line on 3 phase ABC  [3 X70Sq mm {Phase}+{1x50 Sq mm Messenger cum Neutral wire}] ,0,14,14
+AM,New LT Line on 3 phase ABC  [3 X50Sq mm {Phase}+{1x35 Sq mm Messenger cum Neutral wire}] ,0,49,49
+AN,New LT Line on 1 phase ABC  [1X16 Sq mm {Phase} + {1x25 Sq mm  Messenger cum Neutral wire}]  ,0,0,0
+BALANCE PART OF PHASE-I,,0,,
+BA,Augmentation of 100 KVA Distribution Transformer by 200 KVA new Distribution Transformer for balance works,0,58,58
+BB,Augmentation of 63 KVA Distribution Transformer by 100 KVA Distribution Transformer (Released) for balance works,0,61,61
+BC,Distribution Transformer Substations  63 KVA  on 8 Mtr. PSC pole (New) for balance works,0,0,0
+BD,Distribution Transformer Substations 100 KVA on 8 Mtr. 200 kg PSC Pole by Released DT for balance works,0,25,25
+BE,Distribution Transformer Substations  63 KVA  on 8 Mtr. PSC pole by Release DT for balance works,0,0,0
+BF,R & M of Existing  Distribution  Substations for balance works,0,1000,1000
+BG,New LT Line on 3 phase ABC  [3 X95Sq mm {Phase}+{1x70 Sq mm Messenger cum Neutral wire}] for balance works,0,4.21,4.21
+BH,New LT Line on 3 phase ABC  [3 X70Sq mm {Phase}+{1x50 Sq mm Messenger cum Neutral wire}] for balance works,0,8.42,8.42
+BI,New LT Line on 3 phase ABC  [3 X50Sq mm {Phase}+{1x35 Sq mm Messenger cum Neutral wire}] for balance works,0,29.47,29.47
+BJ,"Construction of 3 Phase 4 Wire LT Line on 8M, 200 Kg PSC with ACSR Weasel Conductor in Vertical configuration for balance works",0,13.26,13.26
+BK,"Construction of 3 Phase 4 Wire LT Line on 8M, 200 Kg PSC with ACSR Weasel Conductor in Horizontal configuration for balance works",0,30.94,30.94
+BL,"Construction of 3 Phase 4 Wire LT Line on 8M, 200 Kg PSC with ACSR Rabbit Conductor in Horizontal configuration for balance works",0,18.95,18.95
+BM,Guarding of  11 KV line for balance works,0,1056,1056
+BN,New LT Line on 1 phase ABC  [1X16 Sq mm {Phase} + {1x25 Sq mm  Messenger cum Neutral wire}] for balance works,0,0,0
+ Special Plan (BRGF) Phase-II PART-C,,0,,
+CA,R&M of existing overhead 11 KV Line by 3 phase ABC 3X120 + 1X 100 Sq.mm bare messenger wire,10,7,17
+CB,R&M of existing overhead 11 KV Line by 3 phase ABC 3X70 + 1X 70 Sq.mm bare messenger,10,7,17
+CC,R&M of existing overhead 11 KV Line by 3 phase ABC 3X35 + 1X 70 Sq.mm,30,21,51
+CD,R & M of LT Line on 3 phase ABC  [3 X95Sq mm {Phase}+{1x70 Sq mm Messenger cum Neutral wire}] ,39,42,81
+CE,R & M of LT Line on 3 phase ABC  [3 X70Sq mm {Phase}+{1x50 Sq mm Messenger cum Neutral wire}] ,97.5,105,202.5
+CF,R &M of LT Line on 3 phase ABC  [3 X50Sq mm {Phase}+{1x35 Sq mm Messenger cum Neutral wire}] ,58.5,63,121.5

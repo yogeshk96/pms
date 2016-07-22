@@ -16,7 +16,8 @@ include "/var/www/html/Mail_Mime/Mail/mime.php";
 include "/var/www/html/AWSSDKforPHP/sdk.class.php";
 
 
-class sendMail {//This class is used by PD. Do not alter this for SSEL
+class sendMail { 
+//This class is used by PD. Do not alter this for SSEL
 	
 	function sendEmail($to, $subject, $message)
 	{
@@ -30,7 +31,7 @@ class sendMail {//This class is used by PD. Do not alter this for SSEL
 	        'secret' => '2ByKEUKSXIZu7iREmGVf5uxNiyh19r+Kkgg+ZEjd'
 	    ));
 	  //$amazonSes->verify_email_address('dta.pdap@gmail.com');
-	   $response = $amazonSes->send_email('yogeshk96@gmail.com',
+	   $response = $amazonSes->send_email('narasimha@pixelvide.com',
 	        array('ToAddresses' => array($to)),
 	        array(
 	            'Subject.Data' => $subject,
@@ -54,10 +55,10 @@ class sendRawMail {
 	{
 	    $mail_mime = new Mail_mime(array('eol' => "\n")); 
 		$mail_mime->setHTMLBody($messagecontent); 
-		// for($d=0;$d<count($enqdocs);$d++) {
+		for($d=0;$d<count($enqdocs);$d++) {
 
-		// 	$mail_mime->addAttachment("/var/www/html".$enqdocs[$d]['doc_url'], $enqdocs[$d]['mime_type']);
-		// }
+			$mail_mime->addAttachment("/var/www/html".$enqdocs[$d]['doc_url'], $enqdocs[$d]['mime_type']);
+		}
 		//Retrieve the complete message body in MIME format, along with the headers:
 
 		$body = $mail_mime->get(); 
@@ -290,6 +291,9 @@ Route::post('/add_subcontractor', ['middleware'=>'auth','uses'=>'WarehouseContro
 Route::get('/get_third_parties', ['middleware'=>'auth','uses'=>'WarehouseController@get_third_parties']);
 
 Route::get('/get_storelist', ['middleware'=>'auth','uses'=>'WarehouseController@get_storelist']);
+//same function for all reports
+Route::get('/get_storelist_all', ['middleware'=>'auth','uses'=>'WarehouseController@get_storelist_all']);
+
 
 Route::get('/get_subcontractors', ['middleware'=>'auth','uses'=>'WarehouseController@get_subcontractors']);
 
@@ -632,6 +636,8 @@ Route::post('/rejectindent', ['middleware'=>'auth','uses'=>'AdminController@reje
 Route::post('/saveactivitygroup', ['middleware'=>'auth','uses'=>'AdminController@saveactivitygroup']);
 
 Route::get('/get_activity_group_list', ['middleware'=>'auth','uses'=>'AdminController@get_activity_group_list']);
+
+Route::get('/get_activity_group_list_unique', ['middleware'=>'auth','uses'=>'AdminController@get_activity_group_list_unique']);
 
 Route::get('/get_material_activities', ['middleware'=>'auth','uses'=>'BillingController@get_material_activities']);
 

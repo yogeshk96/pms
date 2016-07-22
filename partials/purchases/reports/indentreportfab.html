@@ -47,17 +47,19 @@
 		 					<th>S.No</th>
 							<th>Description</th>
 							<th>ERECODE</th>
+							<th>Total PO Qty</th>
 							<th>INDENT QTY(in nos)</th>
 							<th>INDENT QTY(in kgs)</th>
-							<th colspan="2"></td>
+							<th>To be purchased (in nos)</td>
 		 				</tr>
 		 				<tr ng-repeat="acg in mat['actgrp']">
 		 					<td>{{$index+1}}</td>
 							<td>{{acg.name}}</td>
 							<td>{{acg.erecode}}</td>
+							<td>{{acg.totpoqty}}</td>
 							<td>{{acg.qty}}</td>
 							<td>{{acg.totindentqty}}</td>
-							<td colspan="2"></td>
+							<td>{{acg.tobepurchased}}</td>
 		 				</tr>
 		 				<tr>
 		 					<th colspan="3">Total</th>

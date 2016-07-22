@@ -20,4 +20,8 @@ class StoreStock extends Model {
 	public function trans(){
 		return $this->hasMany('App\StoreTransactionData','stock_id','id');
 	}
+
+	public function level1mat(){
+		return $this->hasOne('App\StoreMaterialsLevel1','id','material_level1_id');
+	}
 }

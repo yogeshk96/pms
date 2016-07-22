@@ -1036,10 +1036,10 @@ app.controller("PurchasesHeadClosePoController",function($scope,$http,$rootScope
 				} else {
 
 					var checktaxtax = 0;
-
+					console.log($scope.taxdetails[i]['taxmaterials'][j]['tax']['id']);
 					for(var k=0; k<$scope.taxdetails.length;k++){
 								
-						if($scope.taxdetails[k]['id'] == $scope.taxdetails[i]['taxmaterials'][j]['tax']['tax_id']) {
+						if($scope.taxdetails[k]['id'] == $scope.taxdetails[i]['taxmaterials'][j]['tax']['id']) {
 
 							if(!$scope.taxdetails[i]['taxmaterials'][j]['tax']) {
 
@@ -1092,7 +1092,6 @@ app.controller("PurchasesHeadClosePoController",function($scope,$http,$rootScope
 			}
 
 			$scope.taxdetails[i]['taxamount'] = angular.copy(taxamount);
-
 			if(taxamount > 0) {
 
 				var taxamountfinal = ($scope.taxdetails[i]['taxpercentage']*taxamount)/100;
@@ -1388,6 +1387,9 @@ app.controller("PurchasesHeadClosePoController",function($scope,$http,$rootScope
 										potaxmat.tax = {};
 									}
 									potaxmat.tax['tax_id'] = potax.tax_id;
+								} else {
+
+									potaxmat.tax['id'] = potaxmat.purchase_taxes_id;
 								}
 							});
 
@@ -1899,6 +1901,9 @@ app.controller("PurchasesHeadApproveClosePoController",function($scope,$http,$ro
 										potaxmat.tax = {};
 									}
 									potaxmat.tax['tax_id'] = potax.tax_id;
+								} else {
+
+									potaxmat.tax['id'] = potaxmat.purchase_taxes_id;
 								}
 							});
 
@@ -1978,10 +1983,6 @@ app.controller("PurchasesHeadApproveClosePoController",function($scope,$http,$ro
 		} else if(parseFloat(pomat.requested_closing_qty) > parseFloat(pomat.qty)) {
 
 			swal("Quantity cannot be greater than the PO quantity.");
-			pomat.requested_closing_qty = pomat.qty;
-		} else if(parseFloat(pomat.requested_closing_qty) < parseFloat(pomat.internal_di_quantity)) {
-
-			swal("You cannot close with quantity less than internal di quantity.");
 			pomat.requested_closing_qty = pomat.qty;
 		} else {
 
@@ -2070,7 +2071,7 @@ app.controller("PurchasesHeadApproveClosePoController",function($scope,$http,$ro
 
 					for(var k=0; k<$scope.taxdetails.length;k++){
 								
-						if($scope.taxdetails[k]['id'] == $scope.taxdetails[i]['taxmaterials'][j]['tax']['tax_id']) {
+						if($scope.taxdetails[k]['id'] == $scope.taxdetails[i]['taxmaterials'][j]['tax']['id']) {
 
 							if(!$scope.taxdetails[i]['taxmaterials'][j]['tax']) {
 
@@ -2100,21 +2101,21 @@ app.controller("PurchasesHeadApproveClosePoController",function($scope,$http,$ro
 
 				if($scope.taxdetails[i]['tax_id'] == 11) {
 
-					var totalfreightcost = 0;
+					// var totalfreightcost = 0;
 
-					angular.forEach($scope.pomateriallistnew,function(pomat){
+					// angular.forEach($scope.pomateriallistnew,function(pomat){
 
-						angular.forEach(pomat.materials,function(inpomat){
+					// 	angular.forEach(pomat.materials,function(inpomat){
 
-							if(!inpomat['freightinsurance_rate']) {
+					// 		if(!inpomat['freightinsurance_rate']) {
 
-								inpomat['freightinsurance_rate'] = 0;
-							}
-							totalfreightcost += parseFloat(inpomat['qty'])*parseFloat(inpomat['freightinsurance_rate']);
-						});
-					});
+					// 			inpomat['freightinsurance_rate'] = 0;
+					// 		}
+					// 		totalfreightcost += parseFloat(inpomat['qty'])*parseFloat(inpomat['freightinsurance_rate']);
+					// 	});
+					// });
 
-					taxamount = totalfreightcost;
+					taxamount = $scope.taxdetails[i]['lumpsum_requested_value'];
 				} else {
 
 					taxamount = $scope.taxdetails[i]['taxamount'];

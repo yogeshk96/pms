@@ -52,7 +52,7 @@
 		 		<div class="form-group smallfont" ng-show="issuematto=='subcontractor'">
 		 			<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Select Sub Contractor</div>
 		 			<div class="col-sm-3 col-md-3 col-xs-8">
-		 				<select class="form-control smallfont" ng-options="subcon as subcon.name for subcon in subcons" ng-model="mainsubcon">
+		 				<select class="form-control smallfont" ng-options="subcon as (subcon.name+' - '+subcon.workorder_name) for subcon in subcons" ng-model="mainsubcon">
 		 					<option value="">SELECT</option>
 		 				</select>
 		 			</div>
@@ -79,7 +79,7 @@
 		 			<div class="form-group smallfont">
 		 				<div for="inputEmail3" class="col-sm-3 col-xs-4 control-label">Material</div>
 		 				<div class="col-sm-5 col-xs-6">
-		 					<select class="form-control smallfont" ng-model="mainmat" ng-options="mat as mat.material.name for mat in stocks | filter:catfilter" ng-change="issueqty=''">
+		 					<select class="form-control smallfont" chosen options="stocks" ng-model="mainmat" ng-options="mat as (mat.material.name+' '+mat.level1mat.ere_code) for mat in stocks | filter:catfilter" ng-change="issueqty=''">
 		 						<option value="">SELECT</option>
 		 					</select>
 		 				</div>
@@ -175,6 +175,13 @@
 	 				</div>
 	 			</div>
 
+	 			<div class="form-group smallfont">
+	 				<div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">DC Date(Optional)</div>
+	 				<div class="col-sm-2 col-xs-6">
+	 					<input type="date" class="form-control" id="exampleInputEmail1" ng-model="dcdate">
+	 				</div>
+	 			</div>
+
 	 			<div class="col-sm-3 col-xs-8 submitbtn" style="padding:0px;margin-bottom:15px;">
                   <input type="submit" class="btn btn-success" value="Generate Delivery Challan">
                 </div>
@@ -229,7 +236,7 @@
 				<div class="purchaseorderbox col-sm-12 col-xs-12" style"display:inlineblock">
 					<div class="col-sm-3 col-xs-3"><img src="images/logo.png" style="height: 50px;margin-left: -25px;margin-top: 16px;"></div>
 					<div class="col-sm-9 col-xs-9 text-right">
-						<p><strong>Shirdi Sai Electricals Ltd.</strong><br>RATNA VILLA:Flat No 401<br>Budda Colony:East Canal Boring Road <br>Patna Bihar 800001</p>
+						<p>{{mainissue.storename.location}}</p>
 					</div>
 					<div style="clear:both;height:10px;"></div>
 					<h5 class="modal-title" style="text-align:center;text-decoration:underline;"><strong>Material Issue : Store to <span ng-show="mainissue.issue_type=='1'">Store</span><span ng-show="mainissue.issue_type=='3'">Third Party</span><span ng-show="mainissue.issue_type=='2'">Sub Contractor</span></strong></h5>
@@ -239,6 +246,8 @@
 						<div class="col-sm-12 col-xs-12 text-left" ng-show="mainissue.issue_type=='1'"><strong>Store :</strong> {{mainissue.storename.name}}</div>
 						<div class="col-sm-12 col-xs-12 text-left" ng-show="mainissue.issue_type=='3'"><strong>Third Party :</strong> {{mainissue.tptname.name}}</div>
 						<div class="col-sm-12 col-xs-12 text-left" ng-show="mainissue.issue_type=='2'"><strong>Sub Contractor :</strong> {{mainissue.subconname.name}}</div>
+						<div class="col-sm-12 col-xs-12 text-left" ng-show="mainissue.issue_type=='2'"><strong>Sub Contractor Contact:</strong> {{mainissue.subconname.contact}}</div>
+						<div class="col-sm-12 col-xs-12 text-left" ng-show="mainissue.issue_type=='2'"><strong>Sub Contractor Address:</strong> {{mainissue.subconname.address}}</div>
 					</div>
 					<div class="col-sm-6 col-xs-6 text-right">
 						<div class="col-sm-3 col-xs-3">&nbsp;</div>

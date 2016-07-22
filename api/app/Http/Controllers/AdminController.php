@@ -48,6 +48,7 @@ use App\ActivityGroupSubMaterial;
 use App\StoreMaterialUom;
 use sendMail;
 use DB;
+use App\StoreStock;
 
 class AdminController extends Controller {
 
@@ -1022,18 +1023,17 @@ class AdminController extends Controller {
 	public function edit_activity_to_project() {
 
 		$filedata = Request::input("filedata");
+
 		$projectid = Request::input("projectid");
 		$schtype = Request::input("schtype");
 		if(!isset($schtype)) {
 
 			$schtype = 1;
 		}
-
 		$tkn=Request::header('JWT-AuthToken');
 		$userinfo=Session::where('refreshtoken','=',$tkn)->with('users')->first();
 
 		$projinfo = Projects::where("id", "=", $projectid)->with("subprojects.multiplier")->first();
-
 		foreach ($filedata as $fdata) {
 
 			$schcheck = Schedule::where("id", "=", $fdata['id'])->first();
@@ -1137,6 +1137,11 @@ class AdminController extends Controller {
 
 								SubScheduleMaterials::where("id", "=", $subschmat['id'])->update(array("unit_qty"=>$subschmat['unitqty'], "qty"=>$subschmat['qty']));
 								$subschmatarr[] = $subschmat['id'];
+
+								SubScheduleMaterialActivityGroup::where("sub_schedule_material_id", "=", $subschmat['id'])->delete();
+								foreach ($subschmat['actgridarr'] as $indiactgrid) {
+									SubScheduleMaterialActivityGroup::create(array("sub_schedule_material_id"=>$subschmat['id'], "activity_group_id"=>$indiactgrid['id'], "qty"=>$indiactgrid['qty']));
+								}
 							} else {
 
 								$subschmatcheck = SubScheduleMaterials::where("material_id", "=", $subschmat['matid'])->where("sub_schedule_id", "=", $subdata['id'])->first();
@@ -2346,18 +2351,119 @@ class AdminController extends Controller {
 
 	public function get_activity_group_list() {
 
-		$projectid = Request::input("projectid");
 		$matid = Request::input("matid");
+		$tkn=Request::header('JWT-AuthToken');
+		$userdata=Session::where('refreshtoken','=',$tkn)->with('users.store.project')->first();
+		$storeid = $userdata['users']['store']['id'];
+		$projectid = Request::input("projectid");
+		if(!isset($projectid)) {
+			$projectid = $userdata['users']['store']['project']['id'];
+		}
+
+		if($projectid == 2) {
+
+			$projectid = 4;
+		}
 		if(!isset($matid)) {
-			return ActivityGroup::where("project_id", "=", $projectid)->with("material.submaterial.storelevel1mat.storematerial.matuom.stmatuom")->with("material.submaterial.storelevel1mat.msmat")->with("material.submaterial.storelevel1mat.storeuom")->get();
+			$actdet = ActivityGroup::where("project_id", "=", $projectid)->with("material.submaterial.storelevel1mat.storematerial.matuom.stmatuom")->with("material.submaterial.storelevel1mat.msmat")->with("material.submaterial.storelevel1mat.storeuom")->get();
 		} else {
-			return ActivityGroup::where("project_id", "=", $projectid)->with(array('material'=>function($query) use ($matid){
+			$actdet = ActivityGroup::where("project_id", "=", $projectid)->with(array('material'=>function($query) use ($matid){
 			        $query->where('material_id', '=', $matid)->with("submaterial.storelevel1mat.storematerial.matuom.stmatuom")->with("submaterial.storelevel1mat.storeuom")->with("submaterial.storelevel1mat.msmat");
 			    }))->whereHas('material', function($query) use ($matid)
 				{
 				    $query->where('material_id', '=', $matid);
 				})->get();
 		}
+		foreach ($actdet as $inactdet) {
+			
+			foreach ($inactdet['material'] as $inactmat) {
+				
+				foreach ($inactmat['submaterial'] as $insubamt) {
+					
+					$storest = StoreStock::where("store_id", "=", $storeid)->where("material_id", "=", $insubamt['storelevel1mat']['store_material_id'])->where("material_level1_id", "=", $insubamt['storelevel1mat']['id'])->where("fab_flag", "=", 1)->first();
+					if($storest) {
+						$insubamt['storelevel1mat']['total_received'] = $storest['total_received'];
+						$insubamt['storelevel1mat']['total_issued'] = $storest['total_issued'];
+						$insubamt['storelevel1mat']['total_stock'] = $storest['quantity'];
+						$insubamt['storelevel1mat']['physical_qty'] = $storest['physical_qty'];
+						$insubamt['storelevel1mat']['stockid'] = $storest['id'];
+					} else {
+						$insubamt['storelevel1mat']['total_received'] = 0;
+						$insubamt['storelevel1mat']['total_issued'] = 0;
+						$insubamt['storelevel1mat']['total_stock'] = 0;
+						$insubamt['storelevel1mat']['physical_qty'] = 0;
+						$insubamt['storelevel1mat']['stockid'] = 0;
+					}
+				}
+			}
+		}
+
+		return $actdet;
+	}
+
+
+	public function get_activity_group_list_unique() {
+
+		$matid = Request::input("matid");
+		$tkn=Request::header('JWT-AuthToken');
+		$userdata=Session::where('refreshtoken','=',$tkn)->with('users.store.project')->first();
+		$storeid = $userdata['users']['store']['id'];
+		$projectid = $userdata['users']['store']['project']['id'];
+
+		if($projectid == 2) {
+
+			$projectid = 4;
+		}
+		if(!isset($matid)) {
+			$actdet = ActivityGroup::where("project_id", "=", $projectid)->with("material.submaterial.storelevel1mat.storematerial.matuom.stmatuom")->with("material.submaterial.storelevel1mat.msmat")->with("material.submaterial.storelevel1mat.storeuom")->get();
+		} else {
+			$actdet = ActivityGroup::where("project_id", "=", $projectid)->with(array('material'=>function($query) use ($matid){
+			        $query->where('material_id', '=', $matid)->with("submaterial.storelevel1mat.storematerial.matuom.stmatuom")->with("submaterial.storelevel1mat.storeuom")->with("submaterial.storelevel1mat.msmat");
+			    }))->whereHas('material', function($query) use ($matid)
+				{
+				    $query->where('material_id', '=', $matid);
+				})->get();
+		}
+
+		$out = array();
+		$matcheck = array();
+		
+		foreach ($actdet as $inactdet) {
+			
+			foreach ($inactdet['material'] as $inactmat) {
+				foreach ($inactmat['submaterial'] as $insubamt) {
+					
+					$storest = StoreStock::where("store_id", "=", $storeid)->where("material_id", "=", $insubamt['storelevel1mat']['store_material_id'])->where("material_level1_id", "=", $insubamt['storelevel1mat']['id'])->where("fab_flag", "=", 1)->first();
+					if($storest) {
+						$insubamt['storelevel1mat']['total_received'] = $storest['total_received'];
+						$insubamt['storelevel1mat']['total_issued'] = $storest['total_issued'];
+						$insubamt['storelevel1mat']['total_stock'] = $storest['quantity'];
+						if($storest['physical_qty'] > 0) {
+							$insubamt['storelevel1mat']['physical_qty'] = $storest['physical_qty'];
+						} else {
+							$insubamt['storelevel1mat']['physical_qty'] = $storest['quantity'];
+						}
+						$insubamt['storelevel1mat']['stockid'] = $storest['id'];
+					} else {
+						$insubamt['storelevel1mat']['total_received'] = 0;
+						$insubamt['storelevel1mat']['total_issued'] = 0;
+						$insubamt['storelevel1mat']['total_stock'] = 0;
+						$insubamt['storelevel1mat']['physical_qty'] = 0;
+						$insubamt['storelevel1mat']['stockid'] = 0;
+					}	
+
+					if(!in_array($insubamt['storelevel1mat']['ere_code']."=".$insubamt['storelevel1mat']['msmat']['id'], $matcheck)) {			
+
+						array_push($out, $insubamt);
+						$matcheck[] = $insubamt['storelevel1mat']['ere_code']."=".$insubamt['storelevel1mat']['msmat']['id'];
+					}					
+					
+				}
+				
+			}
+		}
+
+		return $out;
 	}
 
 	public function calculateactivityvarqty() {

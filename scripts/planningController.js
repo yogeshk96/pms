@@ -585,6 +585,11 @@ app.controller("EditBoqBomMappingController",function($scope,$http,$rootScope,$s
 
 	}
 
+	$scope.removeactgrp = function(pomat, key) {
+
+		pomat.actgridarr.splice(key, 1);
+	}
+
 	$scope.editactivitytoproject = function() {
 
 		$rootScope.showloader=true;

@@ -1,0 +1,16 @@
+,11kV Take off DP structure on 9M/400Kg PSC Pole,135-STR-SB-015,,,,,
+ERE. CODE.,DESCRIPTION,,SECTION,"LENGTH
+(in mm.)","QTY.
+(in Nos.)                                                                                                                                                      ","Wt./Mtr.
+Kg./Mtr.",Unit Wt/PC
+9T01,Top Channel (ISMC),,100x50x6,2690,2,9.560,25.716
+9T02,LA Mounting Plate,,6mm,65400,3,47.100,3.080
+9T03,Isolator Mounting Channel (ISLC),,75x40x6,2680,2,5.700,15.276
+9T04,Isolator Supporting Channel (ISLC),,75x40x6,430,4,5.700,2.451
+9T05,Belting Angle,,50x50x6,2720,2,4.500,12.240
+9T06,Bracing Angle,,50x50x6,2534,2,4.500,11.403
+9T07,Isolator Operating Box Fixing Channel (ISLC),,75x40x6,508,4,5.700,2.896
+9T08,Top Back Clamp for Belting Angle,,50x8,783,2,3.140,2.459
+9T09,Bottom Back Clamp for Belting Angle,,50x8,841,2,3.140,2.641
+9T10,Back Clamp for Isolator Auxiliary Switch,,50x8,649,4,3.140,2.038
+9T11,Clamp for Cable Fixing,,50x8,514,2,3.140,1.614

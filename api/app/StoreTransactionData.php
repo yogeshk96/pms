@@ -19,4 +19,8 @@ class StoreTransactionData extends Model {
 	public function transmain(){
 		return $this->belongsTo('App\StoreTransactions','trans_id','id');
 	}
+
+	public function pomaterial(){
+		return $this->hasOne('App\PurchaseOrderMaterial','id','pomaterial_id');
+	}
 }

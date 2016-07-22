@@ -15,6 +15,10 @@ class Store extends Model {
 
 		return $this->hasOne('App\Projects','id','project_id');
 	}
+	public function subproject() {
+
+		return $this->hasOne('App\SubProjects','id','subproject_id');
+	}
 
 	
 }

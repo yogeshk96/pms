@@ -35,6 +35,9 @@ use App\StoreTransactionsPackDocs;
 use App\StoreTransactionsWeighDocs;
 use App\PurchaseOrderMaterial;
 use App\SubContractor;
+use App\SubcontractorAccountDetails;
+use App\SubcontractorWorkorders;
+use App\Workorders;
 use App\MRV;
 use App\Projects;
 use App\OldPurchaseOrder;
@@ -44,6 +47,7 @@ use App\StoreMaterialUom;
 use App\StoreMaterialUomConversion;
 use App\MsMaterial;
 use App\PoFabricationMaterial;
+use App\StoreGroundStock;
 
 class WarehouseController extends Controller {
 
@@ -64,7 +68,16 @@ class WarehouseController extends Controller {
 
 	public function getinventorydata_store(){
 		$storeid=Request::get('store');
-		return $matcat = MaterialCategory::whereHas('submaterials.stocks', function($query) use ($storeid)
+		return $matcat = MaterialCategory::with(array('submaterials'=>function($que) use ($storeid){
+
+			$que->whereHas("stocks", function($q) use ($storeid){
+
+				$q->where('store_id', '=', $storeid);
+			})->with(array("stocks"=>function($q2) use ($storeid){
+
+				$q2->where('store_id', '=', $storeid);
+			}));
+		}))->whereHas('submaterials.stocks', function($query) use ($storeid)
 			{
 			    $query->where('store_id', '=', $storeid);
 			})->get();
@@ -159,9 +172,14 @@ class WarehouseController extends Controller {
 	}
 
 
+	// public function get_receipt_report_store(){
+	// 	$dates=Request::all();
+	// 	return StoreTransactions::where('store_id','=',$dates['store']['id'])->where('type','=',1)->where('created_at','>=',$dates['dates']['fromdate'])->where('created_at','<=',$dates['dates']['todate'].' 23:59:59')->with('transdata.matname')->with('transdata.storestock')->with('storename')->with('tptname')->with('subconname')->with('mrndata')->with('mrvdata')->with('dcdata.storename')->orderBy('created_at')->get();
+	// }
+	///test function below
 	public function get_receipt_report_store(){
 		$dates=Request::all();
-		return StoreTransactions::where('store_id','=',$dates['store']['id'])->where('type','=',1)->where('created_at','>=',$dates['dates']['fromdate'])->where('created_at','<=',$dates['dates']['todate'].' 23:59:59')->with('transdata.matname')->with('transdata.storestock')->with('storename')->with('tptname')->with('subconname')->with('mrndata')->with('mrvdata')->with('dcdata.storename')->orderBy('created_at')->get();
+		return StoreTransactions::where('store_id','=',$dates['store']['id'])->where('type','=',1)->where('created_at','>=',$dates['dates']['fromdate'])->where('created_at','<=',$dates['dates']['todate'].' 23:59:59')->with('transdata.matname')->with('transdata.pomaterial')->with('transdata.pomaterial.purchaseorder')->with('transdata.pomaterial.purchaseorder.taxes')->with('transdata.pomaterial.purchaseorder.taxes.taxmaterials')->with('transdata.storestock')->with('storename')->with('tptname')->with('subconname')->with('mrndata')->with('mrvdata')->with('dcdata.storename')->orderBy('created_at')->get();
 	}
 
 	public function get_receipt_rpt(){
@@ -174,7 +192,7 @@ class WarehouseController extends Controller {
 
 	public function get_issue_report_store(){
 		$dates=Request::all();
-		return StoreTransactions::where('store_id','=',$dates['store']['id'])->where('type','=',2)->where('created_at','>=',$dates['dates']['fromdate'])->where('created_at','<=',$dates['dates']['todate'].' 23:59:59')->with('transdata.matname')->with('transdata.storestock')->with('storename')->with('tptname')->with('subconname')->orderBy('dc_date')->get();
+		return StoreTransactions::where('store_id','=',$dates['store']['id'])->where('type','=',2)->where('created_at','>=',$dates['dates']['fromdate'])->where('created_at','<=',$dates['dates']['todate'].' 23:59:59')->with('transdata.matname.matuom.stmatuom')->with('transdata.storestock.level1mat')->with('storename')->with('tptname')->with('subconname')->orderBy('dc_date')->get();
 	}
 
 	public function get_issue_rpt(){
@@ -189,7 +207,7 @@ class WarehouseController extends Controller {
 	{
 		$dates=Request::all();
 		$data=StoreStock::where('store_id','=',$dates['store']['id'])->with('material')->with(array('trans'=>function($query) use ($dates){
-			$query->where('created_at','>=',$dates['dates']['fromdate'])->where('created_at','<=',$dates['dates']['todate'].' 23:59:59');
+			$query->where('created_at','>=',$dates['dates']['fromdate'])->where('created_at','<=',$dates['dates']['todate'].' 23:59:59')->with('transmain');
 		}))->get()->toArray();
 
 		for($i=0;$i<count($data);$i++)
@@ -199,14 +217,29 @@ class WarehouseController extends Controller {
 			$data[$i]['damaged']=0.000;
 			for($j=0;$j<count($data[$i]['trans']);$j++)
 			{
-				if($data[$i]['trans'][$j]['transmain']['type']==1)
+				if($data[$i]['trans'][$j]['type']==1)
 				{
-					$data[$i]['credit']+=$data[$i]['trans'][$j]['accepted_qty'];
-					$data[$i]['damaged']+=$data[$i]['trans'][$j]['damaged_qty'];
+					if ($data[$i]['trans'][$j]['transmain']['old_flag']==1)
+					{
+						$data[$i]['credit']+=$data[$i]['trans'][$j]['old_accepted_qty'];
+						$data[$i]['damaged']+=$data[$i]['trans'][$j]['old_damaged_qty'];	
+					}
+					else
+					{
+						$data[$i]['credit']+=$data[$i]['trans'][$j]['accepted_qty'];
+						$data[$i]['damaged']+=$data[$i]['trans'][$j]['damaged_qty'];
+					}
 				}
 				else
 				{
-					$data[$i]['debit']+=$data[$i]['trans'][$j]['quantity'];
+					if ($data[$i]['trans'][$j]['transmain']['old_flag']==1)
+					{
+						$data[$i]['debit']+=$data[$i]['trans'][$j]['old_quantity'];
+					}
+					else
+					{
+						$data[$i]['debit']+=$data[$i]['trans'][$j]['quantity'];
+					}
 				}
 			}
 		}
@@ -248,12 +281,36 @@ class WarehouseController extends Controller {
 		$userdata=Session::where('refreshtoken','=',$tkn)->with('users.store')->first();
 		$storeid = $userdata['users']['store']['id'];
 
-		return $matcat = MaterialCategory::with('submaterials.stocks')->whereHas('submaterials.stocks', function($query) use ($storeid)
+		return $matcat = MaterialCategory::with(array('submaterials'=>function($que) use ($storeid){
+
+			$que->with(array('stocks'=>function($que) use ($storeid){
+
+				$que->where("store_id", "=", $storeid);
+			}))->with("parent");
+		}))->whereHas('submaterials.stocks', function($query) use ($storeid)
 			{
 			    $query->where('store_id', '=', $storeid);
 			})->get();
+
 		
 	}
+	// public function getinventorydata() {
+
+	// 	$tkn=Request::header('JWT-AuthToken');
+	// 	$userdata=Session::where('refreshtoken','=',$tkn)->with('users.store')->first();
+	// 	$storeid = $userdata['users']['store']['id'];
+	// 	// $storeid=$userdata->id;
+	// 	// $storeid='6';
+		
+
+	// // 	return $matcat = MaterialCategory::with('submaterials.stocks')->where('store_id', '=', $storeid)->get();
+	// // return $matcat= MaterialCategory::where('store_id','=',$storeid)->with('submaterials.stocks')->get();
+	// 	return $matcat = MaterialCategory::with('submaterials.stocks')-> function($query) {
+	// 		    $query->where('store_id', '=', '6');
+	// 		})->get();
+		
+		
+	// }
 
 	public function getstoredata() {
 
@@ -425,7 +482,7 @@ class WarehouseController extends Controller {
 		$sid = $q2['id'];
 		$stockdate = $q2['project']['stock_date'];
 		$days = 10;
-		$newstockdate = date("Y-m-d", strtotime("-".$days." days", strtotime($stockdate)));
+		$newstockdate = date("Y-m-d", strtotime("-1 month", strtotime($stockdate)));
 		$pos = PurchaseOrder::where("vendor_id", "=", $id)->with(array("pomaterials.intdipo"=>function($que){
 
 			$que->whereRaw("quantity>already_received");
@@ -450,7 +507,7 @@ class WarehouseController extends Controller {
 					}
 					foreach ($q1 as $inq1) {
 
-						// if(($inq1['intdimat']['intdi']['manual_flag'] == 1 && $inq1['intdimat']['intdi']['manual_date'] >= $newstockdate) || ($inq1['intdimat']['intdi']['manual_flag'] == 0 && $inq1['intdimat']['intdi']['created_at'] >= $newstockdate)) {
+						if(($inq1['intdimat']['intdi']['manual_flag'] == 1 && $inq1['intdimat']['intdi']['manual_date'] >= $newstockdate) || ($inq1['intdimat']['intdi']['manual_flag'] == 0 && $inq1['intdimat']['intdi']['created_at'] >= $newstockdate)) {
 							$matid = $inq1['material_id'];
 							$pomatdet = PurchaseOrderMaterial::where("purchase_order_id", "=", $inq1['podets']['id'])->where("material_id", "=", $inq1['material_id'])->with("fabmat.storemainuom.stmatuom")
 							->with(array('fabmat.storemat.level1matindi' => function($query) 		
@@ -458,16 +515,19 @@ class WarehouseController extends Controller {
 								}))->with("uoms.stmatuom")
 							->first();
 							$inq1['pomatdetails'] = $pomatdet;
+							array_push($intpos[$i]['intdidets'], $inq1);
 							$checkintdi++;
-						// }
+						}
 					}
-					// if($checkintdi > 0) {
-						$intpos[$i]['intdidets'] = $q1;
+					if($checkintdi > 0) {
+						
 						$intpos[$i]['matname'] = $indipomat['storematerial']['name'];
 						$i++;
-					// }
+
+						$matarr[] = $indipomat['material_id'];
+					}
 					
-					$matarr[] = $indipomat['material_id'];
+					
 					
 				}
 			}
@@ -629,11 +689,11 @@ class WarehouseController extends Controller {
 									$q8 = StoreStock::where('material_id','=',$mat[$i]['fabmats'][$k]['store_material_id'])->where('material_level1_id','=',$mat[$i]['fabmats'][$k]['store_material_level1_id'])->where('store_id','=',$storeid)->update(array('quantity' => $nqty, 'damaged'=> $dqty, 'shortage_qty'=>$shortageqty));
 								} else {
 
-									$oldnqty = floatval($q6[0]['old_quantity']) + floatval($mat[$i]['fabmats'][$k]['acceptedqty']);
-									$olddqty = floatval($mat[$i]['fabmats'][$k]['damagedqty']) + floatval($q6[0]['old_damaged']);
-									$oldshortageqty = floatval($mat[$i]['fabmats'][$k]['shortageqty']) + floatval($q6[0]['old_shortage_qty']);
+									// $oldnqty = floatval($q6[0]['old_quantity']) + floatval($mat[$i]['fabmats'][$k]['acceptedqty']);
+									// $olddqty = floatval($mat[$i]['fabmats'][$k]['damagedqty']) + floatval($q6[0]['old_damaged']);
+									// $oldshortageqty = floatval($mat[$i]['fabmats'][$k]['shortageqty']) + floatval($q6[0]['old_shortage_qty']);
 									
-									$q8 = StoreStock::where('material_id','=',$mat[$i]['fabmats'][$k]['store_material_id'])->where('material_level1_id','=',$mat[$i]['fabmats'][$k]['store_material_level1_id'])->where('store_id','=',$storeid)->update(array('old_quantity' => $oldnqty, 'old_damaged'=> $olddqty, 'old_shortage_qty'=>$oldshortageqty));
+									// $q8 = StoreStock::where('material_id','=',$mat[$i]['fabmats'][$k]['store_material_id'])->where('material_level1_id','=',$mat[$i]['fabmats'][$k]['store_material_level1_id'])->where('store_id','=',$storeid)->update(array('old_quantity' => $oldnqty, 'old_damaged'=> $olddqty, 'old_shortage_qty'=>$oldshortageqty));
 								}
 								$storestockid = $q6[0]['id'];
 							}
@@ -950,7 +1010,7 @@ class WarehouseController extends Controller {
 		$yearnext = $year+1;
 		$finyear = $year."-".substr($yearnext, 2,2);
 
-		$out = PurchaseOrder::where('po_no', '=', $pono)->with('users')->with('pomaterials.storematerial.inversestore')->with('pomaterials.fabmat.storemainuom.stmatuom')->with('pomaterials.storematerial.matuom.stmatuom')->with('pomaterials.fabmat.storemat')->with('pomaterials.storemainuom.stmatuom')->with('vendor')->with('project')->with('taxes')->with('specialterms')->get();
+		$out = PurchaseOrder::where('po_no', '=', $pono)->with('users')->with('pomaterials.storematerial.inversestore')->with('pomaterials.fabmat.storemainuom.stmatuom')->with('pomaterials.storematerial.matuom.stmatuom')->with('pomaterials.fabmat.storemat.matuom.stmatuom')->with('pomaterials.fabmat.storematlevel1')->with('pomaterials.storemainuom.stmatuom')->with('vendor')->with('project')->with('taxes')->with('specialterms')->get();
 
 		if($out->count() > 0) {
 
@@ -1417,7 +1477,29 @@ class WarehouseController extends Controller {
 
 		$id = Request::input('data');
 		$q2 = Store::where('user_id','!=',$userid)->get();
-		$q3 = SubContractor::get();
+		// $q3 = SubContractor::get();
+		$code=1;
+		$q3 = Store::where('user_id','=',$userid)->with(array('subproject.workorders'=>function($query) use ($code)
+			{
+		        $query->where('code', '=', $code)->with('subcontractor.subcontractor');
+		    }))->get();
+		$q4 = ThirdParty::get();
+		return array($q2,$q3,$q4);
+	}
+
+	public function get_storelist_all(){
+		$tkn=Request::header('JWT-AuthToken');
+		$userdata=Session::where('refreshtoken','=',$tkn)->with('users.store')->first();
+		$userid = $userdata['users']['id'];
+
+		$id = Request::input('data');
+		$q2 = Store::where('user_id','!=',$userid)->get();
+		// $q3 = SubContractor::get();
+		$code=1;
+		$q3 = Store::with(array('subproject.workorders'=>function($query) use ($code)
+			{
+		        $query->where('code', '=', $code)->with('subcontractor.subcontractor');
+		    }))->get();
 		$q4 = ThirdParty::get();
 		return array($q2,$q3,$q4);
 	}
@@ -1428,7 +1510,7 @@ class WarehouseController extends Controller {
 		$userdata=Session::where('refreshtoken','=',$tkn)->with('users.store')->first();
 		$userid = $userdata['users']['id'];
 		$store = Store::where('user_id','=',$userid)->first();
-		$q2=StoreStock::where('store_id','=',$store->id)->with('material.category')->with('material.allmatuom.stmatuom')->get();
+		$q2=StoreStock::where('store_id','=',$store->id)->with('material.category')->with('material.allmatuom.stmatuom')->with("level1mat")->get();
 		return array($q1,$q2);
 	}
 
@@ -1438,9 +1520,15 @@ class WarehouseController extends Controller {
 		$userdata=Session::where('refreshtoken','=',$tkn)->with('users.store')->first();
 		$userid = $userdata['users']['id'];
 		$store = Store::where('user_id','=',$userid)->first();
+		if($dat['issuetype'] == "new") {
+			$old_flag = 0;
+		} else {
+			$old_flag = 1;
+		}
 		$st=new StoreTransactions;
 		$st->created_by=$userid;
 		$st->store_id=$store->id;
+		$st->old_flag = $old_flag;
 		$st->type=2;
 		if($dat['type']=='manager')
 		{
@@ -1457,7 +1545,6 @@ class WarehouseController extends Controller {
 			$st->issue_type=3;
 			$st->third_party_id=$dat['tpty']['id'];
 		}
-		$st->dc_date=date('Y-m-d');
 		if(Request::input('rems'))
 		{
 			$st->remarks=$dat['rems'];
@@ -1475,6 +1562,13 @@ class WarehouseController extends Controller {
 		{
 			$st->dc_no=$store->id.'-'.str_pad(1,6,'0',STR_PAD_LEFT);
 		}
+		if(isset($data['dcdate'])) {
+
+			$st->dc_date = $data['dcdate'];
+		} else {
+
+			$st->dc_date=date('Y-m-d');
+		}
 		$st->save();
 		for($i=0;$i<count($dat['mats']);$i++)
 		{
@@ -1491,8 +1585,9 @@ class WarehouseController extends Controller {
 			$ss=StoreStock::where('id','=',$dat['mats'][$i]['stockid'])->first();
 			if($dat['issuetype'] == "new") {
 				$ss->quantity=$ss->quantity-$dat['mats'][$i]['qty'];
+				$ss->total_issued=$ss->total_issued+$dat['mats'][$i]['qty'];
 			} else {
-				$ss->total_received=$ss->total_received-$dat['mats'][$i]['qty'];
+				// $ss->total_received=$ss->total_received-$dat['mats'][$i]['qty'];
 			}
 			$ss->save();
 		}
@@ -1829,26 +1924,85 @@ class WarehouseController extends Controller {
 	public function inventoryrevision() {
 
 		$inventorydata = Request::input('inventorydata');
+		$groundstockrevdate = Request::input("groundstockrevdate");
+		$tkn=Request::header('JWT-AuthToken');
+		$stocktype = Request::input("stocktype");
+		$activitygrouplist = Request::input("activitygrouplist");
 
-		foreach ($inventorydata as $inv) {
-			
-			foreach ($inv['submaterials'] as $invalue) {
+		$user = Session::where('refreshtoken','=',$tkn)->with('users')->first();
+
+		$userid = $user['users']['id'];
+
+		if(!isset($groundstockrevdate)) {
+
+			$groundstockrevdate = date("Y-m-d");
+		}
+
+		if($stocktype == "normal") {
+
+			foreach ($inventorydata as $inv) {
 				
-				
-				if(!isset($invalue['stocks'][0]['remarks'])) {
+				foreach ($inv['submaterials'] as $invalue) {
+					
+					if(count($invalue['parent']) == 0 || $invalue['parent']['type']!='3' && count($invalue['stocks']) > 0 && isset($invalue['stocks'])) {
+						if(!isset($invalue['stocks'][0]['remarks'])) {
+
+							$remarks = "";
+						} else {
+
+							$remarks = $invalue['stocks'][0]['remarks'];
+						}
+
+						if(isset($invalue['stocks'][0]['physical_qty'])) {
+							$phinv = $invalue['stocks'][0]['physical_qty'];
+							$stqty = $invalue['stocks'][0]['quantity'];
+							$id = $invalue['stocks'][0]['id'];
+
+							$stocks = StoreStock::where('id', '=', $id)->first();
+							$stocks->physical_qty = $phinv;
+							$stocks->remarks = $remarks;
+							$stocks->save();
+							$stockcheck = StoreGroundStock::where("stock_id", "=", $id)->where("stock_date", "=", $groundstockrevdate)->first();
+							if($stockcheck) {
+								StoreGroundStock::where("stock_id", "=", $id)->where("stock_date", "=", $groundstockrevdate)->update(array("physical_qty"=>$phinv, "quantity"=>$stqty, "remarks"=>$remarks, "created_by"=>$userid));
+							} else {
+								StoreGroundStock::create(array("stock_id"=>$id, "physical_qty"=>$phinv, "quantity"=>$stqty, "remarks"=>$remarks,  "stock_date"=>$groundstockrevdate, "created_by"=>$userid));
+							}
+						}
+					}
+				}
+			}
+		} else if($stocktype == "fab") {
+
+			foreach ($activitygrouplist as $inmat) {
+
+				if(!isset($inmat['storelevel1mat']['remarks'])) {
 
 					$remarks = "";
 				} else {
 
-					$remarks = $invalue['stocks'][0]['remarks'];
+					$remarks = $inmat['storelevel1mat']['remarks'];
 				}
-				$phinv = $invalue['stocks'][0]['physical_qty'];
-				$id = $invalue['stocks'][0]['id'];
+				if(isset($inmat['storelevel1mat']['physical_qty'])) {
+					$phinv = $inmat['storelevel1mat']['physical_qty'];
+					$stqty = $inmat['storelevel1mat']['total_stock'];
+					$id = $inmat['storelevel1mat']['stockid'];
 
-				$stocks = StoreStock::where('id', '=', $id)->first();
-				$stocks->physical_qty = $phinv;
-				$stocks->remarks = $remarks;
-				$stocks->save();
+					$stocks = StoreStock::where('id', '=', $id)->first();
+					if($stocks) {
+						$stocks->physical_qty = $phinv;
+						$stocks->remarks = $remarks;
+						$stocks->save();
+
+						$stockcheck = StoreGroundStock::where("stock_id", "=", $id)->where("stock_date", "=", $groundstockrevdate)->first();
+						if($stockcheck) {
+							StoreGroundStock::where("stock_id", "=", $id)->where("stock_date", "=", $groundstockrevdate)->update(array("physical_qty"=>$phinv, "quantity"=>$stqty, "remarks"=>$remarks, "created_by"=>$userid));
+						} else {
+							StoreGroundStock::create(array("stock_id"=>$id, "physical_qty"=>$phinv, "quantity"=>$stqty, "remarks"=>$remarks,  "stock_date"=>$groundstockrevdate, "created_by"=>$userid));
+						}
+					}
+				}
+				
 			}
 		}
 
@@ -2240,38 +2394,40 @@ class WarehouseController extends Controller {
 
 	public function addfabstocks() {
 
-		$mattracklist = Request::input("mattracklist");
+		$mattracklist = Request::input("activitygrouplist");
 		$projdet = Request::input("projdet");
 		$tkn=Request::header('JWT-AuthToken');
 		$userdata=Session::where('refreshtoken','=',$tkn)->with('users.store')->first();
 		$storeid = $userdata['users']['store']['id'];
 
 		foreach ($mattracklist as $inmat) {
-			$storest = StoreStock::where("store_id", "=", $storeid)->where("material_level1_id", "=", $inmat['id'])->where("material_id", "=", $inmat['store_material_id'])->where("fab_flag", "=", 1)->first();
+			
+			$storest = StoreStock::where("store_id", "=", $storeid)->where("material_level1_id", "=", $inmat['storelevel1mat']['id'])->where("material_id", "=", $inmat['storelevel1mat']['store_material_id'])->where("fab_flag", "=", 1)->first();
 
 			if($storest) {
 
-				$storest->quantity = $inmat['total_stock'];
-				$storest->opening = $inmat['total_stock'];
-				$storest->total_received = $inmat['total_received'];
-				$storest->total_issued = $inmat['total_issued'];
+				$storest->quantity = $inmat['storelevel1mat']['total_stock'];
+				$storest->opening = $inmat['storelevel1mat']['total_stock'];
+				$storest->total_received = $inmat['storelevel1mat']['total_received'];
+				$storest->total_issued = $inmat['storelevel1mat']['total_issued'];
 				$storest->save();
 			} else {
 
 				$singlestorestock = array(
 					"store_id"=>$storeid,
-					"material_id"=>$inmat['store_material_id'],
-					"material_level1_id"=>$inmat['id'],
-					"total_received"=>$inmat['total_received'],
-					"total_issued"=>$inmat['total_issued'],
+					"material_id"=>$inmat['storelevel1mat']['store_material_id'],
+					"material_level1_id"=>$inmat['storelevel1mat']['id'],
+					"total_received"=>$inmat['storelevel1mat']['total_received'],
+					"total_issued"=>$inmat['storelevel1mat']['total_issued'],
 					"created_by"=>$userdata['users']['id'],
-					"quantity"=>$inmat['total_stock'],
-					"opening"=>$inmat['total_stock'],
+					"quantity"=>$inmat['storelevel1mat']['total_stock'],
+					"opening"=>$inmat['storelevel1mat']['total_stock'],
 					"fab_flag"=>1
 					);
 
 				StoreStock::create($singlestorestock);
 			}
+			
 		}
 		Projects::where("id", "=", $projdet['id'])->update(array("stock_date"=>$projdet['stock_date']));
 		

@@ -1682,7 +1682,10 @@ app.controller("PurchasesReportsVendorRepController",function($scope,$http,$root
 });	
 
 app.controller("PurchasesInternalDIController",function($scope,$http,$rootScope,$state,Logging,$timeout, Commas,Dates){
-
+	$scope.payterms = {};
+	$scope.payterms['payment_type'] = "PDC";
+	$scope.actype = "existing";
+	$scope.file_attachments = [];
 	$scope.old_flag = 0;
 	$http({
 		method:'GET',
@@ -1693,6 +1696,7 @@ app.controller("PurchasesInternalDIController",function($scope,$http,$rootScope,
 		// console.log(result);
 		$rootScope.showloader=false;
 		$scope.vendorlist = result;
+		
 
 	});
 
@@ -1732,6 +1736,365 @@ app.controller("PurchasesInternalDIController",function($scope,$http,$rootScope,
 
 	});
 
+
+	$scope.calculatelcinterest = function() {
+
+		if(!$scope.payterms['lc_time_period']) {
+
+			swal("Please enter LC time period.");
+		} else {
+
+			var intrstval = (parseFloat($scope.payterms['lc_interest_percentage'])*parseFloat($scope.totalmatcost)/36500)*parseInt($scope.payterms['lc_time_period']);
+
+			$scope.payterms['lc_interest_value'] = parseFloat(intrstval).toFixed(2);
+		}
+	}
+
+	$scope.calculate_vendor_sse_interest = function() {
+
+		if(!$scope.payterms['lc_time_period']) {
+
+			swal("Please enter LC time period.");
+		} else if(parseInt($scope.payterms['lc_interest_days_vendor']) > parseInt($scope.payterms['lc_time_period'])) {
+
+			swal("Interest days of vendor cannot be greater than LC time period.");
+			$scope.payterms['lc_interest_days_vendor'] = 0;
+		} else if(!$scope.payterms['lc_interest_percentage']) {
+
+			swal("Please enter LC interest %.");
+		} else if(!$scope.payterms['lc_interest_days_vendor']) {
+
+			swal("Please enter interest days on vendor.");
+		} else {
+
+			var lcintsse = parseInt($scope.payterms['lc_time_period'])-parseInt($scope.payterms['lc_interest_days_vendor']);
+
+			$scope.payterms['lc_interest_days_sse'] = lcintsse;
+
+			var intrstvalvendor = (parseFloat($scope.payterms['lc_interest_percentage'])*parseFloat($scope.totalmatcost)/36500)*parseInt($scope.payterms['lc_interest_days_vendor']);
+
+			var intrstvalsse = (parseFloat($scope.payterms['lc_interest_percentage'])*parseFloat($scope.totalmatcost)/36500)*parseInt($scope.payterms['lc_interest_days_sse']);
+
+			$scope.payterms['interest_amount_vendorac'] = parseFloat(intrstvalvendor).toFixed(2);
+			$scope.payterms['interest_amount_sselac']= parseFloat(intrstvalsse).toFixed(2);
+		}
+	}
+
+	$scope.changeoflctimeperiod = function() {
+
+		if($scope.payterms['lc_interest_days_vendor']) {
+
+			var lcintsse = parseInt($scope.payterms['lc_time_period'])-parseInt($scope.payterms['lc_interest_days_vendor']);
+
+			$scope.payterms['lc_interest_days_sse'] = lcintsse;
+
+			var intrstvalvendor = (parseFloat($scope.payterms['lc_interest_percentage'])*parseFloat($scope.totalmatcost)/36500)*parseInt($scope.payterms['lc_interest_days_vendor']);
+
+			var intrstvalsse = (parseFloat($scope.payterms['lc_interest_percentage'])*parseFloat($scope.totalmatcost)/36500)*parseInt($scope.payterms['lc_interest_days_sse']);
+
+			$scope.payterms['interest_amount_vendorac'] = parseFloat(intrstvalvendor).toFixed(2);
+			$scope.payterms['interest_amount_sselac']= parseFloat(intrstvalsse).toFixed(2);
+		}
+	}
+
+	$scope.caltotalpaycost = function(indipomat, pomat) {
+
+
+		var totalprevqty = angular.copy(parseFloat(indipomat.currentpayqty)+parseFloat(indipomat.payment_qty));
+		if(parseFloat(indipomat.currentpayqty) > parseFloat(indipomat.pendingpayqty)) {
+
+			swal("Current payment quantity cannot be greater than the pending payment quantity.");
+			indipomat.currentpaycost = 0;
+			indipomat.currentpaycostn = 0;
+			indipomat.currentpayqty = 0;
+		}
+		else if(totalprevqty > indipomat.quantity) {
+
+			swal("Total quantity cannot be greater than the purchase quantity.");
+			indipomat.currentpaycost = 0;
+			indipomat.currentpaycostn = 0;
+			indipomat.currentpayqty = 0;
+		} else {
+
+			indipomat.currentpaycost = angular.copy(parseFloat(indipomat.currentpayqty)*parseFloat(indipomat.unit_rate_taxed));
+			indipomat.currentpaycost = angular.copy(indipomat.currentpaycost.toFixed(2));
+
+			indipomat.currentpaycostn = angular.copy(parseFloat(indipomat.currentpayqty)*parseFloat(indipomat.unit_rate));
+			indipomat.currentpaycostn = angular.copy(indipomat.currentpaycostn.toFixed(2));
+
+			if(!indipomat.currentpayqty) {
+
+				indipomat.currentpaycost = 0;
+				indipomat.currentpaycostn = 0;
+			}
+
+		}
+
+		
+		var thistotalmatcost = 0;
+		var thistotalmatcostn = 0;
+		var currentpaycostcheck = 0;
+	
+
+		angular.forEach(pomat.pomaterials, function(thisinnpom) {
+
+			if(!thisinnpom.currentpayqty) {
+
+				thisinnpom.currentpaycost = 0;
+				thisinnpom.currentpaycostn = 0;
+			}
+
+			if(thisinnpom.currentpayqty > 0) {
+
+				currentpaycostcheck++;
+			}
+
+			thistotalmatcost += parseFloat(thisinnpom['currentpaycost']);
+			thistotalmatcostn += parseFloat(thisinnpom['currentpaycostn']);
+
+		});
+
+
+
+		$scope.currentpaycostcheck = angular.copy(currentpaycostcheck);
+
+		pomat.totalmatcost = angular.copy(thistotalmatcost.toFixed(2));
+		pomat.totalmatcostn = angular.copy(thistotalmatcostn.toFixed(2));
+
+		var totalmatcost = 0;
+		var totalmatcostn = 0;
+
+		var totaltaxcostn = 0;
+		angular.forEach($scope.pomateriallist, function(inpomat) {
+
+			angular.forEach(inpomat.pomaterials, function(innpom) {
+
+				if(!innpom.currentpayqty) {
+
+					innpom.currentpaycost = 0;
+					innpom.currentpaycostn = 0;
+				}
+
+				totalmatcost = angular.copy(totalmatcost+parseFloat(innpom['currentpaycost']));
+				totalmatcostn = angular.copy(totalmatcostn+parseFloat(innpom['currentpaycostn']));
+
+			});
+
+			var totaltaxcost = 0;
+
+			angular.forEach(inpomat.taxes, function(innpot) {
+				console.log("xx");
+				console.log(innpot);
+				var totalcurpay = 0;
+				if(parseFloat(innpot.value) > 0) {
+					if(parseFloat(innpot.value) > 0 && innpot.tax_id != 11) {
+						
+						angular.forEach(innpot.taxmaterials, function(innpotm) {
+
+							if(innpotm.material_id != 0){
+
+								angular.forEach(inpomat.pomaterials, function(innpom) {
+
+									if(innpotm.material_id == innpom.id) {
+
+										if(!innpom.currentpayqty) {
+
+											innpom.currentpayqty = 0;
+										}
+										totalcurpay += parseFloat(innpom.currentpayqty)*parseFloat(innpom.unit_rate);
+									}
+								});
+							} else {
+
+								angular.forEach(inpomat.taxes, function(innpot2) {
+
+									if(innpotm.purchase_taxes_id == innpot2.id) {
+
+										totalcurpay += parseFloat(innpot2.newtaxvalue);
+									}
+
+								});
+							}
+
+						});
+
+						innpot.newtaxvalue = (parseFloat(innpot.taxpercentage)*parseFloat(totalcurpay))/100;
+					} else if(innpot.tax_id == 11 && innpot.lumpsum != 1){
+
+						angular.forEach(inpomat.pomaterials, function(innpomm) {
+
+							totalcurpay += parseFloat(innpomm.currentpayqty)*innpomm.freightinsurance_rate;
+						});
+						
+						innpot.newtaxvalue = parseFloat(totalcurpay).toFixed(2);
+					} else if(innpot.lumpsum == 1) {
+						var totmqty = 0;
+						angular.forEach(inpomat.pomaterials, function(innpomm) {
+
+							totmqty += parseFloat(innpomm.quantity);
+						});
+						var indimqty = angular.copy(parseFloat(innpot.value)/totmqty);
+						angular.forEach(inpomat.pomaterials, function(innpomm) {
+
+							totalcurpay += parseFloat(innpomm.currentpayqty)*indimqty;
+						});
+						innpot.newtaxvalue = parseFloat(totalcurpay).toFixed(2);
+					}
+				} else {
+
+					innpot.newtaxvalue = 0;
+				}
+
+				totaltaxcost += parseFloat(innpot.newtaxvalue);
+			});
+
+				totaltaxcostn += totaltaxcost;
+
+				inpomat.totaltaxcost = angular.copy(totaltaxcost.toFixed(2));
+		});
+		$scope.totalmatcost = angular.copy(totalmatcost.toFixed(2));
+		$scope.totalmatcostn = angular.copy(totalmatcostn.toFixed(2));
+		$scope.totaltaxcostn = angular.copy(totaltaxcostn.toFixed(2));
+
+		$scope.netcost = parseFloat($scope.totalmatcostn)+parseFloat($scope.totaltaxcostn);
+		$scope.netcost = Math.round($scope.netcost*100)/100;
+
+		if($scope.payterms['interest_amount_vendorac']) {
+
+			$scope.calculatelcinterest();
+
+			$scope.calculate_vendor_sse_interest();
+		}
+
+
+	}
+
+
+	$scope.save_payment = function() {
+
+		if(!$scope.projectid) {
+
+			swal("Please select a project.");
+		} else if(!$scope.vendorid) {
+
+			swal("Please select a vendor.");
+		} else if(!$scope.ponumber){
+
+			swal("Please select a purchase order.");
+		} else if($scope.actype == "existing" && !$scope.vendoraccid){
+
+			swal("Please select a bank account.")
+		} else if($scope.actype == "new" && !$scope.accountno){
+
+			swal("Please enter bank account number.")
+		} else if($scope.actype == "new" && !$scope.ifsccode){
+
+			swal("Please enter IFSC code.")
+		} else if($scope.actype == "new" && !$scope.bankname){
+
+			swal("Please enter bank name.")
+		} else if($scope.actype == "new" && !$scope.bankbranch){
+
+			swal("Please enter bank branch.")
+		} else {
+
+			$rootScope.showloader=true;
+			var vendccid = "";
+			if($scope.vendoraccid) {
+
+				vendccid = $scope.vendoraccid.id;
+			}
+
+			$http({
+			method:'POST',
+			url:$rootScope.requesturl+'/save_payments',
+			data:{pomateriallist:$scope.pomateriallist, payterms:$scope.payterms, actype:$scope.actype, bank_name:$scope.bankname, bank_branch:$scope.bankbranch, ifsc_code:$scope.ifsccode, account_number:$scope.accountno, vendoraccid:vendccid, vendorid:$scope.vendorid.id, ponos:$scope.ponumber, indiid:$scope.internaldiid},
+			headers:{'JWT-AuthToken':localStorage.pmstoken},
+			}).
+			success(function(result){
+
+				$rootScope.showloader=false;
+				if(result != 0) {
+
+					$scope.memono = result['memono'];
+					$scope.today = result['date'];
+					$scope.uniqmat = result['pomaterials'];
+					$scope.poinfo = result['poinfo'];
+					$scope.userinfo = result['userinfo'];
+					$scope.payid = result['payid'];
+					$scope.totalmatcostinwords = angular.copy(getwords(parseFloat($scope.netcost)));
+
+					$("#paymentModal").modal("show");
+					
+					setTimeout( function(){
+						var htmlcontent = $(document).find(".paymentcontent").html();
+
+						$http({
+						method:'POST',
+						url:'html2pdf/paymentpdf.php',
+						data:{payid:result['payid'], htmlcontent:htmlcontent},
+						headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+						}).
+						success(function(resultin){
+
+							$scope.interofmemourl = resultin;
+							$scope.file_attachments.push({'doc_url':resultin, 'doc_name':'INTERMEMO-'+$scope.payid,'mime_type':'pdf'});
+						});
+					}, 3000);
+
+					
+				}
+				console.log(result);
+
+			}).error(function(data,status){
+				console.log(data+status);
+				$rootScope.showloader=false;
+				$rootScope.showerror=true;
+				//Logging.validation(status);
+			});
+		}
+	}
+
+
+	$scope.submit_payment=function() {
+
+		if($scope.paymentraisetype=='manual' && !$scope.paymentdate) {
+
+			swal("Please select payment raise date.");
+		} else {
+
+			$http({
+			method:'POST',
+			url:$rootScope.requesturl+'/submit_payments',
+			data:{file_attachments:$scope.file_attachments, payid:$scope.payid, paymentraisetype:$scope.paymentraisetype, paymentdate:$scope.paymentdate, interofmemourl:$scope.interofmemourl, to:$scope.to, cc:$scope.cc, subject:$scope.subject, emailcontent:$scope.emailcontent},
+			headers:{'JWT-AuthToken':localStorage.pmstoken},
+			}).
+			success(function(result){
+
+				$rootScope.showloader=false;
+				console.log(result);
+				if(result != 0) {
+					swal({ 
+					  title: "Success",
+					   text: "Payment details saved successfully.",
+					    type: "success" 
+					  },
+					  function(){
+					    location.reload();
+					});
+				}
+
+			}).error(function(data,status){
+				console.log(data+status);
+				$rootScope.showloader=false;
+				$rootScope.showerror=true;
+				//Logging.validation(status);
+			});
+
+		}
+	}
+
+
 	$scope.changevend = function() {
 
 		$scope.showinsbox = false;
@@ -1740,11 +2103,26 @@ app.controller("PurchasesInternalDIController",function($scope,$http,$rootScope,
 		$scope.dinumber = "";
 
 		$rootScope.showloader=true;
+		$http({
+			method:'GET',
+			url:$rootScope.requesturl+'/get_vendor_info',
+			params:{vendorid:$scope.vendorid.id},
+			headers:{'JWT-AuthToken':localStorage.pmstoken},
+		}).
+		success(function(result){
 
+			$rootScope.showloader=false;
+			$scope.vendordetails = result;
+
+		}).error(function(data,status){
+			$rootScope.showloader=false;
+			$rootScope.showerror=true;
+			//Logging.validation(status);
+		});
 		$http({
 		method:'GET',
 		url:$rootScope.requesturl+'/get_vendor_polist',
-		params:{'vendorid':$scope.vendorid, 'projectid':$scope.projectid},
+		params:{'vendorid':$scope.vendorid.id, 'projectid':$scope.projectid.id},
 		headers:{'JWT-AuthToken':localStorage.pmstoken},
 		}).
 		success(function(result){
@@ -1801,7 +2179,7 @@ app.controller("PurchasesInternalDIController",function($scope,$http,$rootScope,
 			$http({
 			method:'POST',
 			url:$rootScope.requesturl+'/get_vendor_inspection_ref',
-			data:{'vendorid':$scope.vendorid, 'projectid':$scope.projectid, ponumber:$scope.ponumber},
+			data:{'vendorid':$scope.vendorid.id, 'projectid':$scope.projectid.id, ponumber:$scope.ponumber},
 			headers:{'JWT-AuthToken':localStorage.pmstoken},
 			}).
 			success(function(result){
@@ -1853,7 +2231,7 @@ app.controller("PurchasesInternalDIController",function($scope,$http,$rootScope,
 		$scope.dinumber = "";
 	}
 
-	$scope.addidittotals = function(data)
+	$scope.addidittotals = function(data, y)
 	{
 		// console.log(data);
 		var total = 0;
@@ -1876,6 +2254,19 @@ app.controller("PurchasesInternalDIController",function($scope,$http,$rootScope,
 		};
 		data['total_internal_di'] = total;
 		// console.log(total);
+
+		angular.forEach($scope.pomateriallist, function(inpo){
+
+			angular.forEach(inpo['pomaterials'], function(inpomat){
+				if(data.matdes.id == inpomat.material_id && y.podets.id==inpo.id) {
+
+					inpomat.currentpayqty = angular.copy(y.new_internal_di_quantity);
+
+					$scope.caltotalpaycost(inpomat, inpo);
+				}
+
+			});
+		});
 	}
 
 	$scope.deldimat = function(data)
@@ -1961,6 +2352,7 @@ app.controller("PurchasesInternalDIController",function($scope,$http,$rootScope,
 			console.log(result);
 			$rootScope.showloader=false;
 			$scope.dilist = result;
+			console.log(result);
 			$scope.showdibox = true;
 
 		});
@@ -1971,7 +2363,6 @@ app.controller("PurchasesInternalDIController",function($scope,$http,$rootScope,
 	{
 		$scope.showdiboxdets = true;
 		$scope.showall_dets = true;
-
 		$rootScope.showloader=true;
 		for (var i = 0; i < $scope.dilist.length; i++) {
 			if($scope.dilist[i]['id']==$scope.dinumber)
@@ -1981,7 +2372,30 @@ app.controller("PurchasesInternalDIController",function($scope,$http,$rootScope,
 				break;
 			}
 		};
+		$scope.pomateriallists = [];
+		
+		for(var j=0;j<$scope.didetails.dimat.length;j++) {
 
+			for(var k=0; k<$scope.didetails.dimat[j]['dieachpomat'].length;k++) {
+				if(!$scope.pomateriallists[$scope.didetails.dimat[j]['dieachpomat'][k]['podets']['id']]) {
+
+					$scope.pomateriallists[$scope.didetails.dimat[j]['dieachpomat'][k]['podets']['id']] = [];
+				}
+				console.log($scope.didetails.dimat[j]['dieachpomat'][k]['podets']['id']);
+				$scope.pomateriallists[$scope.didetails.dimat[j]['dieachpomat'][k]['podets']['id']].push($scope.didetails.dimat[j]['dieachpomat'][k]['podets']);
+			}
+		}
+		$scope.pomateriallist = [];
+		var checkmatarr = [];
+		angular.forEach($scope.pomateriallists, function(inpo){
+			angular.forEach(inpo, function(inpo2){
+				if(checkmatarr.indexOf(inpo2.id) == -1) {
+					$scope.pomateriallist.push(inpo2);
+					checkmatarr.push(inpo2.id);
+				}
+			});
+		});
+		console.log($scope.pomateriallists);
 		for (var i = 0; i < $scope.didetails.intdi.length; i++) {
 			if($scope.didetails.intdi[i]['manual_flag']=='0')
 			{
@@ -1993,6 +2407,23 @@ app.controller("PurchasesInternalDIController",function($scope,$http,$rootScope,
 				$scope.didetails.intdi[i]['raisedate'] = $scope.didetails.intdi[i]['manual_date'].split("-").reverse().join("-");
 			}
 		};
+
+		angular.forEach($scope.pomateriallist, function(inpomat) {
+			if(inpomat['csref']) {
+				angular.forEach(inpomat['csref']['csrefdet'], function(incsref){
+					if(incsref.csvendor) {
+						if(incsref.csvendor.vendor_id == $scope.vendorid){
+
+							$scope.payterms = angular.copy(incsref['csquotations']);
+						}
+					}
+				});
+			}
+			angular.forEach(inpomat.pomaterials, function(innpom) {
+
+				$scope.caltotalpaycost(innpom, inpomat);
+			});
+		});
 
 		$rootScope.showloader=false;
 	}
@@ -2128,7 +2559,31 @@ app.controller("PurchasesInternalDIController",function($scope,$http,$rootScope,
 		if(nflag==0)
 		{
 
-			if(!$scope.refdate)
+			if(!$scope.projectid) {
+
+			swal("Please select a project.");
+			} else if(!$scope.vendorid) {
+
+				swal("Please select a vendor.");
+			} else if(!$scope.ponumber){
+
+				swal("Please select a purchase order.");
+			} else if($scope.actype == "existing" && !$scope.vendoraccid){
+
+				swal("Please select a bank account.")
+			} else if($scope.actype == "new" && !$scope.accountno){
+
+				swal("Please enter bank account number.")
+			} else if($scope.actype == "new" && !$scope.ifsccode){
+
+				swal("Please enter IFSC code.")
+			} else if($scope.actype == "new" && !$scope.bankname){
+
+				swal("Please enter bank name.")
+			} else if($scope.actype == "new" && !$scope.bankbranch){
+
+				swal("Please enter bank branch.")
+			} else if(!$scope.refdate)
 			{
 				swal('Please enter Internal DI Raise Date!');
 			}
@@ -2167,20 +2622,13 @@ app.controller("PurchasesInternalDIController",function($scope,$http,$rootScope,
 				$http({
 					method:'POST',
 					url:$rootScope.requesturl+'/post_internal_di_manual',
-					data:{dat:$scope.didetails,date:$scope.refdate,iid:$scope.insnumber,dtype:$scope.dloctype,deliverylocid:delid,vendorid:$scope.vendorid, old_flag:$scope.old_flag},
+					data:{dat:$scope.didetails,date:$scope.refdate,iid:$scope.insnumber,dtype:$scope.dloctype,deliverylocid:delid,vendorid:$scope.vendorid.id, old_flag:$scope.old_flag},
 					headers:{'JWT-AuthToken':localStorage.pmstoken},
 				}).
 				success(function(result){
 					// console.log(result);
-					$rootScope.showloader=false;
-					swal({ 
-					  title: "Success",
-					   text: "successfully saved Internal DI quantity",
-					    type: "success" 
-					  },
-					  function(){
-					    $state.go('user.purchases.payments', {'indiid':result});
-					});					
+					$scope.internaldiid = result;
+					$scope.save_payment();					
 
 				});
 
@@ -2264,7 +2712,7 @@ app.controller("PurchasesInternalDIController",function($scope,$http,$rootScope,
 				$http({
 					method:'POST',
 					url:$rootScope.requesturl+'/post_internal_di_mail',
-					data:{dat:$scope.didetails,date:$scope.refdate,iid:$scope.insnumber,to:$scope.to,cc:$scope.cc,subject:$scope.subject,content:$scope.emailcontent,attachments:$scope.didetails.internaldidocs,vendorid:$scope.vendorid,dtype:$scope.dloctype,deliverylocid:delid, old_flag:$scope.old_flag},
+					data:{dat:$scope.didetails,date:$scope.refdate,iid:$scope.insnumber,to:$scope.to,cc:$scope.cc,subject:$scope.subject,content:$scope.emailcontent,attachments:$scope.didetails.internaldidocs,vendorid:$scope.vendorid.id,dtype:$scope.dloctype,deliverylocid:delid, old_flag:$scope.old_flag},
 					headers:{'JWT-AuthToken':localStorage.pmstoken},
 				}).
 				success(function(result){
@@ -2285,14 +2733,8 @@ app.controller("PurchasesInternalDIController",function($scope,$http,$rootScope,
 							swal("Following email ID failed. Please send mail to these email ids manually "+htm, "warning");
 
 						} else {
-							swal({ 
-							  title: "Success",
-							   text: "Internal DI sent & Saved",
-							    type: "success" 
-							  },
-							  function(){
-							    $state.go('user.purchases.payments', {'indiid':result['indiid']});
-							});	
+							$scope.internaldiid = result['indiid'];
+							$scope.save_payment();
 						}
 					}
 
@@ -2305,6 +2747,82 @@ app.controller("PurchasesInternalDIController",function($scope,$http,$rootScope,
 			swal('Please enter atleast one Internal DI quantity to add!');
 		}
 	}
+
+
+	$scope.uploaddidoc=function(files){
+
+		var formdata = new FormData();
+		formdata.append('file', files[0]);
+		$scope.fd = formdata;
+		$scope.fdType = files[0]['type']
+
+	}
+
+	$scope.add_payment_doc=function(){
+
+		if(!$scope.fd)
+		{
+			swal('Please select the file to upload');
+		}
+		else
+		{
+			$rootScope.showloader=true;
+			$http({
+				method:'POST',
+				url:$scope.requesturl+'/uploaddocs',
+				data:$scope.fd,
+				headers:{'Content-Type': undefined,
+				'JWT-AuthToken':localStorage.pmstoken,
+				'filepath':'uploads/payments'},
+				transformRequest: function(data) {return data;}
+			}).
+			success(function(data){
+				$rootScope.showloader=false;
+				if(data[0]=='success')
+				{
+					$rootScope.showloader=false;
+
+					$scope.file_attachments.push({'doc_url':$scope.requesturl+'/uploads/payments/'+data[1], 'doc_name':data[2],'mime_type':$scope.fdType});
+
+					// console.log($scope.file_attachments);					
+				}
+				else
+				{
+					swal(data[1]);
+				}
+			}).error(function(data,status){
+				console.log(data+status);
+				$rootScope.showloader=false;
+				$rootScope.showerror=true;
+			});
+
+			
+		}
+
+	}
+
+	function getwords(e){if(parseInt(e) == 0) { return "ZERO";} else {
+			e = e.toString();
+		var splite = e.split(".");
+			e = splite[0];
+
+			if(splite[1]=='00')
+			{
+				var u='';
+			}
+			else
+			{
+				if(splite[1]) {
+					var u=' RUPEES '+getnum(splite[1])+' PAISE';
+				} else {
+
+					var u='';
+				}
+			}
+
+
+		var t="";if(e.length==2){}else if(e.length==1){e=0+e}else if(e.length%2===0){e=0+e}var n=e.substr(-2,2);t=t+getnum(n);if(e.length>=3){var r="0"+e.substr(-3,1);if(r=="00"){}else{t=getnum(r)+" HUNDRED"+t}}if(e.length>=5){var i=e.substr(-5,2);if(i=="00"){}else{t=getnum(i)+" THOUSAND"+t}}if(e.length>=7){var s=e.substr(-7,2);if(s=="00"){}else{t=getnum(s)+" LAKH"+t}}if(e.length>7){var o=e.substr(0,e.length-7);t=getwords(o)+" CRORE"+t}return t+' '+u}
+	function getnum(e){var t="";ones=e.substr(1,1);tens=e.substr(0,1);if(tens=="0"){switch(ones){case"0":t="";break;case"1":t=" ONE";break;case"2":t=" TWO";break;case"3":t=" THREE";break;case"4":t=" FOUR";break;case"5":t=" FIVE";break;case"6":t=" SIX";break;case"7":t=" SEVEN";break;case"8":t=" EIGHT";break;case"9":t=" NINE";break}}else if(tens=="1"){switch(ones){case"0":t=" TEN";break;case"1":t=" ELEVEN";break;case"2":t=" TWELVE";break;case"3":t=" THIRTEEN";break;case"4":t=" FOURTEEN";break;case"5":t=" FIFTEEN";break;case"6":t=" SIXTEEN";break;case"7":t=" SEVENTEEN";break;case"8":t=" EIGHTEEN";break;case"9":t="NINETEEN";break}}else{switch(tens){case"2":t=" TWENTY";break;case"3":t=" THIRTY";break;case"4":t=" FORTY";break;case"5":t=" FIFTY";break;case"6":t=" SIXTY";break;case"7":t=" SEVENTY";break;case"8":t=" EIGHTY";break;case"9":t=" NINTY";break}switch(ones){case"0":t=t+"";break;case"1":t=t+" ONE";break;case"2":t=t+" TWO";break;case"3":t=t+" THREE";break;case"4":t=t+" FOUR";break;case"5":t=t+" FIVE";break;case"6":t=t+" SIX";break;case"7":t=t+" SEVEN";break;case"8":t=t+" EIGHT";break;case"9":t=t+" NINE";break}}return t}}
 
 
 });

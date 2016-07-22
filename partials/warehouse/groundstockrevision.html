@@ -2,7 +2,7 @@
 <div class="container-fluid">
 
   <div class="row">
-    
+
     <div class="clearfix" style="height:20px;"></div>
 
     <p><strong>Ground Stock Revision</strong></p>
@@ -10,34 +10,87 @@
     <p class="pagesubtitle">* Total stock report as of now</p>
     
     <div class="col-sm-12 col-xs-12 pmstable table-responsive">
+      <div class="form-group smallfont" ng-show="inventorydata">
+        <div for="inputEmail3" class="col-sm-2 col-xs-4 control-label">Revision Date(Optional)</div>
+        <div class="col-sm-3 col-xs-6">
+          <input type="date" class="form-control" ng-model="groundstockrevdate">
+        </div>
+      </div>
+      
+      <div style="clear:both;height:10px;"></div>
 
-      <table class="table table-striped">
-
-        <tbody ng-repeat="stockdata in inventorydata">
-          <tr class="innerhead">
-            <th>S.No</th>
-            <th class="coloredhead">{{stockdata['name']}}</th>
-            <th>UOM</th>
-            <th>Existing Inventory</th>
-            <th class="col-sm-1">Physical Inventory</th>
-            <th class="col-sm-4">Remarks</th>
-          </tr>
-          <tr ng-repeat="stock in stockdata['submaterials']">
-            <td scope="row">{{$index+1}}</td>
-            <td>{{stock['name']}}</td>
-            <td>{{stock['units']}}</td>
-            <td>{{stock['stocks'][0]['quantity']}}</td>
-            <td><input type="text" class="form-control" ng-model="stock['stocks'][0]['physical_qty']"/></td>
-            <td><input type="text" class="form-control" ng-model="stock['stocks'][0]['remarks']"/></td>
-            
-          </tr>
-        </tbody>
+      <div class="form-group smallfont" ng-show="inventorydata">
+        <div for="inputEmail3" class="col-sm-2 col-md-2 col-xs-4 control-label"></div>
+        <div class="col-sm-3 col-md-3 col-xs-8 jumbobox" style="padding:5px">
+          <label class="radio-inline">
+            <input type="radio" ng-model="stocktype" value="normal"> Normal Materials
+          </label>
+          <label class="radio-inline" >
+            <input type="radio" ng-model="stocktype" value="fab" ng-click="getfabmat()"> Fabrication Materials
+          </label>
           
-      </table>
+        </div>
+      </div>
+      <div ng-show="stocktype == 'normal'">
+        <div style="clear:both;height:10px;"></div>
+        <table class="table table-striped">
 
-    </div><!-- col-sm-9 ends -->
+          <tbody ng-repeat="stockdata in inventorydata">
+            <tr class="innerhead">
+              <th>S.No</th>
+              <th class="coloredhead">{{stockdata['name']}}</th>
+              <th>UOM</th>
+              <th>Existing Inventory</th>
+              <th class="col-sm-1">Physical Inventory</th>
+              <th class="col-sm-4">Remarks</th>
+            </tr>
+            <tr ng-repeat="stock in stockdata['submaterials']" ng-if="(!stock.parent || stock.parent.type!='3') && stock['stocks'].length > 0">
+              <td scope="row">{{$index+1}}</td>
+              <td>{{stock['name']}}</td>
+              <td>{{stock['units']}}</td>
+              <td>{{stock['stocks'][0]['quantity']}}</td>
+              <td><input type="text" class="form-control" ng-model="stock['stocks'][0]['physical_qty']"/></td>
+              <td><input type="text" class="form-control" ng-model="stock['stocks'][0]['remarks']"/></td>
+              
+            </tr>
+          </tbody>
 
-    <div class="col-sm-2 col-xs-6 submitbtn hidden-print">
+        </table>
+      </div>
+
+      <div ng-show="stocktype == 'fab'">
+
+        <div class="enquirymaterialbox col-sm-8 col-xs-12" ng-show="activitygrouplist.length > 0">
+          <p><strong>Material list</strong></p>
+              <table class="table table-striped smallfont">
+              <thead>
+                <tr class="innerhead">
+                  <th class="col-sm-1">S.No</th>
+                  <th class="col-sm-4">Material Description</th>
+                  <th class="col-sm-1">ERE CODE</th>
+                  <th class="col-sm-1">Section</th>
+                  <th>Existing Inventory</th>
+                  <th class="col-sm-1">Physical Inventory</th>
+                  <th class="col-sm-4">Remarks</th>
+                </tr>
+              </thead>
+              <tr ng-repeat="pomat in activitygrouplist">
+                <td scope="row">{{$index+1}}</td>
+                <td>{{pomat.storelevel1mat.storematerial.name}}</td>
+                <td>{{pomat.storelevel1mat.ere_code}}</td>
+                <td>{{pomat.storelevel1mat.msmat.name}}</td>
+                <td><input class="form-control" type="text" ng-model="pomat.storelevel1mat['total_stock']" style="width:80px" readonly/></td>
+                <td><input class="form-control" type="text" ng-model="pomat.storelevel1mat['physical_qty']"  ng-blur="qtycheck(pomat.storelevel1mat)" style="width:80px"/></td>
+                <td><input class="form-control" type="text" ng-model="pomat.storelevel1mat['remarks']" style="width:300px"/></td>
+              </tr>
+
+            </table>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-sm-2 col-xs-6 submitbtn hidden-print" ng-show="inventorydata">
       <button type="button" class="btn btn-success" ng-click="savegstockrevision()" ng-show="!printstock">Save</button>
     </div>
     <div class="col-sm-3 col-xs-6 hidden-print">

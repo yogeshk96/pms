@@ -59,8 +59,8 @@ app.controller('WarehouseAdminReceiptReportController',function($scope,$http,$ro
 
 	$scope.view_dc=function(mat)
 	{
-		$scope.mainissue=angular.copy(mat);
-		$("#GeneratePoModal").modal('show');
+		$scope.receipt=angular.copy(mat);
+		$("#myReceiptModal").modal('show');
 	}
 
 });
@@ -96,6 +96,7 @@ app.controller('WarehouseAdminReconReportController',function($scope,$http,$root
 		}).success(function(result){
 			$rootScope.showloader=false;
 			$scope.mats=result;
+			console.log(result);
 		});
 	}
 
@@ -202,6 +203,7 @@ app.controller('WarehouseAdminMaterialReportController',function($scope,$http,$r
 			headers:{'JWT-AuthToken':localStorage.pmstoken},
 			params:{mat:$scope.mainmat.id}
 		}).success(function(result){
+			console.log(result);
 			$scope.stores=result;
 		});
 	}

@@ -3296,7 +3296,7 @@ app.controller("PurchasesEditPoController",function($scope,$http,$rootScope,$sta
 
 		if(pomatnew.type==3 && !pomat.unitrate) {
 
-			if(!pomat.qty || pomat.qty == 0) {
+			if(!pomat.qty) {
 
 				swal("Please enter some quantity.");
 			} else if(!$rootScope.digitcheck.test(pomat.qty)) {
@@ -3333,7 +3333,7 @@ app.controller("PurchasesEditPoController",function($scope,$http,$rootScope,$sta
 				inspectqty = angular.copy(pomat.inspected_quantity);
 			}
 			console.log(pomat.qty+'='+inspectqty);
-			if(!pomat.qty || pomat.qty == 0) {
+			if(!pomat.qty) {
 				swal("Please enter some quantity.");
 			} else if(!$rootScope.digitcheck.test(pomat.qty)) {
 
@@ -5608,7 +5608,7 @@ app.controller("PurchasesReportsPoOrderController",function($scope,$http,$rootSc
 							$scope.pomateriallistnewpre[pomat['storematerial']['parent_id']]['valueofgoods'] = pomat['value_of_goods'];
 							angular.forEach(pomat.fabmat,function(pomatfab){
 
-								$scope.pomateriallistnewpre[pomat['storematerial']['parent_id']]['materials'].push({'materialdesc':pomatfab['storemat']['name'], 'uom':pomatfab['storemainuom']['stmatuom']['uom'], 'uomid':pomatfab['store_material_uom_id'], 'qty':pomatfab['qty'], 'materialid':pomatfab['store_material_id']});
+								$scope.pomateriallistnewpre[pomat['storematerial']['parent_id']]['materials'].push({'materialdesc':pomatfab['storemat']['name'], 'uom':pomatfab['storemat']['matuom'][0]['stmatuom']['uom'], 'uomid':pomatfab['store_material_uom_id'], 'qty':pomatfab['qty'], 'materialid':pomatfab['store_material_id']});
 							});
 
 						} else {
@@ -5762,7 +5762,7 @@ app.controller("PurchasesReportsPoOrderController",function($scope,$http,$rootSc
 						$scope.pomateriallistnewpre[pomat['storematerial']['parent_id']]['valueofgoods'] = pomat['value_of_goods'];
 						angular.forEach(pomat.fabmat,function(pomatfab){
 
-							$scope.pomateriallistnewpre[pomat['storematerial']['parent_id']]['materials'].push({'materialdesc':pomatfab['storemat']['name'], 'uom':pomatfab['storemainuom']['stmatuom']['uom'], 'uomid':pomatfab['store_material_uom_id'], 'qty':pomatfab['qty'], 'materialid':pomatfab['store_material_id']});
+							$scope.pomateriallistnewpre[pomat['storematerial']['parent_id']]['materials'].push({'materialdesc':pomatfab['storemat']['name'], 'uom':pomatfab['storemat']['matuom'][0]['stmatuom']['uom'], 'uomid':pomatfab['store_material_uom_id'], 'qty':pomatfab['qty'], 'materialid':pomatfab['store_material_id'], 'ere_code':pomatfab['storematlevel1']['ere_code']});
 						});
 
 					} else {
@@ -16876,6 +16876,11 @@ app.controller("PurchasesIndentReportFabController",function($scope,$http,$rootS
 		$scope.projectlist = result;
 	});
 
+	$scope.gettobepurchased = function(acg) {
+
+		return Math.round(parseFloat(acg.qty)-parseFloat(act.totpoqty));
+	}
+
 	$scope.getindentreportfab = function() {
 
 		if(!$scope.projectid) {
@@ -16893,6 +16898,16 @@ app.controller("PurchasesIndentReportFabController",function($scope,$http,$rootS
 				console.log(result);
 				$rootScope.showloader=false;
 				$scope.indentlist = result;
+				angular.forEach($scope.indentlist, function(ind){
+
+					angular.forEach(ind['sub'], function(insub){
+
+						angular.forEach(insub['actgrp'], function(ingrp){
+
+							ingrp.tobepurchased = Math.round(parseFloat(ingrp.qty)-parseFloat(ingrp.totpoqty));
+						});
+					});
+				});
 			});
 		}
 	}

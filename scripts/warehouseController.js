@@ -2116,7 +2116,18 @@ app.controller("WarehouseIssueController",function($scope,$http,$rootScope,$stat
 		headers:{'JWT-AuthToken':localStorage.pmstoken},
 	}).success(function(result){
 		$scope.stores=result[0];
-		$scope.subcons=result[1];
+		// $scope.subcons=result[1];
+		console.log(result[1]);
+		var arr =[];
+		var xx = result[1][0]['subproject']['workorders'];
+		for (var i = 0; i < xx.length; i++) 
+		{
+			arr.push({'id':xx[i]['subcontractor']['subcontractor']['id'],'name':xx[i]['subcontractor']['subcontractor']['name'],'workorder_id':xx[i]['id'],'workorder_name':xx[i]['order_number']});
+
+		};
+		console.log("check out the array");
+		console.log(arr);
+		$scope.subcons=arr;
 		$scope.thirdparties=result[2];
 	});
 
@@ -2130,7 +2141,11 @@ app.controller("WarehouseIssueController",function($scope,$http,$rootScope,$stat
 	});
 
 	$scope.catfilter=function(a){
-		if($scope.mainmatcat)
+
+		if(a.material.type == 2) {
+
+			return false;
+		} else if($scope.mainmatcat)
 		{
 			if(a.material.category_id==$scope.mainmatcat.id)
 			{
@@ -2210,7 +2225,7 @@ app.controller("WarehouseIssueController",function($scope,$http,$rootScope,$stat
 				method:'POST',
 				headers:{'JWT-AuthToken':localStorage.pmstoken},
 				url:$rootScope.requesturl+'/issuematerial',
-				data:{type:$scope.issuematto,store:$scope.mainstore,subcon:$scope.mainsubcon,tpty:$scope.maintpty,mats:$scope.issuemats,transport:$scope.tp,rems:$scope.rems, issuetype:$scope.issuetype}
+				data:{type:$scope.issuematto,store:$scope.mainstore,subcon:$scope.mainsubcon,tpty:$scope.maintpty,mats:$scope.issuemats,transport:$scope.tp,rems:$scope.rems, issuetype:$scope.issuetype, dcdate:$scope.dcdate}
 			}).
 			success(function(result){
 				$rootScope.showloader=false;
@@ -2228,7 +2243,7 @@ app.controller("WarehouseIssueController",function($scope,$http,$rootScope,$stat
 
 app.controller("WarehouseGroundStockRevisionController",function($scope,$http,$rootScope,$state, Logging){
 	$scope.$emit("changeTitle",$state.current.views.content.data.title);	
-
+	$scope.stocktype = "normal";
 	$rootScope.showloader=true;
 	$http({
 		method:'GET',
@@ -2236,8 +2251,23 @@ app.controller("WarehouseGroundStockRevisionController",function($scope,$http,$r
 		url:$rootScope.requesturl+'/getinventorydata'
 	}).
 	success(function(result){
-		$rootScope.showloader=false;
+		
 		$scope.inventorydata = result;
+
+		angular.forEach($scope.inventorydata, function(inven){
+
+			angular.forEach(inven.submaterials, function(inven2){
+				if(inven2['stocks'].length > 0) {
+					if(inven2['stocks'][0]['physical_qty'] > 0) {
+
+
+					} else {
+						inven2['stocks'][0]['physical_qty'] = angular.copy(inven2['stocks'][0]['quantity']);
+					}
+				}
+			});
+		});
+		$rootScope.showloader=false;
 	}).error(function(data,status){
 		$rootScope.showloader=false;
 		$rootScope.showerror=true;
@@ -2250,56 +2280,77 @@ app.controller("WarehouseGroundStockRevisionController",function($scope,$http,$r
 			remcount = 0;
 
 		angular.forEach($scope.inventorydata,function(inv){
-			
-			angular.forEach(inv.submaterials,function(invin){
+			if(inv.id != 49) {
+				angular.forEach(inv.submaterials,function(invin){
+					if(invin['stocks'].length>0 && (!invin.parent || invin.parent.type!='3')) {
+						if(invin['stocks'][0]['physical_qty'] && invin['stocks'][0]['physical_qty'] != "") {
 
-				if(invin['stocks'][0]['physical_qty'] && invin['stocks'][0]['physical_qty'] != "") {
-
-					invin['stocks'][0]['physical_qty'] = parseInt(invin['stocks'][0]['physical_qty']);
-				}
-					
-				if(!invin['stocks'][0]['physical_qty'] || invin['stocks'][0]['physical_qty'] == ""){
-
-					ecount++;
-				}
-				if(invin['stocks'][0]['quantity'] != invin['stocks'][0]['physical_qty'] && (!invin['stocks'][0]['remarks'] || invin['stocks'][0]['remarks'] == "")){
-
-					remcount++;
-				}
-			});					
+							invin['stocks'][0]['physical_qty'] = parseFloat(invin['stocks'][0]['physical_qty']);
+						}
+							
+						// if(!invin['stocks'][0]['physical_qty'] && ){
+						// 	console.log(invin['stocks'][0]['physical_qty']);
+						// 	ecount++;
+						// }
+						if(parseFloat(invin['stocks'][0]['quantity']) != parseFloat(invin['stocks'][0]['physical_qty']) && (!invin['stocks'][0]['remarks'] || invin['stocks'][0]['remarks'] == "")){
+							remcount++;
+						}
+					}
+				});		
+			}			
 			
 		});
 
-		if(ecount > 0) {
+		if(ecount > 0 && $scope.stocktype == "normal") {
 
 			swal("Please enter physical inventory for all stock.");
-		} else if(remcount> 0) {
+		}
+		// else if(remcount> 0) {
 
-			swal("Please write remarks for those inventory whose physical inventory differs from existing inventory.");
-		} else {
+		// 	swal("Please write remarks for those inventory whose physical inventory differs from existing inventory.");
+		// } 
+		else {
 
+			// $rootScope.showloader=true;
+			console.log($scope.inventorydata);
+			// $http({
+			// 	method:'POST',
+			// 	headers:{'JWT-AuthToken':localStorage.pmstoken},
+			// 	data:{inventorydata:$scope.inventorydata, groundstockrevdate:$scope.groundstockrevdate, stocktype:$scope.stocktype, activitygrouplist:$scope.activitygrouplist},
+			// 	url:$rootScope.requesturl+'/inventoryrevision'
+			// }).
+			// success(function(result){
+			// 	$rootScope.showloader=false;
+			// 	console.log(result);
+			// 	if(result == 1) {
+
+			// 		swal("Phyical Inventory updated.");
+			// 		$scope.printstock = 1;
+			// 	}
+			// }).error(function(data,status){
+			// 	$rootScope.showloader=false;
+			// 	$rootScope.showerror=true;
+			// 	//Logging.validation(status);
+			// });
+
+
+		}
+	}
+
+	$scope.getfabmat = function() {
+		if(!$scope.activitygrouplist) {
 			$rootScope.showloader=true;
 			$http({
-				method:'POST',
+				method:'GET',
+				url:$rootScope.requesturl+'/get_activity_group_list_unique',
 				headers:{'JWT-AuthToken':localStorage.pmstoken},
-				data:{inventorydata:$scope.inventorydata},
-				url:$rootScope.requesturl+'/inventoryrevision'
 			}).
 			success(function(result){
+
 				$rootScope.showloader=false;
+				$scope.activitygrouplist = result;
 				console.log(result);
-				if(result == 1) {
-
-					swal("Phyical Inventory updated.");
-					$scope.printstock = 1;
-				}
-			}).error(function(data,status){
-				$rootScope.showloader=false;
-				$rootScope.showerror=true;
-				//Logging.validation(status);
 			});
-
-
 		}
 	}
 });
@@ -3424,8 +3475,25 @@ app.controller("WarehouseAddStocksController",function($scope,$http,$rootScope,$
 
 			$rootScope.showloader=false;
 			$scope.mattracklist = result;
+
+			$scope.checkfive();
 		});
 		
+	}
+
+	$scope.checkfive = function() {
+
+		angular.forEach($scope.mattracklist, function(inmat){
+
+			var fiveper = parseFloat(inmat['total_received'] * 5/100);
+			if(parseFloat(inmat['total_stock']) < fiveper) {
+
+				inmat['fiveper'] = 1;
+			} else {
+
+				inmat['fiveper'] = 0;
+			}
+		});
 	}
 
 	$scope.qtycheck = function(mat) {
@@ -3439,6 +3507,25 @@ app.controller("WarehouseAddStocksController",function($scope,$http,$rootScope,$
 
 			mat['total_stock'] = angular.copy(Math.round((parseFloat(mat['total_received'])-parseFloat(mat['total_issued']))*100)/100);
 		}
+
+		$scope.checkfive();
+	}
+
+	$scope.addsubmat = function(mat) {
+
+		if(!mat['total_issued_add']) {
+
+			mat['total_issued_add'] = 0;
+		}
+		if(!mat['total_received_add']) {
+
+			mat['total_received_add'] = 0;
+		}
+
+		mat['total_received'] = angular.copy(parseFloat(mat['total_received']) + parseFloat(mat['total_received_add']));
+		mat['total_issued'] = angular.copy(parseFloat(mat['total_issued']) + parseFloat(mat['total_issued_add']));
+
+		$scope.qtycheck(mat);
 	}
 
 	$scope.addstocks = function() {
@@ -3482,6 +3569,7 @@ app.controller("WarehouseAddFabStocksController",function($scope,$http,$rootScop
     $scope.today = dd+'/'+mm+'/'+yyyy;
 	$rootScope.showloader=true;
 
+
 	// $http({
 	// 	method:'GET',
 	// 	url:$rootScope.requesturl+'/get_project_list',
@@ -3499,9 +3587,54 @@ app.controller("WarehouseAddFabStocksController",function($scope,$http,$rootScop
 	}).
 	success(function(result){
 
-		$rootScope.showloader=false;
 		$scope.projectdet = result;
+		$http({
+			method:'GET',
+			url:$rootScope.requesturl+'/get_activity_group_list_unique',
+			params:{projectid:$scope.projectdet.project.id},
+			headers:{'JWT-AuthToken':localStorage.pmstoken},
+		}).
+		success(function(result){
+
+			$rootScope.showloader=false;
+			$scope.activitygrouplist = result;
+			console.log(result);
+			$scope.checkten();
+		});
 	});
+
+	$scope.checkten = function() {
+
+		angular.forEach($scope.activitygrouplist, function(inmat){
+
+			var tenper = parseFloat(inmat['storelevel1mat']['total_received'] * 10/100);
+			if(parseFloat(inmat['storelevel1mat']['total_stock']) < tenper) {
+
+				inmat['tenper'] = 1;
+			} else {
+
+				inmat['tenper'] = 0;
+			}
+		});
+	}
+
+	
+	$scope.qtycheck = function(mat) {
+
+		if(parseFloat(mat['total_issued']) > parseFloat(mat['total_received'])) {
+
+			swal("Issued qty cannot be greater than received qty.");
+			mat['total_issued'] = 0;
+			mat['total_received'] = 0;
+			mat['total_stock'] = 0;
+		} else {
+
+			mat['total_stock'] = angular.copy(Math.round((parseFloat(mat['total_received'])-parseFloat(mat['total_issued']))*100)/100);
+		}
+
+		$scope.checkten();
+	}
+
 
 	$scope.generatematfabreport = function() {
 
@@ -3530,18 +3663,6 @@ app.controller("WarehouseAddFabStocksController",function($scope,$http,$rootScop
 		$rootScope.showloader=false;
 		$scope.fabmattype = result;
 	});
-		
-
-
-	$scope.qtycheck = function(mat) {
-
-		if(parseFloat(mat['total_issued']) > parseFloat(mat['total_received'])) {
-
-			swal("Issued qty cannot be greater than received qty.");
-			mat['total_issued'] = 0;
-			mat['total_received'] = 0;
-		}
-	}
 
 	$scope.addfabstocks = function() {
 
@@ -3549,7 +3670,7 @@ app.controller("WarehouseAddFabStocksController",function($scope,$http,$rootScop
 		$http({
 			method:'POST',
 			url:$rootScope.requesturl+'/addfabstocks',
-			data:{mattracklist:$scope.submat.level1mat, projdet:$scope.projectdet.project},
+			data:{activitygrouplist:$scope.activitygrouplist, projdet:$scope.projectdet.project},
 			headers:{'JWT-AuthToken':localStorage.pmstoken},
 		}).
 		success(function(result){

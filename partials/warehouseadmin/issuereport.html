@@ -1,5 +1,5 @@
 <!-- page right main container starts -->
-<div class="container-fluid">
+<div class="container-fluid hidden-print">
 
 	<div class="row-fluid">
 
@@ -114,9 +114,10 @@
 			 				</thead>
 			 				<tr ng-repeat="mat in mainissue.transdata">
 			 					<td scope="row">{{$index+1}}</td>
-			 					<td>{{mat.matname.name}}</td>
-			 					<td>{{mat.matname.units}}</td>
-			 					<td>{{mat.quantity}}</td>
+			 					<td>{{mat.matname.name}} <span ng-if="mat.storestock.level1mat"> - {{mat.storestock.level1mat.ere_code}}</span></td>
+			 					<td>{{mat.matname.matuom[0]['stmatuom']['uom']}}</td>
+			 					<td ng-if="mainissue.old_flag=='0'">{{mat.quantity}}</td>
+			 					<td ng-if="mainissue.old_flag=='1'">{{mat.old_quantity}}</td>
 			 				</tr>
 			 			</table>
 			 		</div>

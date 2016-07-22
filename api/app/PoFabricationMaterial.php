@@ -17,4 +17,8 @@ class PoFabricationMaterial extends Model {
 		return $this->hasOne('App\StoreMaterial','id','store_material_id');
 	}
 
+	public function storematlevel1() {
+
+		return $this->hasOne('App\StoreMaterialsLevel1','id','store_material_level1_id');
+	}
 }

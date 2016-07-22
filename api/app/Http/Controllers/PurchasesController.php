@@ -1236,14 +1236,14 @@ class PurchasesController extends Controller {
 			// }
 
 		} else {
-			// if($data['csrefid'] == 0 && !isset($data['pomanualdate']) && $data['projectid'] != 3) {
+			if($data['csrefid'] == 0 && !isset($data['pomanualdate']) && $data['projectid'] != 3) {
 
-			// 	return 3;
-			// } 
-			// if($data['csrefid'] == 0 && $data['pomanualdate'] > $prevmonthdate && $data['projectid'] != 3){
+				return 3;
+			} 
+			if($data['csrefid'] == 0 && $data['pomanualdate'] > $prevmonthdate && $data['projectid'] != 3){
 
-			// 	return 4;
-			// }
+				return 4;
+			}
 		}
 		$check = 0;
 
@@ -3759,10 +3759,10 @@ class PurchasesController extends Controller {
 		}
 
 		foreach ($pomatcalarr as $key => $value) {
-
-		
-			$taxtotalrate = ($value['tax']/$value['quantity']) + $value['freightinsurance_rate'];
-			PurchaseOrderMaterial::where("id", "=", $key)->update(array("unit_rate_taxed"=>$taxtotalrate));
+			if($value['quantity'] > 0) {
+				$taxtotalrate = ($value['tax']/$value['quantity']) + $value['freightinsurance_rate'];
+				PurchaseOrderMaterial::where("id", "=", $key)->update(array("unit_rate_taxed"=>$taxtotalrate));
+			}
 
 		}
 
@@ -4120,8 +4120,23 @@ class PurchasesController extends Controller {
 
 	public function get_dispatches_list() {
 		$insid = Request::input("dat");
+		$q1check = InspectionDispatch::where('inspection_id','=',$insid)->with('intdi.intdimat')->get();
+		$matarr = array();
+		foreach ($q1check as $inq1) {
+			foreach ($inq1['intdi'] as $indiint) {
+				foreach ($indiint['intdimat'] as $inma) {
+					if(!in_array($inma['di_material_id'], $matarr)) {
+						array_push($matarr, $inma['di_material_id']);
+					}
+				}
+			}
+			
+		}
+		$q1 = InspectionDispatch::where('inspection_id','=',$insid)->with('intdi.intdidocs')->with('intdi.intdimat.matdes')->with('intdi.intdimat.intdipo.podets')->with('intdi.intdimat.intdipo.storename')->with('intdi.intdimat.intdipo.siteareas')->with('callraise.attachments')->with('didocs')->with('dimat.dieachpomat.podets.taxes.taxmaterials')->with('dimat.dieachpomat.podets.project')->with('dimat.dieachpomat.podets.vendor')->with('dimat.dieachpomat.podets.csref.csrefdet.csvendor')->with('dimat.matdes')->with(array('dimat.dieachpomat.podets.pomaterials'=>function($q) use ($matarr){
 
-		$q1 = InspectionDispatch::where('inspection_id','=',$insid)->with('intdi.intdidocs')->with('intdi.intdimat.matdes')->with('intdi.intdimat.intdipo.podets')->with('intdi.intdimat.intdipo.storename')->with('intdi.intdimat.intdipo.siteareas')->with('callraise.attachments')->with('didocs')->with('dimat.dieachpomat.podets')->with('dimat.matdes')->get();
+			$q->whereIn("material_id", $matarr)->with("storematerial");
+		}))->get();
+		
 		return $q1;
 			
 	}
@@ -5691,7 +5706,7 @@ class PurchasesController extends Controller {
 				
 					PurchaseOrderMaterial::where("id", "=", $inmat['id'])->increment('payment_qty', $inmat['currentpayqty']);
 
-					PaymentMaterials::create(array("payments_id"=>$createpayments->id,"purchase_order_material_id"=>$inmat['id'], "quantity"=>$inmat['currentpayqty'], "total_cost"=>$inmat['currentpaycost']));
+					PaymentMaterials::create(array("payments_id"=>$createpayments->id,"purchase_order_material_id"=>$inmat['id'], "quantity"=>$inmat['currentpayqty'], "total_cost"=>$inmat['currentpaycost'], "material_id"=>$inmat['material_id']));
 
 					$indimatdes = InternalDIMaterial::where("internal_di_id", "=", $indiid)->where("di_material_id", "=", $inmat['material_id'])->first();
 					if($indimatdes) {
@@ -6837,6 +6852,7 @@ class PurchasesController extends Controller {
 		$tkn=Request::header('JWT-AuthToken');
 		$userdata=Session::where('refreshtoken','=',$tkn)->with('users.store.project')->first();
 		$storeid = $userdata['users']['store']['id'];
+		$projectid = $userdata['users']['store']['project']['id'];
 
 		$matdet = MaterialCategory::orderBy('name')->whereHas('submaterials', function($query)
 			{
@@ -7103,20 +7119,23 @@ class PurchasesController extends Controller {
 			foreach ($indiact['material'] as $indimat) {
 				
 				foreach ($indimat['submaterial'] as $indisub) {
+					if(isset($indisub['selected'])) {
+						if(isset($indisub['storelevel1mat']['thisqty'])) {
+							$storematid = $indisub['storelevel1mat']['store_material_id'];
+							$level1matid = $indisub['storelevel1mat']['id'];
+							$thisqty = $indisub['storelevel1mat']['thisqty'];
+							$checkmat = PoFabricationMaterial::where("purchase_order_material_id", "=", $pomatid)->where("store_material_id", "=", $storematid)->where("store_material_level1_id", "=", $level1matid)->first();
+							if(!$checkmat) {
 
-					$storematid = $indisub['storelevel1mat']['store_material_id'];
-					$level1matid = $indisub['storelevel1mat']['id'];
-					$thisqty = $indisub['storelevel1mat']['thisqty'];
-					$checkmat = PoFabricationMaterial::where("purchase_order_material_id", "=", $pomatid)->where("store_material_id", "=", $storematid)->where("store_material_level1_id", "=", $level1matid)->first();
-					if(!$checkmat) {
-
-						$singlecheckmat = array(
-								"purchase_order_material_id"=>$pomatid,
-								"store_material_id"=>$storematid,
-								"store_material_level1_id"=>$level1matid,
-								"qty"=>$thisqty
-							);
-						PoFabricationMaterial::create($singlecheckmat);
+								$singlecheckmat = array(
+										"purchase_order_material_id"=>$pomatid,
+										"store_material_id"=>$storematid,
+										"store_material_level1_id"=>$level1matid,
+										"qty"=>$thisqty
+									);
+								PoFabricationMaterial::create($singlecheckmat);
+							}
+						}
 					}
 				}
 			}
@@ -7272,9 +7291,10 @@ class PurchasesController extends Controller {
 		$taxdetails = Request::input("taxdetails");
 		$pomateriallistnew = Request::input("pomateriallistnew");
 		$totalvalueofgoods = Request::input("totalvalueofgoods");
+		$toda = date("Y-m-d");
 		if($status == 2) {
 
-			PurchaseOrder::where("id", "=", $poid)->update(array("close_po_hod_remarks"=>$remarks, "status"=>1));
+			PurchaseOrder::where("id", "=", $poid)->update(array("close_po_hod_remarks"=>$remarks, "status"=>1, "close_po_response_date"=>$toda));
 		} else {
 
 			foreach ($pomateriallistnew as $inpomat) {
@@ -7320,6 +7340,7 @@ class PurchasesController extends Controller {
 				$podet->close_po_hod_remarks = $remarks;
 				$podet->total_cost = $totalvalueofgoods;
 				$podet->total_qty = $poqty;
+				$podet->close_po_response_date = $toda;
 				$podet->status = 1;
 				$podet->save();
 			}
@@ -7464,23 +7485,46 @@ class PurchasesController extends Controller {
 					$submatcheck = array();
 					$totalqty = 0;
 					$totalwt = 0;
+					$totpoqty = 0;
 					foreach ($actmainarr as $actgrpid => $actgrpqty) {
 						
 						$actdet = ActivityGroup::where("id", "=", $actgrpid)->with("material.submaterial.storelevel1mat.storematerial.matuom.stmatuom")->first();
 						foreach ($actdet['material'] as $actmat) {
 							
 							foreach ($actmat['submaterial'] as $insubacm) {
+								$stmatid = $insubacm['storelevel1mat']['id'];
+								$podett = PurchaseOrder::where("project_id", "=", $projectid)->whereHas("pomaterials.fabmat", function($que) use ($stmatid){
+									$que->where("store_material_level1_id", "=", $stmatid);
+								})->with(array("pomaterials.fabmat"=>function($q) use ($stmatid){
+
+									$q->where("store_material_level1_id", "=", $stmatid);
+								}))->get();
+
 								if(!in_array($insubacm['storelevel1mat']['id'], $submatcheck)) {
+									$thisfabqty= 0;
+									foreach ($podett as $inpodet) {
+										
+										foreach ($inpodet['pomaterials'] as $inpomats) {
+											
+											foreach ($inpomats['fabmat'] as $infmat) {
+												
+												$thisfabqty += $infmat['qty'];
+											}
+										}
+									}
+									$totpoqty += $thisfabqty;
 									$fabmatarr[$insubacm['storelevel1mat']['id']]['name'] = $insubacm['storelevel1mat']['storematerial']['name'];
 									$fabmatarr[$insubacm['storelevel1mat']['id']]['erecode'] = $insubacm['storelevel1mat']['ere_code'];
-									$fabmatarr[$insubacm['storelevel1mat']['id']]['qty'] = round(($insubacm['storelevel1mat']['qty_per_pole']*$actgrpqty['totindentqty']), 2);
+									$fabmatarr[$insubacm['storelevel1mat']['id']]['qty'] = round(($insubacm['storelevel1mat']['qty_per_pole']*$actgrpqty['totindentqty']));
+
+									$fabmatarr[$insubacm['storelevel1mat']['id']]['totpoqty'] = $thisfabqty;
 									$fabmatarr[$insubacm['storelevel1mat']['id']]['totindentqty'] = round(($insubacm['storelevel1mat']['wt_per_pc']*$insubacm['storelevel1mat']['qty_per_pole']*$actgrpqty['totindentqty']/1000), 2);
 									$totalqty += $fabmatarr[$insubacm['storelevel1mat']['id']]['qty'];
 									$totalwt += $fabmatarr[$insubacm['storelevel1mat']['id']]['totindentqty'];
 									$submatcheck[] = $insubacm['storelevel1mat']['id'];
 								} 
 								else {
-									$fabmatarr[$insubacm['storelevel1mat']['id']]['qty'] += round(($insubacm['storelevel1mat']['qty_per_pole']*$actgrpqty['totindentqty']), 2);
+									$fabmatarr[$insubacm['storelevel1mat']['id']]['qty'] += round(($insubacm['storelevel1mat']['qty_per_pole']*$actgrpqty['totindentqty']));
 									$fabmatarr[$insubacm['storelevel1mat']['id']]['totindentqty'] += round(($insubacm['storelevel1mat']['wt_per_pc']*$insubacm['storelevel1mat']['qty_per_pole']*$actgrpqty['totindentqty']/1000), 2);
 									$totalqty += $fabmatarr[$insubacm['storelevel1mat']['id']]['qty'];
 									$totalwt += $fabmatarr[$insubacm['storelevel1mat']['id']]['totindentqty'];
@@ -7491,6 +7535,7 @@ class PurchasesController extends Controller {
 					$totindentqtyarr[$i]['sub'][$j]['actgrp'] = $fabmatarr;
 					$totindentqtyarr[$i]['sub'][$j]['indentnos'] = $totalqty;
 					$totindentqtyarr[$i]['sub'][$j]['indentkgs'] = $totalwt;
+					$totindentqtyarr[$i]['sub'][$j]['totpoqty'] = $totpoqty;
 					$count++;
 					$j++;
 				}
@@ -7499,6 +7544,51 @@ class PurchasesController extends Controller {
 		}
 		
 		return $totindentqtyarr;
+	}
+
+	public function getindiinfo() {
+
+		$indiid = Request::input("indiid");
+		$intdi = InternalDI::where("id", "=", $indiid)->with('intdimat.matdes')->with('intdimat.intdipo.podets')->with('intdimat.intdipo.storename')->first();
+		$matarr = array();
+		$poarr = array();
+		foreach($intdi->intdimat as $inmat) {
+
+			if(!in_array($inmat['matdes']['id'], $matarr)) {
+
+				$matarr[] = $inmat['matdes']['id'];
+			}
+
+			foreach ($inmat->intdipo as $inpo) {
+				
+				if(!in_array($inpo['podets']['id'], $poarr)) {
+
+					$poarr[] = $inpo['podets']['id'];
+				}
+			}
+		}
+		$podetails = PurchaseOrder::whereIn("id", $poarr)->with(array('pomaterials'=>function($query) use ($matarr){
+		        $query->whereIn('material_id',$matarr)->with('storematerial');
+		    }))->with("taxes.taxmaterials")->with('csref.csrefdet.csquotations')->with('csref.csrefdet.csvendor')->with("project")->with("vendor")->get();
+		foreach ($podetails as $indip) {
+			foreach ($indip['pomaterials'] as $inpom) {
+				foreach($intdi->intdimat as $inmat) {
+
+					if($inmat['matdes']['id'] ==  $inpom['material_id']) {
+						foreach ($inmat->intdipo as $inpo) {
+							if($inpo['podets']['id'] ==  $indip['id']) {
+								$inpom['currentpayqty'] = $inmat['quantity']-$inmat['total_payment_qty'];
+								$inpom['pendingpayqty'] = $inmat['quantity']-$inmat['total_payment_qty'];
+							}
+						}
+					}
+				}
+			}
+		}
+		$mainarr = array();
+		array_push($mainarr, $podetails);
+		array_push($mainarr, $poarr);
+		return $mainarr;
 	}
 
 }

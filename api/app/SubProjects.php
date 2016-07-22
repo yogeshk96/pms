@@ -11,5 +11,9 @@ class SubProjects extends Model {
 
 		return $this->hasMany('App\SubProjectActivityMultiplier','sub_project_id','id');
 	}
+	public function workorders() {
+
+		return $this->hasMany('App\Workorders','subproject_id','id');
+	}
 	
 }

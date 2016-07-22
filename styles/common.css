@@ -6,39 +6,9 @@
 
 	border-left:1px dotted #bababa;
 }
-.tablesmallfontcls td
-{
-  font-size: 10px;
-}
-.marginbtmcls
-{
-  margin-bottom: 0px;
-}
-.mrvimg
-{
-    margin-right: 20px;
-    width: 126px;
-    top: 24px;
-    position: absolute;
-    right: 46px;
-}
 .homeimg img {
 
 	max-width:100%;
-}
-.venddirtable td 
-{
-  word-wrap:break-word;
-  max-width: 45px;
-}
-.viewcls
-{
-  color: blue;
-}
-.viewcls:hover
-{
-  cursor: pointer;
-  text-decoration: underline;
 }
 a {
 
@@ -461,4 +431,46 @@ filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 
 .bold-font{
   font-weight:bold;
+}
+#summarybox {
+
+  position:fixed;
+  right:0;
+  top:250px;
+  width:200px;
+  font-size:9px;
+  display:inline-block;
+  cursor: pointer;
+  display:none;
+  min-height:200px;
+  border:1px solid #000;
+  background:#FFF;
+}
+.innersummarybox {
+
+  width:30px;
+  height:100px;
+  border:1px solid #000;
+  font-size:9px;
+  background:#a40004;
+  color:#FFF;
+  display:inline-block;
+  cursor: pointer;
+  position:absolute;
+  top:55px;
+  right:198px;
+}
+.showsummarybtn {
+
+  position:fixed;
+  right:0;
+  top:300px;
+  width:30px;
+  height:100px;
+  border:1px solid #000;
+  font-size:9px;
+  background:#a40004;
+  color:#FFF;
+  display:inline-block;
+  cursor: pointer;
 }

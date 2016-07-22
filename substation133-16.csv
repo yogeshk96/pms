@@ -1,0 +1,18 @@
+,11/0.433kV 3Ph 100KVA station transformer DP structure,135-STR-SB-016,,,,,
+ERE. CODE.,DESCRIPTION,,SECTION,"LENGTH
+(in mm.)","QTY.
+(in Nos.)                                                                                                                                                      ","Wt./Mtr.
+Kg./Mtr.",Unit Wt/PC
+ST01,LA Mounting Channel (ISLC),,75x40x6,2796,1,5.700,15.937
+ST02,LA Mounting Plate Welded to ST01,,6mm,400,3,47.100,1.884
+ST03,Isolator Mounting Channel (ISLC),,75x40x6,2750,2,5.700,15.675
+ST04,Isolator Supporting Channel (ISLC),,75x40x6,470,4,5.700,2.679
+ST05,H.G Fuse Mounting Channel (ISLC),,75x40x6,2796,2,5.700,15.937
+ST06,Transformer Base Channel (ISLC),,100x50x6,2750,2,7.900,21.725
+ST07,Transformer Side Base Channel (ISLC),,75x40x6,515,4,5.700,2.936
+ST08,Transformer Belting Angle,,50x50x6,2760,2,4.500,12.420
+ST09,Transformer Side Belting Angle,,50x50x6,635,2,4.500,2.858
+ST10,Isolator Operating Box Fixing Channel (ISLC),,75x40x6,440,4,5.700,2.508
+ST11,Back Clamp for LA & H.G Fuse,,50x8,658,6,3.140,2.066
+ST12,Back Clamp for Transformer Side Belting Angle,,50x8,616,2,3.140,1.934
+ST13,Back Clamp for Isolator Auxiliary Switch,,50x8,762,4,3.140,2.393
